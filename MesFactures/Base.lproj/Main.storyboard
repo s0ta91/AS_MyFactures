@@ -155,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-348" y="-108"/>
+            <point key="canvasLocation" x="-1742" y="-210"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
@@ -202,9 +202,12 @@
                                 <rect key="frame" x="20" y="557" width="335" height="47"/>
                                 <color key="backgroundColor" name="ConnexionButton"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="25"/>
-                                <state key="normal" title="Connexion">
+                                <state key="normal" title="Créer mon compte">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="createAccountButtonPressed:" destination="4FB-7Q-Yx0" eventType="touchUpInside" id="vDD-Uz-b21"/>
+                                </connections>
                             </button>
                             <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Nom d'utilisateur" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="N5K-DV-vTO">
                                 <rect key="frame" x="20" y="291" width="335" height="60"/>
@@ -309,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1s-2i-0sD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-348" y="681.2807881773399"/>
+            <point key="canvasLocation" x="-1742" y="579"/>
         </scene>
     </scenes>
     <resources>
@@ -318,14 +321,8 @@
         <namedColor name="ConnexionButton">
             <color red="0.95294117647058818" green="0.35294117647058826" blue="0.35294117647058826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="ConnexionButton">
-            <color red="0.95294117649999999" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="creeruncompteButton">
             <color red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="creeruncompteButton">
-            <color red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

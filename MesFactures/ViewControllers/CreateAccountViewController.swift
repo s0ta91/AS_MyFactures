@@ -26,11 +26,23 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
     }
     
+    private func createNewUser () {
+        if let username = usernameTextField.text,
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            let db = DbManager().getDb() {
+                db.createNewUser(username, email, password)
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
 
+    @IBAction func createAccountButtonPressed(_ sender: Any) {
+        createNewUser()
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
