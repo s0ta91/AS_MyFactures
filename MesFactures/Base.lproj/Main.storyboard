@@ -23,7 +23,6 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -59,6 +58,9 @@
                                 <state key="normal" title="Connexion">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="unlockWithPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1xW-g2-hWm"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-bF-X22">
                                 <rect key="frame" x="108" y="614" width="160" height="33"/>
@@ -127,13 +129,42 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="createNewPasswordButton" destination="BSc-bF-X22" id="jdd-6O-Ery"/>
-                        <outlet property="mesfacturesTextField" destination="RZg-Pt-dGW" id="0xM-Jw-Kfv"/>
-                        <outlet property="passwordTextField" destination="0Df-Cs-8WS" id="7qK-3a-Bby"/>
+                        <outlet property="ui_createNewPasswordButton" destination="BSc-bF-X22" id="wHY-AK-TqD"/>
+                        <outlet property="ui_mesfacturesTextField" destination="RZg-Pt-dGW" id="qUj-Kj-vc6"/>
+                        <outlet property="ui_passwordTextField" destination="0Df-Cs-8WS" id="cC5-M1-DQD"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-4457" y="-497"/>
+        </scene>
+        <!--Group Table View Controller-->
+        <scene sceneID="Fm1-JW-DBZ">
+            <objects>
+                <tableViewController storyboardIdentifier="GroupTableViewController" id="tv1-cC-bj3" customClass="GroupTableViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B9j-tn-lzf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ump-l5-uvy">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ump-l5-uvy" id="qV9-gH-wcS">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tv1-cC-bj3" id="kRL-5W-7yE"/>
+                            <outlet property="delegate" destination="tv1-cC-bj3" id="qsY-Xb-zcw"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Xw-20-cuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3561" y="-497"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">

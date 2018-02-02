@@ -26,7 +26,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     private func createNewUser () {
         if let password = passwordTextField.text,
             let db = DbManager().getDb() {
-                db.createNewUser(password)
+                db.savePassword(password)
         }
     }
     

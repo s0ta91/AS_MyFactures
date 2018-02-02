@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import KeychainAccess
 
 class Manager {
     
@@ -19,21 +20,11 @@ class Manager {
         _userLists = _realm.objects(User.self)
     }
     
-    private func getNewIdentifier () -> UUID {
-        return UUID()
+    func savePassword (_ password: String) {
+        DbManager().saveMasterPassword(password)
     }
     
-    func createNewUser (_ password: String) {
-        let newUser = User()
-        let identifier = getNewIdentifier()
-        newUser.identifier = identifier.uuidString
-        newUser.password = password
-        try? _realm.write {
-            _realm.add(newUser)
-        }
-    }
-    
-    func getUserCount () -> Int{
-        return _userLists.count
+    func hasMasterPassword () -> Bool{
+        return DbManager().getMasterPassword() != nil
     }
 }

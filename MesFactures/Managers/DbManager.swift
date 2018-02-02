@@ -12,6 +12,7 @@ import KeychainAccess
 
 class DbManager {
     private static let REALM_ENCRYPTION_KEY = "REALM_ENCRYPTION_KEY"
+    private static let MASTER_PASSWORD = "MESFACTURES_MASTER_PASSWORD"
     private static let ENCRYPT_FILE = false
     
     private var _database: Manager?
@@ -44,6 +45,17 @@ class DbManager {
         }
         return _database
     }
+    
+    func saveMasterPassword (_ password: String) {
+        _keychain[DbManager.MASTER_PASSWORD] = password
+    }
+    func reInitMasterPassword () {
+        _keychain[DbManager.MASTER_PASSWORD] = nil
+    }
+    func getMasterPassword () -> String? {
+        return _keychain[DbManager.MASTER_PASSWORD]
+    }
+    
     
     private func loadRealmEncryptionKey () -> Data? {
         return _keychain[data: DbManager.REALM_ENCRYPTION_KEY]

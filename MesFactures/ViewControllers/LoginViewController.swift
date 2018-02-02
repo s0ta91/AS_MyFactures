@@ -10,17 +10,19 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var mesfacturesTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var createNewPasswordButton: UIButton!
+    @IBOutlet weak var ui_mesfacturesTextField: UITextField!
+    @IBOutlet weak var ui_passwordTextField: UITextField!
+    @IBOutlet weak var ui_createNewPasswordButton: UIButton!
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        /** DEBUG **/
+//        DbManager().reInitMasterPassword()
         
         showHideCreateNewPasswordButton()
-        mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
-        self.passwordTextField.delegate = self
+        ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
+        self.ui_passwordTextField.delegate = self
     }
     
     override func viewDidLoad() {
@@ -35,16 +37,31 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func showHideCreateNewPasswordButton (){
         if let db = DbManager().getDb() {
-            if db.getUserCount() == 0 {
-                createNewPasswordButton.isHidden = false
+            if db.hasMasterPassword() == true {
+                ui_createNewPasswordButton.isHidden = true
             }else {
-                createNewPasswordButton.isHidden = true
+                ui_createNewPasswordButton.isHidden = false
             }
         }
     }
     
     
-
+    @IBAction func unlockWithPassword(_ sender: Any) {
+        if let typedPassword = ui_passwordTextField.text,
+            let storedPassword = DbManager().getMasterPassword(),
+            typedPassword == storedPassword {
+            displayGroupTableViewController()
+        }
+    }
+    
+    func displayGroupTableViewController () {
+        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "GroupTableViewController") as? GroupTableViewController {
+//            show(GroupTableVC, sender: nil)
+            GroupTableVC.modalTransitionStyle = .crossDissolve
+            present(GroupTableVC, animated: true, completion: nil)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
