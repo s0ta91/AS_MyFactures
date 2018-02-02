@@ -10,15 +10,12 @@ import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.usernameTextField.delegate = self
-        self.emailTextField.delegate = self
+        
         self.passwordTextField.delegate = self
     }
     
@@ -27,11 +24,9 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     private func createNewUser () {
-        if let username = usernameTextField.text,
-            let email = emailTextField.text,
-            let password = passwordTextField.text,
+        if let password = passwordTextField.text,
             let db = DbManager().getDb() {
-                db.createNewUser(username, email, password)
+                db.createNewUser(password)
         }
     }
     

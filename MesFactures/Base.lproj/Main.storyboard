@@ -15,7 +15,6 @@
             <string>Abuget</string>
         </array>
         <array key="Avenir.ttc">
-            <string>Avenir-Book</string>
             <string>Avenir-Heavy</string>
             <string>Avenir-Medium</string>
         </array>
@@ -24,6 +23,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -42,17 +42,7 @@
                                 <fontDescription key="fontDescription" name="Abuget" family="Abuget" pointSize="100"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="QWi-35-ZeP">
-                                <rect key="frame" x="20" y="369" width="335" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="0EB-sH-ROk"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mot de passe..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Df-Cs-8WS">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Entrez votre mot de passe..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0Df-Cs-8WS">
                                 <rect key="frame" x="20" y="447" width="335" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -71,9 +61,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-bF-X22">
-                                <rect key="frame" x="128" y="614" width="119" height="33"/>
+                                <rect key="frame" x="108" y="614" width="160" height="33"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="Créer un compte">
+                                <state key="normal" title="Créer un mot de passe">
                                     <color key="titleColor" name="creeruncompteButton"/>
                                 </state>
                                 <connections>
@@ -92,13 +82,9 @@
                             <constraint firstItem="RZg-Pt-dGW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A9o-pJ-6tD"/>
                             <constraint firstItem="RZg-Pt-dGW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="G4y-Oi-uQa"/>
                             <constraint firstItem="BSc-bF-X22" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Gjm-02-cZF"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QWi-35-ZeP" secondAttribute="trailing" constant="20" id="IR5-Gi-HhD">
-                                <variation key="widthClass=regular" constant="217"/>
-                            </constraint>
                             <constraint firstItem="c2l-pK-DFJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LfI-of-iyK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="slb-lc-DB2" secondAttribute="trailing" constant="20" id="NXU-Gj-pf7"/>
                             <constraint firstItem="BSc-bF-X22" firstAttribute="top" secondItem="slb-lc-DB2" secondAttribute="bottom" constant="10" id="SyJ-56-Y6p"/>
-                            <constraint firstItem="QWi-35-ZeP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TQC-xx-u55"/>
                             <constraint firstItem="0Df-Cs-8WS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UhX-Ek-WJK"/>
                             <constraint firstItem="5F5-WH-3jO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UjJ-k9-ik5"/>
                             <constraint firstItem="RZg-Pt-dGW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="145" id="Y6l-ag-kum">
@@ -112,14 +98,10 @@
                             <constraint firstItem="c2l-pK-DFJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dgh-Au-IZO"/>
                             <constraint firstItem="slb-lc-DB2" firstAttribute="top" secondItem="0Df-Cs-8WS" secondAttribute="bottom" constant="50" id="e20-hE-1Il"/>
                             <constraint firstItem="5F5-WH-3jO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="f4S-WY-ZFW"/>
-                            <constraint firstItem="0Df-Cs-8WS" firstAttribute="top" secondItem="QWi-35-ZeP" secondAttribute="bottom" constant="18" id="fKs-xk-oDd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BSc-bF-X22" secondAttribute="bottom" constant="20" id="fMW-XH-nKj">
                                 <variation key="widthClass=regular" constant="120"/>
                             </constraint>
                             <constraint firstAttribute="bottom" secondItem="5F5-WH-3jO" secondAttribute="bottom" id="fYn-Gh-n74"/>
-                            <constraint firstItem="QWi-35-ZeP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="upH-Yh-Gvy">
-                                <variation key="widthClass=regular" constant="216"/>
-                            </constraint>
                             <constraint firstItem="5F5-WH-3jO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vuB-AM-Aru"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="RZg-Pt-dGW" secondAttribute="trailing" constant="16" id="wiH-Aa-aT8"/>
                         </constraints>
@@ -127,7 +109,6 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="8f1-eb-zlF"/>
-                                <exclude reference="TQC-xx-u55"/>
                                 <exclude reference="UhX-Ek-WJK"/>
                                 <exclude reference="2yz-SM-w8g"/>
                             </mask>
@@ -140,22 +121,19 @@
                         <variation key="widthClass=regular">
                             <mask key="constraints">
                                 <exclude reference="NXU-Gj-pf7"/>
-                                <include reference="TQC-xx-u55"/>
-                                <exclude reference="upH-Yh-Gvy"/>
                                 <include reference="UhX-Ek-WJK"/>
                                 <include reference="2yz-SM-w8g"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="QWi-35-ZeP" id="FYl-cc-EEd"/>
+                        <outlet property="createNewPasswordButton" destination="BSc-bF-X22" id="jdd-6O-Ery"/>
                         <outlet property="mesfacturesTextField" destination="RZg-Pt-dGW" id="0xM-Jw-Kfv"/>
                         <outlet property="passwordTextField" destination="0Df-Cs-8WS" id="7qK-3a-Bby"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1742" y="-210"/>
+            <point key="canvasLocation" x="-4457" y="-497"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
@@ -178,17 +156,7 @@
                                 <fontDescription key="fontDescription" name="Abuget" family="Abuget" pointSize="100"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Email..." minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MbR-tt-KGX">
-                                <rect key="frame" x="20" y="369" width="335" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="O5W-lD-CvZ"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mot de passe..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-vn-rbh">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Créez votre mot de passe..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-vn-rbh">
                                 <rect key="frame" x="20" y="447" width="335" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -202,101 +170,53 @@
                                 <rect key="frame" x="20" y="557" width="335" height="47"/>
                                 <color key="backgroundColor" name="ConnexionButton"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="25"/>
-                                <state key="normal" title="Créer mon compte">
+                                <state key="normal" title="Créer">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="createAccountButtonPressed:" destination="4FB-7Q-Yx0" eventType="touchUpInside" id="vDD-Uz-b21"/>
                                 </connections>
                             </button>
-                            <textField contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" placeholder="Nom d'utilisateur" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="N5K-DV-vTO">
-                                <rect key="frame" x="20" y="291" width="335" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="LUl-lA-znS"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" textContentType="username"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGB-lr-eD0">
-                                <rect key="frame" x="139" y="614" width="97" height="33"/>
-                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="Me connecter">
-                                    <color key="titleColor" name="creeruncompteButton"/>
-                                </state>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="crossDissolve" id="H4F-29-Nfw"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4Pd-Yz-zyc" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="2ym-yb-3Vr"/>
-                            <constraint firstItem="N5K-DV-vTO" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="3Am-2r-ply"/>
-                            <constraint firstItem="CGB-lr-eD0" firstAttribute="centerX" secondItem="l7c-Cp-hjC" secondAttribute="centerX" id="6Se-2e-4AU"/>
                             <constraint firstItem="4Pd-Yz-zyc" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="7ff-Vs-5Yg"/>
-                            <constraint firstItem="MbR-tt-KGX" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="9zg-Ja-3tU"/>
                             <constraint firstAttribute="bottom" secondItem="6QV-qp-y2K" secondAttribute="bottom" id="C9F-VY-q8e"/>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="N5K-DV-vTO" secondAttribute="trailing" constant="216" id="CTj-iM-2JC">
-                                <variation key="widthClass=regular" constant="217"/>
-                            </constraint>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="MbR-tt-KGX" secondAttribute="trailing" constant="217" id="DOQ-GF-WI6"/>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="N5K-DV-vTO" secondAttribute="trailing" constant="20" id="Dmb-nM-cwc"/>
+                            <constraint firstItem="yBx-f8-b5K" firstAttribute="bottom" secondItem="4Pd-Yz-zyc" secondAttribute="bottom" constant="63" id="DdS-A2-aT3"/>
                             <constraint firstItem="6QV-qp-y2K" firstAttribute="trailing" secondItem="yBx-f8-b5K" secondAttribute="trailing" id="E9h-Ct-s8J"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="4Pd-Yz-zyc" secondAttribute="trailing" constant="20" id="EKp-Mo-Hd2"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="4Pd-Yz-zyc" secondAttribute="trailing" constant="217" id="Fc6-qI-Sfc"/>
                             <constraint firstItem="6QV-qp-y2K" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" id="FdN-Kh-iXv"/>
                             <constraint firstItem="ql9-b7-eiR" firstAttribute="top" secondItem="l7c-Cp-hjC" secondAttribute="top" id="GN2-Zu-mjA"/>
-                            <constraint firstItem="MbR-tt-KGX" firstAttribute="top" secondItem="N5K-DV-vTO" secondAttribute="bottom" constant="18" id="Hfs-n1-7GO"/>
                             <constraint firstItem="6QV-qp-y2K" firstAttribute="top" secondItem="l7c-Cp-hjC" secondAttribute="top" id="KZI-Ov-m9J"/>
                             <constraint firstItem="ql9-b7-eiR" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" id="Mxf-pb-VMA"/>
                             <constraint firstItem="4Pd-Yz-zyc" firstAttribute="top" secondItem="oUb-vn-rbh" secondAttribute="bottom" constant="50" id="OQT-So-Li9"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="oUb-vn-rbh" secondAttribute="trailing" constant="217" id="UA6-Em-9yn"/>
-                            <constraint firstItem="N5K-DV-vTO" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="WTP-vd-eDM"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="oUb-vn-rbh" secondAttribute="trailing" constant="20" id="Wob-Cm-nI2"/>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="bottom" secondItem="CGB-lr-eD0" secondAttribute="bottom" constant="20" id="XCn-AT-t7t">
-                                <variation key="widthClass=regular" constant="120"/>
-                            </constraint>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="y9Z-UM-0vf" secondAttribute="trailing" constant="16" id="YlY-rV-wFo"/>
                             <constraint firstItem="oUb-vn-rbh" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="cJQ-Dr-IoX"/>
                             <constraint firstItem="y9Z-UM-0vf" firstAttribute="top" secondItem="yBx-f8-b5K" secondAttribute="top" constant="50" id="dfo-q8-8Mm"/>
                             <constraint firstItem="oUb-vn-rbh" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="dgq-jf-b7s"/>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="MbR-tt-KGX" secondAttribute="trailing" constant="20" id="dh0-Qq-j4U"/>
-                            <constraint firstItem="oUb-vn-rbh" firstAttribute="top" secondItem="MbR-tt-KGX" secondAttribute="bottom" constant="18" id="fWn-KW-LBH"/>
                             <constraint firstItem="y9Z-UM-0vf" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="16" id="fcX-bF-Rhb"/>
-                            <constraint firstItem="CGB-lr-eD0" firstAttribute="top" secondItem="4Pd-Yz-zyc" secondAttribute="bottom" constant="10" id="k57-jr-EVa"/>
                             <constraint firstItem="ql9-b7-eiR" firstAttribute="trailing" secondItem="yBx-f8-b5K" secondAttribute="trailing" id="lwC-wy-vGr"/>
-                            <constraint firstItem="MbR-tt-KGX" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="wud-gs-Pos"/>
                             <constraint firstAttribute="bottom" secondItem="ql9-b7-eiR" secondAttribute="bottom" id="zUW-M4-KnY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yBx-f8-b5K"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="CTj-iM-2JC"/>
-                                <exclude reference="DOQ-GF-WI6"/>
                                 <exclude reference="Fc6-qI-Sfc"/>
                                 <exclude reference="UA6-Em-9yn"/>
-                                <exclude reference="WTP-vd-eDM"/>
-                                <exclude reference="wud-gs-Pos"/>
                                 <exclude reference="dgq-jf-b7s"/>
                                 <exclude reference="2ym-yb-3Vr"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=regular">
                             <mask key="constraints">
-                                <include reference="CTj-iM-2JC"/>
-                                <include reference="DOQ-GF-WI6"/>
-                                <exclude reference="Dmb-nM-cwc"/>
                                 <exclude reference="EKp-Mo-Hd2"/>
                                 <include reference="Fc6-qI-Sfc"/>
                                 <include reference="UA6-Em-9yn"/>
                                 <exclude reference="Wob-Cm-nI2"/>
-                                <exclude reference="dh0-Qq-j4U"/>
-                                <exclude reference="3Am-2r-ply"/>
-                                <include reference="WTP-vd-eDM"/>
-                                <exclude reference="9zg-Ja-3tU"/>
-                                <include reference="wud-gs-Pos"/>
                                 <exclude reference="cJQ-Dr-IoX"/>
                                 <include reference="dgq-jf-b7s"/>
                                 <include reference="2ym-yb-3Vr"/>
@@ -305,19 +225,17 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="MbR-tt-KGX" id="AKb-fH-Gz1"/>
                         <outlet property="passwordTextField" destination="oUb-vn-rbh" id="dS7-Wa-hfk"/>
-                        <outlet property="usernameTextField" destination="N5K-DV-vTO" id="j5j-Qh-Bkq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1s-2i-0sD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1742" y="579"/>
+            <point key="canvasLocation" x="-4457" y="304"/>
         </scene>
     </scenes>
     <resources>
-        <image name="bg_GreenGradient" width="375" height="812"/>
-        <image name="trees_BGimage" width="536" height="750"/>
+        <image name="bg_GreenGradient" width="187" height="406"/>
+        <image name="trees_BGimage" width="268" height="375"/>
         <namedColor name="ConnexionButton">
             <color red="0.95294117647058818" green="0.35294117647058826" blue="0.35294117647058826" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

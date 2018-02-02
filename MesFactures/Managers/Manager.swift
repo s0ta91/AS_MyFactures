@@ -9,27 +9,31 @@
 import Foundation
 import RealmSwift
 
-public class Manager {
+class Manager {
     
     private var _realm: Realm
+    private let _userLists : Results<User>
     
     init (withRealm realm: Realm) {
         _realm = realm
+        _userLists = _realm.objects(User.self)
     }
     
     private func getNewIdentifier () -> UUID {
         return UUID()
     }
     
-    func createNewUser (_ username: String, _ email: String, _ password: String) {
+    func createNewUser (_ password: String) {
         let newUser = User()
         let identifier = getNewIdentifier()
         newUser.identifier = identifier.uuidString
-        newUser.username = username
-        newUser.email = email
         newUser.password = password
         try? _realm.write {
             _realm.add(newUser)
         }
+    }
+    
+    func getUserCount () -> Int{
+        return _userLists.count
     }
 }
