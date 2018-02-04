@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-bF-X22">
-                                <rect key="frame" x="108" y="614" width="160" height="33"/>
+                                <rect key="frame" x="107.5" y="614" width="160" height="33"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="Créer un mot de passe">
                                     <color key="titleColor" name="creeruncompteButton"/>
@@ -129,6 +129,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="ui_connexionButton" destination="slb-lc-DB2" id="54T-FB-i2h"/>
                         <outlet property="ui_createNewPasswordButton" destination="BSc-bF-X22" id="wHY-AK-TqD"/>
                         <outlet property="ui_mesfacturesTextField" destination="RZg-Pt-dGW" id="qUj-Kj-vc6"/>
                         <outlet property="ui_passwordTextField" destination="0Df-Cs-8WS" id="cC5-M1-DQD"/>
@@ -164,7 +165,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Xw-20-cuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3561" y="-497"/>
+            <point key="canvasLocation" x="-3655" y="-497"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
