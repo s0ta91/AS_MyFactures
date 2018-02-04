@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var passwordTextField: UITextField!
     
     
@@ -21,9 +21,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
     }
     
-    private func createNewUser () {
+    private func createNewUser (){
         if let password = passwordTextField.text,
             let db = DbManager().getDb() {
                 db.savePassword(password)
@@ -34,9 +36,17 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return true
     }
+    
+    func displayGroupTableViewController () {
+        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "GroupTableViewController") as? GroupTableViewController {
+            GroupTableVC.modalTransitionStyle = .crossDissolve
+            present(GroupTableVC, animated: true, completion: nil)
+        }
+    }
 
     @IBAction func createAccountButtonPressed(_ sender: Any) {
         createNewUser()
+        displayGroupTableViewController()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

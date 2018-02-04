@@ -15,7 +15,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ui_passwordTextField: UITextField!
     @IBOutlet weak var ui_createNewPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
-    @IBOutlet weak var ui_deletePasswordButton: UIButton!
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,7 +55,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
                     ui_passwordTextField.isHidden = true
                     ui_connexionButton.isHidden = true
-                    ui_deletePasswordButton.isHidden = true
                     unlockWithBiometrics()
                 }
             }else {
@@ -96,10 +94,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func showPasswordField () {
         ui_passwordTextField.isHidden = false
         ui_connexionButton.isHidden = false
-        ui_deletePasswordButton.isHidden = false
     }
     
-    private func displayGroupTableViewController () {
+    func displayGroupTableViewController () {
+        print("Exec function")
         if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "GroupTableViewController") as? GroupTableViewController {
             GroupTableVC.modalTransitionStyle = .crossDissolve
             present(GroupTableVC, animated: true, completion: nil)
