@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "trees_BGimage.png",
+      "filename" : "MesFactures.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "trees_BGimage-1.png",
+      "filename" : "MesFactures-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "trees_BGimage-2.png",
+      "filename" : "MesFactures-2.png",
       "scale" : "3x"
     }
   ],
