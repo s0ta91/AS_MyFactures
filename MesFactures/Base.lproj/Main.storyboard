@@ -232,9 +232,9 @@
                         <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>
-                            <constraint firstItem="qWy-3l-pJt" firstAttribute="bottom" secondItem="4ky-NB-Zlg" secondAttribute="bottom" id="bep-7i-6R5"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" constant="16" id="fuO-tA-gb9"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="gaE-LW-nr8"/>
+                            <constraint firstAttribute="bottom" secondItem="4ky-NB-Zlg" secondAttribute="bottom" id="hbZ-03-3H1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qWy-3l-pJt"/>
                     </view>
@@ -252,7 +252,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atx-u6-ncx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2106.4000000000001" y="-497.00149925037488"/>
+            <point key="canvasLocation" x="-2106.4000000000001" y="-497.29064039408871"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
