@@ -21,7 +21,7 @@
 		1D4B07A220233FF4002F745C /* MesFacturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07A120233FF4002F745C /* MesFacturesTests.swift */; };
 		1D4B07AD20233FF4002F745C /* MesFacturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
-		1DD5AB182024DC4300EEEF54 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */; };
+		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
@@ -65,7 +65,7 @@
 		1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesFacturesUITests.swift; sourceTree = "<group>"; };
 		1D4B07AE20233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
-		1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 			children = (
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
-				1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */,
+				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -526,12 +526,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1D4809CF20248BD700068094 /* User.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
-				1DD5AB182024DC4300EEEF54 /* GroupTableViewController.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
 			);
