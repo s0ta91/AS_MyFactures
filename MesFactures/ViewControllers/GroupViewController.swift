@@ -9,19 +9,50 @@
 import UIKit
 
 class GroupViewController: UIViewController {
-  
+    
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
+    }
+    
     @IBOutlet weak var groupCV: UICollectionView!
-    @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var ui_newGroupButton: UIButton!
+    @IBOutlet weak var ui_manageYearButton: UIBarButtonItem!
+    @IBOutlet weak var ui_manageGroupButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         groupCV.dataSource = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNewGroupButtonLayer()
+
+        _manager.addGroup(withTitle: "Achats en ligne")
+        _manager.addGroup(withTitle: "Energies")
+        _manager.addGroup(withTitle: "Internet")
+        _manager.addGroup(withTitle: "Fiches de paie")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func setNewGroupButtonLayer () {
+        ui_newGroupButton.layer.cornerRadius = 17
+        ui_newGroupButton.layer.shadowColor = UIColor.lightGray.cgColor
+        ui_newGroupButton.layer.shadowOffset = CGSize(width:0,height: 2)
+        ui_newGroupButton.layer.shadowRadius = 2.0
+        ui_newGroupButton.layer.shadowOpacity = 1.0
+        ui_newGroupButton.layer.masksToBounds = false;
+        ui_newGroupButton.layer.shadowPath = UIBezierPath(roundedRect:ui_newGroupButton.bounds, cornerRadius:ui_newGroupButton.layer.cornerRadius).cgPath
     }
     
     
@@ -37,13 +68,19 @@ class GroupViewController: UIViewController {
     */
 
 }
+extension GroupViewController: UICollectionViewDelegate {
+    
+}
 
 extension GroupViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
+        
         switch kind {
         case UICollectionElementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as! HeaderGroupView
-            headerView.headerViewLabel.text = "2018"
+            headerView.setYear(withYear: "\(selectedYear.year)")
             return headerView
         default:
             assert(false, "Unexpected element kind")
@@ -52,12 +89,17 @@ extension GroupViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 12
+        return _manager.getGroupCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath)
+        let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
+        if let group = _manager.getGroup(atIndex: indexPath.row) {
+            cell_group.setValues(_manager, group)
+        }
+        
+        // Cell's display configuration
         cell_group.layer.cornerRadius = 8
         cell_group.layer.borderWidth = 1.0
         cell_group.layer.borderColor = UIColor.clear.cgColor
