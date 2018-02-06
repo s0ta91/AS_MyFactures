@@ -10,7 +10,7 @@ import UIKit
 import LocalAuthentication
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
     @IBOutlet weak var ui_createNewPasswordButton: UIButton!
@@ -97,8 +97,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func displayGroupTableViewController () {
-        print("Exec function")
-        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "GroupTableViewController") as? GroupTableViewController {
+        
+        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
             present(GroupTableVC, animated: true, completion: nil)
         }

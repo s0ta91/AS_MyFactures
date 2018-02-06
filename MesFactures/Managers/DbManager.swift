@@ -18,10 +18,25 @@ class DbManager {
     private var _database: Manager?
     private var _keychain: Keychain
 
-    
+    /** INIT functions **/
     init () {
         _keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "s0ta.MesFactures")
     }
+    
+    
+    /** PRIVATE functions **/
+    private func loadRealmEncryptionKey () -> Data? {
+        return _keychain[data: DbManager.REALM_ENCRYPTION_KEY]
+    }
+    
+    private func generateRealmEncryptionKey () -> Data? {
+        guard let generatedData = Data(countOfRandomData: 64) else { return nil }
+        try! _keychain.set(generatedData, key: DbManager.REALM_ENCRYPTION_KEY)
+        return generatedData
+    }
+    
+    
+    /** PUBLIC functions **/
     func getDb () -> Manager? {
         if DbManager.ENCRYPT_FILE == true {
             // try to load the key
@@ -57,13 +72,4 @@ class DbManager {
     }
     
     
-    private func loadRealmEncryptionKey () -> Data? {
-        return _keychain[data: DbManager.REALM_ENCRYPTION_KEY]
-    }
-    
-    private func generateRealmEncryptionKey () -> Data? {
-        guard let generatedData = Data(countOfRandomData: 64) else { return nil }
-        try! _keychain.set(generatedData, key: DbManager.REALM_ENCRYPTION_KEY)
-        return generatedData
-    }
 }

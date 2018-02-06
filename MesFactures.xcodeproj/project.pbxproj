@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */; };
 		1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */; };
-		1D4809CF20248BD700068094 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809CE20248BD700068094 /* User.swift */; };
 		1D4809D12024900A00068094 /* DbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809D02024900A00068094 /* DbManager.swift */; };
 		1D4809D32024924900068094 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809D22024924900068094 /* Manager.swift */; };
 		1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809DA2024B0A400068094 /* DataExtension.swift */; };
@@ -21,7 +20,12 @@
 		1D4B07A220233FF4002F745C /* MesFacturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07A120233FF4002F745C /* MesFacturesTests.swift */; };
 		1D4B07AD20233FF4002F745C /* MesFacturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
-		1DD5AB182024DC4300EEEF54 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */; };
+		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
+		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
+		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
+		1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */; };
+		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
+		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +51,6 @@
 		07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
-		1D4809CE20248BD700068094 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1D4809D02024900A00068094 /* DbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbManager.swift; sourceTree = "<group>"; };
 		1D4809D22024924900068094 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		1D4809DA2024B0A400068094 /* DataExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
@@ -65,7 +68,12 @@
 		1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesFacturesUITests.swift; sourceTree = "<group>"; };
 		1D4B07AE20233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
-		1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
+		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
+		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,7 +114,9 @@
 		1D4809CD20248B4800068094 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1D4809CE20248BD700068094 /* User.swift */,
+				1DAEAC212029E3DD001C144E /* ApplicationData.swift */,
+				1DAEAC1F2029E093001C144E /* Year.swift */,
+				1DAEAC232029E756001C144E /* Group.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -158,6 +168,7 @@
 				1D4809CD20248B4800068094 /* Models */,
 				1D4809D82024AA7F00068094 /* Managers */,
 				1D4B07BA20234026002F745C /* ViewControllers */,
+				1DD923582028C49900387FF8 /* CustomCollectionViewCell */,
 				1D4B079020233FF4002F745C /* Main.storyboard */,
 				1D4B079320233FF4002F745C /* Assets.xcassets */,
 				1D4B079520233FF4002F745C /* LaunchScreen.storyboard */,
@@ -190,7 +201,7 @@
 			children = (
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
-				1DD5AB172024DC4300EEEF54 /* GroupTableViewController.swift */,
+				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -201,6 +212,15 @@
 				1D6220F220235D1300D25828 /* Abuget.ttf */,
 			);
 			path = Ressources;
+			sourceTree = "<group>";
+		};
+		1DD923582028C49900387FF8 /* CustomCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				1DD923592028C4C800387FF8 /* HeaderGroupView.swift */,
+				1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */,
+			);
+			path = CustomCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		4038E0185330D3C1844EB1A9 /* Frameworks */ = {
@@ -526,14 +546,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D4809CF20248BD700068094 /* User.swift in Sources */,
+				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
+				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
+				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
-				1DD5AB182024DC4300EEEF54 /* GroupTableViewController.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
+				1DAEAC202029E093001C144E /* Year.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
+				1DAEAC242029E756001C144E /* Group.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

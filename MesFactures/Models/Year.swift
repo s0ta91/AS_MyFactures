@@ -1,34 +1,34 @@
 //
-//  User.swift
+//  yearsList.swift
 //  MesFactures
 //
-//  Created by Sébastien on 02/02/2018.
+//  Created by Sébastien on 10/01/2018.
 //  Copyright © 2018 Sébastien Constant. All rights reserved.
 //
 
 import Foundation
 import RealmSwift
 
-class User: Object {
-    @objc private dynamic var _identifier: String = ""
-    @objc private dynamic var _password = ""
+class Year: Object {
+    @objc private dynamic var _year: Int = 0
+    @objc private dynamic var _selected: Bool = false
     
-    var identifier: String {
+    var year: Int {
         get {
-            return _identifier
+            return _year
         }set {
             realm?.beginWrite()
-            _identifier = newValue
+            _year = newValue
             try? realm?.commitWrite()
         }
     }
     
-    var password: String {
+    var selected: Bool {
         get {
-            return _password
+            return _selected
         }set {
             realm?.beginWrite()
-            _password = newValue
+            _selected = newValue
             try? realm?.commitWrite()
         }
     }
