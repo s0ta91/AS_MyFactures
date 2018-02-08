@@ -24,6 +24,9 @@
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
 		1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */; };
+		1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */; };
+		1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */; };
+		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
 		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
 		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
@@ -72,6 +75,9 @@
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
+		1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPopupView.swift; sourceTree = "<group>"; };
+		1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdeasCollectionViewCell.swift; sourceTree = "<group>"; };
+		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
 		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 				1DAEAC212029E3DD001C144E /* ApplicationData.swift */,
 				1DAEAC1F2029E093001C144E /* Year.swift */,
 				1DAEAC232029E756001C144E /* Group.swift */,
+				1DD2402A202C5D4300917B08 /* GroupIdea.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -202,6 +209,7 @@
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
+				1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 			children = (
 				1DD923592028C4C800387FF8 /* HeaderGroupView.swift */,
 				1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */,
+				1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */,
 			);
 			path = CustomCollectionViewCell;
 			sourceTree = "<group>";
@@ -548,7 +557,9 @@
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
+				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
@@ -556,6 +567,7 @@
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				1DAEAC202029E093001C144E /* Year.swift in Sources */,
+				1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
 			);
