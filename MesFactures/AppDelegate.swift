@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let database = DbManager().getDb() {
             database.initYear()
             database.updateApplicationData()
+            database.setGroupIdeaList()
         }
         return true
     }

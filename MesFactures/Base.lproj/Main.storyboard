@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-X9-wAt">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -292,32 +292,29 @@
                     </navigationItem>
                     <connections>
                         <outlet property="groupCV" destination="4ky-NB-Zlg" id="gd0-0b-xgb"/>
-                        <outlet property="ui_createGroupView" destination="9z4-yx-RDU" id="ZhC-CJ-Jbr"/>
+                        <outlet property="ui_createGroupView" destination="9z4-yx-RDU" id="1hq-Aq-guE"/>
+                        <outlet property="ui_groupIdeaCV" destination="zXB-2I-qOR" id="h0M-GD-817"/>
+                        <outlet property="ui_groupNameTextField" destination="SlU-rg-RpY" id="HQQ-DC-Ecx"/>
                         <outlet property="ui_manageGroupButton" destination="5JL-9u-fRO" id="Z1F-R3-rpI"/>
                         <outlet property="ui_manageYearButton" destination="ELf-8C-f64" id="6vM-4Z-bb5"/>
                         <outlet property="ui_newGroupButton" destination="g6D-3l-Cu7" id="LbM-Q5-XW5"/>
+                        <outlet property="ui_newGroupNameTextField" destination="SlU-rg-RpY" id="byb-rK-8eP"/>
                         <outlet property="ui_visualEffectView" destination="wVm-uH-hc3" id="w9W-GU-Zxb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atx-u6-ncx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="9z4-yx-RDU" customClass="CreateGroupPopupView" customModule="MesFactures" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="344" height="220"/>
+                <view contentMode="scaleToFill" id="9z4-yx-RDU">
+                    <rect key="frame" x="0.0" y="0.0" width="344" height="170"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom du groupe ..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SlU-rg-RpY">
-                            <rect key="frame" x="10" y="59" width="324" height="18"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Idées de groupes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3x-fg-b4z">
-                            <rect key="frame" x="10" y="102" width="132.66666666666666" height="21"/>
+                            <rect key="frame" x="10" y="60" width="132.66666666666666" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTI-aw-vCM">
-                            <rect key="frame" x="52" y="137" width="68" height="36"/>
+                            <rect key="frame" x="52" y="129" width="68" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <state key="normal" title="Annuler">
                                 <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -326,48 +323,76 @@
                                 <action selector="cancelButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="ED1-dl-AmN"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyD-Qf-xEY">
-                            <rect key="frame" x="190" y="137" width="134" height="36"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Créer le groupe"/>
-                        </button>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-2I-qOR">
-                            <rect key="frame" x="0.0" y="123" width="344" height="17"/>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" verticalCompressionResistancePriority="751" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-2I-qOR">
+                            <rect key="frame" x="0.0" y="86" width="344" height="38"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ts2-SQ-j7U">
-                                <size key="itemSize" width="50" height="50"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="20" id="Ts2-SQ-j7U">
+                                <size key="itemSize" width="72" height="25"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="sectionInset" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
                             <cells>
-                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell_groupIdeas" id="cXU-5S-orn">
-                                    <rect key="frame" x="0.0" y="-16.666666666666668" width="50" height="50"/>
+                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell_groupIdeas" id="cXU-5S-orn" customClass="GroupIdeasCollectionViewCell" customModule="MesFactures" customModuleProvider="target">
+                                    <rect key="frame" x="10" y="6.666666666666667" width="72" height="25"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="25"/>
                                         <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energies" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="950-SJ-hDX">
+                                                <rect key="frame" x="6" y="3" width="60" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
                                     </view>
+                                    <constraints>
+                                        <constraint firstItem="950-SJ-hDX" firstAttribute="centerY" secondItem="cXU-5S-orn" secondAttribute="centerY" id="LZM-W6-aoh"/>
+                                        <constraint firstItem="950-SJ-hDX" firstAttribute="centerX" secondItem="cXU-5S-orn" secondAttribute="centerX" id="c02-hO-cmW"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="ui_groupIdeaNameLabel" destination="950-SJ-hDX" id="v7w-HI-sxN"/>
+                                    </connections>
                                 </collectionViewCell>
                             </cells>
+                            <connections>
+                                <outlet property="dataSource" destination="D5B-Ih-OFp" id="bWB-Et-ovs"/>
+                            </connections>
                         </collectionView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TyD-Qf-xEY">
+                            <rect key="frame" x="190" y="129" width="134" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="Créer le groupe"/>
+                            <connections>
+                                <action selector="createNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="kSS-dx-tUu"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom du groupe ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SlU-rg-RpY">
+                            <rect key="frame" x="10" y="18" width="324" height="19"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="W40-uR-JsQ" firstAttribute="bottom" secondItem="TyD-Qf-xEY" secondAttribute="bottom" constant="13" id="1qn-NY-LWl"/>
                         <constraint firstItem="W40-uR-JsQ" firstAttribute="trailing" secondItem="TyD-Qf-xEY" secondAttribute="trailing" constant="20" id="3vF-tD-XOz"/>
                         <constraint firstItem="l3x-fg-b4z" firstAttribute="leading" secondItem="W40-uR-JsQ" secondAttribute="leading" constant="10" id="7rC-zX-WBN"/>
-                        <constraint firstItem="VTI-aw-vCM" firstAttribute="top" secondItem="zXB-2I-qOR" secondAttribute="bottom" constant="-3" id="FMV-1j-PGG"/>
+                        <constraint firstAttribute="bottom" secondItem="TyD-Qf-xEY" secondAttribute="bottom" constant="5" id="B6e-dP-gtX"/>
                         <constraint firstItem="zXB-2I-qOR" firstAttribute="leading" secondItem="W40-uR-JsQ" secondAttribute="leading" id="OMa-sr-oqO"/>
+                        <constraint firstAttribute="bottom" secondItem="VTI-aw-vCM" secondAttribute="bottom" constant="5" id="Oob-sv-PNF"/>
                         <constraint firstItem="W40-uR-JsQ" firstAttribute="trailing" secondItem="l3x-fg-b4z" secondAttribute="trailing" constant="201.33000000000001" id="UAl-Ac-9Xe"/>
-                        <constraint firstItem="zXB-2I-qOR" firstAttribute="top" secondItem="l3x-fg-b4z" secondAttribute="bottom" id="Vjh-Az-8v5"/>
-                        <constraint firstItem="SlU-rg-RpY" firstAttribute="top" secondItem="W40-uR-JsQ" secondAttribute="top" constant="15" id="X97-KQ-wmj"/>
+                        <constraint firstItem="VTI-aw-vCM" firstAttribute="top" secondItem="zXB-2I-qOR" secondAttribute="bottom" constant="5" id="aAZ-EB-sua"/>
+                        <constraint firstItem="TyD-Qf-xEY" firstAttribute="top" secondItem="zXB-2I-qOR" secondAttribute="bottom" constant="5" id="aZg-3m-K9y"/>
                         <constraint firstItem="W40-uR-JsQ" firstAttribute="trailing" secondItem="SlU-rg-RpY" secondAttribute="trailing" constant="10" id="acB-us-63g"/>
-                        <constraint firstItem="l3x-fg-b4z" firstAttribute="top" secondItem="SlU-rg-RpY" secondAttribute="bottom" constant="25" id="ayd-lf-Dwu"/>
+                        <constraint firstItem="SlU-rg-RpY" firstAttribute="top" secondItem="9z4-yx-RDU" secondAttribute="top" constant="18" id="cLB-Ti-zrR"/>
                         <constraint firstItem="zXB-2I-qOR" firstAttribute="trailing" secondItem="W40-uR-JsQ" secondAttribute="trailing" id="gbl-jK-FDN"/>
+                        <constraint firstItem="zXB-2I-qOR" firstAttribute="top" secondItem="l3x-fg-b4z" secondAttribute="bottom" constant="5" id="mQy-0W-1Kp"/>
                         <constraint firstItem="TyD-Qf-xEY" firstAttribute="leading" secondItem="VTI-aw-vCM" secondAttribute="trailing" constant="70" id="mc4-L9-MeH"/>
                         <constraint firstItem="VTI-aw-vCM" firstAttribute="leading" secondItem="W40-uR-JsQ" secondAttribute="leading" constant="52" id="qxN-ps-zbt"/>
-                        <constraint firstItem="W40-uR-JsQ" firstAttribute="bottom" secondItem="VTI-aw-vCM" secondAttribute="bottom" constant="13" id="y9O-xO-UMJ"/>
+                        <constraint firstItem="l3x-fg-b4z" firstAttribute="top" secondItem="SlU-rg-RpY" secondAttribute="bottom" constant="23" id="saU-Dq-Mof"/>
                         <constraint firstItem="SlU-rg-RpY" firstAttribute="leading" secondItem="W40-uR-JsQ" secondAttribute="leading" constant="10" id="zVo-F1-oFF"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="W40-uR-JsQ"/>

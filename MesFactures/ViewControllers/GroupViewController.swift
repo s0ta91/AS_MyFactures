@@ -10,13 +10,23 @@ import UIKit
 
 class GroupViewController: UIViewController {
     
+    // GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet weak var ui_manageYearButton: UIBarButtonItem!
     @IBOutlet weak var ui_manageGroupButton: UIBarButtonItem!
     @IBOutlet weak var ui_visualEffectView: UIVisualEffectView!
-    @IBOutlet var ui_createGroupView: CreateGroupPopupView!
+    @IBOutlet var ui_createGroupView: UIView!
+    @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
+    
+    // CreateGroupPopupView
+    @IBOutlet weak var ui_groupNameTextField: UITextField!
+    @IBOutlet weak var ui_groupIdeaCV: UICollectionView!
+    
+    
+    
+    // Variables declaration
     private var _manager: Manager {
         if let database =  DbManager().getDb() {
             return database
@@ -24,12 +34,12 @@ class GroupViewController: UIViewController {
             fatalError("Database doesn't exists")
         }
     }
-    
     var effect: UIVisualEffect!
     
+    
+    // ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
-
         groupCV.dataSource = self
     }
     
@@ -53,6 +63,8 @@ class GroupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // Private functions
     private func setNewGroupButtonLayer () {
         ui_newGroupButton.layer.cornerRadius = 17
         ui_newGroupButton.layer.shadowColor = UIColor.lightGray.cgColor
@@ -67,9 +79,6 @@ class GroupViewController: UIViewController {
         self.navigationController!.view.addSubview(ui_createGroupView)
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
         let topAdjust = navigationBarHeight + 60
-        
-        print(navigationBarHeight)
-        print(topAdjust)
         
         
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,13 +112,24 @@ class GroupViewController: UIViewController {
     }
     
     
+    // Action functions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
+        ui_newGroupNameTextField.text = ""
         animateIn()
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         animateOut()
     }
+    
+    @IBAction func createNewGroupButtonPressed(_ sender: Any) {
+        if let newGroupName = ui_newGroupNameTextField.text {
+            _manager.addGroup(withTitle: newGroupName)
+        }
+        animateOut()
+        self.groupCV.reloadData()
+    }
+    
     
     
     
@@ -144,27 +164,42 @@ extension GroupViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return _manager.getGroupCount()
+        if collectionView.tag == 0 {
+            return _manager.getGroupCount()
+        }else {
+            print("CreateGroupView: \(_manager.getGroupIdeaCount())")
+            return _manager.getGroupIdeaCount()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
+        if collectionView.tag == 0 {
+            let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-        if let group = _manager.getGroup(atIndex: indexPath.row) {
-            cell_group.setValues(_manager, group)
+            if let group = _manager.getGroup(atIndex: indexPath.row) {
+                cell_group.setValues(_manager, group)
+            }
+            
+            // Cell's display configuration
+            cell_group.layer.cornerRadius = 8
+            cell_group.layer.borderWidth = 1.0
+            cell_group.layer.borderColor = UIColor.clear.cgColor
+            cell_group.layer.shadowColor = UIColor.lightGray.cgColor
+            cell_group.layer.shadowOffset = CGSize(width:0,height: 2)
+            cell_group.layer.shadowRadius = 2.0
+            cell_group.layer.shadowOpacity = 1.0
+            cell_group.layer.masksToBounds = false;
+            cell_group.layer.shadowPath = UIBezierPath(roundedRect:cell_group.bounds, cornerRadius:cell_group.layer.cornerRadius).cgPath
+            
+            return cell_group
+        }else {
+            print("inside")
+            let cell_groupIdea = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_groupIdea", for: indexPath) as! GroupIdeasCollectionViewCell
+            let titleList:[String] = _manager.getGroupIdeaNameList()
+            print("titleList: \(titleList)")
+            cell_groupIdea.setTitle(titleList[indexPath.row])
+            return cell_groupIdea
         }
-        
-        // Cell's display configuration
-        cell_group.layer.cornerRadius = 8
-        cell_group.layer.borderWidth = 1.0
-        cell_group.layer.borderColor = UIColor.clear.cgColor
-        cell_group.layer.shadowColor = UIColor.lightGray.cgColor
-        cell_group.layer.shadowOffset = CGSize(width:0,height: 2)
-        cell_group.layer.shadowRadius = 2.0
-        cell_group.layer.shadowOpacity = 1.0
-        cell_group.layer.masksToBounds = false;
-        cell_group.layer.shadowPath = UIBezierPath(roundedRect:cell_group.bounds, cornerRadius:cell_group.layer.cornerRadius).cgPath
-        
-        return cell_group
     }
 }
+

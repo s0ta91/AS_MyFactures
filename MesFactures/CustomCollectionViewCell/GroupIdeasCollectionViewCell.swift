@@ -10,5 +10,9 @@ import UIKit
 
 class GroupIdeasCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var ui_groupIdeaNameLabel: UILabel!
     
+    func setTitle (_ groupIdeaTitle: String) {
+        ui_groupIdeaNameLabel.text = groupIdeaTitle
+    }
 }

@@ -16,6 +16,7 @@ class Manager {
     private var _yearsList: Results<Year>
     private var _applicationDataList: Results<ApplicationData>
     private var _groupList: Results<Group>
+    private var _groupIdeaList: Results<GroupIdea>
     
     /** INIT functions **/
     init (withRealm realm: Realm) {
@@ -23,6 +24,7 @@ class Manager {
         _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
         _applicationDataList = _realm.objects(ApplicationData.self)
         _groupList = _realm.objects(Group.self).sorted(byKeyPath: "_title")
+        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
     }
     
     func initYear () {
@@ -59,6 +61,8 @@ class Manager {
     
     
     /** PUBLIC functions **/
+    
+    // Password management
     func savePassword (_ password: String) {
         DbManager().saveMasterPassword(password)
     }
@@ -67,6 +71,7 @@ class Manager {
         return DbManager().getMasterPassword() != nil
     }
     
+    // ApplicationData functions
     func updateApplicationData () {
         let applicationData = ApplicationData()
         _realm.beginWrite()
@@ -117,6 +122,35 @@ class Manager {
         }
     }
     
+    // GROUPIDEA functions
+    func getGroupIdeaCount () -> Int {
+        return _groupIdeaList.count
+    }
+    private func addGroupidea (_ groupIdeaName: String) {
+        let newGroupIdea = GroupIdea()
+        newGroupIdea.title = groupIdeaName
+        try? _realm.write {
+            _realm.add(newGroupIdea)
+        }
+    }
+    func setGroupIdeaList () {
+        addGroupidea("Achats en ligne")
+        addGroupidea("Energies")
+        addGroupidea("Fiches de paie")
+        addGroupidea("Internet")
+        addGroupidea("Magasins")
+        addGroupidea("Téléphones")
+    }
+    func getGroupIdeaNameList () -> [String]{
+        var groupIdeaName:[String] = []
+        for groupIdeaIndex in 0...getGroupIdeaCount() {
+             groupIdeaName.append(_groupIdeaList[groupIdeaIndex].title)
+        }
+        return groupIdeaName
+    }
+    
+    
+    // Other functions
     func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
         let textFieldToConvert = textField
         let labelToConvert = label
