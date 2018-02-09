@@ -34,6 +34,7 @@ class GroupViewController: UIViewController {
             fatalError("Database doesn't exists")
         }
     }
+    private var _currentYear: Year!
     var effect: UIVisualEffect!
     
     
@@ -45,6 +46,8 @@ class GroupViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        _currentYear = _manager.getSelectedYear()
+        
         ui_visualEffectView.isHidden = true
         effect = ui_visualEffectView.effect
         ui_visualEffectView.effect = nil
@@ -112,16 +115,18 @@ class GroupViewController: UIViewController {
     // Action functions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
+        ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
+        ui_newGroupNameTextField.resignFirstResponder()
         animateOut()
     }
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
         if let newGroupName = ui_newGroupNameTextField.text {
-            _manager.addGroup(withTitle: newGroupName)
+            _currentYear.addGroup(withTitle: newGroupName)
         }
         animateOut()
         self.groupCV.reloadData()
@@ -131,7 +136,7 @@ class GroupViewController: UIViewController {
         if segue.identifier == "showModaly_manageGroupVC" {
             if let navigationVC = segue.destination as? UINavigationController,
                 let destinationVC = navigationVC.viewControllers.first as? ManageGroupTableViewController {
-                destinationVC._manager = _manager
+                destinationVC._currentYear = _currentYear
             }
         }
         
@@ -162,7 +167,7 @@ extension GroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.tag == 0 {
-            return _manager.getGroupCount()
+            return _currentYear.getGroupCount()
         }else {
             print("CreateGroupView: \(_manager.getGroupIdeaCount())")
             return _manager.getGroupIdeaCount()
@@ -173,7 +178,7 @@ extension GroupViewController: UICollectionViewDataSource {
         if collectionView.tag == 0 {
             let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-            if let group = _manager.getGroup(atIndex: indexPath.row) {
+            if let group = _currentYear.getGroup(atIndex: indexPath.row) {
                 cell_group.setValues(_manager, group)
             }
             

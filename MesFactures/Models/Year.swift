@@ -12,6 +12,7 @@ import RealmSwift
 class Year: Object {
     @objc private dynamic var _year: Int = 0
     @objc private dynamic var _selected: Bool = false
+    private var _groupList = List<Group>()
     
     var year: Int {
         get {
@@ -31,5 +32,37 @@ class Year: Object {
             _selected = newValue
             try? realm?.commitWrite()
         }
+    }
+    
+    
+    // GROUP functions
+    func addGroup (withTitle title: String) {
+        let newGroup = Group()
+        newGroup.title = title
+        realm?.beginWrite()
+        _groupList.append(newGroup)
+        try? realm?.commitWrite()
+    }
+    
+    func getGroupCount () -> Int{
+        return _groupList.count
+    }
+    
+    func getGroup (atIndex index: Int) -> Group? {
+        guard index >= 0 && index <= getGroupCount() else {return nil}
+        return _groupList[index]
+    }
+    
+    func getGroupIndex (forGroup group: Group) -> Int? {
+        return _groupList.index(of: group)
+    }
+    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
+        group.title = newTitle
+    }
+    
+    func removeGroup (atIndex index:Int) {
+        realm?.beginWrite()
+        _groupList.remove(at: index)
+        try? realm?.commitWrite()
     }
 }

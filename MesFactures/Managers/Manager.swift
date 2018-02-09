@@ -106,36 +106,36 @@ class Manager {
     
     
     // GROUP functions
-    func getGroupCount () -> Int{
-        return _groupList.count
-    }
+//    func getGroupCount () -> Int{
+//        return _groupList.count
+//    }
     
-    func addGroup (withTitle title: String) {
-        let newGroup = Group()
-        newGroup.title = title
-        try? _realm.write {
-            _realm.add(newGroup)
-        }
-    }
+//    func addGroup (withTitle title: String) {
+//        let newGroup = Group()
+//        newGroup.title = title
+//        try? _realm.write {
+//            _realm.add(newGroup)
+//        }
+//    }
     
-    func getGroup (atIndex index:Int) -> Group? {
-        guard index >= 0 && index <= getGroupCount() else {return nil}
-        return _groupList[index]
-    }
-    func getGroupIndex (forGroup group: Group) -> Int? {
-        return _groupList.index(of: group)
-    }
-    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
-        group.title = newTitle
-    }
-    
-    func removeGroup (atIndex index:Int) {
-        if let groupToRemove = getGroup(atIndex: index) {
-            try? _realm.write {
-                _realm.delete(groupToRemove)
-            }
-        }
-    }
+//    func getGroup (atIndex index:Int) -> Group? {
+//        guard index >= 0 && index <= getGroupCount() else {return nil}
+//        return _groupList[index]
+//    }
+//    func getGroupIndex (forGroup group: Group) -> Int? {
+//        return _groupList.index(of: group)
+//    }
+//    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
+//        group.title = newTitle
+//    }
+//
+//    func removeGroup (atIndex index:Int) {
+//        if let groupToRemove = getGroup(atIndex: index) {
+//            try? _realm.write {
+//                _realm.delete(groupToRemove)
+//            }
+//        }
+//    }
     
     // GROUPIDEA functions
     func getGroupIdeaCount () -> Int {

@@ -11,6 +11,8 @@ import UIKit
 class SelectYearViewController: UIViewController {
 
     @IBOutlet weak var ui_selectYearTableView: UITableView!
+    
+    
     var _manager: Manager!
     
     override func viewDidLoad() {
@@ -35,20 +37,30 @@ class SelectYearViewController: UIViewController {
 
 extension SelectYearViewController: UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _manager.getyearsCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell_yearSelection = tableView.dequeueReusableCell(withIdentifier: "cell_yearSelection", for: indexPath)
+        let cell_yearSelection = tableView.dequeueReusableCell(withIdentifier: "cell_yearSelection", for: indexPath) as! SelectYearTableViewCell
         if let year = _manager.getYear(atIndex: indexPath.row) {
             let yearString = String(describing: year.year)
-            cell_yearSelection.textLabel?.text = yearString
+            let nbGroupForYear = year.getGroupCount()
+            var numberOfGroup: String {
+                if nbGroupForYear > 1 {
+                    return "\(nbGroupForYear) groupes"
+                }else {
+                    return "\(nbGroupForYear) groupe"
+                }
+            }
+            cell_yearSelection.setValues(yearString, numberOfGroup)
             if year.selected == true {
-//                print("\(yearString) checkmark")
                 cell_yearSelection.accessoryType = .checkmark
             }else {
-//                print("\(yearString) none")
                 cell_yearSelection.accessoryType = .none
             }
         }

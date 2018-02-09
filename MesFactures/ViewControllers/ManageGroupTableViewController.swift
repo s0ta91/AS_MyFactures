@@ -10,9 +10,10 @@ import UIKit
 
 class ManageGroupTableViewController: UIViewController {
     
-    var _manager: Manager!
+    var _currentYear: Year!
     private var _visualEffect: UIVisualEffect!
     private var _selectedGroup: Group!
+    
     
     @IBOutlet weak var ui_manageGroupTableView: UITableView!
     @IBOutlet weak var ui_manageGroupVisualEffectView: UIVisualEffectView!
@@ -33,11 +34,7 @@ class ManageGroupTableViewController: UIViewController {
         ui_modifyGroupView.layer.cornerRadius = 10
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_modifyGroupView)
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -80,13 +77,14 @@ class ManageGroupTableViewController: UIViewController {
     
     @IBAction func modifyGroupNameButtonPressed(_ sender: Any) {
         if let newTitle = ui_modifiedGroupNameTextField.text {
-            _manager.modifyGroupTitle(forGroup: _selectedGroup, withNewTitle: newTitle)
+            _currentYear.modifyGroupTitle(forGroup: _selectedGroup, withNewTitle: newTitle)
             ui_manageGroupTableView.reloadData()
             animateOut()
         }
     }
     
     @IBAction func cancelModifyGroupNameButtonPressed(_ sender: Any) {
+        ui_modifiedGroupNameTextField.resignFirstResponder()
         animateOut()
     }
 
@@ -102,13 +100,13 @@ extension ManageGroupTableViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return _manager.getGroupCount()
+        return _currentYear.getGroupCount()
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell_groupManage = tableView.dequeueReusableCell(withIdentifier: "cell_manageGroup", for: indexPath)
-        if let group = _manager.getGroup(atIndex: indexPath.row) {
+        if let group = _currentYear.getGroup(atIndex: indexPath.row) {
             cell_groupManage.textLabel?.text = group.title
         }
         return cell_groupManage
@@ -118,16 +116,17 @@ extension ManageGroupTableViewController: UITableViewDataSource {
 extension ManageGroupTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let editAction = UITableViewRowAction(style: .normal, title: "Modifier") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            if let group = self._manager.getGroup(atIndex: indexPath.row) {
+            if let group = self._currentYear.getGroup(atIndex: indexPath.row) {
                 self._selectedGroup = group
                 self.ui_modifiedGroupNameTextField.text = group.title
+                self.ui_modifiedGroupNameTextField.becomeFirstResponder()
                 self.animateIn()
             }
         }
         editAction.backgroundColor = UIColor(named: "EditButtonGrey")
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            self._manager.removeGroup(atIndex: indexPath.row)
+            self._currentYear.removeGroup(atIndex: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
         deleteAction.backgroundColor = .red
