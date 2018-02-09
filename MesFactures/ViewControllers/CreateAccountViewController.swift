@@ -38,7 +38,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     }
     
     func displayGroupTableViewController () {
-        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "GroupViewController") as? GroupViewController {
+        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
             present(GroupTableVC, animated: true, completion: nil)
         }
