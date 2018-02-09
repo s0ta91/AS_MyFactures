@@ -115,10 +115,18 @@ class Manager {
         guard index >= 0 && index <= getGroupCount() else {return nil}
         return _groupList[index]
     }
+    func getGroupIndex (forGroup group: Group) -> Int? {
+        return _groupList.index(of: group)
+    }
+    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
+        group.title = newTitle
+    }
     
     func removeGroup (atIndex index:Int) {
         if let groupToRemove = getGroup(atIndex: index) {
-            _realm.delete(groupToRemove)
+            try? _realm.write {
+                _realm.delete(groupToRemove)
+            }
         }
     }
     
@@ -173,4 +181,5 @@ class Manager {
             }
         }
     }
+
 }

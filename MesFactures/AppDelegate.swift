@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             database.initYear()
             database.updateApplicationData()
             database.setGroupIdeaList()
+            
+            database.addGroup(withTitle: "Achats en ligne")
+            database.addGroup(withTitle: "Energies")
+            database.addGroup(withTitle: "Internet")
+            database.addGroup(withTitle: "Fiches de paie")
         }
         return true
     }

@@ -51,11 +51,8 @@ class GroupViewController: UIViewController {
         ui_createGroupView.layer.cornerRadius = 10
         
         setNewGroupButtonLayer()
-
-        _manager.addGroup(withTitle: "Achats en ligne")
-        _manager.addGroup(withTitle: "Energies")
-        _manager.addGroup(withTitle: "Internet")
-        _manager.addGroup(withTitle: "Fiches de paie")
+        
+        self.groupCV.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -129,21 +126,15 @@ class GroupViewController: UIViewController {
         animateOut()
         self.groupCV.reloadData()
     }
-    
-    
-    
-    
-    
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showModaly_manageGroupVC" {
+            if let navigationVC = segue.destination as? UINavigationController,
+                let destinationVC = navigationVC.viewControllers.first as? ManageGroupTableViewController {
+                destinationVC._manager = _manager
+            }
+        }
     }
-    */
 
 }
 
