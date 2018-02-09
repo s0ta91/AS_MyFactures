@@ -690,6 +690,7 @@
                                             <constraints>
                                                 <constraint firstItem="4SU-JZ-ITp" firstAttribute="leading" secondItem="lLZ-3P-or9" secondAttribute="leadingMargin" id="Qny-hS-SHy"/>
                                                 <constraint firstItem="UAL-jF-2DQ" firstAttribute="centerY" secondItem="lLZ-3P-or9" secondAttribute="centerY" id="wRF-vt-yRW"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="UAL-jF-2DQ" secondAttribute="trailing" constant="208" id="x9N-hL-vBm"/>
                                                 <constraint firstItem="UAL-jF-2DQ" firstAttribute="leading" secondItem="4SU-JZ-ITp" secondAttribute="trailing" constant="8" id="ydZ-Bt-DTc"/>
                                                 <constraint firstItem="4SU-JZ-ITp" firstAttribute="centerY" secondItem="lLZ-3P-or9" secondAttribute="centerY" id="z1N-ky-lU3"/>
                                             </constraints>
