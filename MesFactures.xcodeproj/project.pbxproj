@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */; };
 		1D42C4A3202CAD8D0033BEF1 /* ManageGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42C4A2202CAD8D0033BEF1 /* ManageGroupTableViewController.swift */; };
+		1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */; };
 		1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */; };
 		1D4809D12024900A00068094 /* DbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809D02024900A00068094 /* DbManager.swift */; };
 		1D4809D32024924900068094 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809D22024924900068094 /* Manager.swift */; };
@@ -55,6 +56,7 @@
 		07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D42C4A2202CAD8D0033BEF1 /* ManageGroupTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageGroupTableViewController.swift; sourceTree = "<group>"; };
+		1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearViewController.swift; sourceTree = "<group>"; };
 		1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		1D4809D02024900A00068094 /* DbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbManager.swift; sourceTree = "<group>"; };
 		1D4809D22024924900068094 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 				1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */,
 				1D42C4A2202CAD8D0033BEF1 /* ManageGroupTableViewController.swift */,
+				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,

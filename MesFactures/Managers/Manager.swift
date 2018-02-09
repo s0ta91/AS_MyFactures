@@ -80,6 +80,13 @@ class Manager {
     }
     
     // YEAR functions
+    func getyearsCount () -> Int {
+        return _yearsList.count
+    }
+    func getYear (atIndex index: Int) -> Year? {
+        return _yearsList[index]
+    }
+    
     func setSelectedYear (forYear newSelectedYear: Year) {
         let oldSelectedYear = getSelectedYear()
         oldSelectedYear?.selected = false

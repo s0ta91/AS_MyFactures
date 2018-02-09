@@ -134,6 +134,12 @@ class GroupViewController: UIViewController {
                 destinationVC._manager = _manager
             }
         }
+        
+        if segue.identifier == "showModaly_yearSelectionVC" {
+            if let destinationVC = segue.destination as? SelectYearViewController {
+                destinationVC._manager = _manager
+            }
+        }
     }
 
 }
