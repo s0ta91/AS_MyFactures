@@ -28,6 +28,9 @@
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
 		1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */; };
 		1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */; };
+		1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */; };
+		1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */; };
+		1DB07FC42031D2F100BDDDFB /* InvoiceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC32031D2F100BDDDFB /* InvoiceDetails.swift */; };
 		1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */; };
 		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
 		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
@@ -82,6 +85,9 @@
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGroupPopupView.swift; sourceTree = "<group>"; };
+		1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewController.swift; sourceTree = "<group>"; };
+		1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		1DB07FC32031D2F100BDDDFB /* InvoiceDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetails.swift; sourceTree = "<group>"; };
 		1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdeasCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
 		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +189,7 @@
 				1D4B07BA20234026002F745C /* ViewControllers */,
 				1D5F069C202DF4CF00FE2105 /* CustomTableViewCell */,
 				1DD923582028C49900387FF8 /* CustomCollectionViewCell */,
+				1DB07FC22031D2BD00BDDDFB /* Views */,
 				1D4B079020233FF4002F745C /* Main.storyboard */,
 				1D4B079320233FF4002F745C /* Assets.xcassets */,
 				1D4B079520233FF4002F745C /* LaunchScreen.storyboard */,
@@ -219,6 +226,7 @@
 				1DAEAC27202AFB46001C144E /* CreateGroupPopupView.swift */,
 				1D42C4A2202CAD8D0033BEF1 /* ManageGroupTableViewController.swift */,
 				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
+				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -239,12 +247,21 @@
 			path = Ressources;
 			sourceTree = "<group>";
 		};
+		1DB07FC22031D2BD00BDDDFB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1DB07FC32031D2F100BDDDFB /* InvoiceDetails.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		1DD923582028C49900387FF8 /* CustomCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				1DD923592028C4C800387FF8 /* HeaderGroupView.swift */,
 				1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */,
 				1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */,
+				1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */,
 			);
 			path = CustomCollectionViewCell;
 			sourceTree = "<group>";
@@ -574,6 +591,7 @@
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
@@ -586,9 +604,11 @@
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				1DAEAC202029E093001C144E /* Year.swift in Sources */,
+				1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */,
 				1D42C4A3202CAD8D0033BEF1 /* ManageGroupTableViewController.swift in Sources */,
 				1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
+				1DB07FC42031D2F100BDDDFB /* InvoiceDetails.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

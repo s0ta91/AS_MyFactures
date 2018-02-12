@@ -26,7 +26,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         /** DEBUG **/
-        DbManager().reInitMasterPassword()
+//        DbManager().reInitMasterPassword()
         
         /** Set the font for title **/
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
