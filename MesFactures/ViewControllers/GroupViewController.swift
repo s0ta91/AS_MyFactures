@@ -145,6 +145,12 @@ class GroupViewController: UIViewController {
                 destinationVC._manager = _manager
             }
         }
+        
+        if segue.identifier == "show_invoiceCollectionVC" {
+            if let destinationVC = segue.destination as? InvoiceCollectionViewController {
+                destinationVC._manager = _manager
+            }
+        }
     }
 
 }

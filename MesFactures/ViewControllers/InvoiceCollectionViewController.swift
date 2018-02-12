@@ -12,10 +12,17 @@ class InvoiceCollectionViewController: UIViewController {
     
     @IBOutlet weak var invoiceCollectionView: UICollectionView!
     
+    var _manager: Manager?
+    var _currentGroup: Group?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +44,11 @@ class InvoiceCollectionViewController: UIViewController {
 }
 
 extension InvoiceCollectionViewController: UICollectionViewDataSource  {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
     }
