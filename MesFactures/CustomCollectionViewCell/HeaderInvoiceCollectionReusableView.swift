@@ -13,8 +13,14 @@ class HeaderInvoiceCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var ui_headerDateLabel: UILabel!
     @IBOutlet weak var ui_totalMonthAmountLabel: UILabel!
     
-    func setValues (_ date: String, _ totalMonthAmount: String) {
+    var _ptManager: Manager?
+    
+    func setValuesForHeader (_ date: String, _ totalMonthAmount: String) {
         ui_headerDateLabel.text = date
         ui_totalMonthAmountLabel.text = totalMonthAmount
+        
+        if let _manager = _ptManager {
+            _manager.convertToCurrencyNumber(forLabel: ui_totalMonthAmountLabel)
+        }
     }
 }

@@ -47,16 +47,20 @@ class Group: Object {
         }
     }
     
+    // MONTH Functions
     func getMonthCount () -> Int{
         return _monthList.count
     }
     
     func addMonth (_ monthName: String) {
-        let newMonth = Month()
-        newMonth.month = monthName
-        realm?.beginWrite()
-        _monthList.append(newMonth)
-        try? realm?.commitWrite()
+        let monthFilter = _monthList.filter(NSPredicate(format: "_month == %@", monthName ))
+        if monthFilter.isEmpty {
+            let newMonth = Month()
+            newMonth.month = monthName
+            realm?.beginWrite()
+            _monthList.append(newMonth)
+            try? realm?.commitWrite()
+        }
     }
     
     func getMonth (atIndex index: Int) -> Month? {
@@ -67,6 +71,9 @@ class Group: Object {
             month = nil
         }
         return month
+    }
+    func getMonthIndex (forMonth month: Month) -> Int? {
+        return _monthList.index(of: month)
     }
     
     func removeMonth (atIndex index: Int) {

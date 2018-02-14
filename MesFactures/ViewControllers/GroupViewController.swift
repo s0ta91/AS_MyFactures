@@ -147,8 +147,12 @@ class GroupViewController: UIViewController {
         }
         
         if segue.identifier == "show_invoiceCollectionVC" {
-            if let destinationVC = segue.destination as? InvoiceCollectionViewController {
-                destinationVC._manager = _manager
+            if let destinationVC = segue.destination as? InvoiceCollectionViewController,
+                let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
+                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row) {
+                    destinationVC._ptManager = _manager
+                    destinationVC._ptCurrentGroup = selectedGroup
+                    destinationVC._ptYear = _currentYear
             }
         }
     }
@@ -201,10 +205,8 @@ extension GroupViewController: UICollectionViewDataSource {
             
             return cell_group
         }else {
-            print("inside")
             let cell_groupIdea = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_groupIdea", for: indexPath) as! GroupIdeasCollectionViewCell
             let titleList:[String] = _manager.getGroupIdeaNameList()
-            print("titleList: \(titleList)")
             cell_groupIdea.setTitle(titleList[indexPath.row])
             return cell_groupIdea
         }

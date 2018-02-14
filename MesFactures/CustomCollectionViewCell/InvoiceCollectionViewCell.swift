@@ -14,10 +14,16 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_categoryLabel: UILabel!
     @IBOutlet weak var ui_invoiceTitleLabel: UILabel!
     
+    var _ptManager: Manager?
+    
     func setValues (_ amount: String, _ categoryName: String, _ invoiceTitle: String) {
         ui_amountLabel.text = amount
         ui_categoryLabel.text = categoryName
         ui_invoiceTitleLabel.text = invoiceTitle
+        
+        if let _manager = _ptManager {
+            _manager.convertToCurrencyNumber(forLabel: ui_amountLabel)
+        }
     }
     
     @IBAction func modifyInvoice(_ sender: Any) {

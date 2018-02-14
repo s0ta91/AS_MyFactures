@@ -199,9 +199,8 @@
 				1D5F069C202DF4CF00FE2105 /* CustomTableViewCell */,
 				1DD923582028C49900387FF8 /* CustomCollectionViewCell */,
 				1DB07FC22031D2BD00BDDDFB /* Views */,
-				1D4B079020233FF4002F745C /* Main.storyboard */,
+				1DB07FCF2033550C00BDDDFB /* Storyboards */,
 				1D4B079320233FF4002F745C /* Assets.xcassets */,
-				1D4B079520233FF4002F745C /* LaunchScreen.storyboard */,
 				1D4B079820233FF4002F745C /* Info.plist */,
 				1D6220F120235CBA00D25828 /* Ressources */,
 			);
@@ -261,6 +260,15 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1DB07FCF2033550C00BDDDFB /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				1D4B079020233FF4002F745C /* Main.storyboard */,
+				1D4B079520233FF4002F745C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		1DD923582028C49900387FF8 /* CustomCollectionViewCell */ = {

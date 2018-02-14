@@ -11,7 +11,7 @@ import RealmSwift
 
 class Invoice: Object {
     @objc private dynamic var _identifier: String?
-    @objc private dynamic var _filename: String = ""
+    @objc private dynamic var _detailedDescription: String = ""
     @objc private dynamic var _categoryName: String = ""
     @objc private dynamic var _amount: Double = 0
     
@@ -24,13 +24,13 @@ class Invoice: Object {
             try? realm?.commitWrite()
         }
     }
-    
-    var filename: String {
+
+    var detailedDescription: String {
         get {
-            return _filename
+            return _detailedDescription
         }set {
             realm?.beginWrite()
-            _filename = newValue
+            _detailedDescription = newValue
             try? realm?.commitWrite()
         }
     }
