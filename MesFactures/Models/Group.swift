@@ -14,7 +14,7 @@ class Group: Object {
     @objc private dynamic var _title = ""
     @objc private dynamic var _totalPrice = 0.0
     @objc private dynamic var _totalDocuments = 0
-//    private var _subCategoryList = List<Subcategory>()
+    private var _monthList = List<Month>()
     
     var title: String {
         get {
@@ -47,57 +47,40 @@ class Group: Object {
         }
     }
     
-//    func getSubcategoryCount () -> Int {
-//        return _subCategoryList.count
-//    }
-//    
-//    func getSubcategory (atIndex index: Int) -> Subcategory? {
-//        return _subCategoryList[index]
-//    }
-//    
-//    func getSubcategoryIndex (forSubcategory subcategory: Subcategory) -> Int!{
-//        return _subCategoryList.index(of: subcategory)
-//    }
-//    
-//    func addSubcategory (Subcategory: Subcategory, atIndex index: Int? = nil) -> Bool {
-//        if let indexToUse = index {
-//            return insertSubcategory(Subcategory, at: indexToUse)
-//        }else {
-//            return appendSubcategory(Subcategory)
-//        }
-//    }
-//    
-//    private func insertSubcategory (_ Subcategory: Subcategory, at index: Int) -> Bool{
-//        let result: Bool
-//        if index >= 0 && index <= getSubcategoryCount() {
-//            realm?.beginWrite()
-//            _subCategoryList.insert(Subcategory, at: index)
-//            try? realm?.commitWrite()
-//            result = true
-//        }else{
-//            result = false
-//        }
-//        return result
-//    }
-//    
-//    private func appendSubcategory (_ Subcategory: Subcategory) -> Bool {
-//            realm?.beginWrite()
-//            _subCategoryList.append(Subcategory)
-//            try? realm?.commitWrite()
-//            return true
-//    }
-//    
-//    func moveSubcategory (from indexSource: Int, to indexDest: Int) {
-//        realm?.beginWrite()
-//        _subCategoryList.move(from: indexSource, to: indexDest)
-//        try? realm?.commitWrite()
-//    }
-//    
-//    func removeSubcategory (atIndex index: Int) -> Subcategory? {
-//        let subcategoryToDelete = getSubcategory(atIndex: index)
-//        realm?.beginWrite()
-//        _subCategoryList.remove(at: index)
-//        try? realm?.commitWrite()
-//        return subcategoryToDelete
-//    }
+    // MONTH Functions
+    func getMonthCount () -> Int{
+        return _monthList.count
+    }
+    
+    func addMonth (_ monthName: String) {
+        let monthFilter = _monthList.filter(NSPredicate(format: "_month == %@", monthName ))
+        if monthFilter.isEmpty {
+            let newMonth = Month()
+            newMonth.month = monthName
+            realm?.beginWrite()
+            _monthList.append(newMonth)
+            try? realm?.commitWrite()
+        }
+    }
+    
+    func getMonth (atIndex index: Int) -> Month? {
+        let month: Month?
+        if index >= 0 && index < getMonthCount() {
+            month = _monthList[index]
+        }else {
+            month = nil
+        }
+        return month
+    }
+    func getMonthIndex (forMonth month: Month) -> Int? {
+        return _monthList.index(of: month)
+    }
+    
+    func removeMonth (atIndex index: Int) {
+        if let monthToDelete = getMonth(atIndex: index) {
+            realm?.beginWrite()
+            realm?.delete(monthToDelete)
+            try? realm?.commitWrite()
+        }
+    }
 }

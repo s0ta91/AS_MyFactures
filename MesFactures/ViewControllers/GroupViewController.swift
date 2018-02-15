@@ -53,8 +53,8 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
         
-        setNewGroupButtonLayer()
-        
+        _manager.setButtonLayer(ui_newGroupButton)
+        _manager.setHeaderClippedToBound(groupCV)
         self.groupCV.reloadData()
     }
 
@@ -65,16 +65,6 @@ class GroupViewController: UIViewController {
     
     
     // Private functions
-    private func setNewGroupButtonLayer () {
-        ui_newGroupButton.layer.cornerRadius = 17
-        ui_newGroupButton.layer.shadowColor = UIColor.lightGray.cgColor
-        ui_newGroupButton.layer.shadowOffset = CGSize(width:0,height: 2)
-        ui_newGroupButton.layer.shadowRadius = 2.0
-        ui_newGroupButton.layer.shadowOpacity = 1.0
-        ui_newGroupButton.layer.masksToBounds = false;
-        ui_newGroupButton.layer.shadowPath = UIBezierPath(roundedRect:ui_newGroupButton.bounds, cornerRadius:ui_newGroupButton.layer.cornerRadius).cgPath
-    }
-    
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_createGroupView)
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -127,6 +117,7 @@ class GroupViewController: UIViewController {
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
         if let newGroupName = ui_newGroupNameTextField.text {
             _currentYear.addGroup(withTitle: newGroupName)
+            
         }
         animateOut()
         self.groupCV.reloadData()
@@ -143,6 +134,16 @@ class GroupViewController: UIViewController {
         if segue.identifier == "showModaly_yearSelectionVC" {
             if let destinationVC = segue.destination as? SelectYearViewController {
                 destinationVC._manager = _manager
+            }
+        }
+        
+        if segue.identifier == "show_invoiceCollectionVC" {
+            if let destinationVC = segue.destination as? InvoiceCollectionViewController,
+                let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
+                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row) {
+                    destinationVC._ptManager = _manager
+                    destinationVC._ptCurrentGroup = selectedGroup
+                    destinationVC._ptYear = _currentYear
             }
         }
     }
@@ -195,10 +196,8 @@ extension GroupViewController: UICollectionViewDataSource {
             
             return cell_group
         }else {
-            print("inside")
             let cell_groupIdea = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_groupIdea", for: indexPath) as! GroupIdeasCollectionViewCell
             let titleList:[String] = _manager.getGroupIdeaNameList()
-            print("titleList: \(titleList)")
             cell_groupIdea.setTitle(titleList[indexPath.row])
             return cell_groupIdea
         }

@@ -16,6 +16,7 @@ class Manager {
     private var _yearsList: Results<Year>
     private var _applicationDataList: Results<ApplicationData>
     private var _groupList: Results<Group>
+    private var _categoryList: Results<Category>
     private var _groupIdeaList: Results<GroupIdea>
     
     /** INIT functions **/
@@ -24,6 +25,7 @@ class Manager {
         _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
         _applicationDataList = _realm.objects(ApplicationData.self)
         _groupList = _realm.objects(Group.self).sorted(byKeyPath: "_title")
+        _categoryList = _realm.objects(Category.self).sorted(byKeyPath: "_title")
         _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
     }
     
@@ -71,7 +73,7 @@ class Manager {
         return DbManager().getMasterPassword() != nil
     }
     
-    // ApplicationData functions
+    // APPLICATIONDATA functions
     func updateApplicationData () {
         let applicationData = ApplicationData()
         _realm.beginWrite()
@@ -103,39 +105,7 @@ class Manager {
         }
         return selectedYear
     }
-    
-    
-    // GROUP functions
-//    func getGroupCount () -> Int{
-//        return _groupList.count
-//    }
-    
-//    func addGroup (withTitle title: String) {
-//        let newGroup = Group()
-//        newGroup.title = title
-//        try? _realm.write {
-//            _realm.add(newGroup)
-//        }
-//    }
-    
-//    func getGroup (atIndex index:Int) -> Group? {
-//        guard index >= 0 && index <= getGroupCount() else {return nil}
-//        return _groupList[index]
-//    }
-//    func getGroupIndex (forGroup group: Group) -> Int? {
-//        return _groupList.index(of: group)
-//    }
-//    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
-//        group.title = newTitle
-//    }
-//
-//    func removeGroup (atIndex index:Int) {
-//        if let groupToRemove = getGroup(atIndex: index) {
-//            try? _realm.write {
-//                _realm.delete(groupToRemove)
-//            }
-//        }
-//    }
+
     
     // GROUPIDEA functions
     func getGroupIdeaCount () -> Int {
@@ -164,6 +134,35 @@ class Manager {
         return groupIdeaName
     }
     
+    // CATEGORY Functions
+    func getCategoryCount () -> Int {
+        return _categoryList.count
+    }
+    
+    func getCategory (atIndex index: Int) -> Category? {
+        return _categoryList[index]
+    }
+    
+    func getCategoryIndex (forCategory category: Category) -> Int!{
+        return _categoryList.index(of: category)
+    }
+    
+    func addCategory (_ categoryTitle: String) {
+        let newCatagory = Category()
+        newCatagory.title = categoryTitle
+        try? _realm.write {
+            _realm.add(newCatagory)
+        }
+    }
+    
+    func removeCategory (atIndex index: Int) {
+        if let categoryToDelete = getCategory(atIndex: index) {
+            try? _realm.write {
+                _realm.delete(categoryToDelete)
+            }
+        }
+    }
+    
     
     // Other functions
     func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
@@ -187,6 +186,21 @@ class Manager {
                 labelToConvert?.text = numberToCurrencyType
             }
         }
+    }
+    
+    func setButtonLayer (_ button: UIButton) {
+        button.layer.cornerRadius = 17
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOffset = CGSize(width:0,height: 2)
+        button.layer.shadowRadius = 2.0
+        button.layer.shadowOpacity = 1.0
+        button.layer.masksToBounds = false;
+        button.layer.shadowPath = UIBezierPath(roundedRect:button.bounds, cornerRadius:button.layer.cornerRadius).cgPath
+    }
+    
+    func setHeaderClippedToBound (_ collectionView: UICollectionView) {
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        layout?.sectionHeadersPinToVisibleBounds = true
     }
 
 }
