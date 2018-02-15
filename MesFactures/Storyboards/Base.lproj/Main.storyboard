@@ -226,6 +226,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.85045927762985229" green="0.85055547952651978" blue="0.85040384531021118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="R8g-6v-AIg" firstAttribute="centerY" secondItem="Md9-SA-J3R" secondAttribute="centerY" id="TIh-EO-t4c"/>
                                         <constraint firstItem="R8g-6v-AIg" firstAttribute="centerX" secondItem="Md9-SA-J3R" secondAttribute="centerX" id="qJd-5D-xQi"/>
@@ -249,7 +250,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
-                                            <blurEffect style="dark"/>
+                                            <vibrancyEffect>
+                                                <blurEffect style="dark"/>
+                                            </vibrancyEffect>
                                         </visualEffectView>
                                     </subviews>
                                 </view>
@@ -563,6 +566,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" red="0.85045927762985229" green="0.85055547952651978" blue="0.85040384531021118" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <connections>
                                         <outlet property="ui_headerDateLabel" destination="8Qz-Br-IMQ" id="sYK-CI-OXW"/>
                                         <outlet property="ui_totalMonthAmountLabel" destination="BTK-14-40r" id="7h9-pv-uTD"/>

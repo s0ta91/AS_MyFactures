@@ -36,7 +36,8 @@ class InvoiceCollectionViewController: UIViewController {
         setNavigationBarInfo()
         
         _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
-//        invoiceCollectionView.reloadSections(IndexSet(indexPath))
+        _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
+        
         /** !! TEST PURPOSE ONLY !! ***
         *** !! DELETE BEFORE LIVE !! **/
         if let group = _invoiceCollectionCurrentGroup {

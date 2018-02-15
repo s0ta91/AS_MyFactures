@@ -197,5 +197,10 @@ class Manager {
         button.layer.masksToBounds = false;
         button.layer.shadowPath = UIBezierPath(roundedRect:button.bounds, cornerRadius:button.layer.cornerRadius).cgPath
     }
+    
+    func setHeaderClippedToBound (_ collectionView: UICollectionView) {
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        layout?.sectionHeadersPinToVisibleBounds = true
+    }
 
 }

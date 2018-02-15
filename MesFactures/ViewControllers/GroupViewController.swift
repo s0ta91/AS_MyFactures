@@ -53,9 +53,8 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
         
-//        setNewGroupButtonLayer()
         _manager.setButtonLayer(ui_newGroupButton)
-        
+        _manager.setHeaderClippedToBound(groupCV)
         self.groupCV.reloadData()
     }
 
@@ -118,6 +117,7 @@ class GroupViewController: UIViewController {
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
         if let newGroupName = ui_newGroupNameTextField.text {
             _currentYear.addGroup(withTitle: newGroupName)
+            
         }
         animateOut()
         self.groupCV.reloadData()
