@@ -32,8 +32,9 @@ class InvoiceCollectionViewController: UIViewController {
         
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
-        
-        
+        setNavigationBarInfo()
+        print("viewWillAppear")
+//        invoiceCollectionView.reloadSections(IndexSet(indexPath))
         /** !! TEST PURPOSE ONLY !! ***
         *** !! DELETE BEFORE LIVE !! **/
         if let group = _invoiceCollectionCurrentGroup {
@@ -53,7 +54,9 @@ class InvoiceCollectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func checkReceivedData () {
+    //MARK: - PRIVATE FUNCTIONS
+    //TODO: Check if the data recieved from previous controller are ok
+    private func checkReceivedData () {
         if let _manager = _ptManager {
             _invoiceCollectionManager = _manager
         }else {
@@ -73,22 +76,29 @@ class InvoiceCollectionViewController: UIViewController {
         }
     }
     
-    func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
+    //TODO: Set the navigationBar title with the name of the current group
+    private func setNavigationBarInfo () {
+        self.title = _invoiceCollectionCurrentGroup.title
+    }
+    
+    //TODO: Retrieve the month for the section index
+    private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
         return _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
     }
     
-    func getNumberOfSections () -> Int {
+    //TODO: Get the number of sections for the current group
+    private func getNumberOfSections () -> Int {
         return _invoiceCollectionCurrentGroup.getMonthCount()
     }
     
-    func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
+    //TODO: Get the number of Invoice by section (by month)
+    private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
         var numberOfInvoice = 0
         if let month = getCurrentMonth(atIndex: monthIndex) {
             numberOfInvoice = month.getInvoiceCount()
         }
         return numberOfInvoice
     }
-    
 
     /*
     // MARK: - Navigation
@@ -102,6 +112,7 @@ class InvoiceCollectionViewController: UIViewController {
 
 }
 
+//MARK: - Create the extension for the CollectionView Datasource here :
 extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -109,6 +120,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        print("ReusableView")
         var headerDate: String = ""
         var monthAmount: String = ""
         switch kind {
@@ -138,8 +150,54 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
             cell_invoice._ptManager = _invoiceCollectionManager
             cell_invoice.setValues(String(describing: invoice.amount), invoice.categoryName, invoice.detailedDescription)
         }
+        cell_invoice.delegate = self
         return cell_invoice
     }
-    
-    
 }
+
+//MARK: - Create the delegate to be conform to the cell
+extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
+    
+    //TODO: Create the function to delete a cell
+    func delete(invoiceCell: InvoiceCollectionViewCell) {
+        if let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
+            
+            let alert = UIAlertController(title: "Supprimer la facture ?", message: "", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
+                if let month = self.getCurrentMonth(atIndex: indexPath.section),
+                    let invoiceToDelete = month.getInvoice(atIndex: indexPath.row) {
+                    // Delete the photo from the database
+                    month.removeInvoice(invoice: invoiceToDelete)
+                    // Delete the photo from the data source
+                    self.invoiceCollectionView.deleteItems(at: [indexPath])
+                    let indexPaths = self.invoiceCollectionView.indexPathsForVisibleSupplementaryElements(ofKind: UICollectionElementKindSectionHeader)
+                    for indexPath in indexPaths {
+                        self.invoiceCollectionView.reloadSections(IndexSet(indexPath))
+                    }
+                }
+            })
+            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
+            })
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            present(alert, animated: true, completion: nil)
+        }
+    }
+
+    //TODO: Create the function to share the invoice
+    func share(invoiceCell: InvoiceCollectionViewCell) {
+        print("Share invoice")
+//        if let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
+            //TODO: Retrieve the document for te selected cell
+            /** TEST PURPOSE ONLY **/
+            guard let image = UIImage(named: "Boulanger.com") else {return print("image does not exists")}
+            /** ***** **/
+            
+            let shareObject = image
+            let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
+            present(activityViewController, animated: true, completion: nil)
+//        }
+    }
+}
+

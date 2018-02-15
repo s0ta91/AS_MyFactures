@@ -8,14 +8,25 @@
 
 import UIKit
 
+protocol InvoiceCollectionViewCellDelegate: class {
+    func delete(invoiceCell: InvoiceCollectionViewCell)
+    func share(invoiceCell: InvoiceCollectionViewCell)
+}
+
 class InvoiceCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - IBOutlets
     @IBOutlet weak var ui_amountLabel: UILabel!
     @IBOutlet weak var ui_categoryLabel: UILabel!
     @IBOutlet weak var ui_invoiceTitleLabel: UILabel!
     
+    //MARK: - Global variables
     var _ptManager: Manager?
+    weak var delegate: InvoiceCollectionViewCellDelegate?
     
+    
+    //MARK: - Functions
+    //TODO: Create a function to set values for the cell
     func setValues (_ amount: String, _ categoryName: String, _ invoiceTitle: String) {
         ui_amountLabel.text = amount
         ui_categoryLabel.text = categoryName
@@ -26,13 +37,15 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @IBAction func modifyInvoice(_ sender: Any) {
+    //MARK: - IBActions
+    
+    //TODO: Define actions for delete button here
+    @IBAction func deleteInvoice(_ sender: UIButton) {
+        delegate?.delete(invoiceCell: self)
     }
     
-    @IBAction func deleteInvoice(_ sender: Any) {
+    //TODO: Define actions for share button here
+    @IBAction func shareInvoice(_ sender: UIButton) {
+        delegate?.share(invoiceCell: self)
     }
-    
-    @IBAction func shareInvoice(_ sender: Any) {
-    }
-    
 }

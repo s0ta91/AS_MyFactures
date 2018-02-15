@@ -474,7 +474,7 @@
                                                         <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="deleteInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="nsU-PZ-fun"/>
+                                                        <action selector="deleteInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="ieI-hg-gOU"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZUP-ta-6dK">
@@ -488,7 +488,7 @@
                                                         <color key="titleColor" red="0.59999999999999998" green="0.80000000000000004" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="modifyInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="sUI-Ue-2cd"/>
+                                                        <action selector="modifyInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="CPN-y2-h6P"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qy-QY-PwY">
@@ -502,7 +502,7 @@
                                                         <color key="titleColor" red="0.0" green="0.51372549019607838" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="shareInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="pFO-c8-wip"/>
+                                                        <action selector="shareInvoice:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="tGQ-iF-8gn"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="etiquette" translatesAutoresizingMaskIntoConstraints="NO" id="lBM-bG-bIm">
@@ -901,6 +901,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9jl-vg-yyV">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" red="0.37254901960784315" green="0.49019607843137253" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
