@@ -11,6 +11,7 @@ import UIKit
 class InvoiceCollectionViewController: UIViewController {
     
     @IBOutlet weak var invoiceCollectionView: UICollectionView!
+    @IBOutlet weak var ui_newActionButton: UIButton!
     
     // Data reveived from previous VC
     var _ptManager: Manager?
@@ -33,7 +34,8 @@ class InvoiceCollectionViewController: UIViewController {
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-        print("viewWillAppear")
+        
+        _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
 //        invoiceCollectionView.reloadSections(IndexSet(indexPath))
         /** !! TEST PURPOSE ONLY !! ***
         *** !! DELETE BEFORE LIVE !! **/
@@ -99,6 +101,27 @@ class InvoiceCollectionViewController: UIViewController {
         }
         return numberOfInvoice
     }
+    
+    @IBAction func newActionButtonPressed(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let addInvoiceAction = UIAlertAction(title: "Ajouter une facture", style: .default) { (action: UIAlertAction) in
+            
+        }
+        
+        let addCategoryAction = UIAlertAction(title: "Créer une nouvelle catégorie", style: .default) { (action: UIAlertAction) in
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(addInvoiceAction)
+        actionSheet.addAction(addCategoryAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -161,11 +184,12 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     //TODO: Create the function to delete a cell
     func delete(invoiceCell: InvoiceCollectionViewCell) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
-            
-            let alert = UIAlertController(title: "Supprimer la facture ?", message: "", preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
-                if let month = self.getCurrentMonth(atIndex: indexPath.section),
-                    let invoiceToDelete = month.getInvoice(atIndex: indexPath.row) {
+            if let month = self.getCurrentMonth(atIndex: indexPath.section),
+                let invoiceToDelete = month.getInvoice(atIndex: indexPath.row) {
+                
+                let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
+                let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
+                
                     // Delete the photo from the database
                     month.removeInvoice(invoice: invoiceToDelete)
                     // Delete the photo from the data source
@@ -174,14 +198,15 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                     for indexPath in indexPaths {
                         self.invoiceCollectionView.reloadSections(IndexSet(indexPath))
                     }
-                }
-            })
-            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
-            })
+                })
             
-            alert.addAction(deleteAction)
-            alert.addAction(cancelAction)
-            present(alert, animated: true, completion: nil)
+                let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
+                })
+                
+                alert.addAction(deleteAction)
+                alert.addAction(cancelAction)
+                present(alert, animated: true, completion: nil)
+            }
         }
     }
 

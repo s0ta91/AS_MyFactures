@@ -187,5 +187,15 @@ class Manager {
             }
         }
     }
+    
+    func setButtonLayer (_ button: UIButton) {
+        button.layer.cornerRadius = 17
+        button.layer.shadowColor = UIColor.lightGray.cgColor
+        button.layer.shadowOffset = CGSize(width:0,height: 2)
+        button.layer.shadowRadius = 2.0
+        button.layer.shadowOpacity = 1.0
+        button.layer.masksToBounds = false;
+        button.layer.shadowPath = UIBezierPath(roundedRect:button.bounds, cornerRadius:button.layer.cornerRadius).cgPath
+    }
 
 }

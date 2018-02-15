@@ -53,7 +53,8 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
         
-        setNewGroupButtonLayer()
+//        setNewGroupButtonLayer()
+        _manager.setButtonLayer(ui_newGroupButton)
         
         self.groupCV.reloadData()
     }
@@ -65,16 +66,6 @@ class GroupViewController: UIViewController {
     
     
     // Private functions
-    private func setNewGroupButtonLayer () {
-        ui_newGroupButton.layer.cornerRadius = 17
-        ui_newGroupButton.layer.shadowColor = UIColor.lightGray.cgColor
-        ui_newGroupButton.layer.shadowOffset = CGSize(width:0,height: 2)
-        ui_newGroupButton.layer.shadowRadius = 2.0
-        ui_newGroupButton.layer.shadowOpacity = 1.0
-        ui_newGroupButton.layer.masksToBounds = false;
-        ui_newGroupButton.layer.shadowPath = UIBezierPath(roundedRect:ui_newGroupButton.bounds, cornerRadius:ui_newGroupButton.layer.cornerRadius).cgPath
-    }
-    
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_createGroupView)
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height

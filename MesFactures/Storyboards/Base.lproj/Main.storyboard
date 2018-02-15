@@ -263,7 +263,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="+ Nouveau Groupe">
+                                <state key="normal" title="Nouveau Groupe">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -569,12 +569,30 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcs-56-npU">
+                                <rect key="frame" x="96" y="756" width="183" height="36"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.25490196079999999" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="183" id="eaI-lP-o4x"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Actions">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="Wx3-kE-24N"/>
+                                    <action selector="newActionButtonPressed:" destination="t7y-qo-KY2" eventType="touchUpInside" id="9FD-l2-tbF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" constant="16" id="AIu-Ja-4GN"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="top" secondItem="OMx-QP-Nft" secondAttribute="top" id="Cbu-hk-Rwr"/>
+                            <constraint firstItem="Lcs-56-npU" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="DCo-Sh-kfu"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="Ii0-BK-mYC"/>
+                            <constraint firstAttribute="bottom" secondItem="Lcs-56-npU" secondAttribute="bottom" constant="20" id="ONJ-cs-KQ8"/>
                             <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="xQN-Id-J85" secondAttribute="trailing" constant="16" id="Z54-jM-Cfy"/>
                             <constraint firstAttribute="bottom" secondItem="xQN-Id-J85" secondAttribute="bottom" id="n4v-Fx-cFV"/>
                         </constraints>
@@ -582,6 +600,7 @@
                     </view>
                     <connections>
                         <outlet property="invoiceCollectionView" destination="xQN-Id-J85" id="ED9-ZO-BJN"/>
+                        <outlet property="ui_newActionButton" destination="Lcs-56-npU" id="v1l-xd-SxJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
