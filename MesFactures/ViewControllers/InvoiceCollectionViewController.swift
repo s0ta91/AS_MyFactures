@@ -107,7 +107,13 @@ class InvoiceCollectionViewController: UIViewController {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let addInvoiceAction = UIAlertAction(title: "Ajouter une facture", style: .default) { (action: UIAlertAction) in
-            
+            if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
+                let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
+                destinationVC._ptManager = self._invoiceCollectionManager
+                destinationVC._ptYear = self._invoiceCollectionCurrentYear
+                destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
+                self.present(addInvoiceVC, animated: true, completion: nil)
+            }
         }
         
         let addCategoryAction = UIAlertAction(title: "Créer une nouvelle catégorie", style: .default) { (action: UIAlertAction) in
@@ -123,17 +129,13 @@ class InvoiceCollectionViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
-
-    /*
     // MARK: - Navigation
-
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
     }
     */
-
 }
 
 //MARK: - Create the extension for the CollectionView Datasource here :
