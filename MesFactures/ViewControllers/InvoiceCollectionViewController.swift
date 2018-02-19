@@ -30,7 +30,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        invoiceCollectionView.reloadData()
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
@@ -40,15 +40,15 @@ class InvoiceCollectionViewController: UIViewController {
         
         /** !! TEST PURPOSE ONLY !! ***
         *** !! DELETE BEFORE LIVE !! **/
-        if let group = _invoiceCollectionCurrentGroup {
-            group.addMonth("January")
-            if let firstMonth = group.getMonth(atIndex: 0) {
-                print("monthIndexCreation: \(String(describing: group.getMonthIndex(forMonth: firstMonth)))")
-            }
-            if let january = group.getMonth(atIndex: 0) {
-                january.addInvoice(description: "Aspirateur Dyson", amount: 629.0, categoryName: "Boulanger")
-            }
-        }
+//        if let group = _invoiceCollectionCurrentGroup {
+//            _ = group.addMonth("January")
+//            if let firstMonth = group.getMonth(atIndex: 0) {
+//                print("monthIndexCreation: \(String(describing: group.getMonthIndex(forMonth: firstMonth)))")
+//            }
+//            if let january = group.getMonth(atIndex: 0) {
+//                january.addInvoice("Aspirateur Dyson", 629.0, "Boulanger", "")
+//            }
+//        }
         /*****************************/
     }
 
@@ -172,9 +172,10 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
         if let month = getCurrentMonth(atIndex: indexPath.section),
-            let invoice = month.getInvoice(atIndex: indexPath.row) {
+            let invoice = month.getInvoice(atIndex: indexPath.row),
+            let categoryName = invoice.categoryName {
             cell_invoice._ptManager = _invoiceCollectionManager
-            cell_invoice.setValues(String(describing: invoice.amount), invoice.categoryName, invoice.detailedDescription)
+            cell_invoice.setValues(String(describing: invoice.amount), categoryName, invoice.detailedDescription)
         }
         cell_invoice.delegate = self
         return cell_invoice

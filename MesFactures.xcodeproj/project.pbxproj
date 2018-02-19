@@ -40,6 +40,11 @@
 		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
 		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
 		1DFE14E2203751E800176EF3 /* YearsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E1203751E800176EF3 /* YearsPicker.swift */; };
+		1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */; };
+		1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E5203B097F00176EF3 /* GroupPicker.swift */; };
+		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
+		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
+		1DFE14EE203B314500176EF3 /* Boulanger.com.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1DFE14ED203B314500176EF3 /* Boulanger.com.pdf */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
@@ -102,6 +107,12 @@
 		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
 		1DFE14E1203751E800176EF3 /* YearsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsPicker.swift; sourceTree = "<group>"; };
+		1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsPicker.swift; sourceTree = "<group>"; };
+		1DFE14E5203B097F00176EF3 /* GroupPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPicker.swift; sourceTree = "<group>"; };
+		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
+		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
+		1DFE14EB203B2F3F00176EF3 /* TestDocuments */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestDocuments; sourceTree = "<group>"; };
+		1DFE14ED203B314500176EF3 /* Boulanger.com.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Boulanger.com.pdf; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +154,9 @@
 			isa = PBXGroup;
 			children = (
 				1DFE14E1203751E800176EF3 /* YearsPicker.swift */,
+				1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */,
+				1DFE14E5203B097F00176EF3 /* GroupPicker.swift */,
+				1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */,
 			);
 			path = pickersView;
 			sourceTree = "<group>";
@@ -166,6 +180,7 @@
 			children = (
 				1D4809D02024900A00068094 /* DbManager.swift */,
 				1D4809D22024924900068094 /* Manager.swift */,
+				1DFE14E9203B238E00176EF3 /* SaveManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -181,6 +196,7 @@
 		1D4B078020233FF4002F745C = {
 			isa = PBXGroup;
 			children = (
+				1DFE14ED203B314500176EF3 /* Boulanger.com.pdf */,
 				1D4B078B20233FF4002F745C /* MesFactures */,
 				1D4B07A020233FF4002F745C /* MesFacturesTests */,
 				1D4B07AB20233FF4002F745C /* MesFacturesUITests */,
@@ -212,6 +228,7 @@
 				1DD923582028C49900387FF8 /* CustomCollectionViewCell */,
 				1D07921420373FBA0097A354 /* pickersView */,
 				1DB07FC22031D2BD00BDDDFB /* Views */,
+				1DFE14EB203B2F3F00176EF3 /* TestDocuments */,
 				1DB07FCF2033550C00BDDDFB /* Storyboards */,
 				1D4B079320233FF4002F745C /* Assets.xcassets */,
 				1D4B079820233FF4002F745C /* Info.plist */,
@@ -440,6 +457,7 @@
 				1D4B079420233FF4002F745C /* Assets.xcassets in Resources */,
 				1D6220F320235D1300D25828 /* Abuget.ttf in Resources */,
 				1D4B079220233FF4002F745C /* Main.storyboard in Resources */,
+				1DFE14EE203B314500176EF3 /* Boulanger.com.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,7 +640,9 @@
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
 				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
+				1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */,
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
 				1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */,
@@ -637,6 +657,7 @@
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
+				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				1DAEAC202029E093001C144E /* Year.swift in Sources */,
 				1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */,
@@ -646,6 +667,7 @@
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
+				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

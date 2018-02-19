@@ -12,7 +12,7 @@ import RealmSwift
 class Invoice: Object {
     @objc private dynamic var _identifier: String?
     @objc private dynamic var _detailedDescription: String = ""
-    @objc private dynamic var _categoryName: String = ""
+    @objc private dynamic var _categoryName: String?
     @objc private dynamic var _amount: Double = 0
     
     var identifier: String? {
@@ -35,7 +35,7 @@ class Invoice: Object {
         }
     }
     
-    var categoryName: String {
+    var categoryName: String? {
         get {
             return _categoryName
         }set {

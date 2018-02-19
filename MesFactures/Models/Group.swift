@@ -52,15 +52,16 @@ class Group: Object {
         return _monthList.count
     }
     
-    func addMonth (_ monthName: String) {
+    func addMonth (_ monthName: String) -> Month {
+        let newMonth = Month()
         let monthFilter = _monthList.filter(NSPredicate(format: "_month == %@", monthName ))
         if monthFilter.isEmpty {
-            let newMonth = Month()
             newMonth.month = monthName
             realm?.beginWrite()
             _monthList.append(newMonth)
             try? realm?.commitWrite()
         }
+        return newMonth
     }
     
     func getMonth (atIndex index: Int) -> Month? {
@@ -82,5 +83,21 @@ class Group: Object {
             realm?.delete(monthToDelete)
             try? realm?.commitWrite()
         }
+    }
+    
+    func checkIfMonthExist (forMonthName monthName: String) -> Month {
+        let monthToReturn: Month
+        let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+        guard let monthIndex = monthArray.index(of: monthName) else { fatalError("month name does not exist") }
+        // DEBUG
+//        let monthIndex = 0
+        if let monthObject = getMonth(atIndex: monthIndex) {
+            print("monthObject: \(monthObject)")
+            monthToReturn = monthObject
+        }else {
+            monthToReturn = addMonth(monthName)
+        }
+        print("monthToReturn: :\(monthToReturn)")
+        return monthToReturn
     }
 }
