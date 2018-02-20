@@ -85,13 +85,11 @@ class Group: Object {
         let monthToReturn: Month
         let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
         guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
-        print("monthName/ID: \(monthName)/\(monthIndex)")
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
         }else {
             fatalError("month :\(monthName) does not exists in database")
         }
-        print("monthToReturn: :\(monthToReturn)")
         return monthToReturn
     }
 }

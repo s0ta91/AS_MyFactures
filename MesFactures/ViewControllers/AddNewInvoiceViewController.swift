@@ -32,7 +32,8 @@ class AddNewInvoiceViewController: UIViewController {
     private var _year: Year!
     private var _group: Group!
     
-    //MARK: - PickerView Initializer
+    //MARK: - Others
+    //TODO: PickerView Initializer
     private var yearsPickerView: YearsPicker!
     private var monthsPickerView: MonthsPicker!
     private var groupPickerView: GroupPicker!
@@ -53,7 +54,6 @@ class AddNewInvoiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_descriptionTextField.delegate = self
-        ui_yearSelectionTextField.delegate = self
         ui_monthSelectionTextField.delegate = self
         ui_groupSelectionTextField.delegate = self
         ui_categorySelectionTextField.delegate = self
@@ -76,6 +76,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     
     //MARK: - Private functions
+    //TODO: Check if data received from previous controller are all set
     private func checkReceivedData () {
         if let recievedManager = _ptManager,
             let recievedYear = _ptYear,
@@ -88,6 +89,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
 
+    //TODO: Add a separator line between all stack view
     private func setSeparatorForFields () {
         ui_descriptionTextField.underlined()
         ui_yearSelectionTextField.underlined()
@@ -96,14 +98,15 @@ class AddNewInvoiceViewController: UIViewController {
         ui_categorySelectionTextField.underlined()
     }
     
+    //TODO: Set the custom view under the keyboard
     private func setAccessoryViewForPickersView() {
-        ui_yearSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_monthSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_groupSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_categorySelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_amountTextField.inputAccessoryView = ui_keyboardToolbarView
     }
 
+    //TODO: Set defaults values for all fields
     private func setDefaultValueForTextFields () {
         if firstLoad == true {
             if let firstMonth = _group.getMonth(atIndex: 0),
@@ -112,10 +115,12 @@ class AddNewInvoiceViewController: UIViewController {
                     ui_yearSelectionTextField.text = String(describing: currentYear.year)
                     ui_groupSelectionTextField.text = _group.title
             }
+            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
             firstLoad = false
         }
     }
     
+    //TODO: Show info if document has been added or hide if not
     private func updateDocumentInfo () {
         if _pickedDocument != nil {
             _documentHasBeenAdded = true
@@ -134,6 +139,7 @@ class AddNewInvoiceViewController: UIViewController {
 
     
     //MARK: - IBAction functions
+    //TODO: Hide the keyboard
     @IBAction func doneKeyboardViewButtonpressed(_ sender: UIButton) {
         _activeTextField.resignFirstResponder()
         if _activeTextField == ui_amountTextField {
@@ -141,6 +147,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
     
+    //TODO: Add a new document to the invoice
     @IBAction func addNewDocumentButtonPressed(_ sender: UIButton) {
         // DocumentPickerViewController to selected a document
 //        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
@@ -154,6 +161,7 @@ class AddNewInvoiceViewController: UIViewController {
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
+    //TODO: Delete added document from invoice
     @IBAction func deleteAddedDocument(_ sender: UIButton) {
         // Delete the reference to the document
         _pickedDocument = nil
@@ -161,7 +169,7 @@ class AddNewInvoiceViewController: UIViewController {
         updateDocumentInfo()
     }
     
-    
+    //TODO: Add invoide to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
@@ -177,6 +185,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
 
+    //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -187,19 +196,15 @@ class AddNewInvoiceViewController: UIViewController {
 //TODO: - textField Delegate
 extension AddNewInvoiceViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        // Store textfield clicked
         _activeTextField = textField
+        
+        // Define actions for each textFields
         if textField == ui_monthSelectionTextField {
             monthsPickerView = MonthsPicker()
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
-        }
-        if textField == ui_yearSelectionTextField {
-            yearsPickerView = YearsPicker()
-            ui_yearSelectionTextField.inputView = _pickerView
-            _pickerView.delegate = yearsPickerView
-            yearsPickerView._manager = _manager
-            yearsPickerView._yearsTexField = ui_yearSelectionTextField
         }
         if textField == ui_groupSelectionTextField {
             groupPickerView = GroupPicker()

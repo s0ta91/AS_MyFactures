@@ -173,7 +173,6 @@ extension GroupViewController: UICollectionViewDataSource {
         if collectionView.tag == 0 {
             return _currentYear.getGroupCount()
         }else {
-            print("CreateGroupView: \(_manager.getGroupIdeaCount())")
             return _manager.getGroupIdeaCount()
         }
     }
