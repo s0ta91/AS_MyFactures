@@ -213,6 +213,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             _pickerView.delegate = groupPickerView
             groupPickerView._year = _year
             groupPickerView._groupTextField = ui_groupSelectionTextField
+            groupPickerView.selectDefaultRow(forGroup: _group, forPickerView: _pickerView)
         }
         if textField == ui_categorySelectionTextField {
             categoryPickerView = CategoryPicker()

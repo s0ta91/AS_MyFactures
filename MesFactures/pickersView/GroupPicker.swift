@@ -21,6 +21,13 @@ class GroupPicker: UIPickerView {
         }
         return groupTitle
     }
+    
+    func selectDefaultRow (forGroup group: Group, forPickerView pickerView: UIPickerView) {
+        if let year = _year,
+            let groupIndex = year.getGroupIndex(forGroup: group) {
+            pickerView.selectRow(groupIndex, inComponent: 0, animated: false)
+        }
+    }
 }
 
 extension GroupPicker: UIPickerViewDataSource {
@@ -35,8 +42,6 @@ extension GroupPicker: UIPickerViewDataSource {
         }
         return numberOfRowInComponentGroup
     }
-    
-    
 }
 
 extension GroupPicker: UIPickerViewDelegate {
@@ -52,6 +57,7 @@ extension GroupPicker: UIPickerViewDelegate {
             _groupTextField.text = "Error"
         }
     }
+
 }
 
 
