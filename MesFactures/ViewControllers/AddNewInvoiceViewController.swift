@@ -12,7 +12,6 @@ import MobileCoreServices
 class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
-    @IBOutlet weak var ui_thumbnailView: UIImageView!
     @IBOutlet weak var ui_descriptionTextField: UITextField!
     @IBOutlet weak var ui_monthSelectionTextField: UITextField!
     @IBOutlet weak var ui_yearSelectionTextField: UITextField!
@@ -46,7 +45,8 @@ class AddNewInvoiceViewController: UIViewController {
     private var _activeTextField: UITextField!
     
     private var _pickedDocument: URL?
-    private var _documentHasBeenAdded: Bool! = false
+    private var _documentHasBeenAdded: Bool = false
+    private var firstLoad: Bool = true
     
     
     //MARK: - Controller functions
@@ -105,11 +105,14 @@ class AddNewInvoiceViewController: UIViewController {
     }
 
     private func setDefaultValueForTextFields () {
-        if let firstMonth = _group.getMonth(atIndex: 0),
-            let currentYear = _manager.getYear(atIndex: 0) {
-                ui_monthSelectionTextField.text = firstMonth.month
-                ui_yearSelectionTextField.text = String(describing: currentYear.year)
-                ui_groupSelectionTextField.text = _group.title
+        if firstLoad == true {
+            if let firstMonth = _group.getMonth(atIndex: 0),
+                let currentYear = _manager.getYear(atIndex: 0) {
+                    ui_monthSelectionTextField.text = firstMonth.month
+                    ui_yearSelectionTextField.text = String(describing: currentYear.year)
+                    ui_groupSelectionTextField.text = _group.title
+            }
+            firstLoad = false
         }
     }
     
@@ -170,11 +173,6 @@ class AddNewInvoiceViewController: UIViewController {
                 SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryName: category, amount: amountDouble, month: month)
                 dismiss(animated: true, completion: nil)
         }else {
-//            print(ui_descriptionTextField.text)
-//            print(ui_amountTextField.text)
-//            print(ui_monthSelectionTextField.text)
-//            print(ui_categorySelectionTextField.text)
-//            print(Double(ui_amountTextField.text!))
             print("Something went wrong")
         }
     }

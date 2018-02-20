@@ -36,12 +36,13 @@ class Year: Object {
     
     
     // GROUP functions
-    func addGroup (withTitle title: String) {
+    func addGroup (withTitle title: String) -> Group? {
         let newGroup = Group()
         newGroup.title = title
         realm?.beginWrite()
         _groupList.append(newGroup)
         try? realm?.commitWrite()
+        return newGroup
     }
     
     func getGroupCount () -> Int{

@@ -52,16 +52,12 @@ class Group: Object {
         return _monthList.count
     }
     
-    func addMonth (_ monthName: String) -> Month {
+    func addMonth (_ monthName: String) {
         let newMonth = Month()
-        let monthFilter = _monthList.filter(NSPredicate(format: "_month == %@", monthName ))
-        if monthFilter.isEmpty {
-            newMonth.month = monthName
-            realm?.beginWrite()
-            _monthList.append(newMonth)
-            try? realm?.commitWrite()
-        }
-        return newMonth
+        newMonth.month = monthName
+        realm?.beginWrite()
+        _monthList.append(newMonth)
+        try? realm?.commitWrite()
     }
     
     func getMonth (atIndex index: Int) -> Month? {
@@ -88,14 +84,12 @@ class Group: Object {
     func checkIfMonthExist (forMonthName monthName: String) -> Month {
         let monthToReturn: Month
         let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-        guard let monthIndex = monthArray.index(of: monthName) else { fatalError("month name does not exist") }
-        // DEBUG
-//        let monthIndex = 0
+        guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
+        print("monthName/ID: \(monthName)/\(monthIndex)")
         if let monthObject = getMonth(atIndex: monthIndex) {
-            print("monthObject: \(monthObject)")
             monthToReturn = monthObject
         }else {
-            monthToReturn = addMonth(monthName)
+            fatalError("month :\(monthName) does not exists in database")
         }
         print("monthToReturn: :\(monthToReturn)")
         return monthToReturn

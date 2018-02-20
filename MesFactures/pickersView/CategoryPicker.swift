@@ -33,7 +33,6 @@ extension CategoryPicker: UIPickerViewDataSource {
         if let manager = _manager {
             numberOfRowInComponentCategory = manager.getCategoryCount()
         }
-        print("catRow: \(numberOfRowInComponentCategory)")
         return numberOfRowInComponentCategory
     }
     

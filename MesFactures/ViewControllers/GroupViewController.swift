@@ -36,6 +36,7 @@ class GroupViewController: UIViewController {
     }
     private var _currentYear: Year!
     var effect: UIVisualEffect!
+    let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     
     // ViewController functions
@@ -115,9 +116,11 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
-        if let newGroupName = ui_newGroupNameTextField.text {
-            _currentYear.addGroup(withTitle: newGroupName)
-            
+        if let newGroupName = ui_newGroupNameTextField.text,
+            let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
+                for monthName in monthArray {
+                    newGroup.addMonth(monthName)
+                }
         }
         animateOut()
         self.groupCV.reloadData()
