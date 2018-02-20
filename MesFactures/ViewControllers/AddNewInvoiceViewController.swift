@@ -108,6 +108,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Set defaults values for all fields
     private func setDefaultValueForTextFields () {
         if firstLoad == true {
+            ui_descriptionTextField.becomeFirstResponder()
             if let firstMonth = _group.getMonth(atIndex: 0),
                 let currentYear = _manager.getYear(atIndex: 0) {
                     ui_monthSelectionTextField.text = firstMonth.month
