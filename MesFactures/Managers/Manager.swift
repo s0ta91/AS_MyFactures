@@ -188,6 +188,20 @@ class Manager {
         }
     }
     
+    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
+        let convertedResult: Decimal?
+        let textFieldToConvert = textField
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .currency
+        if let amountString = textFieldToConvert.text,
+            let currencyToNumber = currencyFormatter.number(from: amountString) {
+            convertedResult = currencyToNumber.decimalValue
+        }else {
+            convertedResult = nil
+        }
+        return convertedResult
+    }
+    
     func setButtonLayer (_ button: UIButton) {
         button.layer.cornerRadius = 17
         button.layer.shadowColor = UIColor.lightGray.cgColor

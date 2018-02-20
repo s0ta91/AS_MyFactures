@@ -27,15 +27,16 @@ class Month: Object {
         return _invoiceList.count
     }
     
-    func addInvoice (description: String, amount: Double, categoryName: String) {
+    func addInvoice (_ description: String, _ amount: Double, _ categoryName: String? = nil, _ identifier: String? = nil) {
         let newInvoice = Invoice()
+        newInvoice.identifier = identifier
         newInvoice.detailedDescription = description
         newInvoice.categoryName = categoryName
         newInvoice.amount = amount
-        
         realm?.beginWrite()
         _invoiceList.append(newInvoice)
         try? realm?.commitWrite()
+
     }
     
     func getInvoice (atIndex index: Int) -> Invoice? {
@@ -48,10 +49,15 @@ class Month: Object {
         return invoice
     }
     
-    func removeInvoice (invoice: Invoice) {
+    func removeInvoice (invoice: Invoice) -> Bool {
         realm?.beginWrite()
         realm?.delete(invoice)
-        try? realm?.commitWrite()
+        do {
+            try realm?.commitWrite()
+            return true
+        }catch{
+            return false
+        }
     }
     
     func getTotalAmount (forMonthIndex monthIndex: Int) -> Double {

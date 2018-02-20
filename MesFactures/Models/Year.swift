@@ -36,12 +36,13 @@ class Year: Object {
     
     
     // GROUP functions
-    func addGroup (withTitle title: String) {
+    func addGroup (withTitle title: String) -> Group? {
         let newGroup = Group()
         newGroup.title = title
         realm?.beginWrite()
         _groupList.append(newGroup)
         try? realm?.commitWrite()
+        return newGroup
     }
     
     func getGroupCount () -> Int{
@@ -56,6 +57,15 @@ class Year: Object {
     func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
+    func getGroup (forName groupName: String) -> Group? {
+        var group: Group? = nil
+        let groupPredicate = NSPredicate(format: "_title == %@", groupName)
+        if let groupIndex = _groupList.index(matching: groupPredicate) {
+            group = getGroup(atIndex: groupIndex)
+        }
+        return group
+    }
+    
     func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
         group.title = newTitle
     }
