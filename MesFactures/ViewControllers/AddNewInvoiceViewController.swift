@@ -34,7 +34,6 @@ class AddNewInvoiceViewController: UIViewController {
     
     //MARK: - Others
     //TODO: PickerView Initializer
-    private var yearsPickerView: YearsPicker!
     private var monthsPickerView: MonthsPicker!
     private var groupPickerView: GroupPicker!
     private var categoryPickerView: CategoryPicker!
@@ -173,11 +172,13 @@ class AddNewInvoiceViewController: UIViewController {
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
+            let groupName = ui_groupSelectionTextField.text,
+            let group = _year.getGroup(forName: groupName),
             let amount = ui_amountTextField,
             let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
             let amountDouble = Double(truncating: convertedAmount as NSNumber)
             let category = ui_categorySelectionTextField.text
-            let month = _group.checkIfMonthExist(forMonthName: monthString)
+            let month = group.checkIfMonthExist(forMonthName: monthString)
                 SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryName: category, amount: amountDouble, month: month)
                 dismiss(animated: true, completion: nil)
         }else {

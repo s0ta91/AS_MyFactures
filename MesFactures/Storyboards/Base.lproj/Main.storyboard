@@ -250,9 +250,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
-                                            <vibrancyEffect>
-                                                <blurEffect style="dark"/>
-                                            </vibrancyEffect>
+                                            <blurEffect style="dark"/>
                                         </visualEffectView>
                                     </subviews>
                                 </view>
