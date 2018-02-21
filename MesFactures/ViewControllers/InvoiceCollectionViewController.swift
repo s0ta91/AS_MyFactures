@@ -41,6 +41,9 @@ class InvoiceCollectionViewController: UIViewController {
         checkReceivedData()
         setNavigationBarInfo()
         
+        let rightBarButtonItem = UIBarButtonItem(image:  UIImage(named: "add") , style: UIBarButtonItemStyle.plain, target: self, action: #selector(InvoiceCollectionViewController.addNewInvoice(_:)))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
     }
@@ -131,6 +134,15 @@ class InvoiceCollectionViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    @objc func addNewInvoice (_ sender: UIBarButtonItem!) {
+        if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
+            let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
+            destinationVC._ptManager = self._invoiceCollectionManager
+            destinationVC._ptYear = self._invoiceCollectionCurrentYear
+            destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
+            self.present(addInvoiceVC, animated: true, completion: nil)
+        }
+    }
     // MARK: - Navigation
     /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -9,6 +9,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -211,7 +212,10 @@
                                             <outlet property="ui_titleLabel" destination="LwW-La-Xw3" id="eA5-q6-fbl"/>
                                             <outlet property="ui_totalDocumentsLabel" destination="ZNu-Zl-cpf" id="XVj-GN-lIj"/>
                                             <outlet property="ui_totalPriceLabel" destination="gMJ-vn-PJT" id="NoC-TC-NoC"/>
-                                            <segue destination="t7y-qo-KY2" kind="show" identifier="show_invoiceCollectionVC" id="3JA-uB-TcT"/>
+                                            <segue destination="t7y-qo-KY2" kind="show" identifier="show_invoiceCollectionVC" id="3JA-uB-TcT">
+                                                <segue key="commit" inheritsFrom="parent" id="8DD-H3-ec2"/>
+                                                <segue key="preview" inheritsFrom="commit" id="0hy-1C-Jbk"/>
+                                            </segue>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -413,7 +417,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-Id-J85">
-                                <rect key="frame" x="16" y="140" width="343" height="672"/>
+                                <rect key="frame" x="16" y="88" width="343" height="724"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d1o-bD-UgL">
                                     <size key="itemSize" width="375" height="113"/>
@@ -579,30 +583,12 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcs-56-npU">
-                                <rect key="frame" x="96" y="756" width="183" height="36"/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.25490196079999999" blue="0.43529411759999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="183" id="eaI-lP-o4x"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="0.0" minY="-3" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Actions">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="addNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="Wx3-kE-24N"/>
-                                    <action selector="newActionButtonPressed:" destination="t7y-qo-KY2" eventType="touchUpInside" id="9FD-l2-tbF"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.84999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" constant="16" id="AIu-Ja-4GN"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="top" secondItem="OMx-QP-Nft" secondAttribute="top" id="Cbu-hk-Rwr"/>
-                            <constraint firstItem="Lcs-56-npU" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="DCo-Sh-kfu"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="Ii0-BK-mYC"/>
-                            <constraint firstAttribute="bottom" secondItem="Lcs-56-npU" secondAttribute="bottom" constant="20" id="ONJ-cs-KQ8"/>
                             <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="xQN-Id-J85" secondAttribute="trailing" constant="16" id="Z54-jM-Cfy"/>
                             <constraint firstAttribute="bottom" secondItem="xQN-Id-J85" secondAttribute="bottom" id="n4v-Fx-cFV"/>
                         </constraints>
@@ -610,12 +596,11 @@
                     </view>
                     <connections>
                         <outlet property="invoiceCollectionView" destination="xQN-Id-J85" id="ED9-ZO-BJN"/>
-                        <outlet property="ui_newActionButton" destination="Lcs-56-npU" id="v1l-xd-SxJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1906.4000000000001" y="-760.34482758620697"/>
+            <point key="canvasLocation" x="-1799" y="-760"/>
         </scene>
         <!--Ajouter une facture-->
         <scene sceneID="RxR-pL-wFB">
@@ -945,7 +930,7 @@
                     <viewLayoutGuide key="safeArea" id="iyg-Cw-m9O"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-187.5" y="-760.56338028169012"/>
+            <point key="canvasLocation" x="-81" y="-761"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
@@ -1044,6 +1029,68 @@
             </objects>
             <point key="canvasLocation" x="-4458" y="13"/>
         </scene>
+        <!--Manager Cagegory Table View Controller-->
+        <scene sceneID="agN-Gb-Xy5">
+            <objects>
+                <tableViewController storyboardIdentifier="ManageCategoryVC" id="EWE-mZ-Exq" customClass="ManagerCagegoryTableViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yTa-HE-bls">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell_cagegory" textLabel="UNO-JQ-0EE" rowHeight="60" style="IBUITableViewCellStyleDefault" id="BJp-os-ymp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BJp-os-ymp" id="yDO-C3-pzQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UNO-JQ-0EE">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="59.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EWE-mZ-Exq" id="TxP-hz-tdi"/>
+                            <outlet property="delegate" destination="EWE-mZ-Exq" id="Ruz-bS-jsp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="sms-bA-Kcb">
+                        <barButtonItem key="leftBarButtonItem" image="close" id="58j-Tw-Y9h">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="dismissVC:" destination="EWE-mZ-Exq" id="Bpm-mq-jZ0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pdn-h3-ygV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-908" y="-25.123152709359609"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="OsH-en-27H">
+            <objects>
+                <navigationController storyboardIdentifier="manageCategoryNC" id="LFg-co-MqC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="xQg-Ak-PfL">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.37254901959999998" green="0.49019607840000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="EWE-mZ-Exq" kind="relationship" relationship="rootViewController" id="4h5-2t-dtS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kP4-Sy-zto" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1799" y="-25"/>
+        </scene>
         <!--Manage Group Table View Controller-->
         <scene sceneID="afa-N2-2Xt">
             <objects>
@@ -1092,7 +1139,9 @@
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <vibrancyEffect>
+                                    <blurEffect style="dark"/>
+                                </vibrancyEffect>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1168,7 +1217,7 @@
                     <viewLayoutGuide key="safeArea" id="spU-mg-adS"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="-1906" y="13"/>
+            <point key="canvasLocation" x="-1799" y="703"/>
         </scene>
         <!--Select Year View Controller-->
         <scene sceneID="zFI-73-kMm">
@@ -1296,7 +1345,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2C3-Ya-eig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2796" y="13"/>
+            <point key="canvasLocation" x="-2796" y="703"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GY2-Q5-qPd">
@@ -1322,7 +1371,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w8e-S6-mtZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1014" y="-760"/>
+            <point key="canvasLocation" x="-908" y="-760"/>
         </scene>
     </scenes>
     <resources>
@@ -1341,4 +1390,7 @@
             <color red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="3JA-uB-TcT"/>
+    </inferredMetricsTieBreakers>
 </document>

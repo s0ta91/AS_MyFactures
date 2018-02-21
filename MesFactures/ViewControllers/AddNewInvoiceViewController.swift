@@ -189,6 +189,7 @@ class AddNewInvoiceViewController: UIViewController {
 
     //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
+        ui_descriptionTextField.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     
