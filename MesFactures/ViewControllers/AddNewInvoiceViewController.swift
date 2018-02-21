@@ -175,12 +175,13 @@ class AddNewInvoiceViewController: UIViewController {
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
             let group = _year.getGroup(forName: groupName),
+            let categoryName = ui_categorySelectionTextField.text,
+            let categoryObject = _manager.getCategory(forName: categoryName),
             let amount = ui_amountTextField,
             let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
             let amountDouble = Double(truncating: convertedAmount as NSNumber)
-            let category = ui_categorySelectionTextField.text
             let month = group.checkIfMonthExist(forMonthName: monthString)
-                SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryName: category, amount: amountDouble, month: month)
+                SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, month: month)
                 dismiss(animated: true, completion: nil)
         }else {
             print("Something went wrong")

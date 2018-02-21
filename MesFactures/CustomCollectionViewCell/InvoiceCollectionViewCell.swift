@@ -27,7 +27,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     //TODO: Create a function to set values for the cell
-    func setValues (_ amount: String, _ categoryName: String, _ invoiceTitle: String) {
+    func setValues (_ amount: String, _ categoryName: String?, _ invoiceTitle: String) {
         ui_amountLabel.text = amount
         ui_categoryLabel.text = categoryName
         ui_invoiceTitleLabel.text = invoiceTitle

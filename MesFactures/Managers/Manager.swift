@@ -147,6 +147,15 @@ class Manager {
         return _categoryList.index(of: category)
     }
     
+    func getCategory (forName categoryName: String) -> Category? {
+        var category: Category? = nil
+        let categoryPredicate = NSPredicate(format: "_title == %@", categoryName)
+        if let categoryIndex = _categoryList.index(matching: categoryPredicate) {
+            category = getCategory(atIndex: categoryIndex)
+        }
+        return category
+    }
+    
     func addCategory (_ categoryTitle: String) {
         let newCatagory = Category()
         newCatagory.title = categoryTitle

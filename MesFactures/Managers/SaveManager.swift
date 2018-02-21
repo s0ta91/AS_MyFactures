@@ -22,7 +22,7 @@ class SaveManager {
         return UUID()
     }
     
-    static func saveDocument (documentURL fromUrl: URL? = nil, description: String, categoryName: String?, amount: Double, month: Month) {
+    static func saveDocument (documentURL fromUrl: URL? = nil, description: String, categoryObject: Category?, amount: Double, month: Month) {
         let identifier = getNewIdentifier()
         let filename = "\(identifier).pdf"
         let destinationDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
@@ -42,6 +42,6 @@ class SaveManager {
                 fatalError("Connot create file -> \(error.localizedDescription)")
             }
         }
-        month.addInvoice(description, amount, categoryName, identifier.uuidString)
+        month.addInvoice(description, amount, categoryObject ,identifier.uuidString)
     }
 }

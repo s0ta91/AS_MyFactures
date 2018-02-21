@@ -190,8 +190,8 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
         let monthIndex = monthToShow[indexPath.section]
         if let month = getCurrentMonth(atIndex: monthIndex),
-            let invoice = month.getInvoice(atIndex: indexPath.row),
-            let categoryName = invoice.categoryName {
+            let invoice = month.getInvoice(atIndex: indexPath.row) {
+            let categoryName = invoice.categoryObject?.title
             cell_invoice._ptManager = _invoiceCollectionManager
             cell_invoice.setValues(String(describing: invoice.amount), categoryName, invoice.detailedDescription)
         }
