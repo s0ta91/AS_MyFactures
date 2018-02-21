@@ -169,7 +169,7 @@ class AddNewInvoiceViewController: UIViewController {
         updateDocumentInfo()
     }
     
-    //TODO: Add invoide to collectionView + DB
+    //TODO: Add invoice to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
@@ -224,6 +224,10 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             _pickerView.delegate = categoryPickerView
             categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
+            
+            if let category = _manager.getCategory(atIndex: 0) {
+                ui_categorySelectionTextField.text = category.title
+            }
         }
         return true
     }

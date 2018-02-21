@@ -1259,7 +1259,7 @@
                                 <action selector="createNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="KYY-Jn-jCP"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom du groupe ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xIJ-kK-61t">
+                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom de la catégorie ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="xIJ-kK-61t">
                             <rect key="frame" x="10" y="18" width="324" height="24"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
@@ -1349,7 +1349,7 @@
                                 <action selector="modifyGroupNameButtonPressed:" destination="SUD-DK-3ZL" eventType="touchUpInside" id="8DL-KF-knX"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom du groupe ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="E97-Vo-UpH">
+                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom de la catégorie ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="E97-Vo-UpH">
                             <rect key="frame" x="10" y="20" width="324" height="24"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
