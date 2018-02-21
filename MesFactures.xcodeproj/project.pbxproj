@@ -44,7 +44,7 @@
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14EE203B314500176EF3 /* Boulanger.com.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1DFE14ED203B314500176EF3 /* Boulanger.com.pdf */; };
-		1DFE14F0203DA67E00176EF3 /* ManagerCagegoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14EF203DA67E00176EF3 /* ManagerCagegoryTableViewController.swift */; };
+		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
@@ -112,7 +112,7 @@
 		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
 		1DFE14EB203B2F3F00176EF3 /* TestDocuments */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestDocuments; sourceTree = "<group>"; };
 		1DFE14ED203B314500176EF3 /* Boulanger.com.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Boulanger.com.pdf; sourceTree = "<group>"; };
-		1DFE14EF203DA67E00176EF3 /* ManagerCagegoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCagegoryTableViewController.swift; sourceTree = "<group>"; };
+		1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryTableViewController.swift; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
@@ -265,7 +265,7 @@
 				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
 				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
 				1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */,
-				1DFE14EF203DA67E00176EF3 /* ManagerCagegoryTableViewController.swift */,
+				1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -648,6 +648,7 @@
 				1DAEAC28202AFB46001C144E /* CreateGroupPopupView.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
+				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1DB07FC82031FCAE00BDDDFB /* Invoice.swift in Sources */,
@@ -656,7 +657,6 @@
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
-				1DFE14F0203DA67E00176EF3 /* ManagerCagegoryTableViewController.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				1DAEAC202029E093001C144E /* Year.swift in Sources */,

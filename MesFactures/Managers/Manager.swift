@@ -155,6 +155,10 @@ class Manager {
         }
     }
     
+    func modifyCategoryTitle (forCategory category: Category, withNewTitle newTitle: String) {
+        category.title = newTitle
+    }
+    
     func removeCategory (atIndex index: Int) {
         if let categoryToDelete = getCategory(atIndex: index) {
             try? _realm.write {

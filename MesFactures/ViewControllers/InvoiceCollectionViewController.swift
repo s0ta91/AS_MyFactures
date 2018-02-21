@@ -13,7 +13,6 @@ class InvoiceCollectionViewController: UIViewController {
     //MARK: - Declarations
     //TODO: Outlets
     @IBOutlet weak var invoiceCollectionView: UICollectionView!
-    @IBOutlet weak var ui_newActionButton: UIButton!
     
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
@@ -40,11 +39,7 @@ class InvoiceCollectionViewController: UIViewController {
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-        
-        let rightBarButtonItem = UIBarButtonItem(image:  UIImage(named: "add") , style: UIBarButtonItemStyle.plain, target: self, action: #selector(InvoiceCollectionViewController.addNewInvoice(_:)))
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
-//        _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
+
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
     }
 
@@ -134,7 +129,7 @@ class InvoiceCollectionViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
-    @objc func addNewInvoice (_ sender: UIBarButtonItem!) {
+    @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
             let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
@@ -143,13 +138,19 @@ class InvoiceCollectionViewController: UIViewController {
             self.present(addInvoiceVC, animated: true, completion: nil)
         }
     }
+
     // MARK: - Navigation
-    /*
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "manageCategoryVC" {
+            if let navigationVC = segue.destination as? UINavigationController,
+                let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
+                    destinationVC._ptManager = _invoiceCollectionManager
+            }
+        }
     }
-    */
+    
 }
 
 //MARK: - Extensions
