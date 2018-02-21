@@ -54,7 +54,7 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
         
-        _manager.setButtonLayer(ui_newGroupButton)
+//        _manager.setButtonLayer(ui_newGroupButton)
         _manager.setHeaderClippedToBound(groupCV)
         self.groupCV.reloadData()
     }

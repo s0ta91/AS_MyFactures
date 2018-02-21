@@ -44,7 +44,7 @@ class InvoiceCollectionViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(image:  UIImage(named: "add") , style: UIBarButtonItemStyle.plain, target: self, action: #selector(InvoiceCollectionViewController.addNewInvoice(_:)))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
-        _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
+//        _invoiceCollectionManager.setButtonLayer(ui_newActionButton)
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
     }
 
