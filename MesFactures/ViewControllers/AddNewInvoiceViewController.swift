@@ -169,18 +169,19 @@ class AddNewInvoiceViewController: UIViewController {
         updateDocumentInfo()
     }
     
-    //TODO: Add invoide to collectionView + DB
+    //TODO: Add invoice to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
             let group = _year.getGroup(forName: groupName),
+            let categoryName = ui_categorySelectionTextField.text,
+            let categoryObject = _manager.getCategory(forName: categoryName),
             let amount = ui_amountTextField,
             let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
             let amountDouble = Double(truncating: convertedAmount as NSNumber)
-            let category = ui_categorySelectionTextField.text
             let month = group.checkIfMonthExist(forMonthName: monthString)
-                SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryName: category, amount: amountDouble, month: month)
+                SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, month: month)
                 dismiss(animated: true, completion: nil)
         }else {
             print("Something went wrong")
@@ -189,6 +190,7 @@ class AddNewInvoiceViewController: UIViewController {
 
     //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
+        ui_descriptionTextField.resignFirstResponder()
         dismiss(animated: true, completion: nil)
     }
     
@@ -222,6 +224,10 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             _pickerView.delegate = categoryPickerView
             categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
+            
+            if let category = _manager.getCategory(atIndex: 0) {
+                ui_categorySelectionTextField.text = category.title
+            }
         }
         return true
     }

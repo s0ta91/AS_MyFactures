@@ -27,16 +27,17 @@ class Month: Object {
         return _invoiceList.count
     }
     
-    func addInvoice (_ description: String, _ amount: Double, _ categoryName: String? = nil, _ identifier: String? = nil) {
+    func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String? = nil) {
         let newInvoice = Invoice()
         newInvoice.identifier = identifier
         newInvoice.detailedDescription = description
-        newInvoice.categoryName = categoryName
+        newInvoice.categoryObject = categoryObject
         newInvoice.amount = amount
+        
+        print("try to add Invoice with an object as value")
         realm?.beginWrite()
         _invoiceList.append(newInvoice)
         try? realm?.commitWrite()
-
     }
     
     func getInvoice (atIndex index: Int) -> Invoice? {

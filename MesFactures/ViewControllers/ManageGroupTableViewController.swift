@@ -126,8 +126,17 @@ extension ManageGroupTableViewController: UITableViewDelegate {
         editAction.backgroundColor = UIColor(named: "EditButtonGrey")
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            self._currentYear.removeGroup(atIndex: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let alert = UIAlertController(title: "Voulez vous vraiment supprimer ce groupe?", message: "Toutes les factures associées seront également supprimées et ne pourront pas être récupérées", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive) { (_) in
+                self._currentYear.removeGroup(atIndex: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
         }
         deleteAction.backgroundColor = .red
         

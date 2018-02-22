@@ -12,7 +12,7 @@ import RealmSwift
 class Invoice: Object {
     @objc private dynamic var _identifier: String?
     @objc private dynamic var _detailedDescription: String = ""
-    @objc private dynamic var _categoryName: String?
+    @objc private dynamic var _categoryobject: Category?
     @objc private dynamic var _amount: Double = 0
     
     var identifier: String? {
@@ -35,12 +35,12 @@ class Invoice: Object {
         }
     }
     
-    var categoryName: String? {
+    var categoryObject: Category? {
         get {
-            return _categoryName
+            return _categoryobject
         }set {
             realm?.beginWrite()
-            _categoryName = newValue
+            _categoryobject = newValue
             try? realm?.commitWrite()
         }
     }
