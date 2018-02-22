@@ -103,31 +103,31 @@ class InvoiceCollectionViewController: UIViewController {
         return numberOfInvoice
     }
     
-    @IBAction func newActionButtonPressed(_ sender: UIButton) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let addInvoiceAction = UIAlertAction(title: "Ajouter une facture", style: .default) { (action: UIAlertAction) in
-            if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
-                let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
-                destinationVC._ptManager = self._invoiceCollectionManager
-                destinationVC._ptYear = self._invoiceCollectionCurrentYear
-                destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
-                self.present(addInvoiceVC, animated: true, completion: nil)
-            }
-        }
-        
-        let addCategoryAction = UIAlertAction(title: "Créer une nouvelle catégorie", style: .default) { (action: UIAlertAction) in
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        actionSheet.addAction(addInvoiceAction)
-        actionSheet.addAction(addCategoryAction)
-        actionSheet.addAction(cancelAction)
-        
-        present(actionSheet, animated: true, completion: nil)
-    }
+//    @IBAction func newActionButtonPressed(_ sender: UIButton) {
+//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//
+//        let addInvoiceAction = UIAlertAction(title: "Ajouter une facture", style: .default) { (action: UIAlertAction) in
+//            if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
+//                let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
+//                destinationVC._ptManager = self._invoiceCollectionManager
+//                destinationVC._ptYear = self._invoiceCollectionCurrentYear
+//                destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
+//                self.present(addInvoiceVC, animated: true, completion: nil)
+//            }
+//        }
+//
+//        let addCategoryAction = UIAlertAction(title: "Créer une nouvelle catégorie", style: .default) { (action: UIAlertAction) in
+//
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        actionSheet.addAction(addInvoiceAction)
+//        actionSheet.addAction(addCategoryAction)
+//        actionSheet.addAction(cancelAction)
+//
+//        present(actionSheet, animated: true, completion: nil)
+//    }
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),

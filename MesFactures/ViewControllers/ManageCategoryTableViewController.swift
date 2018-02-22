@@ -158,8 +158,17 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         editAction.backgroundColor = UIColor(named: "EditButtonGrey")
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            self._manager.removeCategory(atIndex: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            let alert = UIAlertController(title: "Voulez vous vraiment supprimer cette catégorie?", message: "Les factures associées ne seront pas supprimées", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive) { (_) in
+                self._manager.removeCategory(atIndex: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
         }
         deleteAction.backgroundColor = .red
         return [editAction, deleteAction]
