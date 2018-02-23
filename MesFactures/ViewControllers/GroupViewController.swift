@@ -13,8 +13,6 @@ class GroupViewController: UIViewController {
     // GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
     @IBOutlet weak var ui_newGroupButton: UIButton!
-    @IBOutlet weak var ui_manageYearButton: UIBarButtonItem!
-    @IBOutlet weak var ui_manageGroupButton: UIBarButtonItem!
     @IBOutlet weak var ui_visualEffectView: UIVisualEffectView!
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
@@ -36,7 +34,7 @@ class GroupViewController: UIViewController {
     }
     private var _currentYear: Year!
     var effect: UIVisualEffect!
-    let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     
     // ViewController functions
@@ -48,6 +46,7 @@ class GroupViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         _currentYear = _manager.getSelectedYear()
+        groupCV.clipsToBounds = false
         
         ui_visualEffectView.isHidden = true
         effect = ui_visualEffectView.effect
@@ -116,6 +115,7 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
+        ui_newGroupNameTextField.resignFirstResponder()
         if let newGroupName = ui_newGroupNameTextField.text,
             let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
                 for monthName in monthArray {
@@ -184,17 +184,15 @@ extension GroupViewController: UICollectionViewDataSource {
             if let group = _currentYear.getGroup(atIndex: indexPath.row) {
                 cell_group.setValues(_manager, group)
             }
-            
-            // Cell's display configuration
-            cell_group.layer.cornerRadius = 8
+
             cell_group.layer.borderWidth = 1.0
             cell_group.layer.borderColor = UIColor.clear.cgColor
             cell_group.layer.shadowColor = UIColor.lightGray.cgColor
-            cell_group.layer.shadowOffset = CGSize(width:0,height: 2)
+            cell_group.layer.shadowOffset = CGSize(width:2,height: 2)
             cell_group.layer.shadowRadius = 2.0
             cell_group.layer.shadowOpacity = 1.0
             cell_group.layer.masksToBounds = false;
-            cell_group.layer.shadowPath = UIBezierPath(roundedRect:cell_group.bounds, cornerRadius:cell_group.layer.cornerRadius).cgPath
+            cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
             
             return cell_group
         }else {
@@ -205,4 +203,3 @@ extension GroupViewController: UICollectionViewDataSource {
         }
     }
 }
-

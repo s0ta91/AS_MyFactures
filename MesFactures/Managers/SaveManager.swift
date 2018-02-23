@@ -22,26 +22,62 @@ class SaveManager {
         return UUID()
     }
     
-    static func saveDocument (documentURL fromUrl: URL? = nil, description: String, categoryObject: Category?, amount: Double, month: Month) {
-        let identifier = getNewIdentifier()
-        let filename = "\(identifier).pdf"
-        let destinationDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
-        let destinationURL = destinationDirectory.appendingPathComponent(filename, isDirectory: false)
-        if !FileManager.default.fileExists(atPath: destinationDirectory.path, isDirectory: nil) {
-            do {
-                try FileManager.default.createDirectory(atPath: destinationDirectory.path, withIntermediateDirectories: false, attributes: nil)
-            }catch {
-                fatalError("Cannot create destination directory -> \(error.localizedDescription)")
-            }
-        }
+    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil) {
+        var identifier: String? = nil
         
         if let documentFromUrl = fromUrl {
+            if modify == true && invoice != nil && invoice?.identifier != nil {
+                identifier = invoice!.identifier
+            }else {
+                identifier = getNewIdentifier().uuidString
+            }
+            let filename = "\(identifier!).pdf"
+            let destinationDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+            let destinationURL = destinationDirectory.appendingPathComponent(filename, isDirectory: false)
+            if !FileManager.default.fileExists(atPath: destinationDirectory.path, isDirectory: nil) {
+                do {
+                    try FileManager.default.createDirectory(atPath: destinationDirectory.path, withIntermediateDirectories: false, attributes: nil)
+                }catch {
+                    fatalError("Cannot create destination directory -> \(error.localizedDescription)")
+                }
+            }
+            
+            
             do {
                 try FileManager.default.copyItem(at: documentFromUrl, to: destinationURL)
             }catch {
                 fatalError("Connot create file -> \(error.localizedDescription)")
             }
         }
-        month.addInvoice(description, amount, categoryObject ,identifier.uuidString)
+        
+        if modify == false {
+            newMonth.addInvoice(description, amount, categoryObject ,identifier)
+        }else {
+            if let invoiceToModify = invoice {
+                if invoiceToModify.identifier != nil && documentAdded == true {
+                    identifier = invoiceToModify.identifier
+                }
+                if let previousMonth = currentMonth,
+                    let invoiceIndex = previousMonth.removeInvoice(invoice: invoiceToModify) {
+                    if newMonth.month == previousMonth.month {
+                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier: identifier)
+                    }else {
+                        newMonth.addInvoice(description, amount, categoryObject ,identifier)
+                    }
+                }
+            }
+        }
+    }
+    
+    static func removeDocument (forIdentifier identifier: String) {
+        let filename = "\(identifier).pdf"
+        let fileDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+        let fileUrl = fileDirectory.appendingPathComponent(filename, isDirectory: false)
+        
+        do {
+            try FileManager.default.removeItem(at: fileUrl)
+        }catch {
+            fatalError("Cannot remove file. It does not exists")
+        }
     }
 }

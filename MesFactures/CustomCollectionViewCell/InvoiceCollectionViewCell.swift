@@ -11,6 +11,7 @@ import UIKit
 protocol InvoiceCollectionViewCellDelegate: class {
     func delete(invoiceCell: InvoiceCollectionViewCell)
     func share(invoiceCell: InvoiceCollectionViewCell)
+    func modify(invoiceCell: InvoiceCollectionViewCell)
 }
 
 class InvoiceCollectionViewCell: UICollectionViewCell {
@@ -47,5 +48,9 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     //TODO: Define actions for share button here
     @IBAction func shareInvoice(_ sender: UIButton) {
         delegate?.share(invoiceCell: self)
+    }
+    
+    @IBAction func modifyInvoice(_ sender: UIButton) {
+        delegate?.modify(invoiceCell: self)
     }
 }

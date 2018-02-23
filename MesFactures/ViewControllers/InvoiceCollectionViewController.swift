@@ -35,6 +35,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        invoiceCollectionView.clipsToBounds = false
         invoiceCollectionView.reloadData()
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
@@ -130,12 +131,13 @@ class InvoiceCollectionViewController: UIViewController {
 //    }
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
-        if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
-            let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
+//        if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
+//            let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
-            self.present(addInvoiceVC, animated: true, completion: nil)
+            self.present(destinationVC, animated: true, completion: nil)
         }
     }
 
@@ -196,6 +198,16 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
             cell_invoice.setValues(String(describing: invoice.amount), categoryName, invoice.detailedDescription)
         }
         cell_invoice.delegate = self
+        
+        cell_invoice.layer.borderWidth = 1.0
+        cell_invoice.layer.borderColor = UIColor.clear.cgColor
+        cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
+        cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
+        cell_invoice.layer.shadowRadius = 2.0
+        cell_invoice.layer.shadowOpacity = 1.0
+        cell_invoice.layer.masksToBounds = false;
+        cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
+        
         return cell_invoice
     }
 }
@@ -213,10 +225,9 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
                 
                     // Delete the photo from the database
-                    if month.removeInvoice(invoice: invoiceToDelete) == true {
-                        // reload the collectionView to re-calculate the number of section to show
-                        self.invoiceCollectionView.reloadData()
-                    }
+                    _ = month.removeInvoice(invoice: invoiceToDelete)
+                    // reload the collectionView to re-calculate the number of section to show
+                    self.invoiceCollectionView.reloadData()
                 })
             
                 let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
@@ -241,6 +252,28 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
             present(activityViewController, animated: true, completion: nil)
 //        }
+    }
+    
+    func modify(invoiceCell: InvoiceCollectionViewCell) {
+
+//        if let addNewinvoiceNC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
+//            let destinationVC = addNewinvoiceNC.childViewControllers.first as? AddNewInvoiceViewController,
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
+            let cell_indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
+
+                let monthIndex = monthToShow[cell_indexPath.section]
+                if let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex),
+                    let invoice = month.getInvoice(atIndex: cell_indexPath.row) {
+                    destinationVC._modifyInvoice = true
+                    destinationVC._ptManager = _invoiceCollectionManager
+                    destinationVC._ptYear = _invoiceCollectionCurrentYear
+                    destinationVC._ptGroup = _invoiceCollectionCurrentGroup
+                    destinationVC._ptMonth = month
+                    destinationVC._ptInvoice = invoice
+                }
+
+                present(destinationVC, animated: true, completion: nil)
+        }
     }
 }
 

@@ -83,7 +83,7 @@ class Group: Object {
     
     func checkIfMonthExist (forMonthName monthName: String) -> Month {
         let monthToReturn: Month
-        let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+        let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
         guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
@@ -91,5 +91,23 @@ class Group: Object {
             fatalError("month :\(monthName) does not exists in database")
         }
         return monthToReturn
+    }
+    
+    func getTotalGroupAmount () -> Double {
+        var totalAmount: Double = 0
+        for month in _monthList {
+            if let monthIndex = getMonthIndex(forMonth: month) {
+                totalAmount = totalAmount + month.getTotalAmount(forMonthIndex: monthIndex)
+            }
+        }
+        return totalAmount
+    }
+    
+    func getTotalDocument () -> Int {
+        var totalDocument: Int = 0
+        for month in _monthList {
+            totalDocument = totalDocument + month.getInvoiceCount()
+        }
+        return totalDocument
     }
 }

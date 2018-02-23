@@ -10,7 +10,7 @@ import UIKit
 
 class MonthsPicker: UIPickerView {
 
-    let monthArray = ["Janvier", "Févier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     var _monthTextField: UITextField!
 }

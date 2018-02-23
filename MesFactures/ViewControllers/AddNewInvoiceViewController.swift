@@ -21,16 +21,22 @@ class AddNewInvoiceViewController: UIViewController {
     @IBOutlet var ui_keyboardToolbarView: UIView!
     @IBOutlet weak var ui_documentAddedLabel: UILabel!
     @IBOutlet weak var ui_deleteAddedDocumentButton: UIButton!
+    @IBOutlet weak var ui_addOrModifyButton: UIButton!
     
     //MARK: - paththrough Managers/Objects
     var _ptManager: Manager?
     var _ptYear: Year?
     var _ptGroup: Group?
+    var _ptMonth: Month?
+    var _ptInvoice: Invoice?
+    var _modifyInvoice: Bool = false
     
     //MARK: - Global variable filled with passthrough Managers/objects
     private var _manager: Manager!
     private var _year: Year!
     private var _group: Group!
+    private var _month: Month!
+    private var _invoice: Invoice!
     
     //MARK: - Others
     //TODO: PickerView Initializer
@@ -46,6 +52,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     private var _pickedDocument: URL?
     private var _documentHasBeenAdded: Bool = false
+    private var _deletePreviousDocument: Bool = false
     private var firstLoad: Bool = true
     
     
@@ -83,8 +90,19 @@ class AddNewInvoiceViewController: UIViewController {
             _manager = recievedManager
             _year = recievedYear
             _group = recievedGroup
+            
         }else {
             fatalError("Error recieving path_through managers/objects")
+        }
+        
+        if _modifyInvoice == true {
+            if let receivedMonth = _ptMonth,
+                let receivedInvoice = _ptInvoice {
+                _month = receivedMonth
+                _invoice = receivedInvoice
+            }else {
+                fatalError("Error recieving path_through month/invoice objects")
+            }
         }
     }
 
@@ -108,25 +126,43 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Set defaults values for all fields
     private func setDefaultValueForTextFields () {
         if firstLoad == true {
-            ui_descriptionTextField.becomeFirstResponder()
-            if let firstMonth = _group.getMonth(atIndex: 0),
-                let currentYear = _manager.getYear(atIndex: 0) {
-                    ui_monthSelectionTextField.text = firstMonth.month
-                    ui_yearSelectionTextField.text = String(describing: currentYear.year)
-                    ui_groupSelectionTextField.text = _group.title
-            }
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
             firstLoad = false
+            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            
+            if _modifyInvoice == false {
+                ui_descriptionTextField.becomeFirstResponder()
+                if let firstMonth = _group.getMonth(atIndex: 0),
+                    let currentYear = _manager.getYear(atIndex: 0) {
+                        ui_monthSelectionTextField.text = firstMonth.month
+                        ui_yearSelectionTextField.text = String(currentYear.year)
+                        ui_groupSelectionTextField.text = _group.title
+                }
+            }else {
+                ui_descriptionTextField.text = _invoice.detailedDescription
+                ui_yearSelectionTextField.text = String(_year.year)
+                ui_groupSelectionTextField.text = _group.title
+                ui_monthSelectionTextField.text = _month.month
+                ui_categorySelectionTextField.text = _invoice.categoryObject?.title
+                
+                if _invoice.identifier != nil {
+                    // Get URL for existing document
+//                  _pickedDocument = SaveManager.getDocumentURL()
+//                    _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
+                    _documentHasBeenAdded = true
+                }
+                
+                ui_addOrModifyButton.setTitle("Modifier", for: .normal)
+            }
         }
     }
     
     //TODO: Show info if document has been added or hide if not
     private func updateDocumentInfo () {
-        if _pickedDocument != nil {
-            _documentHasBeenAdded = true
-        }else {
-            _documentHasBeenAdded = false
-        }
+//        if _pickedDocument != nil {
+//            _documentHasBeenAdded = true
+//        }else {
+//            _documentHasBeenAdded = false
+//        }
         
         if _documentHasBeenAdded == false {
             ui_documentAddedLabel.isHidden = true
@@ -137,6 +173,21 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
 
+    private func getCategoryName() -> String {
+        var categoryName: String = ""
+        if let text = ui_categorySelectionTextField.text {
+            categoryName = text
+        }
+        return categoryName
+    }
+    
+    
+    private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, _ request: Bool) {
+        if request == true {
+            SaveManager.removeDocument(forIdentifier: documentId)
+        }
+    }
+    
     
     //MARK: - IBAction functions
     //TODO: Hide the keyboard
@@ -163,26 +214,44 @@ class AddNewInvoiceViewController: UIViewController {
     
     //TODO: Delete added document from invoice
     @IBAction func deleteAddedDocument(_ sender: UIButton) {
-        // Delete the reference to the document
+         // Delete the reference to the document
         _pickedDocument = nil
+        _documentHasBeenAdded = false
+        
+        // Specify that we want to delete the previous document on save
+        _deletePreviousDocument = true
+        
         // update UI
         updateDocumentInfo()
     }
     
     //TODO: Add invoice to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
+        let categoryName = getCategoryName()
+        var categoryObject: Category? = nil
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
             let group = _year.getGroup(forName: groupName),
-            let categoryName = ui_categorySelectionTextField.text,
-            let categoryObject = _manager.getCategory(forName: categoryName),
             let amount = ui_amountTextField,
             let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
-            let amountDouble = Double(truncating: convertedAmount as NSNumber)
-            let month = group.checkIfMonthExist(forMonthName: monthString)
-                SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, month: month)
-                dismiss(animated: true, completion: nil)
+            
+                if categoryName != "" {
+                    categoryObject = _manager.getCategory(forName: categoryName)
+                }
+            
+                let amountDouble = Double(truncating: convertedAmount as NSNumber)
+                let newMonth = group.checkIfMonthExist(forMonthName: monthString)
+            
+                if _modifyInvoice == false {
+                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth)
+                }else {
+                    if let documentId = _invoice.identifier {
+                        deletePreviousDocumentIfRequested(withIdentifier: documentId, _deletePreviousDocument)
+                    }
+                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded)
+                }
+                dismiss(animated: true, completion: nil )
         }else {
             print("Something went wrong")
         }
@@ -204,13 +273,13 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
         _activeTextField = textField
         
         // Define actions for each textFields
-        if textField == ui_monthSelectionTextField {
+        if (textField == ui_monthSelectionTextField) {
             monthsPickerView = MonthsPicker()
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
         }
-        if textField == ui_groupSelectionTextField {
+        if (textField == ui_groupSelectionTextField) {
             groupPickerView = GroupPicker()
             ui_groupSelectionTextField.inputView = _pickerView
             _pickerView.delegate = groupPickerView
@@ -218,15 +287,19 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             groupPickerView._groupTextField = ui_groupSelectionTextField
             groupPickerView.selectDefaultRow(forGroup: _group, forPickerView: _pickerView)
         }
-        if textField == ui_categorySelectionTextField {
+        if (textField == ui_categorySelectionTextField) {
             categoryPickerView = CategoryPicker()
             ui_categorySelectionTextField.inputView = _pickerView
             _pickerView.delegate = categoryPickerView
             categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
             
-            if let category = _manager.getCategory(atIndex: 0) {
-                ui_categorySelectionTextField.text = category.title
+            if (_manager.getCategoryCount() > 0) {
+                if let category = _manager.getCategory(atIndex: 0) {
+                    ui_categorySelectionTextField.text = category.title
+                }else {
+                    ui_categorySelectionTextField.text = nil
+                }
             }
         }
         return true
@@ -241,6 +314,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
 extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         _pickedDocument = urls.first
+        _documentHasBeenAdded = true
         updateDocumentInfo()
     }
 }
@@ -249,6 +323,7 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
         _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
+        _documentHasBeenAdded = true
         updateDocumentInfo()
     }
 }
