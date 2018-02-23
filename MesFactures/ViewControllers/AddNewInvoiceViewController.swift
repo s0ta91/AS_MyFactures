@@ -143,6 +143,7 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_groupSelectionTextField.text = _group.title
                 ui_monthSelectionTextField.text = _month.month
                 ui_categorySelectionTextField.text = _invoice.categoryObject?.title
+                ui_amountTextField.text = String(describing: _invoice.amount)
                 
                 if _invoice.identifier != nil {
                     // Get URL for existing document
@@ -153,6 +154,7 @@ class AddNewInvoiceViewController: UIViewController {
                 
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
+            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
         }
     }
     

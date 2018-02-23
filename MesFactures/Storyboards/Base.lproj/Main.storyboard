@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-X9-wAt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,7 +39,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mes Factures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RZg-Pt-dGW">
-                                <rect key="frame" x="16" y="94" width="343" height="117"/>
+                                <rect key="frame" x="16" y="94" width="343" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Abuget" family="Abuget" pointSize="100"/>
@@ -273,25 +273,24 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zET-Ud-FxJ">
-                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="4eb-mi-uPG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zET-Ud-FxJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4eb-mi-uPG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1U9-eT-47t">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="rlT-vt-mrz">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
-                                            <blurEffect style="light"/>
+                                            <blurEffect style="dark"/>
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <blurEffect style="light"/>
                             </visualEffectView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5eM-Ih-UfD">
                                 <rect key="frame" x="0.0" y="728" width="375" height="84"/>
@@ -373,11 +372,15 @@
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="zET-Ud-FxJ" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="1ob-vd-YEK"/>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="top" secondItem="iv6-Xj-pPe" secondAttribute="top" id="CXj-7z-KYC"/>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="HI9-cP-IR0"/>
+                            <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="zET-Ud-FxJ" secondAttribute="trailing" id="HcE-hG-RLf"/>
+                            <constraint firstItem="zET-Ud-FxJ" firstAttribute="top" secondItem="dHV-vc-FxW" secondAttribute="top" id="Qkg-8G-p1q"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>
                             <constraint firstAttribute="bottom" secondItem="5eM-Ih-UfD" secondAttribute="bottom" id="Wbu-zY-1Ku"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="bottom" secondItem="iv6-Xj-pPe" secondAttribute="bottom" id="a4k-eo-CFX"/>
+                            <constraint firstItem="qWy-3l-pJt" firstAttribute="bottom" secondItem="zET-Ud-FxJ" secondAttribute="bottom" id="eaE-6f-QMp"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" constant="16" id="fuO-tA-gb9"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="gaE-LW-nr8"/>
                             <constraint firstAttribute="bottom" secondItem="4ky-NB-Zlg" secondAttribute="bottom" id="hbZ-03-3H1"/>
@@ -1124,7 +1127,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mes Factures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y9Z-UM-0vf">
-                                <rect key="frame" x="16" y="94" width="343" height="117"/>
+                                <rect key="frame" x="16" y="94" width="343" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Abuget" family="Abuget" pointSize="100"/>
@@ -1249,7 +1252,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
-                                            <blurEffect style="light"/>
+                                            <blurEffect style="dark"/>
                                         </visualEffectView>
                                     </subviews>
                                     <constraints>
@@ -1259,7 +1262,7 @@
                                         <constraint firstItem="aLq-LL-jA2" firstAttribute="top" secondItem="eto-cg-Tdc" secondAttribute="top" id="pin-KZ-1WJ"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1507,11 +1510,11 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </view>
-                                            <blurEffect style="light"/>
+                                            <blurEffect style="dark"/>
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
