@@ -15,6 +15,7 @@ class Group: Object {
     @objc private dynamic var _totalPrice = 0.0
     @objc private dynamic var _totalDocuments = 0
     private var _monthList = List<Month>()
+    let _monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     var title: String {
         get {
@@ -71,6 +72,9 @@ class Group: Object {
     }
     func getMonthIndex (forMonth month: Month) -> Int? {
         return _monthList.index(of: month)
+    }
+    func getMonthIndexFromTable (forMonthName monthName: String) -> Int! {
+        return _monthArray.index(of: monthName)
     }
     
     func removeMonth (atIndex index: Int) {

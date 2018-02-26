@@ -69,6 +69,22 @@ class SaveManager {
         }
     }
     
+    static func loadDocument (withIdentifier identifier: String) -> URL? {
+        let documentURL: URL?
+        let filePath = "\(identifier).pdf"
+        let documentDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+        if !FileManager.default.fileExists(atPath: documentDirectory.path) {
+            fatalError("Directory PDF not found at path \(documentDirectory)")
+        }
+        let Url = documentDirectory.appendingPathComponent(filePath)
+        if FileManager.default.fileExists(atPath: Url.path) {
+            documentURL = Url
+        }else {
+            fatalError("File unavailable at path \(Url)")
+        }
+        return documentURL
+    }
+    
     static func removeDocument (forIdentifier identifier: String) {
         let filename = "\(identifier).pdf"
         let fileDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)

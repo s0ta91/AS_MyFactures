@@ -24,13 +24,14 @@ class InvoiceCollectionViewController: UIViewController {
     private var _invoiceCollectionCurrentGroup: Group!
     private var _invoiceCollectionCurrentYear: Year!
     
-    // To store the months that need to shown if they contains at least an invoice
+    // To store the months that need to be shown if they contains at least an invoice
     private var monthToShow: [Int] = []
 
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
+        invoiceCollectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,35 +105,8 @@ class InvoiceCollectionViewController: UIViewController {
         return numberOfInvoice
     }
     
-//    @IBAction func newActionButtonPressed(_ sender: UIButton) {
-//        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        let addInvoiceAction = UIAlertAction(title: "Ajouter une facture", style: .default) { (action: UIAlertAction) in
-//            if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
-//                let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
-//                destinationVC._ptManager = self._invoiceCollectionManager
-//                destinationVC._ptYear = self._invoiceCollectionCurrentYear
-//                destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
-//                self.present(addInvoiceVC, animated: true, completion: nil)
-//            }
-//        }
-//
-//        let addCategoryAction = UIAlertAction(title: "Créer une nouvelle catégorie", style: .default) { (action: UIAlertAction) in
-//
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        actionSheet.addAction(addInvoiceAction)
-//        actionSheet.addAction(addCategoryAction)
-//        actionSheet.addAction(cancelAction)
-//
-//        present(actionSheet, animated: true, completion: nil)
-//    }
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
-//        if let addInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
-//            let destinationVC = addInvoiceVC.childViewControllers.first as? AddNewInvoiceViewController {
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
@@ -209,6 +183,34 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         
         return cell_invoice
+    }
+    
+}
+
+extension InvoiceCollectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
+            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthToShow[indexPath.section]),
+            let selectedInvoice = month.getInvoice(atIndex: indexPath.row) {
+            
+                if let invoiceIdentifier = selectedInvoice.identifier,
+                    let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
+                    destinationVC._documentURL = documentURL
+                    destinationVC.modalTransitionStyle = .crossDissolve
+                    present(destinationVC, animated: true, completion: nil)
+                }
+                else {
+                    let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+                    let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                    alertController.addAction(validAction)
+                    present(alertController, animated: true, completion: nil)
+                    
+                    print("Something went wrong")
+                }
+        }
+        
     }
 }
 
