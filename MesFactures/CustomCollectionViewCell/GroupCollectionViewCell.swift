@@ -8,12 +8,21 @@
 
 import UIKit
 
+protocol GroupCollectionViewCellDelegate: class {
+    func showGroupActions(groupCell: GroupCollectionViewCell)
+}
+
 class GroupCollectionViewCell: UICollectionViewCell {
     
+    //MARK: - Outlets
     @IBOutlet weak var ui_titleLabel: UILabel!
     @IBOutlet weak var ui_totalPriceLabel: UILabel!
     @IBOutlet weak var ui_totalDocumentsLabel: UILabel!
     
+    //MARK: - Variables
+    weak var delegate: GroupCollectionViewCellDelegate?
+    
+    //MARK: - public functions
     func setValues (_ _manager: Manager, _ group: Group) {
         let totalAmount = String(describing: group.getTotalGroupAmount())
         let totalDocument = String(group.getTotalDocument())
@@ -22,5 +31,10 @@ class GroupCollectionViewCell: UICollectionViewCell {
         ui_totalDocumentsLabel.text = totalDocument
         
         _manager.convertToCurrencyNumber(forLabel: ui_totalPriceLabel)
+    }
+    
+    //MARK: - Actions
+    @IBAction func groupActions(_ sender: Any) {
+        delegate?.showGroupActions(groupCell: self)
     }
 }

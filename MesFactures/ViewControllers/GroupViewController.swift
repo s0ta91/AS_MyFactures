@@ -21,7 +21,7 @@ class GroupViewController: UIViewController {
     // CreateGroupPopupView
     @IBOutlet weak var ui_groupNameTextField: UITextField!
     @IBOutlet weak var ui_groupIdeaCV: UICollectionView!
-    
+    @IBOutlet weak var ui_addGroupButton: UIButton!
     
     
     // Variables declaration
@@ -33,6 +33,7 @@ class GroupViewController: UIViewController {
         }
     }
     private var _currentYear: Year!
+    private var _groupToModify: Group?
     var effect: UIVisualEffect!
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
@@ -104,6 +105,7 @@ class GroupViewController: UIViewController {
     // Action functions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
+        ui_addGroupButton.setTitle("Créer le groupe", for: .normal)
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
@@ -115,11 +117,16 @@ class GroupViewController: UIViewController {
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.resignFirstResponder()
-        if let newGroupName = ui_newGroupNameTextField.text,
-            let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
+        guard let newGroupName = ui_newGroupNameTextField.text else {return print("textFiled is empty")}
+        if let selectedGroup = _groupToModify {
+            _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
+            _groupToModify = nil
+        }else {
+            if let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
                 for monthName in monthArray {
                     newGroup.addMonth(monthName)
                 }
+            }
         }
         animateOut()
         self.groupCV.reloadData()
@@ -193,6 +200,7 @@ extension GroupViewController: UICollectionViewDataSource {
             cell_group.layer.masksToBounds = false;
             cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
             
+            cell_group.delegate = self
             return cell_group
         }else {
             let cell_groupIdea = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_groupIdea", for: indexPath) as! GroupIdeasCollectionViewCell
@@ -202,3 +210,33 @@ extension GroupViewController: UICollectionViewDataSource {
         }
     }
 }
+
+extension GroupViewController: GroupCollectionViewCellDelegate {
+    
+    func showGroupActions(groupCell: GroupCollectionViewCell) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
+            if let indexPath = self.groupCV.indexPath(for: groupCell),
+                let group = self._currentYear.getGroup(atIndex: indexPath.row) {
+                    self.ui_newGroupNameTextField.text = group.title
+                    self.ui_addGroupButton.setTitle("Modifier", for: .normal)
+                    self.ui_newGroupNameTextField.becomeFirstResponder()
+                    self._groupToModify = group
+                    self.animateIn()
+            }
+        }
+
+        let delete = UIAlertAction(title: "Supprimer le groupe", style: .destructive) { (_) in
+            if let indexPath = self.groupCV.indexPath(for: groupCell) {
+                self._currentYear.removeGroup(atIndex: indexPath.row)
+                self.groupCV.deleteItems(at: [indexPath])
+            }
+        }
+        let cancel = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        actionSheet.addAction(modify)
+        actionSheet.addAction(delete)
+        actionSheet.addAction(cancel)
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+}
+

@@ -31,7 +31,6 @@ class InvoiceCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
-        invoiceCollectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,6 +104,78 @@ class InvoiceCollectionViewController: UIViewController {
         return numberOfInvoice
     }
     
+    //TODO: Create the function to delete a cell
+    func delete(invoice: InvoiceCollectionViewCell) {
+        if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
+            let monthIndex = _monthToShow[indexPath.section]
+            if let month = self.getCurrentMonth(atIndex: monthIndex),
+                let invoiceToDelete = month.getInvoice(atIndex: indexPath.row) {
+                let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
+                let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
+                    
+                    // Delete the photo from the database
+                    _ = month.removeInvoice(invoice: invoiceToDelete)
+
+                    // reload the collectionView to re-calculate the number of section to show
+                    self.invoiceCollectionView.reloadData()
+                })
+                
+                let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
+                })
+                
+                alert.addAction(deleteAction)
+                alert.addAction(cancelAction)
+                present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    //TODO: Create the function to share the invoice
+    func share(invoice: InvoiceCollectionViewCell) {
+        if let indexPath = invoiceCollectionView.indexPath(for: invoice),
+            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]) {
+            if let selectedInvoice = month.getInvoice(atIndex: indexPath.section),
+                let invoiceIdentifier = selectedInvoice.identifier,
+                let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
+                let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
+                present(activityViewController, animated: true, completion: nil)
+            }else {
+                let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                alertController.addAction(validAction)
+                present(alertController, animated: true, completion: nil)
+            }
+            
+            /** TEST PURPOSE ONLY **/
+            //guard let image = UIImage(named: "Boulanger.com") else {return print("image does not exists")}
+            //let shareObject = image
+            //let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
+            //present(activityViewController, animated: true, completion: nil)
+            /** ***** **/
+        }
+    }
+    
+    //TODO: - Create the function to modify an invoice
+    func modify(invoice: InvoiceCollectionViewCell) {
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
+            let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
+            
+            let monthIndex = _monthToShow[cell_indexPath.section]
+            if let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex),
+                let invoice = month.getInvoice(atIndex: cell_indexPath.row) {
+                destinationVC._modifyInvoice = true
+                destinationVC._ptManager = _invoiceCollectionManager
+                destinationVC._ptYear = _invoiceCollectionCurrentYear
+                destinationVC._ptGroup = _invoiceCollectionCurrentGroup
+                destinationVC._ptMonth = month
+                destinationVC._ptInvoice = invoice
+            }
+            
+            present(destinationVC, animated: true, completion: nil)
+        }
+    }
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
@@ -126,6 +197,7 @@ class InvoiceCollectionViewController: UIViewController {
             }
         }
     }
+    
     
 }
 
@@ -167,9 +239,8 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         let monthIndex = _monthToShow[indexPath.section]
         if let month = getCurrentMonth(atIndex: monthIndex),
             let invoice = month.getInvoice(atIndex: indexPath.row) {
-            let categoryName = invoice.categoryObject?.title
             cell_invoice._ptManager = _invoiceCollectionManager
-            cell_invoice.setValues(String(describing: invoice.amount), categoryName, invoice.detailedDescription)
+            cell_invoice.setValues(forInvoice: invoice)
         }
         cell_invoice.delegate = self
         
@@ -187,107 +258,51 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
 }
 
-extension InvoiceCollectionViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
-            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]),
-            let selectedInvoice = month.getInvoice(atIndex: indexPath.row) {
-            
-                if let invoiceIdentifier = selectedInvoice.identifier,
-                    let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
-                    destinationVC._documentURL = documentURL
-                    destinationVC.modalTransitionStyle = .crossDissolve
-                    present(destinationVC, animated: true, completion: nil)
-                }
-                else {
-                    let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                    let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alertController.addAction(validAction)
-                    present(alertController, animated: true, completion: nil)
-                    
-                    print("Something went wrong")
-                }
-        }
-        
-    }
-}
-
 //TODO: Create the delegate to be conform to the cell
 extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     
-    //TODO: Create the function to delete a cell
-    func delete(invoiceCell: InvoiceCollectionViewCell) {
-        if let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
-            let monthIndex = _monthToShow[indexPath.section]
-            if let month = self.getCurrentMonth(atIndex: monthIndex),
-                let invoiceToDelete = month.getInvoice(atIndex: indexPath.row) {
-                let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
-                let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
-                
-                    // Delete the photo from the database
-                    _ = month.removeInvoice(invoice: invoiceToDelete)
-                    // reload the collectionView to re-calculate the number of section to show
-                    self.invoiceCollectionView.reloadData()
-                })
-            
-                let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
-                })
-                
-                alert.addAction(deleteAction)
-                alert.addAction(cancelAction)
-                present(alert, animated: true, completion: nil)
-            }
+    func showAvailableActions(invoiceCell: InvoiceCollectionViewCell) {
+        let actionsController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let modifyAction = UIAlertAction(title: "Modifier", style: .default) { (action: UIAlertAction) in
+            self.modify(invoice: invoiceCell)
         }
-    }
-
-    //TODO: Create the function to share the invoice
-    func share(invoiceCell: InvoiceCollectionViewCell) {
-        if let indexPath = invoiceCollectionView.indexPath(for: invoiceCell),
-            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]) {
-                if let selectedInvoice = month.getInvoice(atIndex: indexPath.section),
-                    let invoiceIdentifier = selectedInvoice.identifier,
-                    let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
-                        let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
-                        present(activityViewController, animated: true, completion: nil)
-                }else {
-                    let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                    let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alertController.addAction(validAction)
-                    present(alertController, animated: true, completion: nil)
-                }
-            
-            /** TEST PURPOSE ONLY **/
-            //guard let image = UIImage(named: "Boulanger.com") else {return print("image does not exists")}
-            //let shareObject = image
-            //let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
-            //present(activityViewController, animated: true, completion: nil)
-            /** ***** **/
+        let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive) { (_) in
+            self.delete(invoice: invoiceCell)
         }
+        let shareAction = UIAlertAction(title: "Partager", style: .default) { (_) in
+            self.share(invoice: invoiceCell)
+        }
+        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        
+        actionsController.addAction(modifyAction)
+        actionsController.addAction(shareAction)
+        actionsController.addAction(deleteAction)
+        actionsController.addAction(cancelAction)
+        present(actionsController, animated: true, completion: nil)
     }
     
-    func modify(invoiceCell: InvoiceCollectionViewCell) {
-
-//        if let addNewinvoiceNC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceNavigationController"),
-//            let destinationVC = addNewinvoiceNC.childViewControllers.first as? AddNewInvoiceViewController,
-        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
-            let cell_indexPath = invoiceCollectionView.indexPath(for: invoiceCell) {
-
-                let monthIndex = _monthToShow[cell_indexPath.section]
-                if let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex),
-                    let invoice = month.getInvoice(atIndex: cell_indexPath.row) {
-                    destinationVC._modifyInvoice = true
-                    destinationVC._ptManager = _invoiceCollectionManager
-                    destinationVC._ptYear = _invoiceCollectionCurrentYear
-                    destinationVC._ptGroup = _invoiceCollectionCurrentGroup
-                    destinationVC._ptMonth = month
-                    destinationVC._ptInvoice = invoice
-                }
-
-                present(destinationVC, animated: true, completion: nil)
+    func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
+        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
+            let indexPath = invoiceCollectionView.indexPath(for: invoiceCell),
+            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]),
+            let selectedInvoice = month.getInvoice(atIndex: indexPath.row) {
+            
+            if let invoiceIdentifier = selectedInvoice.identifier,
+                let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
+                destinationVC._documentURL = documentURL
+                destinationVC.modalTransitionStyle = .crossDissolve
+                self.present(destinationVC, animated: true, completion: nil)
+            }
+            else {
+                let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                alertController.addAction(validAction)
+                self.present(alertController, animated: true, completion: nil)
+                
+                print("Something went wrong")
+            }
         }
     }
 }

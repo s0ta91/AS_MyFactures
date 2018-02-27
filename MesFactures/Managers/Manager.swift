@@ -15,7 +15,6 @@ class Manager {
     private var _realm: Realm
     private var _yearsList: Results<Year>
     private var _applicationDataList: Results<ApplicationData>
-    private var _groupList: Results<Group>
     private var _categoryList: Results<Category>
     private var _groupIdeaList: Results<GroupIdea>
     
@@ -24,7 +23,6 @@ class Manager {
         _realm = realm
         _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
         _applicationDataList = _realm.objects(ApplicationData.self)
-        _groupList = _realm.objects(Group.self).sorted(byKeyPath: "_title")
         _categoryList = _realm.objects(Category.self).sorted(byKeyPath: "_title")
         _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
     }
@@ -228,6 +226,27 @@ class Manager {
     func setHeaderClippedToBound (_ collectionView: UICollectionView) {
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
+    }
+    
+    func drawPDFfromURL (url: URL) -> UIImage? {
+        guard let document = CGPDFDocument(url as CFURL) else { print("error document")
+            return nil }
+        guard let page = document.page(at: 1) else { print("error page")
+            return nil }
+        
+        let pageRect = page.getBoxRect(.mediaBox)
+        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+        let img = renderer.image { ctx in
+            UIColor.white.set()
+            ctx.fill(pageRect)
+            
+            ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+            ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+            
+            ctx.cgContext.drawPDFPage(page)
+        }
+        
+        return img
     }
 
 }
