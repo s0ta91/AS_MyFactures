@@ -154,12 +154,13 @@ class Manager {
         return category
     }
     
-    func addCategory (_ categoryTitle: String) {
+    func addCategory (_ categoryTitle: String) -> Category {
         let newCatagory = Category()
         newCatagory.title = categoryTitle
         try? _realm.write {
             _realm.add(newCatagory)
         }
+        return newCatagory
     }
     
     func modifyCategoryTitle (forCategory category: Category, withNewTitle newTitle: String) {

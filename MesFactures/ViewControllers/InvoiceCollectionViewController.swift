@@ -190,7 +190,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "manageCategoryVC" {
+        if segue.identifier == "manageCategoryVC"{
             if let navigationVC = segue.destination as? UINavigationController,
                 let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
                     destinationVC._ptManager = _invoiceCollectionManager
