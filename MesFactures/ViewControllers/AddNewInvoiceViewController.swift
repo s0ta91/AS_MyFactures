@@ -358,7 +358,8 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
             
             if (_manager.getCategoryCount() > 0) {
-                if let category = _manager.getCategory(atIndex: 0) {
+                // First category title must never be shown in the pickerView
+                if let category = _manager.getCategory(atIndex: 1) {
                     ui_categorySelectionTextField.text = category.title
                 }else {
                     ui_categorySelectionTextField.text = nil

@@ -47,6 +47,7 @@ class Manager {
     
     func initCategory () {
         if getApplicationDataCount() == 0 {
+            _ = addCategory("Toutes les catégories", isSelected: true)
             _ = addCategory("Non-classée")
         }
     }

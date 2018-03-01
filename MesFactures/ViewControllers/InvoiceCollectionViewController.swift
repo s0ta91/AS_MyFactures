@@ -292,9 +292,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             }
             else {
                 let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                })
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(validAction)
                 self.present(alertController, animated: true, completion: nil)
                 
