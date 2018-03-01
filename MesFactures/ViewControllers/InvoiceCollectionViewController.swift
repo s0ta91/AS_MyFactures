@@ -222,9 +222,14 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         case UICollectionElementKindSectionHeader:
             let invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
+            let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
             if let month = getCurrentMonth(atIndex: monthIndex) {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
-                monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section))
+                if selectedCategory.title == "Toutes les catégories" {
+                    monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section, withFilter: false))
+                }else {
+                    monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section, withFilter: true, forCategory: selectedCategory))
+                }
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount)
