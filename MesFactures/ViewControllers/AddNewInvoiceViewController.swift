@@ -12,6 +12,11 @@ import MobileCoreServices
 class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
+    
+    @IBOutlet var ui_createCategoryView: UIView!
+    @IBOutlet weak var ui_addNewCategoryTextField: UITextField!
+    
+    
     @IBOutlet weak var ui_descriptionTextField: UITextField!
     @IBOutlet weak var ui_monthSelectionTextField: UITextField!
     @IBOutlet weak var ui_yearSelectionTextField: UITextField!
@@ -22,6 +27,9 @@ class AddNewInvoiceViewController: UIViewController {
     @IBOutlet weak var ui_documentAddedLabel: UILabel!
     @IBOutlet weak var ui_deleteAddedDocumentButton: UIButton!
     @IBOutlet weak var ui_addOrModifyButton: UIButton!
+    @IBOutlet weak var ui_addNewDocumentButton: UIButton!
+    @IBOutlet weak var ui_visualEffect: UIVisualEffectView!
+    
     
     //MARK: - paththrough Managers/Objects
     var _ptManager: Manager?
@@ -54,6 +62,7 @@ class AddNewInvoiceViewController: UIViewController {
     private var _documentHasBeenAdded: Bool = false
     private var _deletePreviousDocument: Bool = false
     private var firstLoad: Bool = true
+    private var _visualEffect: UIVisualEffect!
     
     
     //MARK: - Controller functions
@@ -64,6 +73,7 @@ class AddNewInvoiceViewController: UIViewController {
         ui_groupSelectionTextField.delegate = self
         ui_categorySelectionTextField.delegate = self
         ui_amountTextField.delegate = self
+        ui_createCategoryView.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +83,7 @@ class AddNewInvoiceViewController: UIViewController {
         setAccessoryViewForPickersView()
         setDefaultValueForTextFields()
         updateDocumentInfo()
+        ui_visualEffect.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,6 +147,7 @@ class AddNewInvoiceViewController: UIViewController {
                         ui_monthSelectionTextField.text = firstMonth.month
                         ui_yearSelectionTextField.text = String(currentYear.year)
                         ui_groupSelectionTextField.text = _group.title
+                        ui_categorySelectionTextField.text = "Non-classée"
                 }
             }else {
                 ui_descriptionTextField.text = _invoice.detailedDescription
@@ -160,18 +172,14 @@ class AddNewInvoiceViewController: UIViewController {
     
     //TODO: Show info if document has been added or hide if not
     private func updateDocumentInfo () {
-//        if _pickedDocument != nil {
-//            _documentHasBeenAdded = true
-//        }else {
-//            _documentHasBeenAdded = false
-//        }
-        
         if _documentHasBeenAdded == false {
             ui_documentAddedLabel.isHidden = true
             ui_deleteAddedDocumentButton.isHidden = true
+            ui_addNewDocumentButton.isHidden = false
         }else {
             ui_documentAddedLabel.isHidden = false
             ui_deleteAddedDocumentButton.isHidden = false
+            ui_addNewDocumentButton.isHidden = true
         }
     }
 
@@ -183,11 +191,45 @@ class AddNewInvoiceViewController: UIViewController {
         return categoryName
     }
     
-    
     private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, _ request: Bool) {
         if request == true {
             SaveManager.removeDocument(forIdentifier: documentId)
         }
+    }
+    
+    private func animateIn(forSubview subview: UIView) {
+        self.view.addSubview(subview)
+        let navigationBarHeight: CGFloat = 44
+        let topAdjust = navigationBarHeight + 60
+        
+        subview.translatesAutoresizingMaskIntoConstraints = false
+        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+        
+        subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
+        subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        
+        
+        subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        subview.alpha = 0
+        
+        ui_visualEffect.isHidden = false
+        
+        UIView.animate(withDuration: 0.4) {
+            self.ui_visualEffect.effect = self._visualEffect
+            subview.alpha = 1
+            subview.transform = CGAffineTransform.identity
+        }
+    }
+    private func animateOut (forSubview subview: UIView) {
+        UIView.animate(withDuration: 0.3, animations: {
+            subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            subview.alpha = 0
+            
+            self.ui_visualEffect.effect = nil
+        }) { (success: Bool) in
+            subview.removeFromSuperview()
+        }
+        ui_visualEffect.isHidden = true
     }
     
     
@@ -212,6 +254,25 @@ class AddNewInvoiceViewController: UIViewController {
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
         self.present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
+        ui_addNewCategoryTextField.becomeFirstResponder()
+        animateIn(forSubview: ui_createCategoryView)
+    }
+    
+    @IBAction func cancelNewCategoryView(_ sender: UIButton) {
+        ui_addNewCategoryTextField.resignFirstResponder()
+        animateOut(forSubview: ui_createCategoryView)
+    }
+    
+    @IBAction func createNewCategory(_ sender: UIButton) {
+        if let newCatgoryName = ui_addNewCategoryTextField.text {
+            let createdCategory = _manager.addCategory(newCatgoryName)
+            ui_categorySelectionTextField.text = createdCategory.title
+        }
+        ui_addNewCategoryTextField.resignFirstResponder()
+        animateOut(forSubview: ui_createCategoryView)
     }
     
     //TODO: Delete added document from invoice
@@ -297,7 +358,8 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
             
             if (_manager.getCategoryCount() > 0) {
-                if let category = _manager.getCategory(atIndex: 0) {
+                // First category title must never be shown in the pickerView
+                if let category = _manager.getCategory(atIndex: 1) {
                     ui_categorySelectionTextField.text = category.title
                 }else {
                     ui_categorySelectionTextField.text = nil

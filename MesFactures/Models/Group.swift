@@ -101,7 +101,7 @@ class Group: Object {
         var totalAmount: Double = 0
         for month in _monthList {
             if let monthIndex = getMonthIndex(forMonth: month) {
-                totalAmount = totalAmount + month.getTotalAmount(forMonthIndex: monthIndex)
+                totalAmount = totalAmount + month.getTotalAmount(forMonthIndex: monthIndex, withFilter: false)
             }
         }
         return totalAmount

@@ -98,8 +98,14 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
         var numberOfInvoice = 0
+        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
         if let month = getCurrentMonth(atIndex: monthIndex) {
-            numberOfInvoice = month.getInvoiceCount()
+            if selectedCategory.title == "Toutes les catégories" {
+                numberOfInvoice = month.getInvoiceCount()
+            }else {
+                numberOfInvoice = month.getInvoiceListFilteredCount(forCategory: selectedCategory)
+//                print("numberOfinvoice for category :\(selectedCategory.title) = \(numberOfInvoice)")
+            }
         }
         return numberOfInvoice
     }
@@ -190,7 +196,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "manageCategoryVC" {
+        if segue.identifier == "manageCategoryVC"{
             if let navigationVC = segue.destination as? UINavigationController,
                 let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
                     destinationVC._ptManager = _invoiceCollectionManager
@@ -216,9 +222,14 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         case UICollectionElementKindSectionHeader:
             let invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
+            let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
             if let month = getCurrentMonth(atIndex: monthIndex) {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
-                monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section))
+                if selectedCategory.title == "Toutes les catégories" {
+                    monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section, withFilter: false))
+                }else {
+                    monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section, withFilter: true, forCategory: selectedCategory))
+                }
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount)
@@ -236,14 +247,20 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
+        cell_invoice._ptManager = _invoiceCollectionManager
         let monthIndex = _monthToShow[indexPath.section]
-        if let month = getCurrentMonth(atIndex: monthIndex),
-            let invoice = month.getInvoice(atIndex: indexPath.row) {
-            cell_invoice._ptManager = _invoiceCollectionManager
-            cell_invoice.setValues(forInvoice: invoice)
+        var invoice: Invoice? = nil
+        guard let month = getCurrentMonth(atIndex: monthIndex) else {fatalError("no month found at index \(monthIndex)")}
+        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
+        if selectedCategory.title == "Toutes les catégories" {
+            invoice = month.getInvoice(atIndex: indexPath.row)
+        }else {
+            invoice = month.getInvoiceFiltered(ForCategory: selectedCategory, atIndex: indexPath.row)
+        }
+        if let invoiceToShow = invoice {
+            cell_invoice.setValues(forInvoice: invoiceToShow)
         }
         cell_invoice.delegate = self
-        
         cell_invoice.layer.borderWidth = 1.0
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
         cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
@@ -252,10 +269,8 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.shadowOpacity = 1.0
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
-        
         return cell_invoice
     }
-    
 }
 
 //TODO: Create the delegate to be conform to the cell
@@ -295,9 +310,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             }
             else {
                 let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.dismiss(animated: true, completion: nil)
-                })
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                 alertController.addAction(validAction)
                 self.present(alertController, animated: true, completion: nil)
                 

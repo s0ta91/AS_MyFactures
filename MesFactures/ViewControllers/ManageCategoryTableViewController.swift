@@ -12,12 +12,12 @@ class ManageCategoryTableViewController: UIViewController {
     
     //MARK: - Declarations
     //TODO: Outlets
-    @IBOutlet var ui_createCategoryView: UIView!
     @IBOutlet var ui_modifyCategoryView: UIView!
     @IBOutlet weak var ui_manageCategoryTableView: UITableView!
     @IBOutlet weak var ui_manageCategoryVisualView: UIVisualEffectView!
-    @IBOutlet weak var ui_createNewCategoryTextField: UITextField!
     @IBOutlet weak var ui_modifyCategoryTextField: UITextField!
+    @IBOutlet weak var ui_addNewCategoryButton: UIButton!
+    
     
     
     //TODO: Data reveived from previous VC
@@ -40,7 +40,7 @@ class ManageCategoryTableViewController: UIViewController {
         ui_manageCategoryVisualView.isHidden = true
         _visualEffect = ui_manageCategoryVisualView.effect
         ui_manageCategoryVisualView.effect = nil
-        ui_createCategoryView.layer.cornerRadius = 10
+        ui_modifyCategoryView.layer.cornerRadius = 10
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,38 +90,37 @@ class ManageCategoryTableViewController: UIViewController {
         ui_manageCategoryVisualView.isHidden = true
     }
     
+    
+    //MARK: - Actions
     @IBAction func cancelManageCategoryVC(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIBarButtonItem) {
-        animateIn(forSubview: ui_createCategoryView)
-        ui_createNewCategoryTextField.becomeFirstResponder()
+        animateIn(forSubview: ui_modifyCategoryView)
+        ui_modifyCategoryTextField.becomeFirstResponder()
+        ui_addNewCategoryButton.setTitle("Créer", for: .normal)
     }
     
     @IBAction func cancelCreateCategoryView(_ sender: UIButton) {
-        ui_createNewCategoryTextField.resignFirstResponder()
+//        ui_createNewCategoryTextField.resignFirstResponder()
         ui_modifyCategoryTextField.resignFirstResponder()
-        animateOut(forSubview: ui_createCategoryView)
-    }
-    
-    @IBAction func addNewCategory(_ sender: UIButton) {
-        if let newCategoryName = ui_createNewCategoryTextField.text {
-            _manager.addCategory(newCategoryName)
-        }
-        ui_createNewCategoryTextField.resignFirstResponder()
-        ui_manageCategoryTableView.reloadData()
-        animateOut(forSubview: ui_createCategoryView)
+        animateOut(forSubview: ui_modifyCategoryView)
     }
     
     @IBAction func modifyCategory(_ sender: Any) {
-        if let newCategoryTitle = ui_modifyCategoryTextField.text {
-            _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryTitle)
-            ui_manageCategoryTableView.reloadData()
-            animateOut(forSubview: ui_modifyCategoryView)
+        guard let newCategoryName = ui_modifyCategoryTextField.text else {return print("textField is empty")}
+        if ui_addNewCategoryButton.titleLabel?.text == "Créer" {
+            print("Créer")
+            _ = _manager.addCategory(newCategoryName)
         }
+        else if ui_addNewCategoryButton.titleLabel?.text == "Modifier" {
+            print("Modifier")
+            _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
+        }
+        ui_manageCategoryTableView.reloadData()
+        animateOut(forSubview: ui_modifyCategoryView)
     }
-    
 }
 
 // MARK: - Table view data source
@@ -138,7 +137,14 @@ extension ManageCategoryTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell_category = tableView.dequeueReusableCell(withIdentifier: "cell_category", for: indexPath)
-        cell_category.textLabel?.text = _manager.getCategory(atIndex: indexPath.row)?.title
+        if let category = _manager.getCategory(atIndex: indexPath.row) {
+            cell_category.textLabel?.text = category.title
+            if category.selected == true {
+                cell_category.accessoryType = .checkmark
+            }else {
+                cell_category.accessoryType = .none
+            }
+        }
         return cell_category
     }
 
@@ -152,6 +158,7 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
                 self._selectedCategoryToModify = category
                 self.ui_modifyCategoryTextField.text = category.title
                 self.ui_modifyCategoryTextField.becomeFirstResponder()
+                self.ui_addNewCategoryButton.setTitle("Modifier", for: .normal)
                 self.animateIn(forSubview: self.ui_modifyCategoryView)
             }
         }
@@ -173,5 +180,24 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         deleteAction.backgroundColor = .red
         return [editAction, deleteAction]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectedCategory = _manager.getCategory(atIndex: indexPath.row) {
+            _manager.setSelectedCategory(forCategory: selectedCategory)
+            tableView.reloadData()
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        if let movedCategory = _manager.getCategory(atIndex: sourceIndexPath.row) {
+//            _manager.removeCategory(atIndex: sourceIndexPath.row)
+//            _manager.insertCategory(movedCategory, atIndex: destinationIndexPath.row)
+//        }
+//    }
 }
 

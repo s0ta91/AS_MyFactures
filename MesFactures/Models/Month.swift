@@ -61,6 +61,22 @@ class Month: Object {
         return invoice
     }
     
+    func getInvoiceListFilteredCount (forCategory category: Category) -> Int {
+        var filteredInvoiceList: Results<Invoice>
+        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
+        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
+        return filteredInvoiceList.count
+    }
+    func getInvoiceFiltered (ForCategory category: Category, atIndex index: Int) -> Invoice? {
+        var invoice: Invoice? = nil
+        var filteredInvoiceList: Results<Invoice>
+        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
+        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
+        invoice = filteredInvoiceList[index]
+        return invoice
+    }
+    
+    
     func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
         return _invoiceList.index(of: invoice)
     }
@@ -73,11 +89,22 @@ class Month: Object {
         return invoiceIndex
     }
     
-    func getTotalAmount (forMonthIndex monthIndex: Int) -> Double {
+    func getTotalAmount (forMonthIndex monthIndex: Int, withFilter: Bool, forCategory category: Category? = nil) -> Double {
         var totalAmount: Double = 0
-        for invoice in 0...getInvoiceCount() {
-            if let invoice = getInvoice(atIndex: invoice) {
-                totalAmount = totalAmount + invoice.amount
+        if withFilter == false {
+            for invoiceIndex in 0...getInvoiceCount() {
+                if let invoice = getInvoice(atIndex: invoiceIndex) {
+                    totalAmount = totalAmount + invoice.amount
+                }
+            }
+        }else {
+            if let selectedCategory = category {
+                let numberOfInvoice = getInvoiceListFilteredCount(forCategory: selectedCategory)
+                for invoiceIndex in 0..<numberOfInvoice {
+                    if let invoice = getInvoiceFiltered(ForCategory: selectedCategory, atIndex: invoiceIndex) {
+                        totalAmount = totalAmount + invoice.amount
+                    }
+                }
             }
         }
         return totalAmount

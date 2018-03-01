@@ -31,7 +31,7 @@ extension CategoryPicker: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentCategory: Int = 0
         if let manager = _manager {
-            numberOfRowInComponentCategory = manager.getCategoryCount()
+            numberOfRowInComponentCategory = manager.getCategoryCount() - 1
         }
         return numberOfRowInComponentCategory
     }
@@ -41,11 +41,13 @@ extension CategoryPicker: UIPickerViewDataSource {
 
 extension CategoryPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return getCategoryTitle(forRow: row)
+        // First category title must never be shown in the pickerView
+        return getCategoryTitle(forRow: row + 1)
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let categoryTitle = getCategoryTitle(forRow: row)
+        // First category title must never be shown in the pickerView
+        let categoryTitle = getCategoryTitle(forRow: row + 1)
         if categoryTitle != nil {
             _categoryTextField.text = categoryTitle
         }else {
