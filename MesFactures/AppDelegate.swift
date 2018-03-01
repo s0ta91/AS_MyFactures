@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let database = DbManager().getDb() {
             database.initYear()
+            database.initCategory()
             database.updateApplicationData()
         }
         return true

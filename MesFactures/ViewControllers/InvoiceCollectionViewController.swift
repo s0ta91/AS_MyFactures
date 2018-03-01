@@ -239,11 +239,10 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         let monthIndex = _monthToShow[indexPath.section]
         if let month = getCurrentMonth(atIndex: monthIndex),
             let invoice = month.getInvoice(atIndex: indexPath.row) {
-            cell_invoice._ptManager = _invoiceCollectionManager
-            cell_invoice.setValues(forInvoice: invoice)
+                cell_invoice._ptManager = _invoiceCollectionManager
+                cell_invoice.setValues(forInvoice: invoice)
         }
         cell_invoice.delegate = self
-        
         cell_invoice.layer.borderWidth = 1.0
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
         cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
@@ -252,10 +251,8 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.shadowOpacity = 1.0
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
-        
         return cell_invoice
     }
-    
 }
 
 //TODO: Create the delegate to be conform to the cell

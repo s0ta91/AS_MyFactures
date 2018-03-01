@@ -23,7 +23,7 @@ class Manager {
         _realm = realm
         _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
         _applicationDataList = _realm.objects(ApplicationData.self)
-        _categoryList = _realm.objects(Category.self).sorted(byKeyPath: "_title")
+        _categoryList = _realm.objects(Category.self)
         _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
     }
     
@@ -42,6 +42,12 @@ class Manager {
                 yearsListLast.year != currentYear {
                 addYear(currentYear)
             }
+        }
+    }
+    
+    func initCategory () {
+        if getApplicationDataCount() == 0 {
+            _ = addCategory("Non-classée")
         }
     }
     
@@ -154,14 +160,31 @@ class Manager {
         return category
     }
     
-    func addCategory (_ categoryTitle: String) -> Category {
-        let newCatagory = Category()
-        newCatagory.title = categoryTitle
+    func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> Category {
+        let newCategory = Category()
+        newCategory.title = categoryTitle
+        newCategory.selected = isSelected!
         try? _realm.write {
-            _realm.add(newCatagory)
+            _realm.add(newCategory)
         }
-        return newCatagory
+        return newCategory
     }
+    
+//    func insertCategory (_ movedCategory: Category, atIndex index: Int) {
+//        _categoryList.insert(movedCategory, at: index)
+//    }
+    
+    func getSelectedCategory () -> Category {
+        let findSelectedCategory = NSPredicate(format: "_selected == true")
+        guard let getSelectedCategory = _categoryList.filter(findSelectedCategory).first else {fatalError("No category selected")}
+        return getSelectedCategory
+    }
+    func setSelectedCategory (forCategory newSelectedCategory: Category) {
+        let oldSelectedCategory = getSelectedCategory()
+        oldSelectedCategory.selected = false
+        newSelectedCategory.selected = true
+    }
+    
     
     func modifyCategoryTitle (forCategory category: Category, withNewTitle newTitle: String) {
         category.title = newTitle

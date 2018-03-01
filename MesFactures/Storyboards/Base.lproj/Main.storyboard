@@ -143,7 +143,7 @@
             </objects>
             <point key="canvasLocation" x="-4458" y="-760"/>
         </scene>
-        <!--Groupes-->
+        <!--Dossiers-->
         <scene sceneID="5N2-H2-Vgp">
             <objects>
                 <viewController id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
@@ -392,7 +392,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qWy-3l-pJt"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Groupes" id="Wj2-wx-S0b"/>
+                    <navigationItem key="navigationItem" title="Dossiers" id="Wj2-wx-S0b"/>
                     <connections>
                         <outlet property="groupCV" destination="4ky-NB-Zlg" id="gd0-0b-xgb"/>
                         <outlet property="ui_addGroupButton" destination="TyD-Qf-xEY" id="pbi-wX-bq2"/>
@@ -634,13 +634,13 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-14-40r">
-                                            <rect key="frame" x="201.66666666666663" y="13.666666666666664" width="133.33333333333337" height="24"/>
+                                            <rect key="frame" x="201" y="13" width="133.33333333333337" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="BTK-14-40r" firstAttribute="centerY" secondItem="0Pz-Dn-94q" secondAttribute="centerY" id="0Xs-NN-fDh"/>
                                         <constraint firstItem="8Qz-Br-IMQ" firstAttribute="leading" secondItem="0Pz-Dn-94q" secondAttribute="leadingMargin" id="5J5-Cx-L9o"/>
@@ -933,8 +933,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="5En-M0-FIS">
                                 <rect key="frame" x="16" y="253" width="359" height="68"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groupe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZq-nw-jpR">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="28"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dossier" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZq-nw-jpR">
+                                        <rect key="frame" x="0.0" y="0.0" width="68" height="28"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
                                         <color key="textColor" red="0.34901960780000002" green="0.38823529410000002" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1380,7 +1380,9 @@
                                         <constraint firstItem="aLq-LL-jA2" firstAttribute="top" secondItem="eto-cg-Tdc" secondAttribute="top" id="pin-KZ-1WJ"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="light"/>
+                                <vibrancyEffect>
+                                    <blurEffect style="light"/>
+                                </vibrancyEffect>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -137,7 +137,14 @@ extension ManageCategoryTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell_category = tableView.dequeueReusableCell(withIdentifier: "cell_category", for: indexPath)
-        cell_category.textLabel?.text = _manager.getCategory(atIndex: indexPath.row)?.title
+        if let category = _manager.getCategory(atIndex: indexPath.row) {
+            cell_category.textLabel?.text = category.title
+            if category.selected == true {
+                cell_category.accessoryType = .checkmark
+            }else {
+                cell_category.accessoryType = .none
+            }
+        }
         return cell_category
     }
 
@@ -173,5 +180,24 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         deleteAction.backgroundColor = .red
         return [editAction, deleteAction]
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let selectedCategory = _manager.getCategory(atIndex: indexPath.row) {
+            _manager.setSelectedCategory(forCategory: selectedCategory)
+            tableView.reloadData()
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//        return true
+//    }
+//    
+//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        if let movedCategory = _manager.getCategory(atIndex: sourceIndexPath.row) {
+//            _manager.removeCategory(atIndex: sourceIndexPath.row)
+//            _manager.insertCategory(movedCategory, atIndex: destinationIndexPath.row)
+//        }
+//    }
 }
 
