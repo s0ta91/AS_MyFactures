@@ -61,6 +61,22 @@ class Month: Object {
         return invoice
     }
     
+    func getInvoiceListFilteredCount (forCategory category: Category) -> Int {
+        var filteredInvoiceList: Results<Invoice>
+        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
+        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
+        return filteredInvoiceList.count
+    }
+    func getInvoiceFiltered (ForCategory category: Category, atIndex index: Int) -> Invoice? {
+        var invoice: Invoice? = nil
+        var filteredInvoiceList: Results<Invoice>
+        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
+        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
+        invoice = filteredInvoiceList[index]
+        return invoice
+    }
+    
+    
     func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
         return _invoiceList.index(of: invoice)
     }

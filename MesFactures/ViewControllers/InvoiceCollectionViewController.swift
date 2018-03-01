@@ -98,8 +98,14 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
         var numberOfInvoice = 0
+        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
         if let month = getCurrentMonth(atIndex: monthIndex) {
-            numberOfInvoice = month.getInvoiceCount()
+            if selectedCategory.title == "Toutes les catégories" {
+                numberOfInvoice = month.getInvoiceCount()
+            }else {
+                numberOfInvoice = month.getInvoiceListFilteredCount(forCategory: selectedCategory)
+//                print("numberOfinvoice for category :\(selectedCategory.title) = \(numberOfInvoice)")
+            }
         }
         return numberOfInvoice
     }
@@ -236,11 +242,18 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
+        cell_invoice._ptManager = _invoiceCollectionManager
         let monthIndex = _monthToShow[indexPath.section]
-        if let month = getCurrentMonth(atIndex: monthIndex),
-            let invoice = month.getInvoice(atIndex: indexPath.row) {
-                cell_invoice._ptManager = _invoiceCollectionManager
-                cell_invoice.setValues(forInvoice: invoice)
+        var invoice: Invoice? = nil
+        guard let month = getCurrentMonth(atIndex: monthIndex) else {fatalError("no month found at index \(monthIndex)")}
+        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
+        if selectedCategory.title == "Toutes les catégories" {
+            invoice = month.getInvoice(atIndex: indexPath.row)
+        }else {
+            invoice = month.getInvoiceFiltered(ForCategory: selectedCategory, atIndex: indexPath.row)
+        }
+        if let invoiceToShow = invoice {
+            cell_invoice.setValues(forInvoice: invoiceToShow)
         }
         cell_invoice.delegate = self
         cell_invoice.layer.borderWidth = 1.0
