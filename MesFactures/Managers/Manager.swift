@@ -170,10 +170,7 @@ class Manager {
         }
         return newCategory
     }
-    
-//    func insertCategory (_ movedCategory: Category, atIndex index: Int) {
-//        _categoryList.insert(movedCategory, at: index)
-//    }
+
     
     func getSelectedCategory () -> Category {
         let findSelectedCategory = NSPredicate(format: "_selected == true")
