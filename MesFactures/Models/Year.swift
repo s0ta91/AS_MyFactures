@@ -13,6 +13,8 @@ class Year: Object {
     @objc private dynamic var _year: Int = 0
     @objc private dynamic var _selected: Bool = false
     private var _groupList = List<Group>()
+    private var _groupArray: [String] = []
+
     
     var year: Int {
         get {
@@ -37,12 +39,27 @@ class Year: Object {
     
     // GROUP functions
     func addGroup (withTitle title: String) -> Group? {
+        let newGroupIndex = getNewGroupIndex(withTitle: title)
         let newGroup = Group()
         newGroup.title = title
         realm?.beginWrite()
-        _groupList.append(newGroup)
+        _groupList.insert(newGroup, at: newGroupIndex)
         try? realm?.commitWrite()
         return newGroup
+    }
+    //TODO: - Create function to know at which index the new group has to be inserted in order to the list to be sorted
+    private func getNewGroupIndex (withTitle title: String) -> Int {
+        var groupIndex: Int?
+        for index in 0..<_groupList.count {
+            if let group = getGroup(atIndex: index) {
+                let groupName = group.title
+                _groupArray.append(groupName)
+            }
+        }
+        _groupArray.append(title)
+        _groupArray.sort()
+        groupIndex = _groupArray.index(of: title)!
+        return groupIndex!
     }
     
     func getGroupCount () -> Int{
@@ -50,7 +67,6 @@ class Year: Object {
     }
     
     func getGroup (atIndex index: Int) -> Group? {
-        guard index >= 0 && index <= getGroupCount() else {return nil}
         return _groupList[index]
     }
     
