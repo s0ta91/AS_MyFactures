@@ -133,13 +133,6 @@ class GroupViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showModaly_manageGroupVC" {
-            if let navigationVC = segue.destination as? UINavigationController,
-                let destinationVC = navigationVC.viewControllers.first as? ManageGroupTableViewController {
-                destinationVC._currentYear = _currentYear
-            }
-        }
-        
         if segue.identifier == "showModaly_yearSelectionVC" {
             if let destinationVC = segue.destination as? SelectYearViewController {
                 destinationVC._manager = _manager

@@ -59,6 +59,7 @@ class Year: Object {
         _groupArray.append(title)
         _groupArray.sort()
         groupIndex = _groupArray.index(of: title)!
+        _groupArray.removeAll()
         return groupIndex!
     }
     
