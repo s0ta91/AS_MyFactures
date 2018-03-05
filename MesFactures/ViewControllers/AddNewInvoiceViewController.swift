@@ -235,22 +235,46 @@ class AddNewInvoiceViewController: UIViewController {
     @IBAction func doneKeyboardViewButtonpressed(_ sender: UIButton) {
         _activeTextField.resignFirstResponder()
         if _activeTextField == ui_amountTextField {
+            if ui_amountTextField.text == "" {
+                ui_amountTextField.text = "0"
+            }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
         }
     }
     
     //TODO: Add a new document to the invoice
     @IBAction func addNewDocumentButtonPressed(_ sender: UIButton) {
-        // DocumentPickerViewController to selected a document
-//        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
-//        documentPicker.delegate = self
-//        documentPicker.modalPresentationStyle = .formSheet
-//        self.present(documentPicker, animated: true, completion: nil)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        self.present(imagePickerController, animated: true, completion: nil)
+        //TODO: - DocumentPickerViewController to selected a document
+        let pickADocument = UIAlertAction(title: "Choisir un document", style: .default) { (_) in
+            
+            let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
+            documentPicker.delegate = self
+            documentPicker.modalPresentationStyle = .formSheet
+            self.present(documentPicker, animated: true, completion: nil)
+        }
+        
+        //TODO: - ImagePickerController to selected a photo in photoLibrary
+        let pickAPhoto = UIAlertAction(title: "Choisir une photo", style: .default) { (_) in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        
+        //TODO: - Open photoApp to take a photo of a document
+        let takeAPhoto = UIAlertAction(title: "Prendre une photo", style: .default) { (_) in
+            
+        }
+        
+        let cancelActionSheet = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(pickADocument)
+        actionSheet.addAction(pickAPhoto)
+        actionSheet.addAction(takeAPhoto)
+        actionSheet.addAction(cancelActionSheet)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
@@ -397,6 +421,7 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
         updateDocumentInfo()
     }
 }
+
 extension AddNewInvoiceViewController: UINavigationControllerDelegate {
     
 }

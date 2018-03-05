@@ -369,9 +369,7 @@
                                         <constraint firstItem="fSX-ts-Lhk" firstAttribute="top" secondItem="4eb-mi-uPG" secondAttribute="top" id="f9v-Yc-PyE"/>
                                     </constraints>
                                 </view>
-                                <vibrancyEffect>
-                                    <blurEffect style="light"/>
-                                </vibrancyEffect>
+                                <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
