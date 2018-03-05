@@ -122,14 +122,32 @@ class GroupViewController: UIViewController {
             _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
             _groupToModify = nil
         }else {
-            if let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
-                for monthName in monthArray {
-                    newGroup.addMonth(monthName)
+            let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName)
+            if groupExists == false {
+                if let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
+                    for monthName in monthArray {
+                        newGroup.addMonth(monthName)
+                    }
                 }
+                animateOut()
+                self.groupCV.reloadData()
+            }else {
+                let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le titre \(newGroupName)!", preferredStyle: .alert)
+                let createAction = UIAlertAction(title: "Créer", style: .default, handler: { (_) in
+                    if let newGroup = self._currentYear.addGroup(withTitle: newGroupName) {
+                        for monthName in self.monthArray {
+                            newGroup.addMonth(monthName)
+                        }
+                    }
+                    self.animateOut()
+                    self.groupCV.reloadData()
+                })
+                let cancelCreationAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+                alertController.addAction(createAction)
+                alertController.addAction(cancelCreationAction)
+                present(alertController, animated: true, completion: nil)
             }
         }
-        animateOut()
-        self.groupCV.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

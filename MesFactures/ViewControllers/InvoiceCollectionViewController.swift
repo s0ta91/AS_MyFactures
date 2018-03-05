@@ -98,6 +98,7 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
         var numberOfInvoice = 0
+        //FIXME: - Bug here when swipe on groupCell to the right in the TOTAL cell of the second cell(maybe others too)
         let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
         if let month = getCurrentMonth(atIndex: monthIndex) {
             if selectedCategory.title == "Toutes les catégories" {

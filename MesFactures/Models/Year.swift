@@ -63,6 +63,18 @@ class Year: Object {
         return groupIndex!
     }
     
+    func checkForDuplicate (forGroupName groupName: String) -> Bool {
+        var groupNameExists: Bool = false
+        for groupIndex in 0..<getGroupCount() {
+            if let existingGroupToCheck = getGroup(atIndex: groupIndex) {
+                if groupName == existingGroupToCheck.title {
+                    groupNameExists = true
+                }
+            }
+        }
+        return groupNameExists
+    }
+    
     func getGroupCount () -> Int{
         return _groupList.count
     }
