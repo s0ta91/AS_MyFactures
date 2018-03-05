@@ -124,7 +124,7 @@ class InvoiceCollectionViewController: UIViewController {
                     _ = month.removeInvoice(invoice: invoiceToDelete)
 
                     // reload the collectionView to re-calculate the number of section to show
-                    self.invoiceCollectionView.reloadData()
+                    self.invoiceCollectionView.deleteItems(at: [indexPath])
                 })
                 
                 let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in

@@ -98,28 +98,34 @@ class ManageCategoryTableViewController: UIViewController {
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIBarButtonItem) {
         animateIn(forSubview: ui_modifyCategoryView)
+        ui_modifyCategoryTextField.text = ""
         ui_modifyCategoryTextField.becomeFirstResponder()
         ui_addNewCategoryButton.setTitle("Créer", for: .normal)
     }
     
     @IBAction func cancelCreateCategoryView(_ sender: UIButton) {
-//        ui_createNewCategoryTextField.resignFirstResponder()
         ui_modifyCategoryTextField.resignFirstResponder()
         animateOut(forSubview: ui_modifyCategoryView)
     }
     
     @IBAction func modifyCategory(_ sender: Any) {
         guard let newCategoryName = ui_modifyCategoryTextField.text else {return print("textField is empty")}
-        if ui_addNewCategoryButton.titleLabel?.text == "Créer" {
-            print("Créer")
-            _ = _manager.addCategory(newCategoryName)
+        let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: newCategoryName)
+        if categoryExists == false {
+            if ui_addNewCategoryButton.titleLabel?.text == "Créer" {
+                _ = _manager.addCategory(newCategoryName)
+            }
+            else if ui_addNewCategoryButton.titleLabel?.text == "Modifier" {
+                _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
+            }
+            ui_manageCategoryTableView.reloadData()
+            animateOut(forSubview: ui_modifyCategoryView)
+        }else {
+            let alertController = UIAlertController(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(newCategoryName)'", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
         }
-        else if ui_addNewCategoryButton.titleLabel?.text == "Modifier" {
-            print("Modifier")
-            _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
-        }
-        ui_manageCategoryTableView.reloadData()
-        animateOut(forSubview: ui_modifyCategoryView)
     }
 }
 
@@ -188,16 +194,6 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
             dismiss(animated: true, completion: nil)
         }
     }
-    
-//    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//    
-//    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        if let movedCategory = _manager.getCategory(atIndex: sourceIndexPath.row) {
-//            _manager.removeCategory(atIndex: sourceIndexPath.row)
-//            _manager.insertCategory(movedCategory, atIndex: destinationIndexPath.row)
-//        }
-//    }
+
 }
 

@@ -81,7 +81,7 @@ class AddNewInvoiceViewController: UIViewController {
         checkReceivedData()
         setSeparatorForFields()
         setAccessoryViewForPickersView()
-        setDefaultValueForTextFields()
+        setDefaultValues()
         updateDocumentInfo()
         ui_visualEffect.isHidden = true
     }
@@ -135,10 +135,11 @@ class AddNewInvoiceViewController: UIViewController {
     }
 
     //TODO: Set defaults values for all fields
-    private func setDefaultValueForTextFields () {
+    private func setDefaultValues () {
         if firstLoad == true {
             firstLoad = false
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            ui_addOrModifyButton.layer.cornerRadius = 10
             
             if _modifyInvoice == false {
                 ui_descriptionTextField.becomeFirstResponder()
@@ -158,12 +159,8 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_amountTextField.text = String(describing: _invoice.amount)
                 
                 if _invoice.identifier != nil {
-                    // Get URL for existing document
-//                  _pickedDocument = SaveManager.getDocumentURL()
-//                    _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
                     _documentHasBeenAdded = true
                 }
-                
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
@@ -257,6 +254,7 @@ class AddNewInvoiceViewController: UIViewController {
     }
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
+        ui_addNewCategoryTextField.text = ""
         ui_addNewCategoryTextField.becomeFirstResponder()
         animateIn(forSubview: ui_createCategoryView)
     }
@@ -267,12 +265,20 @@ class AddNewInvoiceViewController: UIViewController {
     }
     
     @IBAction func createNewCategory(_ sender: UIButton) {
-        if let newCatgoryName = ui_addNewCategoryTextField.text {
-            let createdCategory = _manager.addCategory(newCatgoryName)
-            ui_categorySelectionTextField.text = createdCategory.title
+        if let newCategoryName = ui_addNewCategoryTextField.text {
+            let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: newCategoryName)
+            if categoryExists == false {
+                let createdCategory = _manager.addCategory(newCategoryName)
+                ui_categorySelectionTextField.text = createdCategory.title
+                ui_addNewCategoryTextField.resignFirstResponder()
+                animateOut(forSubview: ui_createCategoryView)
+            }else {
+                let alertController = UIAlertController(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(newCategoryName)'", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                present(alertController, animated: true, completion: nil)
+            }
         }
-        ui_addNewCategoryTextField.resignFirstResponder()
-        animateOut(forSubview: ui_createCategoryView)
     }
     
     //TODO: Delete added document from invoice

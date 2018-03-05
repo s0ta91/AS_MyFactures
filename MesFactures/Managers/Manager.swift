@@ -171,6 +171,17 @@ class Manager {
         return newCategory
     }
 
+    func checkForDuplicateCategory (forCategoryName categoryName: String) -> Bool {
+        var categoryNameExists: Bool = false
+        for categoryIndex in 0..<getCategoryCount() {
+            if let existingCategoryToCheck = getCategory(atIndex: categoryIndex) {
+                if categoryName == existingCategoryToCheck.title {
+                    categoryNameExists = true
+                }
+            }
+        }
+        return categoryNameExists
+    }
     
     func getSelectedCategory () -> Category {
         let findSelectedCategory = NSPredicate(format: "_selected == true")
