@@ -195,7 +195,6 @@ class InvoiceCollectionViewController: UIViewController {
     }
 
     // MARK: - Navigation
-    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "manageCategoryVC"{
@@ -307,7 +306,9 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             if let invoiceIdentifier = selectedInvoice.identifier,
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
-                destinationVC._documentURL = documentURL
+                destinationVC._ptManager = _invoiceCollectionManager
+                destinationVC._ptDocumentURL = documentURL
+                destinationVC._ptDocumentType = invoiceDocumentExtension
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)
             }

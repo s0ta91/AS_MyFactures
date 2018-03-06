@@ -585,7 +585,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="we9-se-dp2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="113"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="86.333333333333329" height="113"/>
                                                     <state key="normal" image="missing_document"/>
                                                     <connections>
                                                         <action selector="showPdfButtonPressed:" destination="jNN-IC-Tzh" eventType="touchUpInside" id="5QH-uP-ITz"/>
@@ -634,7 +634,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-14-40r">
-                                            <rect key="frame" x="201" y="13" width="133.33333333333337" height="24"/>
+                                            <rect key="frame" x="201" y="13" width="133.66666666666663" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -767,6 +767,14 @@
                                     <constraint firstAttribute="height" constant="44" id="zTu-Fb-tlh"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8q-Ct-7kK">
+                                <rect key="frame" x="0.0" y="85" width="375" height="727"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="R3r-wA-Nui" id="p45-Kc-Uq4"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -782,11 +790,12 @@
                     </view>
                     <connections>
                         <outlet property="ui_navBarView" destination="kdA-Nb-rUC" id="MCo-yM-zHk"/>
+                        <outlet property="ui_scrollView" destination="F8q-Ct-7kK" id="Eza-Ab-Aed"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K1q-d9-6MV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1063.2" y="-1618.2266009852217"/>
+            <point key="canvasLocation" x="-1063.2" y="-1618.9655172413793"/>
         </scene>
         <!--Ajouter une facture-->
         <scene sceneID="RxR-pL-wFB">

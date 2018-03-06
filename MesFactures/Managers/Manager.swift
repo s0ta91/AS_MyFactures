@@ -10,11 +10,6 @@ import Foundation
 import RealmSwift
 import KeychainAccess
 
-enum documentType {
-    case PDF
-    case PHOTO
-}
-
 class Manager {
     
     private var _realm: Realm

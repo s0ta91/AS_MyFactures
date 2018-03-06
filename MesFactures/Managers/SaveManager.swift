@@ -22,22 +22,15 @@ class SaveManager {
         return UUID()
     }
     
-    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: documentType?) {
+    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
-        var documentExtension: String = ""
+        guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
-        if let documentFromUrl = fromUrl,
-            let type = documentType {
+        if let documentFromUrl = fromUrl {
             if modify == true && invoice != nil && invoice?.identifier != nil {
                 identifier = invoice!.identifier
             }else {
                 identifier = getNewIdentifier().uuidString
-            }
-            switch type {
-                case .PDF:
-                    documentExtension = "PDF"
-                case .PHOTO:
-                    documentExtension = "JPG"
             }
             
             let filename = "\(identifier!).\(documentExtension)"
