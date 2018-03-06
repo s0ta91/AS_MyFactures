@@ -143,7 +143,8 @@ class InvoiceCollectionViewController: UIViewController {
             let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]) {
             if let selectedInvoice = month.getInvoice(atIndex: indexPath.section),
                 let invoiceIdentifier = selectedInvoice.identifier,
-                let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
+                let invoiceDocumentExtension = selectedInvoice.documentType,
+                let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
                 present(activityViewController, animated: true, completion: nil)
             }else {
@@ -304,7 +305,8 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             let selectedInvoice = month.getInvoice(atIndex: indexPath.row) {
             
             if let invoiceIdentifier = selectedInvoice.identifier,
-                let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
+                let invoiceDocumentExtension = selectedInvoice.documentType,
+                let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 destinationVC._documentURL = documentURL
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)

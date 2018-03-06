@@ -10,6 +10,11 @@ import Foundation
 import RealmSwift
 import KeychainAccess
 
+enum documentType {
+    case PDF
+    case PHOTO
+}
+
 class Manager {
     
     private var _realm: Realm
@@ -282,4 +287,13 @@ class Manager {
         return img
     }
 
+    func getImageFromURL (url: URL) -> UIImage? {
+        let image: UIImage?
+        if let data = NSData(contentsOf: url) {
+            image = UIImage(data: data as Data)
+        }else {
+            image = nil
+        }
+        return image
+    }
 }

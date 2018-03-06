@@ -60,6 +60,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     private var _pickedDocument: URL?
     private var _documentHasBeenAdded: Bool = false
+    private var _documentType: documentType!
     private var _deletePreviousDocument: Bool = false
     private var firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
@@ -188,9 +189,9 @@ class AddNewInvoiceViewController: UIViewController {
         return categoryName
     }
     
-    private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, _ request: Bool) {
+    private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, andExtension documentExtension: String, _ request: Bool) {
         if request == true {
-            SaveManager.removeDocument(forIdentifier: documentId)
+            SaveManager.removeDocument(forIdentifier: documentId, andExtension: documentExtension)
         }
     }
     
@@ -337,12 +338,13 @@ class AddNewInvoiceViewController: UIViewController {
                 let newMonth = group.checkIfMonthExist(forMonthName: monthString)
             
                 if _modifyInvoice == false {
-                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth)
+                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentType)
                 }else {
-                    if let documentId = _invoice.identifier {
-                        deletePreviousDocumentIfRequested(withIdentifier: documentId, _deletePreviousDocument)
+                    if let documentId = _invoice.identifier,
+                        let documentExtension = _invoice.documentType {
+                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: documentExtension ,_deletePreviousDocument)
                     }
-                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded)
+                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _documentType)
                 }
                 dismiss(animated: true, completion: nil )
         }else {
@@ -408,6 +410,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
 extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         _pickedDocument = urls.first
+        _documentType = documentType.PDF
         _documentHasBeenAdded = true
         updateDocumentInfo()
     }
@@ -415,8 +418,10 @@ extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
 
 extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        _pickedDocument = info.first?.value as? URL
+        _documentType = documentType.PHOTO
         picker.dismiss(animated: true, completion: nil)
-        _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
+//        _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
         _documentHasBeenAdded = true
         updateDocumentInfo()
     }
