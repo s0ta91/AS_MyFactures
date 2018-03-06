@@ -22,8 +22,9 @@ class SaveManager {
         return UUID()
     }
     
-    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil) {
+    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
+        guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
         if let documentFromUrl = fromUrl {
             if modify == true && invoice != nil && invoice?.identifier != nil {
@@ -31,8 +32,9 @@ class SaveManager {
             }else {
                 identifier = getNewIdentifier().uuidString
             }
-            let filename = "\(identifier!).pdf"
-            let destinationDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+            
+            let filename = "\(identifier!).\(documentExtension)"
+            let destinationDirectory = getDocumentDirectory().appendingPathComponent(documentExtension, isDirectory: true)
             let destinationURL = destinationDirectory.appendingPathComponent(filename, isDirectory: false)
             if !FileManager.default.fileExists(atPath: destinationDirectory.path, isDirectory: nil) {
                 do {
@@ -51,7 +53,7 @@ class SaveManager {
         }
         
         if modify == false {
-            newMonth.addInvoice(description, amount, categoryObject ,identifier)
+            newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
         }else {
             if let invoiceToModify = invoice {
                 if invoiceToModify.identifier != nil && documentAdded == true {
@@ -60,21 +62,21 @@ class SaveManager {
                 if let previousMonth = currentMonth,
                     let invoiceIndex = previousMonth.removeInvoice(invoice: invoiceToModify) {
                     if newMonth.month == previousMonth.month {
-                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier: identifier)
+                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier, documentExtension)
                     }else {
-                        newMonth.addInvoice(description, amount, categoryObject ,identifier)
+                        newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
                     }
                 }
             }
         }
     }
     
-    static func loadDocument (withIdentifier identifier: String) -> URL? {
+    static func loadDocument (withIdentifier identifier: String, andExtension documentExtension: String) -> URL? {
         let documentURL: URL?
-        let filePath = "\(identifier).pdf"
-        let documentDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+        let filePath = "\(identifier).\(documentExtension)"
+        let documentDirectory = getDocumentDirectory().appendingPathComponent(documentExtension, isDirectory: true)
         if !FileManager.default.fileExists(atPath: documentDirectory.path) {
-            fatalError("Directory PDF not found at path \(documentDirectory)")
+            fatalError("Directory not found at path \(documentDirectory)")
         }
         let Url = documentDirectory.appendingPathComponent(filePath)
         if FileManager.default.fileExists(atPath: Url.path) {
@@ -85,9 +87,9 @@ class SaveManager {
         return documentURL
     }
     
-    static func removeDocument (forIdentifier identifier: String) {
-        let filename = "\(identifier).pdf"
-        let fileDirectory = getDocumentDirectory().appendingPathComponent("PDF", isDirectory: true)
+    static func removeDocument (forIdentifier identifier: String, andExtension documentExtension: String) {
+        let filename = "\(identifier).\(documentExtension)"
+        let fileDirectory = getDocumentDirectory().appendingPathComponent(documentExtension, isDirectory: true)
         let fileUrl = fileDirectory.appendingPathComponent(filename, isDirectory: false)
         
         do {

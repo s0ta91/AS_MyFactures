@@ -282,4 +282,13 @@ class Manager {
         return img
     }
 
+    func getImageFromURL (url: URL) -> UIImage? {
+        let image: UIImage?
+        if let data = NSData(contentsOf: url) {
+            image = UIImage(data: data as Data)
+        }else {
+            image = nil
+        }
+        return image
+    }
 }

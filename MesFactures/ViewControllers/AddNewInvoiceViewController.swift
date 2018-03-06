@@ -60,6 +60,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     private var _pickedDocument: URL?
     private var _documentHasBeenAdded: Bool = false
+    private var _documentExtension: String = ""
     private var _deletePreviousDocument: Bool = false
     private var firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
@@ -188,9 +189,9 @@ class AddNewInvoiceViewController: UIViewController {
         return categoryName
     }
     
-    private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, _ request: Bool) {
+    private func deletePreviousDocumentIfRequested (withIdentifier documentId: String, andExtension documentExtension: String, _ request: Bool) {
         if request == true {
-            SaveManager.removeDocument(forIdentifier: documentId)
+            SaveManager.removeDocument(forIdentifier: documentId, andExtension: documentExtension)
         }
     }
     
@@ -235,22 +236,46 @@ class AddNewInvoiceViewController: UIViewController {
     @IBAction func doneKeyboardViewButtonpressed(_ sender: UIButton) {
         _activeTextField.resignFirstResponder()
         if _activeTextField == ui_amountTextField {
+            if ui_amountTextField.text == "" {
+                ui_amountTextField.text = "0"
+            }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
         }
     }
     
     //TODO: Add a new document to the invoice
     @IBAction func addNewDocumentButtonPressed(_ sender: UIButton) {
-        // DocumentPickerViewController to selected a document
-//        let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
-//        documentPicker.delegate = self
-//        documentPicker.modalPresentationStyle = .formSheet
-//        self.present(documentPicker, animated: true, completion: nil)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        self.present(imagePickerController, animated: true, completion: nil)
+        //TODO: - DocumentPickerViewController to selected a document
+        let pickADocument = UIAlertAction(title: "Choisir un document", style: .default) { (_) in
+            
+            let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
+            documentPicker.delegate = self
+            documentPicker.modalPresentationStyle = .formSheet
+            self.present(documentPicker, animated: true, completion: nil)
+        }
+        
+        //TODO: - ImagePickerController to selected a photo in photoLibrary
+        let pickAPhoto = UIAlertAction(title: "Choisir une photo", style: .default) { (_) in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        
+        //TODO: - Open photoApp to take a photo of a document
+        let takeAPhoto = UIAlertAction(title: "Prendre une photo", style: .default) { (_) in
+            
+        }
+        
+        let cancelActionSheet = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        
+        actionSheet.addAction(pickADocument)
+        actionSheet.addAction(pickAPhoto)
+        actionSheet.addAction(takeAPhoto)
+        actionSheet.addAction(cancelActionSheet)
+        present(actionSheet, animated: true, completion: nil)
     }
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
@@ -313,12 +338,14 @@ class AddNewInvoiceViewController: UIViewController {
                 let newMonth = group.checkIfMonthExist(forMonthName: monthString)
             
                 if _modifyInvoice == false {
-                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth)
+                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
                 }else {
-                    if let documentId = _invoice.identifier {
-                        deletePreviousDocumentIfRequested(withIdentifier: documentId, _deletePreviousDocument)
+                    if let documentId = _invoice.identifier,
+                        let invoiceDocumentExtension = _invoice.documentType {
+                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+                        SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: invoiceDocumentExtension)
                     }
-                    SaveManager.saveDocument(documentURL: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded)
+                    
                 }
                 dismiss(animated: true, completion: nil )
         }else {
@@ -384,6 +411,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
 extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         _pickedDocument = urls.first
+        _documentExtension = "PDF"
         _documentHasBeenAdded = true
         updateDocumentInfo()
     }
@@ -391,12 +419,14 @@ extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
 
 extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        _pickedDocument = info.first?.value as? URL
+        _documentExtension = "JPG"
         picker.dismiss(animated: true, completion: nil)
-        _pickedDocument = Bundle.main.url(forResource: "Boulanger.com", withExtension: "pdf")
         _documentHasBeenAdded = true
         updateDocumentInfo()
     }
 }
+
 extension AddNewInvoiceViewController: UINavigationControllerDelegate {
     
 }

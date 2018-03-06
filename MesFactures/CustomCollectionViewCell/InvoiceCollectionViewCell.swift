@@ -30,13 +30,20 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     //TODO: Create a function to set values for the cell
     func setValues (forInvoice invoice: Invoice) {
         guard let _manager = _ptManager else {fatalError("passthrough _ptManager does not exists")}
-        
+        var imageToShow = UIImage(named: "missing_document")
         if let invoiceIdentifier = invoice.identifier,
-            let documentUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier) {
-                ui_invoiceDocumentThumbnail.setImage(_manager.drawPDFfromURL(url: documentUrl), for: .normal)
-        }else {
-            ui_invoiceDocumentThumbnail.setImage(UIImage(named: "missing_document"), for: .normal)
+            let invoiceDocumentExtension = invoice.documentType,
+            let documentUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
+                switch invoiceDocumentExtension {
+                    case "PDF":
+                        imageToShow = _manager.drawPDFfromURL(url: documentUrl)
+                    case "JPG":
+                        imageToShow = _manager.getImageFromURL(url: documentUrl)
+                    default:
+                        imageToShow = UIImage(named: "missing_document")
+                }
         }
+        ui_invoiceDocumentThumbnail.setImage(imageToShow, for: .normal)
         ui_amountLabel.text = String(describing: invoice.amount)
         ui_categoryLabel.text = invoice.categoryObject?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription

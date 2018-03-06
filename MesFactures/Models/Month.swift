@@ -27,9 +27,10 @@ class Month: Object {
         return _invoiceList.count
     }
     
-    func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String? = nil) {
+    func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
         let newInvoice = Invoice()
         newInvoice.identifier = identifier
+        newInvoice.documentType = documentType
         newInvoice.detailedDescription = description
         newInvoice.categoryObject = categoryObject
         newInvoice.amount = amount
@@ -39,12 +40,13 @@ class Month: Object {
         try? realm?.commitWrite()
     }
     
-    func modifyInvoice (atIndex index: Int, _ description: String, _ amount: Double, _ categoryObject: Category? = nil, identifier: String?) {
+    func modifyInvoice (atIndex index: Int, _ description: String, _ amount: Double, _ categoryObject: Category? = nil, _ identifier: String?, _ documentType: String?) {
         let updatedInvoice = Invoice()
-        updatedInvoice.detailedDescription = description
-        updatedInvoice.amount = amount
-        updatedInvoice.categoryObject = categoryObject
         updatedInvoice.identifier = identifier
+        updatedInvoice.documentType = documentType
+        updatedInvoice.detailedDescription = description
+        updatedInvoice.categoryObject = categoryObject
+        updatedInvoice.amount = amount
         
         realm?.beginWrite()
         _invoiceList.insert(updatedInvoice, at: index)
