@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SaveManager {
     
@@ -22,11 +23,11 @@ class SaveManager {
         return UUID()
     }
     
-    static func saveDocument (documentURL fromUrl: URL?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
+    static func saveDocument (document: Any?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
-        if let documentFromUrl = fromUrl {
+        if document != nil {
             if modify == true && invoice != nil && invoice?.identifier != nil {
                 identifier = invoice!.identifier
             }else {
@@ -44,12 +45,24 @@ class SaveManager {
                 }
             }
             
-            
-            do {
-                try FileManager.default.copyItem(at: documentFromUrl, to: destinationURL)
-            }catch {
-                fatalError("Connot create file -> \(error.localizedDescription)")
+            if let documentUrl = document as? URL {
+                do {
+                    try FileManager.default.copyItem(at: documentUrl, to: destinationURL)
+                }catch {
+                    fatalError("Connot create file -> \(error.localizedDescription)")
+                }
+            }else {
+                if let image = document as? UIImage {
+                    let JPGImage = UIImageJPEGRepresentation(image, 1.0)
+                    let createFileIsSuccess = FileManager.default.createFile(atPath: destinationURL.path, contents: JPGImage, attributes: nil)
+                    if !createFileIsSuccess {
+                        print("An error occurs. The document has not been written to path : \(destinationURL.path)")
+                    }
+
+                }
             }
+        }else {
+            print("No document receive in parameter")
         }
         
         if modify == false {
