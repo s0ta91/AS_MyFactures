@@ -141,7 +141,7 @@ class InvoiceCollectionViewController: UIViewController {
     func share(invoice: InvoiceCollectionViewCell) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice),
             let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: _monthToShow[indexPath.section]) {
-            if let selectedInvoice = month.getInvoice(atIndex: indexPath.section),
+            if let selectedInvoice = month.getInvoice(atIndex: indexPath.row),
                 let invoiceIdentifier = selectedInvoice.identifier,
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
@@ -155,13 +155,6 @@ class InvoiceCollectionViewController: UIViewController {
                 alertController.addAction(validAction)
                 present(alertController, animated: true, completion: nil)
             }
-            
-            /** TEST PURPOSE ONLY **/
-            //guard let image = UIImage(named: "Boulanger.com") else {return print("image does not exists")}
-            //let shareObject = image
-            //let activityViewController = UIActivityViewController(activityItems: [shareObject], applicationActivities: nil)
-            //present(activityViewController, animated: true, completion: nil)
-            /** ***** **/
         }
     }
     
