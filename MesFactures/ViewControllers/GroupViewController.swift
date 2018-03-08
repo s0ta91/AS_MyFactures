@@ -10,21 +10,25 @@ import UIKit
 
 class GroupViewController: UIViewController {
     
-    // GroupViewController
+    //MARK: - GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
+    @IBOutlet var ui_keyboardSearchBarView: UIView!
+    @IBOutlet weak var ui_searchBar: UISearchBar!
+    @IBOutlet weak var ui_tabBarView: UIView!
+    
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet weak var ui_visualEffectView: UIVisualEffectView!
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
     
-    // CreateGroupPopupView
+    //MARK: - CreateGroupPopupView
     @IBOutlet weak var ui_groupNameTextField: UITextField!
     @IBOutlet weak var ui_groupIdeaCV: UICollectionView!
     @IBOutlet weak var ui_addGroupButton: UIButton!
     
     
-    // Variables declaration
+    //MARK: - Variables declaration
     private var _manager: Manager {
         if let database =  DbManager().getDb() {
             return database
@@ -36,17 +40,21 @@ class GroupViewController: UIViewController {
     private var _groupToModify: Group?
     var effect: UIVisualEffect!
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    var ui_keyboardSearchBarViewBottomConstraint: NSLayoutConstraint?
     
     
-    // ViewController functions
+    //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
         groupCV.dataSource = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         _currentYear = _manager.getSelectedYear()
+        _currentYear.setGroupList()
         groupCV.clipsToBounds = false
         
         ui_visualEffectView.isHidden = true
@@ -55,6 +63,7 @@ class GroupViewController: UIViewController {
         ui_createGroupView.layer.cornerRadius = 10
         
         _manager.setHeaderClippedToBound(groupCV)
+        
         self.groupCV.reloadData()
     }
 
@@ -64,7 +73,7 @@ class GroupViewController: UIViewController {
     }
     
     
-    // Private functions
+    //MARK: -  Private functions
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_createGroupView)
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
@@ -101,11 +110,26 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.isHidden = true
     }
     
+    @objc private func handleKeyboardNotification (notification: NSNotification) {
+        if let userInfo = notification.userInfo,
+            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+            
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            ui_keyboardSearchBarViewBottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                self.ui_keyboardSearchBarView.layoutIfNeeded()
+            }, completion: { (completed) in
+                
+            })
+
+        }
+    }
     
-    // Action functions
+    //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
-        ui_addGroupButton.setTitle("Créer le groupe", for: .normal)
+        ui_addGroupButton.setTitle("Valider", for: .normal)
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
@@ -150,6 +174,16 @@ class GroupViewController: UIViewController {
         }
     }
 
+    @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
+        self.navigationController!.view.addSubview(ui_keyboardSearchBarView)
+        ui_keyboardSearchBarView.translatesAutoresizingMaskIntoConstraints = false
+        ui_keyboardSearchBarViewBottomConstraint = ui_keyboardSearchBarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
+        self.navigationController!.view.addConstraint(ui_keyboardSearchBarViewBottomConstraint!)
+        ui_searchBar.text = ""
+        ui_searchBar.becomeFirstResponder()
+    }
+    
+    //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showModaly_yearSelectionVC" {
             if let destinationVC = segue.destination as? SelectYearViewController {
@@ -220,6 +254,7 @@ extension GroupViewController: UICollectionViewDataSource {
             return cell_groupIdea
         }
     }
+
 }
 
 extension GroupViewController: GroupCollectionViewCellDelegate {
@@ -248,6 +283,18 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
         self.present(actionSheet, animated: true, completion: nil)
+    }
+
+}
+
+extension GroupViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        ui_keyboardSearchBarView.removeFromSuperview()
+        if let searchText = searchBar.text {
+            _currentYear.setGroupList(containing: searchText)
+        }
+        groupCV.reloadData()
     }
 }
 

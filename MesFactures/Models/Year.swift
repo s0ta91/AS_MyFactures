@@ -14,6 +14,7 @@ class Year: Object {
     @objc private dynamic var _selected: Bool = false
     private var _groupList = List<Group>()
     private var _groupArray: [String] = []
+    private var _groupListToShow : [Group] = []
 
     
     var year: Int {
@@ -75,12 +76,27 @@ class Year: Object {
         return groupNameExists
     }
     
+    
     func getGroupCount () -> Int{
-        return _groupList.count
+        return _groupListToShow.count
     }
     
     func getGroup (atIndex index: Int) -> Group? {
-        return _groupList[index]
+        return _groupListToShow[index]
+    }
+    
+    func setGroupList (containing nameParts: String = ""){
+        _groupListToShow.removeAll(keepingCapacity: false)
+        var groupResults: Results<Group>
+        if nameParts != "" {
+            let groupIndexPredicate = NSPredicate(format: "_title CONTAINS[cd] %@", nameParts)
+            groupResults = _groupList.filter(groupIndexPredicate)
+        }else {
+            groupResults = _groupList.filter("TRUEPREDICATE")
+        }
+        for group in groupResults {
+            _groupListToShow.append(group)
+        }
     }
     
     func getGroupIndex (forGroup group: Group) -> Int? {
