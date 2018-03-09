@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 class InvoiceCollectionViewController: UIViewController {
     
     //MARK: - Declarations
     //TODO: Outlets
     @IBOutlet weak var invoiceCollectionView: UICollectionView!
+    @IBOutlet weak var ui_searchBarView: UIView!
+    @IBOutlet weak var ui_searchBar: UISearchBar!
+    
+    @IBOutlet weak var ui_searchBarHeightConstraint: NSLayoutConstraint!
+    private var ui_searchButton: UIBarButtonItem!
     
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
@@ -26,7 +32,13 @@ class InvoiceCollectionViewController: UIViewController {
     
     // To store the months that need to be shown if they contains at least an invoice
     private var _monthToShow: [Int] = []
-
+    private var isListFiltered = false
+    var invoiceListResult: Results<Invoice>!
+    var searchText: String = ""
+    
+    let searchButtonImage = UIImage(named: "search(grey)")
+    
+    
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +48,13 @@ class InvoiceCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         invoiceCollectionView.clipsToBounds = false
-        invoiceCollectionView.reloadData()
+        
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-
+        
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
+        invoiceCollectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,11 +87,20 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Set the navigationBar title with the name of the current group
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
     }
     
     //TODO: Retrieve the month for the section index
     private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
-        return _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
+        let returnedMonth = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
+        if returnedMonth != nil {
+            setInvoiceList(forMonth: returnedMonth!, forInvoiceNameParts: searchText)
+        }
+        return returnedMonth
+    }
+    
+    private func setInvoiceList (forMonth month: Month, forInvoiceNameParts invoiceNameParts: String = "") {
+        invoiceListResult = month.setInvoiceList(containing: invoiceNameParts)
     }
     
     //TODO: Get the number of sections for the current group
@@ -105,7 +127,6 @@ class InvoiceCollectionViewController: UIViewController {
                 numberOfInvoice = month.getInvoiceCount()
             }else {
                 numberOfInvoice = month.getInvoiceListFilteredCount(forCategory: selectedCategory)
-//                print("numberOfinvoice for category :\(selectedCategory.title) = \(numberOfInvoice)")
             }
         }
         return numberOfInvoice
@@ -164,7 +185,7 @@ class InvoiceCollectionViewController: UIViewController {
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
             let monthIndex = _monthToShow[cell_indexPath.section]
-            if let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex),
+            if let month = getCurrentMonth(atIndex: monthIndex),
                 let invoice = month.getInvoice(atIndex: cell_indexPath.row) {
                 destinationVC._modifyInvoice = true
                 destinationVC._ptManager = _invoiceCollectionManager
@@ -177,6 +198,16 @@ class InvoiceCollectionViewController: UIViewController {
             present(destinationVC, animated: true, completion: nil)
         }
     }
+    
+    @objc func search () {
+        ui_searchBar.text = ""
+        ui_searchBar.becomeFirstResponder()
+        ui_searchBarHeightConstraint.constant = 56
+        UIView.animate(withDuration: 0.25) {
+            self.ui_searchBarView.layoutIfNeeded()
+        }
+    }
+    
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
@@ -246,8 +277,9 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         var invoice: Invoice? = nil
         guard let month = getCurrentMonth(atIndex: monthIndex) else {fatalError("no month found at index \(monthIndex)")}
         let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
+        print("invoiceList: \(month._invoiceListToShow)")
         if selectedCategory.title == "Toutes les catégories" {
-            invoice = month.getInvoice(atIndex: indexPath.row)
+            invoice = month.getInvoice(atIndex: indexPath.row, isListFiltered)
         }else {
             invoice = month.getInvoiceFiltered(ForCategory: selectedCategory, atIndex: indexPath.row)
         }
@@ -317,3 +349,27 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     }
 }
 
+extension InvoiceCollectionViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isListFiltered = true
+        searchBar.resignFirstResponder()
+        if let searchBarText = searchBar.text {
+            searchText = searchBarText
+        }
+        invoiceCollectionView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isListFiltered = false
+        ui_searchBarHeightConstraint.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.ui_searchBarView.layoutIfNeeded()
+        }
+        searchText = ""
+        invoiceCollectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+}

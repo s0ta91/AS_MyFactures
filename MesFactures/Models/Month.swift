@@ -12,6 +12,7 @@ import RealmSwift
 class Month: Object {
     @objc private dynamic var _month: String = ""
     private var _invoiceList = List<Invoice>()
+    var _invoiceListToShow : [Invoice] = []
     
     var month: String {
         get {
@@ -24,8 +25,24 @@ class Month: Object {
     }
 
     func getInvoiceCount () -> Int {
-        return _invoiceList.count
+        return _invoiceListToShow.count
     }
+    
+    func setInvoiceList (containing nameParts: String = "") -> Results<Invoice> {
+        _invoiceListToShow.removeAll(keepingCapacity: false)
+        var invoiceResults: Results<Invoice>
+        if nameParts != "" {
+            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", nameParts)
+            invoiceResults = _invoiceList.filter(invoiceIndexPredicate)
+        }else {
+            invoiceResults = _invoiceList.filter("TRUEPREDICATE")
+        }
+        for invoice in invoiceResults {
+            _invoiceListToShow.append(invoice)
+        }
+        return invoiceResults
+    }
+    
     
     func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
         let newInvoice = Invoice()
@@ -53,10 +70,14 @@ class Month: Object {
         try? realm?.commitWrite()
     }
     
-    func getInvoice (atIndex index: Int) -> Invoice? {
+    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
         let invoice: Invoice?
         if index >= 0 && index < getInvoiceCount() {
-            invoice = _invoiceList[index]
+            if isListFiltered == false {
+                invoice = _invoiceList[index]
+            }else {
+                invoice = _invoiceListToShow[index]
+            }
         }else {
             invoice = nil
         }

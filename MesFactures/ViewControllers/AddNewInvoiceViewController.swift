@@ -105,6 +105,9 @@ class AddNewInvoiceViewController: UIViewController {
             _group = recievedGroup
             
         }else {
+            print("manager: \(_manager)")
+            print("year: \(_year)")
+            print("group: \(_group)")
             fatalError("Error recieving path_through managers/objects")
         }
         

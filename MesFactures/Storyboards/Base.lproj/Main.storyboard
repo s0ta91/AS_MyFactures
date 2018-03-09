@@ -294,7 +294,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
                                 <rect key="frame" x="0.0" y="140" width="375" height="0.0"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
+                                    <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
@@ -426,7 +426,6 @@
                         <outlet property="ui_createGroupView" destination="9z4-yx-RDU" id="1hq-Aq-guE"/>
                         <outlet property="ui_groupIdeaCV" destination="zXB-2I-qOR" id="h0M-GD-817"/>
                         <outlet property="ui_groupNameTextField" destination="SlU-rg-RpY" id="HQQ-DC-Ecx"/>
-                        <outlet property="ui_keyboardSearchBarView" destination="ACZ-S0-JU1" id="JKe-fa-O3P"/>
                         <outlet property="ui_newGroupButton" destination="fQj-4B-h0L" id="2hz-oN-72f"/>
                         <outlet property="ui_newGroupNameTextField" destination="SlU-rg-RpY" id="byb-rK-8eP"/>
                         <outlet property="ui_searchBar" destination="dGI-Rd-UgG" id="ywb-rf-Pvp"/>
@@ -535,31 +534,6 @@
                         <constraint firstItem="SlU-rg-RpY" firstAttribute="leading" secondItem="W40-uR-JsQ" secondAttribute="leading" constant="10" id="zVo-F1-oFF"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="W40-uR-JsQ"/>
-                </view>
-                <view contentMode="scaleToFill" id="ACZ-S0-JU1">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <subviews>
-                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ss7-XC-5JE">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="375" id="JYL-aI-o7X"/>
-                                <constraint firstAttribute="height" constant="56" id="gv3-vl-7vz"/>
-                            </constraints>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="D5B-Ih-OFp" id="1B4-4Y-cJN"/>
-                            </connections>
-                        </searchBar>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="ss7-XC-5JE" firstAttribute="top" secondItem="ACZ-S0-JU1" secondAttribute="top" id="QmH-OO-uK3"/>
-                        <constraint firstAttribute="bottom" secondItem="ss7-XC-5JE" secondAttribute="bottom" id="TQ3-T2-s2q"/>
-                        <constraint firstItem="ss7-XC-5JE" firstAttribute="trailing" secondItem="Lsj-Mg-zrM" secondAttribute="trailing" id="Xer-D2-jDa"/>
-                        <constraint firstItem="ss7-XC-5JE" firstAttribute="leading" secondItem="Lsj-Mg-zrM" secondAttribute="leading" id="n27-ls-hCP"/>
-                    </constraints>
-                    <viewLayoutGuide key="safeArea" id="Lsj-Mg-zrM"/>
                 </view>
             </objects>
             <point key="canvasLocation" x="-2948" y="-762.5615763546798"/>
@@ -710,6 +684,26 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-IU-4oa">
+                                <rect key="frame" x="0.0" y="140" width="375" height="0.0"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-pP-fqR">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="t7y-qo-KY2" id="Fir-vr-UNu"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tT3-pP-fqR" secondAttribute="trailing" id="FQp-cr-oh5"/>
+                                    <constraint firstAttribute="height" id="dqB-PQ-1kS"/>
+                                    <constraint firstAttribute="bottom" secondItem="tT3-pP-fqR" secondAttribute="bottom" id="hyp-1a-Ngi"/>
+                                    <constraint firstItem="tT3-pP-fqR" firstAttribute="top" secondItem="JM3-IU-4oa" secondAttribute="top" id="sid-Ju-nDk"/>
+                                    <constraint firstItem="tT3-pP-fqR" firstAttribute="leading" secondItem="JM3-IU-4oa" secondAttribute="leading" id="ueX-B5-xnu"/>
+                                </constraints>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-kp-8Ma">
                                 <rect key="frame" x="0.0" y="728" width="375" height="84"/>
                                 <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -770,16 +764,19 @@
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xQN-Id-J85" firstAttribute="top" secondItem="JM3-IU-4oa" secondAttribute="bottom" id="1Ph-od-wyp"/>
                             <constraint firstItem="BJz-Fp-jCx" firstAttribute="bottom" secondItem="OMx-QP-Nft" secondAttribute="bottom" id="5ku-Wm-wwL"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" constant="16" id="AIu-Ja-4GN"/>
-                            <constraint firstItem="xQN-Id-J85" firstAttribute="top" secondItem="OMx-QP-Nft" secondAttribute="top" id="Cbu-hk-Rwr"/>
                             <constraint firstItem="vl9-kp-8Ma" firstAttribute="leading" secondItem="xq9-AB-Cw1" secondAttribute="leading" id="Gsz-HO-KoW"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="Ii0-BK-mYC"/>
+                            <constraint firstItem="JM3-IU-4oa" firstAttribute="trailing" secondItem="OMx-QP-Nft" secondAttribute="trailing" id="JRg-0n-Fji"/>
                             <constraint firstItem="vl9-kp-8Ma" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="LSh-MV-J2R"/>
                             <constraint firstItem="BJz-Fp-jCx" firstAttribute="trailing" secondItem="OMx-QP-Nft" secondAttribute="trailing" id="OOE-Wt-sQl"/>
                             <constraint firstItem="BJz-Fp-jCx" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" id="RLg-bJ-Nz7"/>
                             <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="vl9-kp-8Ma" secondAttribute="trailing" id="TfB-TK-Lh2"/>
+                            <constraint firstItem="JM3-IU-4oa" firstAttribute="top" secondItem="OMx-QP-Nft" secondAttribute="top" id="YS0-bz-4Dy"/>
                             <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="xQN-Id-J85" secondAttribute="trailing" constant="16" id="Z54-jM-Cfy"/>
+                            <constraint firstItem="JM3-IU-4oa" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" id="dWa-ua-Jp9"/>
                             <constraint firstItem="BJz-Fp-jCx" firstAttribute="top" secondItem="xQN-Id-J85" secondAttribute="bottom" id="n4v-Fx-cFV"/>
                             <constraint firstAttribute="bottom" secondItem="vl9-kp-8Ma" secondAttribute="bottom" id="va1-Sq-iaa"/>
                         </constraints>
@@ -787,6 +784,9 @@
                     </view>
                     <connections>
                         <outlet property="invoiceCollectionView" destination="xQN-Id-J85" id="ED9-ZO-BJN"/>
+                        <outlet property="ui_searchBar" destination="tT3-pP-fqR" id="RMC-d1-h0K"/>
+                        <outlet property="ui_searchBarHeightConstraint" destination="dqB-PQ-1kS" id="EQs-Lj-3Gk"/>
+                        <outlet property="ui_searchBarView" destination="JM3-IU-4oa" id="WWw-su-BxQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
