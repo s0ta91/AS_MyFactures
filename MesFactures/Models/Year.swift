@@ -60,7 +60,7 @@ class Year: Object {
         }
         _groupArray.append(title.lowercased())
         _groupArray.sort()
-        groupIndex = _groupArray.index(of: title)!
+        groupIndex = _groupArray.index(of: title.lowercased())!
         _groupArray.removeAll()
         return groupIndex!
     }
