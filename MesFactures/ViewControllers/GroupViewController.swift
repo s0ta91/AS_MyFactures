@@ -13,6 +13,8 @@ class GroupViewController: UIViewController {
     //MARK: - GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
     @IBOutlet var ui_keyboardSearchBarView: UIView!
+    @IBOutlet weak var ui_searchBarView: UIView!
+    
     @IBOutlet weak var ui_searchBar: UISearchBar!
     @IBOutlet weak var ui_tabBarView: UIView!
     
@@ -42,6 +44,8 @@ class GroupViewController: UIViewController {
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     var ui_keyboardSearchBarViewBottomConstraint: NSLayoutConstraint?
     
+    @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
+    
     
     //MARK: -  ViewController functions
     override func viewDidLoad() {
@@ -64,7 +68,7 @@ class GroupViewController: UIViewController {
         
         _manager.setHeaderClippedToBound(groupCV)
         
-        self.groupCV.reloadData()
+        groupCV.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -175,12 +179,12 @@ class GroupViewController: UIViewController {
     }
 
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
-        self.navigationController!.view.addSubview(ui_keyboardSearchBarView)
-        ui_keyboardSearchBarView.translatesAutoresizingMaskIntoConstraints = false
-        ui_keyboardSearchBarViewBottomConstraint = ui_keyboardSearchBarView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0)
-        self.navigationController!.view.addConstraint(ui_keyboardSearchBarViewBottomConstraint!)
         ui_searchBar.text = ""
         ui_searchBar.becomeFirstResponder()
+        searchBarViewHeight.constant = 56
+        UIView.animate(withDuration: 0.25) {
+            self.ui_searchBarView.layoutIfNeeded()
+        }
     }
     
     //MARK: - Prepare for Navigation
@@ -290,11 +294,25 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
 extension GroupViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        ui_keyboardSearchBarView.removeFromSuperview()
+
         if let searchText = searchBar.text {
             _currentYear.setGroupList(containing: searchText)
         }
         groupCV.reloadData()
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            searchBarViewHeight.constant = 0
+            UIView.animate(withDuration: 0.25) {
+                self.ui_searchBarView.layoutIfNeeded()
+            }
+            _currentYear.setGroupList()
+            groupCV.reloadData()
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            
+        }
     }
 }
 
