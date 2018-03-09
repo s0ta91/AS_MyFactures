@@ -23,6 +23,7 @@ class GroupViewController: UIViewController {
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
+     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
     
     //MARK: - CreateGroupPopupView
     @IBOutlet weak var ui_groupNameTextField: UITextField!
@@ -42,17 +43,14 @@ class GroupViewController: UIViewController {
     private var _groupToModify: Group?
     var effect: UIVisualEffect!
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-    var ui_keyboardSearchBarViewBottomConstraint: NSLayoutConstraint?
-    
-    @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
+    var isListFiltered = false
+   
     
     
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
         groupCV.dataSource = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,23 +110,9 @@ class GroupViewController: UIViewController {
             self.ui_createGroupView.removeFromSuperview()
         }
         ui_visualEffectView.isHidden = true
+        searchBarSearchButtonClicked(self.ui_searchBar)
     }
-    
-    @objc private func handleKeyboardNotification (notification: NSNotification) {
-        if let userInfo = notification.userInfo,
-            let keyboardFrame = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-            
-            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
-            ui_keyboardSearchBarViewBottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
-            
-            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                self.ui_keyboardSearchBarView.layoutIfNeeded()
-            }, completion: { (completed) in
-                
-            })
 
-        }
-    }
     
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
@@ -149,26 +133,25 @@ class GroupViewController: UIViewController {
         if let selectedGroup = _groupToModify {
             _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
             _groupToModify = nil
+            animateOut()
         }else {
-            let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName)
+            let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName, isListFiltered)
             if groupExists == false {
-                if let newGroup = _currentYear.addGroup(withTitle: newGroupName) {
+                if let newGroup = _currentYear.addGroup(withTitle: newGroupName, isListFiltered) {
                     for monthName in monthArray {
                         newGroup.addMonth(monthName)
                     }
                 }
                 animateOut()
-                self.searchBarSearchButtonClicked(self.ui_searchBar)
             }else {
                 let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)
                 let createAction = UIAlertAction(title: "Créer", style: .default, handler: { (_) in
-                    if let newGroup = self._currentYear.addGroup(withTitle: newGroupName) {
+                    if let newGroup = self._currentYear.addGroup(withTitle: newGroupName, self.isListFiltered) {
                         for monthName in self.monthArray {
                             newGroup.addMonth(monthName)
                         }
                     }
                     self.animateOut()
-                    self.searchBarSearchButtonClicked(self.ui_searchBar)
                 })
                 let cancelCreationAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
                 alertController.addAction(createAction)
@@ -198,7 +181,7 @@ class GroupViewController: UIViewController {
         if segue.identifier == "show_invoiceCollectionVC" {
             if let destinationVC = segue.destination as? InvoiceCollectionViewController,
                 let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
-                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row) {
+                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row, isListFiltered) {
                     destinationVC._ptManager = _manager
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
@@ -221,7 +204,6 @@ extension GroupViewController: UICollectionViewDataSource {
         default:
             assert(false, "Unexpected element kind")
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -236,7 +218,7 @@ extension GroupViewController: UICollectionViewDataSource {
         if collectionView.tag == 0 {
             let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-            if let group = _currentYear.getGroup(atIndex: indexPath.row) {
+            if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
                 cell_group.setValues(_manager, group)
             }
 
@@ -267,7 +249,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
-                let group = self._currentYear.getGroup(atIndex: indexPath.row) {
+                let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
                     self.ui_newGroupNameTextField.text = group.title
                     self.ui_addGroupButton.setTitle("Modifier", for: .normal)
                     self.ui_newGroupNameTextField.becomeFirstResponder()
@@ -277,11 +259,16 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         }
 
         let delete = UIAlertAction(title: "Supprimer le groupe", style: .destructive) { (_) in
-            if let indexPath = self.groupCV.indexPath(for: groupCell) {
-                self._currentYear.removeGroup(atIndex: indexPath.row)
-                self.groupCV.deleteItems(at: [indexPath])
+            if let indexPath = self.groupCV.indexPath(for: groupCell),
+                let groupNameToDelete = groupCell.ui_titleLabel.text,
+                    let group = self._currentYear.getGroup(forName: groupNameToDelete, self.isListFiltered),
+                    let groupIndex = self._currentYear.getGroupIndex(forGroup: group) {
+                        self._currentYear.removeGroup(atIndex: groupIndex)
+                        self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
+                        self.groupCV.deleteItems(at: [indexPath])
             }
         }
+        
         let cancel = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
@@ -293,6 +280,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
 
 extension GroupViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isListFiltered = true
         searchBar.resignFirstResponder()
 
         if let searchText = searchBar.text {
@@ -302,6 +290,8 @@ extension GroupViewController: UISearchBarDelegate {
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
+            isListFiltered = false
+            
             searchBarViewHeight.constant = 0
             UIView.animate(withDuration: 0.25) {
                 self.ui_searchBarView.layoutIfNeeded()
@@ -313,6 +303,7 @@ extension GroupViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
+            
         }
     }
 }
