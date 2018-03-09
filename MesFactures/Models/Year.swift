@@ -14,6 +14,7 @@ class Year: Object {
     @objc private dynamic var _selected: Bool = false
     private var _groupList = List<Group>()
     private var _groupArray: [String] = []
+    private var _groupListToShow : [Group] = []
 
     
     var year: Int {
@@ -38,36 +39,37 @@ class Year: Object {
     
     
     // GROUP functions
-    func addGroup (withTitle title: String) -> Group? {
-        let newGroupIndex = getNewGroupIndex(withTitle: title)
+    func addGroup (withTitle title: String, _ isListFiltered: Bool) -> Group? {
+        let newGroupIndex = getNewGroupIndex(withTitle: title, isListFiltered)
         let newGroup = Group()
         newGroup.title = title
         realm?.beginWrite()
         _groupList.insert(newGroup, at: newGroupIndex)
         try? realm?.commitWrite()
+        setGroupList()
         return newGroup
     }
     //TODO: - Create function to know at which index the new group has to be inserted in order to the list to be sorted
-    private func getNewGroupIndex (withTitle title: String) -> Int {
+    private func getNewGroupIndex (withTitle title: String, _ isListFileterd: Bool) -> Int {
         var groupIndex: Int?
         for index in 0..<_groupList.count {
             if let group = getGroup(atIndex: index) {
-                let groupName = group.title
+                let groupName = group.title.lowercased()
                 _groupArray.append(groupName)
             }
         }
-        _groupArray.append(title)
+        _groupArray.append(title.lowercased())
         _groupArray.sort()
-        groupIndex = _groupArray.index(of: title)!
+        groupIndex = _groupArray.index(of: title.lowercased())!
         _groupArray.removeAll()
         return groupIndex!
     }
     
-    func checkForDuplicate (forGroupName groupName: String) -> Bool {
+    func checkForDuplicate (forGroupName groupName: String, _ isListFiltered: Bool) -> Bool {
         var groupNameExists: Bool = false
         for groupIndex in 0..<getGroupCount() {
-            if let existingGroupToCheck = getGroup(atIndex: groupIndex) {
-                if groupName == existingGroupToCheck.title {
+            if let existingGroupToCheck = getGroup(atIndex: groupIndex, isListFiltered) {
+                if groupName.lowercased() == existingGroupToCheck.title.lowercased() {
                     groupNameExists = true
                 }
             }
@@ -75,22 +77,41 @@ class Year: Object {
         return groupNameExists
     }
     
+    
     func getGroupCount () -> Int{
-        return _groupList.count
+        return _groupListToShow.count
     }
     
-    func getGroup (atIndex index: Int) -> Group? {
-        return _groupList[index]
+    func getGroup (atIndex index: Int, _ isListFiltered: Bool = false) -> Group? {
+        if isListFiltered == true {
+            return _groupListToShow[index]
+        }else {
+            return _groupList[index]
+        }
+    }
+    
+    func setGroupList (containing nameParts: String = ""){
+        _groupListToShow.removeAll(keepingCapacity: false)
+        var groupResults: Results<Group>
+        if nameParts != "" {
+            let groupIndexPredicate = NSPredicate(format: "_title CONTAINS[cd] %@", nameParts)
+            groupResults = _groupList.filter(groupIndexPredicate)
+        }else {
+            groupResults = _groupList.filter("TRUEPREDICATE")
+        }
+        for group in groupResults {
+            _groupListToShow.append(group)
+        }
     }
     
     func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
-    func getGroup (forName groupName: String) -> Group? {
+    func getGroup (forName groupName: String, _ isListFiltered: Bool = false) -> Group? {
         var group: Group? = nil
         let groupPredicate = NSPredicate(format: "_title == %@", groupName)
         if let groupIndex = _groupList.index(matching: groupPredicate) {
-            group = getGroup(atIndex: groupIndex)
+            group = getGroup(atIndex: groupIndex, isListFiltered)
         }
         return group
     }
@@ -103,5 +124,9 @@ class Year: Object {
         realm?.beginWrite()
         _groupList.remove(at: index)
         try? realm?.commitWrite()
+    }
+    
+    func removeGroupinListToShow (atIndex index: Int) {
+        _groupListToShow.remove(at: index)
     }
 }

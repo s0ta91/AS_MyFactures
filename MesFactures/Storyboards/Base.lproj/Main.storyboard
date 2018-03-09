@@ -291,6 +291,47 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
+                                <rect key="frame" x="0.0" y="140" width="375" height="0.0"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="D5B-Ih-OFp" id="sqg-UU-daN"/>
+                                        </connections>
+                                    </searchBar>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dGI-Rd-UgG" secondAttribute="bottom" id="4I9-dW-gK2"/>
+                                    <constraint firstAttribute="trailing" secondItem="dGI-Rd-UgG" secondAttribute="trailing" id="EBo-VW-IXb"/>
+                                    <constraint firstItem="dGI-Rd-UgG" firstAttribute="leading" secondItem="jLd-mf-zNG" secondAttribute="leading" id="HUC-0n-KE4"/>
+                                    <constraint firstItem="dGI-Rd-UgG" firstAttribute="top" secondItem="jLd-mf-zNG" secondAttribute="top" id="jTk-7u-Cij"/>
+                                    <constraint firstAttribute="height" identifier="searchBarViewHeight" id="pId-AM-EMX"/>
+                                </constraints>
+                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Djf-0z-0kq">
+                                <rect key="frame" x="0.0" y="140" width="375" height="672"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="a6Y-Ys-gUE">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-67-vBb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="cO1-eb-Oi1">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="light"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5eM-Ih-UfD">
                                 <rect key="frame" x="0.0" y="728" width="375" height="84"/>
                                 <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -347,61 +388,51 @@
                                     <constraint firstAttribute="height" constant="50" id="kAr-Xm-aaN"/>
                                 </constraints>
                             </view>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zET-Ud-FxJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4eb-mi-uPG">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fSX-ts-Lhk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="L1H-f6-6ek">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <blurEffect style="dark"/>
-                                        </visualEffectView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="fSX-ts-Lhk" firstAttribute="leading" secondItem="4eb-mi-uPG" secondAttribute="leading" id="B0t-kF-5T4"/>
-                                        <constraint firstAttribute="bottom" secondItem="fSX-ts-Lhk" secondAttribute="bottom" id="PcX-f7-6hA"/>
-                                        <constraint firstAttribute="trailing" secondItem="fSX-ts-Lhk" secondAttribute="trailing" id="aGj-hR-79f"/>
-                                        <constraint firstItem="fSX-ts-Lhk" firstAttribute="top" secondItem="4eb-mi-uPG" secondAttribute="top" id="f9v-Yc-PyE"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="top" secondItem="iv6-Xj-pPe" secondAttribute="top" id="CXj-7z-KYC"/>
-                            <constraint firstItem="zET-Ud-FxJ" firstAttribute="top" secondItem="dHV-vc-FxW" secondAttribute="top" id="F7q-h6-hdn"/>
-                            <constraint firstAttribute="bottom" secondItem="zET-Ud-FxJ" secondAttribute="bottom" id="HGm-7z-pId"/>
+                            <constraint firstItem="Djf-0z-0kq" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="Eui-Eg-cEu"/>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="HI9-cP-IR0"/>
-                            <constraint firstItem="zET-Ud-FxJ" firstAttribute="trailing" secondItem="qWy-3l-pJt" secondAttribute="trailing" id="Mxv-vr-25b"/>
+                            <constraint firstItem="Djf-0z-0kq" firstAttribute="trailing" secondItem="qWy-3l-pJt" secondAttribute="trailing" id="O5J-eL-bV5"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>
+                            <constraint firstAttribute="bottom" secondItem="Djf-0z-0kq" secondAttribute="bottom" id="V5n-jc-Zu7"/>
                             <constraint firstAttribute="bottom" secondItem="5eM-Ih-UfD" secondAttribute="bottom" id="Wbu-zY-1Ku"/>
+                            <constraint firstItem="Djf-0z-0kq" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="ZMs-bE-hTR"/>
+                            <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="jLd-mf-zNG" secondAttribute="bottom" id="ZmL-WA-6bK"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="bottom" secondItem="iv6-Xj-pPe" secondAttribute="bottom" id="a4k-eo-CFX"/>
-                            <constraint firstItem="zET-Ud-FxJ" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="aef-nU-KdO"/>
+                            <constraint firstItem="jLd-mf-zNG" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="dPY-8y-LBV"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" constant="16" id="fuO-tA-gb9"/>
-                            <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="gaE-LW-nr8"/>
                             <constraint firstItem="iv6-Xj-pPe" firstAttribute="top" secondItem="4ky-NB-Zlg" secondAttribute="bottom" id="hbZ-03-3H1"/>
                             <constraint firstAttribute="trailing" secondItem="5eM-Ih-UfD" secondAttribute="trailing" id="hpx-0u-dnq"/>
                             <constraint firstItem="iv6-Xj-pPe" firstAttribute="trailing" secondItem="qWy-3l-pJt" secondAttribute="trailing" id="mDu-KM-eBv"/>
+                            <constraint firstItem="jLd-mf-zNG" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="nzX-BC-fzQ"/>
+                            <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="jLd-mf-zNG" secondAttribute="trailing" id="osP-OR-aPL"/>
                             <constraint firstItem="iv6-Xj-pPe" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="t6I-mg-ivN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qWy-3l-pJt"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Dossiers" id="Wj2-wx-S0b"/>
+                    <navigationItem key="navigationItem" title="Dossiers" id="Wj2-wx-S0b">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="f9Q-hc-O8F">
+                            <connections>
+                                <action selector="searchButtonPressed:" destination="D5B-Ih-OFp" id="LKr-fU-zNy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="groupCV" destination="4ky-NB-Zlg" id="gd0-0b-xgb"/>
+                        <outlet property="searchBarViewHeight" destination="pId-AM-EMX" id="LR1-Hl-KJ6"/>
                         <outlet property="ui_addGroupButton" destination="TyD-Qf-xEY" id="pbi-wX-bq2"/>
                         <outlet property="ui_createGroupView" destination="9z4-yx-RDU" id="1hq-Aq-guE"/>
                         <outlet property="ui_groupIdeaCV" destination="zXB-2I-qOR" id="h0M-GD-817"/>
                         <outlet property="ui_groupNameTextField" destination="SlU-rg-RpY" id="HQQ-DC-Ecx"/>
+                        <outlet property="ui_keyboardSearchBarView" destination="ACZ-S0-JU1" id="JKe-fa-O3P"/>
                         <outlet property="ui_newGroupButton" destination="fQj-4B-h0L" id="2hz-oN-72f"/>
                         <outlet property="ui_newGroupNameTextField" destination="SlU-rg-RpY" id="byb-rK-8eP"/>
-                        <outlet property="ui_visualEffectView" destination="zET-Ud-FxJ" id="UW7-HI-ZP6"/>
+                        <outlet property="ui_searchBar" destination="dGI-Rd-UgG" id="ywb-rf-Pvp"/>
+                        <outlet property="ui_searchBarView" destination="jLd-mf-zNG" id="OZT-4l-90E"/>
+                        <outlet property="ui_tabBarView" destination="iv6-Xj-pPe" id="CC5-6p-U52"/>
+                        <outlet property="ui_visualEffectView" destination="Djf-0z-0kq" id="vA6-Nd-U2f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atx-u6-ncx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -505,8 +536,33 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="W40-uR-JsQ"/>
                 </view>
+                <view contentMode="scaleToFill" id="ACZ-S0-JU1">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ss7-XC-5JE">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="375" id="JYL-aI-o7X"/>
+                                <constraint firstAttribute="height" constant="56" id="gv3-vl-7vz"/>
+                            </constraints>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="D5B-Ih-OFp" id="1B4-4Y-cJN"/>
+                            </connections>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="ss7-XC-5JE" firstAttribute="top" secondItem="ACZ-S0-JU1" secondAttribute="top" id="QmH-OO-uK3"/>
+                        <constraint firstAttribute="bottom" secondItem="ss7-XC-5JE" secondAttribute="bottom" id="TQ3-T2-s2q"/>
+                        <constraint firstItem="ss7-XC-5JE" firstAttribute="trailing" secondItem="Lsj-Mg-zrM" secondAttribute="trailing" id="Xer-D2-jDa"/>
+                        <constraint firstItem="ss7-XC-5JE" firstAttribute="leading" secondItem="Lsj-Mg-zrM" secondAttribute="leading" id="n27-ls-hCP"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Lsj-Mg-zrM"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="-2946.5" y="-762"/>
+            <point key="canvasLocation" x="-2948" y="-762.5615763546798"/>
         </scene>
         <!--Invoice Collection View Controller-->
         <scene sceneID="syR-r2-fVS">

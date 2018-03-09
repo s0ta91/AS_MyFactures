@@ -84,10 +84,13 @@ class Month: Object {
     }
     
     func removeInvoice (invoice: Invoice) -> Int? {
-        let invoiceIndex = getInvoiceIndex(forInvoice: invoice)
-        realm?.beginWrite()
-        realm?.delete(invoice)
-        try? realm?.commitWrite()
+        var invoiceIndex: Int?
+        if let index = getInvoiceIndex(forInvoice: invoice) {
+            invoiceIndex = index
+            realm?.beginWrite()
+            _invoiceList.remove(at: index)
+            try? realm?.commitWrite()
+        }
         return invoiceIndex
     }
     
