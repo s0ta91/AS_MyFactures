@@ -158,7 +158,7 @@ class GroupViewController: UIViewController {
                     }
                 }
                 animateOut()
-                self.groupCV.reloadData()
+                self.searchBarSearchButtonClicked(self.ui_searchBar)
             }else {
                 let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)
                 let createAction = UIAlertAction(title: "Créer", style: .default, handler: { (_) in
@@ -168,7 +168,7 @@ class GroupViewController: UIViewController {
                         }
                     }
                     self.animateOut()
-                    self.groupCV.reloadData()
+                    self.searchBarSearchButtonClicked(self.ui_searchBar)
                 })
                 let cancelCreationAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
                 alertController.addAction(createAction)
@@ -308,10 +308,11 @@ extension GroupViewController: UISearchBarDelegate {
             }
             _currentYear.setGroupList()
             groupCV.reloadData()
+            
+            // resignFirstResponder is executed in the main thread whatever if the action above are completed or not
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
-            
         }
     }
 }

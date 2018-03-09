@@ -46,13 +46,14 @@ class Year: Object {
         realm?.beginWrite()
         _groupList.insert(newGroup, at: newGroupIndex)
         try? realm?.commitWrite()
+        setGroupList()
         return newGroup
     }
     //TODO: - Create function to know at which index the new group has to be inserted in order to the list to be sorted
     private func getNewGroupIndex (withTitle title: String) -> Int {
         var groupIndex: Int?
         for index in 0..<_groupList.count {
-            if let group = getGroup(atIndex: index) {
+            if let group = getGroup(atIndex: index, withFilter: false) {
                 let groupName = group.title
                 _groupArray.append(groupName)
             }
@@ -81,8 +82,12 @@ class Year: Object {
         return _groupListToShow.count
     }
     
-    func getGroup (atIndex index: Int) -> Group? {
-        return _groupListToShow[index]
+    func getGroup (atIndex index: Int, withFilter filter: Bool = true) -> Group? {
+        if filter == true {
+            return _groupListToShow[index]
+        }else {
+            return _groupList[index]
+        }
     }
     
     func setGroupList (containing nameParts: String = ""){
