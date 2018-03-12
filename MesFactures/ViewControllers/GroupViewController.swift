@@ -265,9 +265,9 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
                     let groupNameToDelete = groupCell.ui_titleLabel.text,
                     let group = self._currentYear.getGroup(forName: groupNameToDelete, self.isListFiltered),
                     let groupIndex = self._currentYear.getGroupIndex(forGroup: group) {
-                    self._currentYear.removeGroup(atIndex: groupIndex)
-                    self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
-                    self.groupCV.deleteItems(at: [indexPath])
+                        self._currentYear.removeGroup(atIndex: groupIndex)
+                        self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
+                        self.groupCV.deleteItems(at: [indexPath])
                 }
             })
             let cancelDeletion = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
@@ -296,22 +296,21 @@ extension GroupViewController: UISearchBarDelegate {
         }
         groupCV.reloadData()
     }
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            isListFiltered = false
-            
-            searchBarViewHeight.constant = 0
-            UIView.animate(withDuration: 0.25) {
-                self.ui_searchBarView.layoutIfNeeded()
-            }
-            _currentYear.setGroupList()
-            groupCV.reloadData()
-            
-            // resignFirstResponder is executed in the main thread whatever if the action above are completed or not
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-            
+
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isListFiltered = false
+        
+        searchBarViewHeight.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.ui_searchBarView.layoutIfNeeded()
+        }
+        _currentYear.setGroupList()
+        groupCV.reloadData()
+        
+        // resignFirstResponder is executed in the main thread whatever if the action above are completed or not
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
         }
     }
 }
