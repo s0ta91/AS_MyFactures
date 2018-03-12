@@ -150,6 +150,7 @@ class InvoiceCollectionViewController: UIViewController {
                         self.invoiceCollectionView.deleteSections(sectionIndexSet)
                     }else { // otherwise we can delete only the item
                         self.invoiceCollectionView.deleteItems(at: [indexPath])
+                        self.invoiceCollectionView.reloadSections(sectionIndexSet)
                     }
                 })
                 
@@ -254,7 +255,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex) {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
-                monthAmount = String(describing: month.getTotalAmount(forMonthIndex: indexPath.section))
+                monthAmount = String(describing: month.getTotalAmount())
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount)

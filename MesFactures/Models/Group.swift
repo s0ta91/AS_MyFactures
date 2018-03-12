@@ -100,9 +100,7 @@ class Group: Object {
     func getTotalGroupAmount () -> Double {
         var totalAmount: Double = 0
         for month in _monthList {
-            if let monthIndex = getMonthIndex(forMonth: month) {
-                totalAmount = totalAmount + month.getTotalAmount(forMonthIndex: monthIndex)
-            }
+            totalAmount = totalAmount + month.totalAmount
         }
         return totalAmount
     }
@@ -110,7 +108,7 @@ class Group: Object {
     func getTotalDocument () -> Int {
         var totalDocument: Int = 0
         for month in _monthList {
-            totalDocument = totalDocument + month.getInvoiceCount()
+            totalDocument = totalDocument + month.totalDocument
         }
         return totalDocument
     }
