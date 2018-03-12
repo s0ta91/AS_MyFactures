@@ -121,9 +121,17 @@ class Year: Object {
     }
     
     func removeGroup (atIndex index:Int) {
-        realm?.beginWrite()
-        _groupList.remove(at: index)
-        try? realm?.commitWrite()
+        if let groupToDelete = getGroup(atIndex: index) {
+            realm?.beginWrite()
+            realm?.delete(groupToDelete)
+            do {
+                try realm?.commitWrite()
+            }catch{
+                print("can't delete group at index :\(index)")
+            }
+        }else {
+            print("This group at index '\(index)' does not exists")
+        }
     }
     
     func removeGroupinListToShow (atIndex index: Int) {

@@ -12,7 +12,9 @@ import RealmSwift
 class Month: Object {
     @objc private dynamic var _month: String = ""
     private var _invoiceList = List<Invoice>()
+    private var filteredInvoiceList: Results<Invoice>?
     var _invoiceListToShow : [Invoice] = []
+    let ALL_CATEGORY_TEXT = "Toutes les catégories"
     
     var month: String {
         get {
@@ -24,25 +26,45 @@ class Month: Object {
         }
     }
 
+    func setInvoiceList (for category: Category, searchText: String = "") {
+        _invoiceListToShow.removeAll(keepingCapacity: false)
+        var invoiceResults: Results<Invoice>
+        if category.title == ALL_CATEGORY_TEXT && searchText != "" {
+            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", searchText)
+            invoiceResults = _invoiceList.filter(invoiceIndexPredicate)
+        }else if category.title != ALL_CATEGORY_TEXT && searchText != "" {
+            let categoryPredicate = NSPredicate(format: "_categoryobject == %@", category)
+            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", searchText)
+            invoiceResults = _invoiceList.filter(categoryPredicate).filter(invoiceIndexPredicate)
+        }else if category.title != ALL_CATEGORY_TEXT && searchText == "" {
+            let categoryPredicate = NSPredicate(format: "_categoryobject == %@", category)
+            invoiceResults = _invoiceList.filter(categoryPredicate)
+        }else {
+            invoiceResults = _invoiceList.filter("TRUEPREDICATE")
+        }
+        
+        for invoice in invoiceResults {
+            _invoiceListToShow.append(invoice)
+        }
+    }
+    
     func getInvoiceCount () -> Int {
         return _invoiceListToShow.count
     }
     
-    func setInvoiceList (containing nameParts: String = "") -> Results<Invoice> {
-        _invoiceListToShow.removeAll(keepingCapacity: false)
-        var invoiceResults: Results<Invoice>
-        if nameParts != "" {
-            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", nameParts)
-            invoiceResults = _invoiceList.filter(invoiceIndexPredicate)
+    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
+        let invoice: Invoice?
+        if index >= 0 && index < getInvoiceCount() {
+            invoice = _invoiceListToShow[index]
         }else {
-            invoiceResults = _invoiceList.filter("TRUEPREDICATE")
+            invoice = nil
         }
-        for invoice in invoiceResults {
-            _invoiceListToShow.append(invoice)
-        }
-        return invoiceResults
+        return invoice
     }
     
+    func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
+        return _invoiceList.index(of: invoice)
+    }
     
     func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
         let newInvoice = Invoice()
@@ -70,67 +92,23 @@ class Month: Object {
         try? realm?.commitWrite()
     }
     
-    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
-        let invoice: Invoice?
-        if index >= 0 && index < getInvoiceCount() {
-            if isListFiltered == false {
-                invoice = _invoiceList[index]
-            }else {
-                invoice = _invoiceListToShow[index]
-            }
-        }else {
-            invoice = nil
-        }
-        return invoice
-    }
-    
-    func getInvoiceListFilteredCount (forCategory category: Category) -> Int {
-        var filteredInvoiceList: Results<Invoice>
-        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
-        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
-        return filteredInvoiceList.count
-    }
-    func getInvoiceFiltered (ForCategory category: Category, atIndex index: Int) -> Invoice? {
-        var invoice: Invoice? = nil
-        var filteredInvoiceList: Results<Invoice>
-        let invoicePredicate = NSPredicate(format: "_categoryobject == %@", category)
-        filteredInvoiceList = _invoiceList.filter(invoicePredicate)
-        invoice = filteredInvoiceList[index]
-        return invoice
-    }
-    
-    
-    func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
-        return _invoiceList.index(of: invoice)
-    }
-    
     func removeInvoice (invoice: Invoice) -> Int? {
-        var invoiceIndex: Int?
-        if let index = getInvoiceIndex(forInvoice: invoice) {
-            invoiceIndex = index
-            realm?.beginWrite()
-            _invoiceList.remove(at: index)
-            try? realm?.commitWrite()
-        }
+        let invoiceIndex = getInvoiceIndex(forInvoice: invoice)
+        realm?.beginWrite()
+        realm?.delete(invoice)
+        try? realm?.commitWrite()
         return invoiceIndex
     }
     
-    func getTotalAmount (forMonthIndex monthIndex: Int, withFilter: Bool, forCategory category: Category? = nil) -> Double {
+    func removeFromInvoiceToShow (atIndex index: Int) {
+        _invoiceListToShow.remove(at: index)
+    }
+    
+    func getTotalAmount (forMonthIndex monthIndex: Int) -> Double {
         var totalAmount: Double = 0
-        if withFilter == false {
-            for invoiceIndex in 0...getInvoiceCount() {
-                if let invoice = getInvoice(atIndex: invoiceIndex) {
-                    totalAmount = totalAmount + invoice.amount
-                }
-            }
-        }else {
-            if let selectedCategory = category {
-                let numberOfInvoice = getInvoiceListFilteredCount(forCategory: selectedCategory)
-                for invoiceIndex in 0..<numberOfInvoice {
-                    if let invoice = getInvoiceFiltered(ForCategory: selectedCategory, atIndex: invoiceIndex) {
-                        totalAmount = totalAmount + invoice.amount
-                    }
-                }
+        for invoiceIndex in 0...getInvoiceCount() {
+            if let invoice = getInvoice(atIndex: invoiceIndex) {
+                totalAmount = totalAmount + invoice.amount
             }
         }
         return totalAmount
