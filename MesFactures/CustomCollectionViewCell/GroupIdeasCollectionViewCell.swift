@@ -16,3 +16,4 @@ class GroupIdeasCollectionViewCell: UICollectionViewCell {
         ui_groupIdeaNameLabel.text = groupIdeaTitle
     }
 }
+

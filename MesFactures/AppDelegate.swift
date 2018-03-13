@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -16,6 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // realm migration configuration
+//        let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { (migration: Migration, oldSchemaVersion: UInt64) in
+//            if oldSchemaVersion < 2 {
+//                migration.enumerateObjects(ofType: "", { (oldObject: MigrationObject?, newObject: MigrationObject?) in
+//                    
+//                })
+//            }
+//        })
+//        Realm.Configuration.defaultConfiguration = config
+        
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false
         
