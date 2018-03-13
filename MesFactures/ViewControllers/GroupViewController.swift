@@ -42,20 +42,21 @@ class GroupViewController: UIViewController {
     var effect: UIVisualEffect!
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     var isListFiltered = false
-   
+    var collectionViewFontSize: CGFloat!
     
     
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
         groupCV.dataSource = self
+        groupCV.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         _currentYear = _manager.getSelectedYear()
         _currentYear.setGroupList()
-        groupCV.clipsToBounds = false
+        setFontSize()
         
         ui_visualEffectView.isHidden = true
         effect = ui_visualEffectView.effect
@@ -109,7 +110,14 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.isHidden = true
         searchBarSearchButtonClicked(self.ui_searchBar)
     }
-
+    private func setFontSize (){
+        let collectionViewWidth = groupCV.frame.size.width
+        if collectionViewWidth == 288 {
+            collectionViewFontSize = 15
+        }else if collectionViewWidth >= 343 {
+            collectionViewFontSize = 17
+        }
+    }
     
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
@@ -182,6 +190,7 @@ class GroupViewController: UIViewController {
                     destinationVC._ptManager = _manager
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
+                    destinationVC._ptFontSize = collectionViewFontSize
             }
         }
     }
@@ -195,7 +204,7 @@ extension GroupViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionElementKindSectionHeader:
            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
-            headerView.setYear(withYear: "\(selectedYear.year)")
+           headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
             return headerView
         default:
             assert(false, "Unexpected element kind")
@@ -211,7 +220,7 @@ extension GroupViewController: UICollectionViewDataSource {
         let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
         if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
-            cell_group.setValues(_manager, group)
+            cell_group.setValues(_manager, group, fontSize: collectionViewFontSize)
         }
 
         cell_group.layer.borderWidth = 1.0
@@ -226,7 +235,13 @@ extension GroupViewController: UICollectionViewDataSource {
         cell_group.delegate = self
         return cell_group
     }
+}
 
+extension GroupViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = groupCV.frame.size.width
+        return CGSize(width: width, height: 115)
+    }
 }
 
 extension GroupViewController: GroupCollectionViewCellDelegate {
