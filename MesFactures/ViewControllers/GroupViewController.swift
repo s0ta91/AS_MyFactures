@@ -12,7 +12,6 @@ class GroupViewController: UIViewController {
     
     //MARK: - GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
-    @IBOutlet var ui_keyboardSearchBarView: UIView!
     @IBOutlet weak var ui_searchBarView: UIView!
     
     @IBOutlet weak var ui_searchBar: UISearchBar!
@@ -27,7 +26,6 @@ class GroupViewController: UIViewController {
     
     //MARK: - CreateGroupPopupView
     @IBOutlet weak var ui_groupNameTextField: UITextField!
-    @IBOutlet weak var ui_groupIdeaCV: UICollectionView!
     @IBOutlet weak var ui_addGroupButton: UIButton!
     
     
@@ -73,7 +71,6 @@ class GroupViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     //MARK: -  Private functions
     private func animateIn() {
@@ -195,10 +192,9 @@ extension GroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
-        
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as! HeaderGroupView
+           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
             headerView.setYear(withYear: "\(selectedYear.year)")
             return headerView
         default:
@@ -207,38 +203,28 @@ extension GroupViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 0 {
-            return _currentYear.getGroupCount()
-        }else {
-            return _manager.getGroupIdeaCount()
-        }
+        return _currentYear.getGroupCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView.tag == 0 {
-            let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-            if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
-                cell_group.setValues(_manager, group)
-            }
+        let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-            cell_group.layer.borderWidth = 1.0
-            cell_group.layer.borderColor = UIColor.clear.cgColor
-            cell_group.layer.shadowColor = UIColor.lightGray.cgColor
-            cell_group.layer.shadowOffset = CGSize(width:2,height: 2)
-            cell_group.layer.shadowRadius = 2.0
-            cell_group.layer.shadowOpacity = 1.0
-            cell_group.layer.masksToBounds = false;
-            cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
-            
-            cell_group.delegate = self
-            return cell_group
-        }else {
-            let cell_groupIdea = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_groupIdea", for: indexPath) as! GroupIdeasCollectionViewCell
-            let titleList:[String] = _manager.getGroupIdeaNameList()
-            cell_groupIdea.setTitle(titleList[indexPath.row])
-            return cell_groupIdea
+        if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
+            cell_group.setValues(_manager, group)
         }
+
+        cell_group.layer.borderWidth = 1.0
+        cell_group.layer.borderColor = UIColor.clear.cgColor
+        cell_group.layer.shadowColor = UIColor.lightGray.cgColor
+        cell_group.layer.shadowOffset = CGSize(width:2,height: 2)
+        cell_group.layer.shadowRadius = 2.0
+        cell_group.layer.shadowOpacity = 1.0
+        cell_group.layer.masksToBounds = false;
+        cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
+        
+        cell_group.delegate = self
+        return cell_group
     }
 
 }
