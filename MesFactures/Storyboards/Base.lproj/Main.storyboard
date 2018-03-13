@@ -203,7 +203,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fMO-8E-GoC">
-                                                    <rect key="frame" x="173" y="66" width="165" height="44"/>
+                                                    <rect key="frame" x="173" y="65" width="165" height="45"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOCUMENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="932-2I-yon">
                                                             <rect key="frame" x="28.666666666666657" y="0.0" width="109" height="24"/>
@@ -212,7 +212,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wv-sk-5MF">
-                                                            <rect key="frame" x="78" y="20" width="9.6666666666666714" height="24"/>
+                                                            <rect key="frame" x="78" y="21" width="9.6666666666666714" height="24"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -253,7 +253,7 @@
                                             <constraint firstItem="xk5-3p-Ucc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8p1-xM-Udn" secondAttribute="leading" symbolic="YES" id="SKX-g7-Cbh"/>
                                             <constraint firstAttribute="bottom" secondItem="RdY-Vm-cFo" secondAttribute="bottom" constant="5" id="UxF-g2-2yU"/>
                                             <constraint firstItem="RdY-Vm-cFo" firstAttribute="top" secondItem="LwW-La-Xw3" secondAttribute="bottom" id="bDt-Y6-F7d"/>
-                                            <constraint firstItem="fMO-8E-GoC" firstAttribute="top" secondItem="LwW-La-Xw3" secondAttribute="bottom" constant="1" id="dvs-b9-Xbe"/>
+                                            <constraint firstItem="fMO-8E-GoC" firstAttribute="top" secondItem="LwW-La-Xw3" secondAttribute="bottom" id="d6j-Il-BEX"/>
                                             <constraint firstAttribute="trailing" secondItem="LwW-La-Xw3" secondAttribute="trailing" id="lyh-88-FDZ"/>
                                             <constraint firstItem="LwW-La-Xw3" firstAttribute="top" secondItem="xk5-3p-Ucc" secondAttribute="bottom" id="p45-6s-A6U"/>
                                             <constraint firstItem="RdY-Vm-cFo" firstAttribute="leading" secondItem="8p1-xM-Udn" secondAttribute="leading" constant="5" id="u5b-WA-I8w"/>
@@ -275,7 +275,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8g-6v-AIg">
-                                            <rect key="frame" x="141.66666666666666" y="10" width="60" height="30"/>
+                                            <rect key="frame" x="114" y="10" width="60" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -330,7 +330,9 @@
                                         </visualEffectView>
                                     </subviews>
                                 </view>
-                                <blurEffect style="dark"/>
+                                <vibrancyEffect>
+                                    <blurEffect style="dark"/>
+                                </vibrancyEffect>
                             </visualEffectView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5eM-Ih-UfD">
                                 <rect key="frame" x="0.0" y="728" width="375" height="84"/>
@@ -602,8 +604,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Septembre 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qz-Br-IMQ">
-                                            <rect key="frame" x="8" y="8.6666666666666643" width="188.66666666666666" height="34"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" text="Septembre 2018" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qz-Br-IMQ">
+                                            <rect key="frame" x="8" y="8.6666666666666643" width="188.5" height="34"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="190" id="i4e-Vf-NIU"/>
                                             </constraints>
@@ -611,8 +613,8 @@
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-14-40r">
-                                            <rect key="frame" x="201" y="13" width="133.66666666666663" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="100000 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-14-40r">
+                                            <rect key="frame" x="201" y="13" width="133.5" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>

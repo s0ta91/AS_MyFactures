@@ -72,7 +72,6 @@ class GroupViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     //MARK: -  Private functions
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_createGroupView)
