@@ -536,7 +536,7 @@
                                                     <rect key="frame" x="100" y="10" width="243" height="21"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDi-RR-UQp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="164.66666666666666" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="110" height="21"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="etiquette" translatesAutoresizingMaskIntoConstraints="NO" id="lBM-bG-bIm">
                                                                     <rect key="frame" x="0.0" y="3" width="15" height="15"/>
@@ -545,8 +545,8 @@
                                                                         <constraint firstAttribute="width" constant="15" id="aSR-fE-5mE"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="1000.00 €" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNB-V4-QW0">
-                                                                    <rect key="frame" x="15" y="0.0" width="75.666666666666671" height="21"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="100000.00 €" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNB-V4-QW0">
+                                                                    <rect key="frame" x="15" y="0.0" width="95" height="21"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="21" id="kCt-2E-UZk"/>
                                                                     </constraints>
@@ -559,12 +559,14 @@
                                                             <constraints>
                                                                 <constraint firstItem="lBM-bG-bIm" firstAttribute="leading" secondItem="MDi-RR-UQp" secondAttribute="leading" id="7Gk-d2-fBo"/>
                                                                 <constraint firstItem="yNB-V4-QW0" firstAttribute="leading" secondItem="lBM-bG-bIm" secondAttribute="trailing" id="8ec-Uo-VbY"/>
+                                                                <constraint firstAttribute="width" constant="110" id="KVQ-n1-omq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="yNB-V4-QW0" secondAttribute="trailing" id="Kub-Ot-vdT"/>
                                                                 <constraint firstItem="lBM-bG-bIm" firstAttribute="centerY" secondItem="MDi-RR-UQp" secondAttribute="centerY" id="RQP-zR-x6U"/>
                                                                 <constraint firstItem="yNB-V4-QW0" firstAttribute="centerY" secondItem="MDi-RR-UQp" secondAttribute="centerY" id="w0F-UI-sA2"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Boulanger" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MMc-2q-GJl">
-                                                            <rect key="frame" x="164.66666666666669" y="0.0" width="78.333333333333314" height="21"/>
+                                                            <rect key="frame" x="110" y="0.0" width="133" height="21"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="21" id="TA5-8M-Aey"/>
                                                             </constraints>
@@ -741,7 +743,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2013.75" y="-761.61971830985919"/>
+            <point key="canvasLocation" x="-2015.625" y="-762.67605633802816"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hlw-1Z-WaR">
@@ -773,10 +775,9 @@
                                     <constraint firstAttribute="height" constant="44" id="zTu-Fb-tlh"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F8q-Ct-7kK">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8q-Ct-7kK">
                                 <rect key="frame" x="0.0" y="85" width="375" height="727"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="R3r-wA-Nui" id="p45-Kc-Uq4"/>
                                 </connections>
@@ -788,13 +789,18 @@
                             <constraint firstItem="sbB-6L-N8C" firstAttribute="bottom" secondItem="kdA-Nb-rUC" secondAttribute="bottom" id="4w5-Ss-atM"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="top" secondItem="zU2-1J-YUb" secondAttribute="top" id="Avw-Zv-jve"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="Fso-un-Xns"/>
+                            <constraint firstAttribute="bottom" secondItem="F8q-Ct-7kK" secondAttribute="bottom" id="IY0-OI-zcI"/>
                             <constraint firstItem="sbB-6L-N8C" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="aJi-4y-2xR"/>
+                            <constraint firstItem="F8q-Ct-7kK" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="cdx-db-qxn"/>
+                            <constraint firstItem="F8q-Ct-7kK" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="ceB-36-gJj"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="e6s-ZV-JAO"/>
                             <constraint firstItem="sbB-6L-N8C" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="h9C-Gn-eoK"/>
+                            <constraint firstItem="F8q-Ct-7kK" firstAttribute="top" secondItem="kdA-Nb-rUC" secondAttribute="bottom" constant="-3" id="z7p-kU-9q4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zU2-1J-YUb"/>
                     </view>
                     <connections>
+                        <outlet property="ui_navBarImageView" destination="sbB-6L-N8C" id="3iD-Zx-QH1"/>
                         <outlet property="ui_navBarView" destination="kdA-Nb-rUC" id="MCo-yM-zHk"/>
                         <outlet property="ui_scrollView" destination="F8q-Ct-7kK" id="Eza-Ab-Aed"/>
                     </connections>

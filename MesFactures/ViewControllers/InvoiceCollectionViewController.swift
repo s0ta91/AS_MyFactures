@@ -241,8 +241,6 @@ class InvoiceCollectionViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 //MARK: - Extensions

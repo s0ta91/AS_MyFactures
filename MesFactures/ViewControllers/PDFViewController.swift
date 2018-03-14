@@ -14,11 +14,13 @@ class PDFViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var ui_navBarView: UIView!
     @IBOutlet weak var ui_scrollView: UIScrollView!
+    @IBOutlet weak var ui_navBarImageView: UIImageView!
     
     //MARK: - Passsthrough variables
     var _ptManager: Manager?
     var _ptDocumentURL: URL?
     var _ptDocumentType: String?
+    var _ptFontSize: CGFloat?
     
     //MARK: -  Variables
     var ui_jpgImageView: UIImageView!
@@ -77,9 +79,16 @@ class PDFViewController: UIViewController {
                 loadPDF()
             
             case "JPG":
+                print("View")
+                print("width: \(view.frame.size.width)")
+                print("height: \(view.frame.size.height - ui_navBarImageView.frame.size.height)")
+                let scrollViewWidth = view.frame.size.width
+                let scrollViewHeight = view.frame.size.height - ui_navBarImageView.frame.size.height
+                
                 //TODO: Create and configure the imageView
                 if let imageToShow = _manager.getImageFromURL(url: _documentURL) {
                     ui_scrollView.isHidden = false
+                    ui_scrollView.frame = CGRect(x: 0, y: 0, width: scrollViewWidth, height: scrollViewHeight)
                     ui_jpgImageView = UIImageView()
                     ui_jpgImageView.frame = CGRect(x: 0, y: 0, width: ui_scrollView.frame.size.width, height: ui_scrollView.frame.size.height)
                     ui_scrollView.addSubview(ui_jpgImageView)
@@ -90,6 +99,9 @@ class PDFViewController: UIViewController {
                     ui_scrollView.contentSize = imageToShow.size
                     
                     
+                    print("jpgImageView")
+                    print("width: \(ui_jpgImageView.frame.size.width)")
+                    print("height: \(ui_jpgImageView.frame.size.height)")
                     
                     let scrollViewFrame = ui_scrollView.frame
                     let scaleWidth = scrollViewFrame.width / ui_scrollView.contentSize.width

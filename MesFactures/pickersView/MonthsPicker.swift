@@ -13,6 +13,10 @@ class MonthsPicker: UIPickerView {
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     var _monthTextField: UITextField!
+    
+    func selectDefaultRow (forMonthIndex index: Int, forPickerView pickerView: UIPickerView) {
+        pickerView.selectRow(index, inComponent: 0, animated: false)
+    }
 }
 
 extension MonthsPicker: UIPickerViewDataSource {
