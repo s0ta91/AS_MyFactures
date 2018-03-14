@@ -14,11 +14,13 @@ class PDFViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var ui_navBarView: UIView!
     @IBOutlet weak var ui_scrollView: UIScrollView!
+    @IBOutlet weak var ui_navBarImageView: UIImageView!
     
     //MARK: - Passsthrough variables
     var _ptManager: Manager?
     var _ptDocumentURL: URL?
     var _ptDocumentType: String?
+    var _ptFontSize: CGFloat?
     
     //MARK: -  Variables
     var ui_jpgImageView: UIImageView!
@@ -77,9 +79,13 @@ class PDFViewController: UIViewController {
                 loadPDF()
             
             case "JPG":
+                let scrollViewWidth = view.frame.size.width
+                let scrollViewHeight = view.frame.size.height - ui_navBarImageView.frame.size.height
+                
                 //TODO: Create and configure the imageView
                 if let imageToShow = _manager.getImageFromURL(url: _documentURL) {
                     ui_scrollView.isHidden = false
+                    ui_scrollView.frame = CGRect(x: 0, y: 0, width: scrollViewWidth, height: scrollViewHeight)
                     ui_jpgImageView = UIImageView()
                     ui_jpgImageView.frame = CGRect(x: 0, y: 0, width: ui_scrollView.frame.size.width, height: ui_scrollView.frame.size.height)
                     ui_scrollView.addSubview(ui_jpgImageView)
@@ -88,8 +94,6 @@ class PDFViewController: UIViewController {
                     ui_jpgImageView.contentMode = UIViewContentMode.center
                     ui_jpgImageView.frame = CGRect(x: 0, y: 0, width: imageToShow.size.width, height: imageToShow.size.height)
                     ui_scrollView.contentSize = imageToShow.size
-                    
-                    
                     
                     let scrollViewFrame = ui_scrollView.frame
                     let scaleWidth = scrollViewFrame.width / ui_scrollView.contentSize.width
@@ -101,8 +105,6 @@ class PDFViewController: UIViewController {
                     ui_scrollView.zoomScale = minScale
                     
                     centerScrollViewContents()
-                    
-                    print("contentFrame after resizing: \(ui_jpgImageView.frame)")
                 }else {
                     print("No image found at path :\(_documentURL)")
                 }
@@ -115,26 +117,19 @@ class PDFViewController: UIViewController {
     private func centerScrollViewContents () {
         let boundSize = ui_scrollView.bounds.size
         var contentsFrame = ui_jpgImageView.frame
-        print("boundSize: \(boundSize)")
-        print("Stating contentFrame: \(contentsFrame)")
         
         if contentsFrame.size.width < boundSize.width {
-            
             contentsFrame.origin.x = (boundSize.width - contentsFrame.size.width) / 2
-            print("resizing width to :\(contentsFrame.origin.x)")
         }else {
             contentsFrame.origin.x = 0
         }
         
         if contentsFrame.size.height < boundSize.height {
             contentsFrame.origin.y = (boundSize.height - contentsFrame.size.height) / 2
-            print("resizing height to :\(contentsFrame.origin.y)")
         }else {
             contentsFrame.origin.y = 0
         }
-        
         ui_jpgImageView.frame = contentsFrame
-        print("Final contentsFrame: \(contentsFrame)")
     }
     
     private func getDocument () -> PDFDocument? {
@@ -148,7 +143,6 @@ class PDFViewController: UIViewController {
     }
     
     //MARK: - Actions
-    
     @IBAction func cancelViewController(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

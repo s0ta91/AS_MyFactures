@@ -24,6 +24,7 @@ class InvoiceCollectionViewController: UIViewController {
     var _ptManager: Manager?
     var _ptCurrentGroup: Group?
     var _ptYear: Year?
+    var _ptFontSize: CGFloat?
     
     //TODO: Internal variables
     private var _invoiceCollectionManager: Manager!
@@ -36,6 +37,7 @@ class InvoiceCollectionViewController: UIViewController {
     // To define if the list is filtered by a search or not
     private var isListFiltered = false
     var searchText: String = ""
+    var collectionViewFontSize: CGFloat!
     
     let searchButtonImage = UIImage(named: "search(grey)")
     
@@ -44,6 +46,7 @@ class InvoiceCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
+        invoiceCollectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +86,10 @@ class InvoiceCollectionViewController: UIViewController {
         }else {
             fatalError("_year data are missing")
         }
+        
+        if let receivedFontSize = _ptFontSize {
+            collectionViewFontSize = receivedFontSize
+        }
     }
     
     //TODO: Set the navigationBar title with the name of the current group
@@ -90,7 +97,7 @@ class InvoiceCollectionViewController: UIViewController {
         self.title = _invoiceCollectionCurrentGroup.title
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
     }
-    
+
     //TODO: Retrieve the month for the section index
     private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
         let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
@@ -234,8 +241,6 @@ class InvoiceCollectionViewController: UIViewController {
             }
         }
     }
-    
-    
 }
 
 //MARK: - Extensions
@@ -258,7 +263,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
                 monthAmount = String(describing: month.getTotalAmount())
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
-            invoiceHeaderView.setValuesForHeader(headerDate, monthAmount)
+            invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
             return invoiceHeaderView
         default:
             assert(false, "Unexpected element kind")
@@ -277,7 +282,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         guard let month = getCurrentMonth(atIndex: monthIndex) else {fatalError("no month found at index \(monthIndex)")}
         let invoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row)
         if let invoiceToShow = invoice {
-            cell_invoice.setValues(forInvoice: invoiceToShow)
+            cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
         cell_invoice.delegate = self
         cell_invoice.layer.borderWidth = 1.0
@@ -291,6 +296,14 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         return cell_invoice
     }
 }
+
+extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = invoiceCollectionView.frame.size.width
+        return CGSize(width: width, height: 115)
+    }
+}
+
 
 //TODO: Create the delegate to be conform to the cell
 extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
@@ -316,9 +329,10 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     }
     
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
+        guard let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) else {return print("No cell found")}
+        let monthIndex = _monthToShow[indexPath.section]
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
-            let indexPath = invoiceCollectionView.indexPath(for: invoiceCell),
-            let month = getCurrentMonth(atIndex: indexPath.section),
+            let month = getCurrentMonth(atIndex: monthIndex),
             let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
             let invoiceIdentifier = selectedInvoice.identifier,
             let invoiceDocumentExtension = selectedInvoice.documentType,
@@ -328,13 +342,12 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 destinationVC._ptDocumentType = invoiceDocumentExtension
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)
-            }
-            else {
-                let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alertController.addAction(validAction)
-                self.present(alertController, animated: true, completion: nil)
-            }
+        }else {
+            let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+            let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(validAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

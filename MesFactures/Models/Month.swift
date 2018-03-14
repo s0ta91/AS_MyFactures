@@ -173,7 +173,6 @@ class Month: Object {
                 totalAmount = totalAmount + invoice.amount
             }
         }
-        print("totalAmount: \(totalAmount)")
         return totalAmount
     }
 }

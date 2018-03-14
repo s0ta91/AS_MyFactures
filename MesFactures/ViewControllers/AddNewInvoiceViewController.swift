@@ -169,6 +169,9 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            
+            // Set the background color of evry uiPickerVIew to white
+            _pickerView.backgroundColor = .white
         }
     }
     
@@ -389,6 +392,10 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
+            
+            if _modifyInvoice == true {
+                monthsPickerView.selectDefaultRow(forMonthIndex: _group.getMonthIndexFromTable(forMonthName: ui_monthSelectionTextField!.text!), forPickerView: _pickerView)
+            }
         }
         if (textField == ui_groupSelectionTextField) {
             groupPickerView = GroupPicker()

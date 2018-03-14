@@ -40,7 +40,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -57,8 +56,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     ui_connexionButton.isHidden = true
                     unlockWithBiometrics()
                 }
-            }else {
-                ui_createNewPasswordButton.isHidden = false
             }
         }
     }

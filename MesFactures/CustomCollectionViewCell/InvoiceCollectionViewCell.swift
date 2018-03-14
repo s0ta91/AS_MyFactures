@@ -28,7 +28,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     //TODO: Create a function to set values for the cell
-    func setValues (forInvoice invoice: Invoice) {
+    func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
         guard let _manager = _ptManager else {fatalError("passthrough _ptManager does not exists")}
         var imageToShow = UIImage(named: "missing_document")
         if let invoiceIdentifier = invoice.identifier,
@@ -48,6 +48,13 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         ui_categoryLabel.text = invoice.categoryObject?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription
         _manager.convertToCurrencyNumber(forLabel: ui_amountLabel)
+        setFontSize(with: fontSize)
+    }
+    
+    func setFontSize (with fontSize: CGFloat) {
+        ui_amountLabel.font = ui_amountLabel.font.withSize(fontSize)
+        ui_categoryLabel.font = ui_categoryLabel.font.withSize(fontSize)
+        ui_invoiceTitleLabel.font = ui_invoiceTitleLabel.font.withSize(fontSize)
     }
     
     //MARK: - IBActions
