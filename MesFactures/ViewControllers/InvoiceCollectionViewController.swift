@@ -329,9 +329,10 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     }
     
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
+        guard let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) else {return print("No cell found")}
+        let monthIndex = _monthToShow[indexPath.section]
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
-            let indexPath = invoiceCollectionView.indexPath(for: invoiceCell),
-            let month = getCurrentMonth(atIndex: indexPath.section),
+            let month = getCurrentMonth(atIndex: monthIndex),
             let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
             let invoiceIdentifier = selectedInvoice.identifier,
             let invoiceDocumentExtension = selectedInvoice.documentType,
@@ -341,13 +342,12 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 destinationVC._ptDocumentType = invoiceDocumentExtension
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)
-            }
-            else {
-                let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alertController.addAction(validAction)
-                self.present(alertController, animated: true, completion: nil)
-            }
+        }else {
+            let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+            let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(validAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 }
 

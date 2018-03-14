@@ -79,9 +79,6 @@ class PDFViewController: UIViewController {
                 loadPDF()
             
             case "JPG":
-                print("View")
-                print("width: \(view.frame.size.width)")
-                print("height: \(view.frame.size.height - ui_navBarImageView.frame.size.height)")
                 let scrollViewWidth = view.frame.size.width
                 let scrollViewHeight = view.frame.size.height - ui_navBarImageView.frame.size.height
                 
@@ -98,11 +95,6 @@ class PDFViewController: UIViewController {
                     ui_jpgImageView.frame = CGRect(x: 0, y: 0, width: imageToShow.size.width, height: imageToShow.size.height)
                     ui_scrollView.contentSize = imageToShow.size
                     
-                    
-                    print("jpgImageView")
-                    print("width: \(ui_jpgImageView.frame.size.width)")
-                    print("height: \(ui_jpgImageView.frame.size.height)")
-                    
                     let scrollViewFrame = ui_scrollView.frame
                     let scaleWidth = scrollViewFrame.width / ui_scrollView.contentSize.width
                     let scaleHeight = scrollViewFrame.height / ui_scrollView.contentSize.height
@@ -113,8 +105,6 @@ class PDFViewController: UIViewController {
                     ui_scrollView.zoomScale = minScale
                     
                     centerScrollViewContents()
-                    
-                    print("contentFrame after resizing: \(ui_jpgImageView.frame)")
                 }else {
                     print("No image found at path :\(_documentURL)")
                 }
@@ -127,26 +117,19 @@ class PDFViewController: UIViewController {
     private func centerScrollViewContents () {
         let boundSize = ui_scrollView.bounds.size
         var contentsFrame = ui_jpgImageView.frame
-        print("boundSize: \(boundSize)")
-        print("Stating contentFrame: \(contentsFrame)")
         
         if contentsFrame.size.width < boundSize.width {
-            
             contentsFrame.origin.x = (boundSize.width - contentsFrame.size.width) / 2
-            print("resizing width to :\(contentsFrame.origin.x)")
         }else {
             contentsFrame.origin.x = 0
         }
         
         if contentsFrame.size.height < boundSize.height {
             contentsFrame.origin.y = (boundSize.height - contentsFrame.size.height) / 2
-            print("resizing height to :\(contentsFrame.origin.y)")
         }else {
             contentsFrame.origin.y = 0
         }
-        
         ui_jpgImageView.frame = contentsFrame
-        print("Final contentsFrame: \(contentsFrame)")
     }
     
     private func getDocument () -> PDFDocument? {
@@ -160,7 +143,6 @@ class PDFViewController: UIViewController {
     }
     
     //MARK: - Actions
-    
     @IBAction func cancelViewController(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
