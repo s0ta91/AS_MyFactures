@@ -393,11 +393,8 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
             
-            if let monthName = ui_monthSelectionTextField.text,
-                let currentMonthIndex = _group.getMonthIndexFromTable(forMonthName: monthName) {
-                monthsPickerView.selectDefaultRow(forMonthIndex: currentMonthIndex, forPickerView: _pickerView)
-            }else {
-                monthsPickerView.selectDefaultRow(forMonthIndex: 0, forPickerView: _pickerView)
+            if _modifyInvoice == true {
+                monthsPickerView.selectDefaultRow(forMonthIndex: _group.getMonthIndexFromTable(forMonthName: ui_monthSelectionTextField!.text!), forPickerView: _pickerView)
             }
         }
         if (textField == ui_groupSelectionTextField) {
