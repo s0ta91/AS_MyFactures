@@ -169,6 +169,9 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            
+            // Set the background color of evry uiPickerVIew to white
+            _pickerView.backgroundColor = .white
         }
     }
     
