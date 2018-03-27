@@ -445,7 +445,7 @@
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="8d6-5Z-sfR"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Créer le groupe"/>
+                            <state key="normal" title="Valider"/>
                             <connections>
                                 <action selector="createNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="kSS-dx-tUu"/>
                             </connections>

@@ -115,7 +115,7 @@ class ManageCategoryTableViewController: UIViewController {
             if ui_addNewCategoryButton.titleLabel?.text == "Créer" {
                 _ = _manager.addCategory(newCategoryName)
             }
-            else if ui_addNewCategoryButton.titleLabel?.text == "Modifier" {
+            else if ui_addNewCategoryButton.titleLabel?.text == "Valider" {
                 _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
             }
             ui_manageCategoryTableView.reloadData()
@@ -164,7 +164,7 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
                 self._selectedCategoryToModify = category
                 self.ui_modifyCategoryTextField.text = category.title
                 self.ui_modifyCategoryTextField.becomeFirstResponder()
-                self.ui_addNewCategoryButton.setTitle("Modifier", for: .normal)
+                self.ui_addNewCategoryButton.setTitle("Valider", for: .normal)
                 self.animateIn(forSubview: self.ui_modifyCategoryView)
             }
         }

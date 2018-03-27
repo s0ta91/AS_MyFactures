@@ -122,7 +122,7 @@ class GroupViewController: UIViewController {
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
-        ui_addGroupButton.setTitle("Valider", for: .normal)
+//        ui_addGroupButton.setTitle("Valider", for: .normal)
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
@@ -252,7 +252,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
                     self.ui_newGroupNameTextField.text = group.title
-                    self.ui_addGroupButton.setTitle("Modifier", for: .normal)
+//                    self.ui_addGroupButton.setTitle("Modifier", for: .normal)
                     self.ui_newGroupNameTextField.becomeFirstResponder()
                     self._groupToModify = group
                     self.animateIn()
@@ -275,7 +275,6 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             alertDeletion.addAction(deleteAction)
             alertDeletion.addAction(cancelDeletion)
             self.present(alertDeletion, animated: true, completion: nil)
-            
         }
         
         let cancel = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
@@ -284,7 +283,6 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         actionSheet.addAction(cancel)
         self.present(actionSheet, animated: true, completion: nil)
     }
-
 }
 
 extension GroupViewController: UISearchBarDelegate {
