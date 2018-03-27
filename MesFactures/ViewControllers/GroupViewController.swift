@@ -183,6 +183,7 @@ class GroupViewController: UIViewController {
             }
         }
         
+        // FIXME: Bug here when swipe on groupCell to the right in the cell. selectedGroup is nil so the App crash
         if segue.identifier == "show_invoiceCollectionVC" {
             if let destinationVC = segue.destination as? InvoiceCollectionViewController,
                 let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
@@ -191,6 +192,8 @@ class GroupViewController: UIViewController {
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
                     destinationVC._ptFontSize = collectionViewFontSize
+            }else {
+                fatalError("One of these variable is nil (destinationVC / selectedGroupindex / selectedGroup)")
             }
         }
     }
