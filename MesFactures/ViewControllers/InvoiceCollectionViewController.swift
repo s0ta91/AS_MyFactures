@@ -100,7 +100,6 @@ class InvoiceCollectionViewController: UIViewController {
 
     //TODO: Retrieve the month for the section index
     private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
-        print("invoiceManager: \(_invoiceCollectionManager)")
         let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
         let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
         if month != nil {
