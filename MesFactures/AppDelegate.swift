@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import IQKeyboardManagerSwift
+import Buglife
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        })
 //        Realm.Configuration.defaultConfiguration = config
+        
+        Buglife.shared().start(withAPIKey: "H9aZT1n1CeWjSu0B7r9IWQtt")
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

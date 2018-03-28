@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Buglife
 
 class SettingsViewController: UIViewController {
 
@@ -43,6 +44,14 @@ class SettingsViewController: UIViewController {
 
 
     //MARK: - Actions
+    
+    @IBAction func reportBug(_ sender: UIButton) {
+        let appearance = Buglife.shared().appearance
+        appearance.barTintColor = UIColor(named: "navBarTint")
+        appearance.tintColor = .white
+        Buglife.shared().presentReporter()
+    }
+    
     @IBAction func cancelSettingsVC(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
