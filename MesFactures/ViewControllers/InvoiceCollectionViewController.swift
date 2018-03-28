@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import DZNEmptyDataSet
 
 class InvoiceCollectionViewController: UIViewController {
     
@@ -47,6 +48,7 @@ class InvoiceCollectionViewController: UIViewController {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
+        invoiceCollectionView.emptyDataSetSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -154,9 +156,11 @@ class InvoiceCollectionViewController: UIViewController {
                     // If there isn't any invoice left we need to delete the section from the collectionView
                     if self.getNumberOfInvoice(atMonthIndex: monthIndex) == 0 {
                         self.invoiceCollectionView.deleteSections(sectionIndexSet)
+                        self.invoiceCollectionView.reloadData()
                     }else { // otherwise we can delete only the item
                         self.invoiceCollectionView.deleteItems(at: [indexPath])
                         self.invoiceCollectionView.reloadSections(sectionIndexSet)
+                        self.invoiceCollectionView.reloadData()
                     }
                 })
                 
@@ -383,5 +387,16 @@ extension InvoiceCollectionViewController: UISearchBarDelegate {
             self.searchText = ""
         }
         invoiceCollectionView.reloadData()
+    }
+}
+
+extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "documentCollectionViewBackground_128")
+    }
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let str = "Tapez sur l'icone 'Nouvelle facture' pour ajouter une facture"
+        let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attr)
     }
 }

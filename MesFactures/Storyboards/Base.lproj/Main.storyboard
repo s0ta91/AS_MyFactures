@@ -444,9 +444,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="672"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <vibrancyEffect>
-                                    <blurEffect style="dark"/>
-                                </vibrancyEffect>
+                                <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
                                 <rect key="frame" x="0.0" y="140" width="375" height="0.0"/>
@@ -501,7 +499,7 @@
                                         <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouveau groupe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-hh-p1l">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouveau dossier" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-hh-p1l">
                                         <rect key="frame" x="141.66666666666666" y="33" width="92" height="17"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                         <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -551,7 +549,7 @@
                     <navigationItem key="navigationItem" title="Dossiers" id="Wj2-wx-S0b">
                         <barButtonItem key="leftBarButtonItem" image="settings" id="CtK-x0-BdT">
                             <connections>
-                                <segue destination="N32-CI-Qz7" kind="presentation" id="OIL-RT-T9W"/>
+                                <segue destination="N32-CI-Qz7" kind="presentation" modalTransitionStyle="flipHorizontal" id="OIL-RT-T9W"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="search(grey)" id="f9Q-hc-O8F">
