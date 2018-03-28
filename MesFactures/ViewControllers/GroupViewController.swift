@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DZNEmptyDataSet
 
 class GroupViewController: UIViewController {
     
@@ -50,6 +51,9 @@ class GroupViewController: UIViewController {
         super.viewDidLoad()
         groupCV.dataSource = self
         groupCV.delegate = self
+        
+        groupCV.emptyDataSetSource = self
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -272,6 +276,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
                         self._currentYear.removeGroup(atIndex: groupIndex)
                         self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
                         self.groupCV.deleteItems(at: [indexPath])
+                        self.groupCV.reloadData()
                 }
             })
             let cancelDeletion = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
@@ -314,6 +319,19 @@ extension GroupViewController: UISearchBarDelegate {
         DispatchQueue.main.async {
             searchBar.resignFirstResponder()
         }
+    }
+}
+
+extension GroupViewController: DZNEmptyDataSetSource {
+    
+    func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
+        return UIImage(named: "folderCollectionViewBackground_128")
+    }
+
+    func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
+        let str = "Tapez sur l'icone 'Nouveau dossier' ci-dessous pour créer un dossier"
+        let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        return NSAttributedString(string: str, attributes: attr)
     }
 }
 
