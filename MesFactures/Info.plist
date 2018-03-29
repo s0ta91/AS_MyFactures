@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to your camera to take a photo</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow access to upload your photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Abuget.ttf</string>
@@ -35,13 +39,7 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to upload your photo</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Please allow access to your camera to take a photo</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
