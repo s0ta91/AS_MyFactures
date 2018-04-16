@@ -200,7 +200,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4oa-fO-Y9k">
                                         <rect key="frame" x="16" y="2" width="311" height="36"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
-                                        <state key="normal" title="Rapporter un bug">
+                                        <state key="normal" title="Contact / Rapporter un bug">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -264,6 +264,9 @@
                                 <state key="normal" title="CONTACT">
                                     <color key="titleColor" red="0.37254901959999998" green="0.49019607840000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="contactButtonPressed:" destination="VFO-Wq-h3u" eventType="touchUpInside" id="Vtr-1D-QjB"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mesfactures 1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkR-Z2-hJa">
                                 <rect key="frame" x="119.66666666666669" y="754.66666666666663" width="135" height="23.333333333333371"/>
@@ -303,7 +306,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="aboutView" destination="VnC-PK-1sa" id="ZkH-kX-ysC"/>
                         <outlet property="cgvView" destination="Tc9-LW-CYO" id="hmH-Wg-ENZ"/>
+                        <outlet property="contactButton" destination="VNh-e6-bgf" id="RaT-Tz-LnO"/>
                         <outlet property="firstCategoryView" destination="b1R-zC-cXL" id="z8j-j8-aCw"/>
                         <outlet property="resetPasswordSubcategoryView" destination="htJ-WW-JPY" id="lEr-o6-Gbb"/>
                     </connections>
