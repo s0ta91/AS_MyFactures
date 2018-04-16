@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController {
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = .white
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

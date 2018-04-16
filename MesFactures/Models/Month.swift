@@ -134,8 +134,8 @@ class Month: Object {
         do {
             try realm?.commitWrite()
         }catch {
-            print("Invoice has not been deleted.")
-            print("Restoring it's totalAmount and TotalDocument values")
+//            print("Invoice has not been deleted.")
+//            print("Restoring it's totalAmount and TotalDocument values")
             setTotalAmount(invoice.amount, .add)
             setTotalDocument(.add)
         }

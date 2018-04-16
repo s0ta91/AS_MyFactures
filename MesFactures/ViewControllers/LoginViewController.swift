@@ -28,13 +28,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         /** DEBUG **/
 //        DbManager().reInitMasterPassword()
         
-        /** Set the font for title **/
+        // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         
-        /** Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain  **/
+        // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         showHideCreateNewPasswordButton()
         
-        /** Delegation for password textField **/
+        // Delegation for password textField
         self.ui_passwordTextField.delegate = self
     }
     

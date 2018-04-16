@@ -24,6 +24,8 @@
 	<string>Please allow access to your camera to take a photo</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Please allow access to upload your photo</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Allow Access to faceID recognition</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Abuget.ttf</string>

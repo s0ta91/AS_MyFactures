@@ -149,7 +149,7 @@ class InvoiceCollectionViewController: UIViewController {
                 let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
                 let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
                     
-                    // Delete the photo from the database
+                    // Delete invoice object from DB
                     _ = month.removeInvoice(invoice: invoiceToDelete)
                     month.removeFromInvoiceToShow (atIndex: indexPath.row)
                     
@@ -306,7 +306,6 @@ extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: 115)
     }
 }
-
 
 //TODO: Create the delegate to be conform to the cell
 extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
