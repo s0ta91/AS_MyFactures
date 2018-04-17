@@ -217,7 +217,10 @@ class Manager {
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = NumberFormatter.Style.currency
         currencyFormatter.locale = NSLocale.autoupdatingCurrent
-        if let amountString = textFieldToConvert?.text,
+//        currencyFormatter.locale = Locale(identifier: "fr-FR")
+        currencyFormatter.decimalSeparator = "."
+        
+        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
             let amountDouble = Double(amountString) {
             let amountNumber = NSNumber(value: amountDouble)
             if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
