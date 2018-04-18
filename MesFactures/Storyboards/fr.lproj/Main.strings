@@ -1,0 +1,192 @@
+
+/* Class = "UITextField"; placeholder = "Entrez votre mot de passe..."; ObjectID = "0Df-Cs-8WS"; */
+"0Df-Cs-8WS.placeholder" = "Entrez votre mot de passe...";
+
+/* Class = "UIButton"; normalTitle = "Réinitialiser le mot de passe"; ObjectID = "1Bk-I6-spS"; */
+"1Bk-I6-spS.normalTitle" = "Réinitialiser le mot de passe";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "1ZH-NR-pBV"; */
+"1ZH-NR-pBV.text" = "Description";
+
+/* Class = "UILabel"; text = "Ancien mot de passe"; ObjectID = "3gq-8b-CoE"; */
+"3gq-8b-CoE.text" = "Ancien mot de passe";
+
+/* Class = "UILabel"; text = "5"; ObjectID = "3wv-sk-5MF"; */
+"3wv-sk-5MF.text" = "5";
+
+/* Class = "UIButton"; normalTitle = "Créer"; ObjectID = "4Pd-Yz-zyc"; */
+"4Pd-Yz-zyc.normalTitle" = "Créer";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "4SU-JZ-ITp"; */
+"4SU-JZ-ITp.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Rapporter un bug"; ObjectID = "4oa-fO-Y9k"; */
+"4oa-fO-Y9k.normalTitle" = "Rapporter un bug";
+
+/* Class = "UILabel"; text = "Mois"; ObjectID = "6jO-05-mdG"; */
+"6jO-05-mdG.text" = "Mois";
+
+/* Class = "UIButton"; normalTitle = "..."; ObjectID = "6qy-QY-PwY"; */
+"6qy-QY-PwY.normalTitle" = "...";
+
+/* Class = "UIButton"; normalTitle = "Valider"; ObjectID = "7Z5-cd-M6K"; */
+"7Z5-cd-M6K.normalTitle" = "Valider";
+
+/* Class = "UILabel"; text = "Septembre 2018"; ObjectID = "8Qz-Br-IMQ"; */
+"8Qz-Br-IMQ.text" = "Septembre 2018";
+
+/* Class = "UILabel"; text = "DOCUMENTS"; ObjectID = "932-2I-yon"; */
+"932-2I-yon.text" = "DOCUMENTS";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Atk-yg-hmA"; */
+"Atk-yg-hmA.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Créer un mot de passe"; ObjectID = "BSc-bF-X22"; */
+"BSc-bF-X22.normalTitle" = "Créer un mot de passe";
+
+/* Class = "UILabel"; text = "100000 €"; ObjectID = "BTK-14-40r"; */
+"BTK-14-40r.text" = "100000 €";
+
+/* Class = "UILabel"; text = "100000"; ObjectID = "Bta-nK-HT1"; */
+"Bta-nK-HT1.text" = "100000";
+
+/* Class = "UILabel"; text = "Changer d'année"; ObjectID = "CbX-l5-1eY"; */
+"CbX-l5-1eY.text" = "Changer d'année";
+
+/* Class = "UIButton"; normalTitle = "Ajouter"; ObjectID = "Cwp-ht-Ewx"; */
+"Cwp-ht-Ewx.normalTitle" = "Ajouter";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "DFt-jV-uN3"; */
+"DFt-jV-uN3.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Nom de la catégorie ..."; ObjectID = "E97-Vo-UpH"; */
+"E97-Vo-UpH.placeholder" = "Nom de la catégorie ...";
+
+/* Class = "UILabel"; text = "Nouveau dossier"; ObjectID = "KGe-hh-p1l"; */
+"KGe-hh-p1l.text" = "Nouveau dossier";
+
+/* Class = "UILabel"; text = "Achats en ligne njiznjcdbjinvo"; ObjectID = "LwW-La-Xw3"; */
+"LwW-La-Xw3.text" = "Achats en ligne njiznjcdbjinvo";
+
+/* Class = "UIButton"; normalTitle = "Terminer"; ObjectID = "M8M-XB-cr7"; */
+"M8M-XB-cr7.normalTitle" = "Terminer";
+
+/* Class = "UINavigationItem"; title = "Sélection de l'année"; ObjectID = "MIh-5H-pF0"; */
+"MIh-5H-pF0.title" = "Sélection de l'année";
+
+/* Class = "UILabel"; text = "Boulanger"; ObjectID = "MMc-2q-GJl"; */
+"MMc-2q-GJl.text" = "Boulanger";
+
+/* Class = "UIButton"; normalTitle = "Créer"; ObjectID = "NNm-sl-e8X"; */
+"NNm-sl-e8X.normalTitle" = "Créer";
+
+/* Class = "UILabel"; text = "Document Ajouté"; ObjectID = "OIm-nc-13H"; */
+"OIm-nc-13H.text" = "Document Ajouté";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "R8g-6v-AIg"; */
+"R8g-6v-AIg.text" = "Label";
+
+/* Class = "UITextField"; text = "Mes Factures"; ObjectID = "RZg-Pt-dGW"; */
+"RZg-Pt-dGW.text" = "Mes Factures";
+
+/* Class = "UILabel"; text = "Catégories"; ObjectID = "Rmd-j5-vtM"; */
+"Rmd-j5-vtM.text" = "Catégories";
+
+/* Class = "UITextField"; placeholder = "Nom de la catégorie ..."; ObjectID = "Sh1-Vj-aLb"; */
+"Sh1-Vj-aLb.placeholder" = "Nom de la catégorie ...";
+
+/* Class = "UITextField"; placeholder = "Nom du groupe ..."; ObjectID = "SlU-rg-RpY"; */
+"SlU-rg-RpY.placeholder" = "Nom du groupe ...";
+
+/* Class = "UIButton"; normalTitle = "Valider"; ObjectID = "TyD-Qf-xEY"; */
+"TyD-Qf-xEY.normalTitle" = "Valider";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "UAL-jF-2DQ"; */
+"UAL-jF-2DQ.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "CONTACT"; ObjectID = "VNh-e6-bgf"; */
+"VNh-e6-bgf.normalTitle" = "CONTACT";
+
+/* Class = "UIButton"; normalTitle = "Annuler"; ObjectID = "VTI-aw-vCM"; */
+"VTI-aw-vCM.normalTitle" = "Annuler";
+
+/* Class = "UILabel"; text = "Nouveau mot de passe"; ObjectID = "W9n-d6-y6s"; */
+"W9n-d6-y6s.text" = "Nouveau mot de passe";
+
+/* Class = "UILabel"; text = "Montant"; ObjectID = "WLZ-2n-TCQ"; */
+"WLZ-2n-TCQ.text" = "Montant";
+
+/* Class = "UINavigationItem"; title = "Dossiers"; ObjectID = "Wj2-wx-S0b"; */
+"Wj2-wx-S0b.title" = "Dossiers";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YH5-Dy-pnG"; */
+"YH5-Dy-pnG.text" = "Label";
+
+/* Class = "UITextField"; text = "0.00"; ObjectID = "Yh9-1a-Erf"; */
+"Yh9-1a-Erf.text" = "0.00";
+
+/* Class = "UIButton"; normalTitle = "Supprimer"; ObjectID = "a6X-EZ-nrs"; */
+"a6X-EZ-nrs.normalTitle" = "Supprimer";
+
+/* Class = "UINavigationItem"; title = "Gestion des catégories"; ObjectID = "aDC-3A-06C"; */
+"aDC-3A-06C.title" = "Gestion des catégories";
+
+/* Class = "UILabel"; text = "ASSISTANCE"; ObjectID = "ebQ-fS-L1C"; */
+"ebQ-fS-L1C.text" = "ASSISTANCE";
+
+/* Class = "UIButton"; normalTitle = "Annuler"; ObjectID = "egP-Bm-Isw"; */
+"egP-Bm-Isw.normalTitle" = "Annuler";
+
+/* Class = "UIButton"; normalTitle = "Annuler"; ObjectID = "ehC-7D-6wp"; */
+"ehC-7D-6wp.normalTitle" = "Annuler";
+
+/* Class = "UILabel"; text = "Catégorie"; ObjectID = "hIn-ia-eGm"; */
+"hIn-ia-eGm.text" = "Catégorie";
+
+/* Class = "UILabel"; text = "Ajouter un document"; ObjectID = "hgq-cl-JvN"; */
+"hgq-cl-JvN.text" = "Ajouter un document";
+
+/* Class = "UILabel"; text = "Aspirateur Dyson v8"; ObjectID = "ihm-5W-wYp"; */
+"ihm-5W-wYp.text" = "Aspirateur Dyson v8";
+
+/* Class = "UILabel"; text = "TOTAL"; ObjectID = "jPa-qy-NxT"; */
+"jPa-qy-NxT.text" = "TOTAL";
+
+/* Class = "UIButton"; normalTitle = "Modifier"; ObjectID = "leU-qq-Dx2"; */
+"leU-qq-Dx2.normalTitle" = "Modifier";
+
+/* Class = "UITextField"; placeholder = "Créez votre mot de passe..."; ObjectID = "oUb-vn-rbh"; */
+"oUb-vn-rbh.placeholder" = "Créez votre mot de passe...";
+
+/* Class = "UILabel"; text = "Année"; ObjectID = "p83-jd-i6d"; */
+"p83-jd-i6d.text" = "Année";
+
+/* Class = "UITextField"; placeholder = "Sélectionner une catégorie (Optionnel)"; ObjectID = "pUU-ka-z15"; */
+"pUU-ka-z15.placeholder" = "Sélectionner une catégorie (Optionnel)";
+
+/* Class = "UINavigationItem"; title = "Ajouter une facture"; ObjectID = "s3T-LL-EGX"; */
+"s3T-LL-EGX.title" = "Ajouter une facture";
+
+/* Class = "UIButton"; normalTitle = "Connexion"; ObjectID = "slb-lc-DB2"; */
+"slb-lc-DB2.normalTitle" = "Connexion";
+
+/* Class = "UILabel"; text = "Dossier"; ObjectID = "wZq-nw-jpR"; */
+"wZq-nw-jpR.text" = "Dossier";
+
+/* Class = "UILabel"; text = "Nouvelle facture"; ObjectID = "wuU-DV-mzG"; */
+"wuU-DV-mzG.text" = "Nouvelle facture";
+
+/* Class = "UITextField"; placeholder = "Entrez une description"; ObjectID = "xXh-de-DgM"; */
+"xXh-de-DgM.placeholder" = "Entrez une description";
+
+/* Class = "UIButton"; normalTitle = "..."; ObjectID = "xk5-3p-Ucc"; */
+"xk5-3p-Ucc.normalTitle" = "...";
+
+/* Class = "UILabel"; text = "Mesfactures 1.0.0"; ObjectID = "xkR-Z2-hJa"; */
+"xkR-Z2-hJa.text" = "Mesfactures 1.0.0";
+
+/* Class = "UITextField"; text = "Mes Factures"; ObjectID = "y9Z-UM-0vf"; */
+"y9Z-UM-0vf.text" = "Mes Factures";
+
+/* Class = "UILabel"; text = "100000.00 €"; ObjectID = "yNB-V4-QW0"; */
+"yNB-V4-QW0.text" = "100000.00 €";

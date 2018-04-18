@@ -8,6 +8,7 @@
 
 import UIKit
 import Buglife
+import Crashlytics
 
 class SettingsViewController: UIViewController {
 
@@ -16,12 +17,15 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var firstCategoryView: UIView!
     @IBOutlet weak var resetPasswordSubcategoryView: UIView!
     @IBOutlet weak var cgvView: UIView!
-    @IBOutlet weak var contactView: UIView!
+    @IBOutlet weak var aboutView: UIView!
+    @IBOutlet weak var contactButton: UIButton!
     
     
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        contactButton.isHidden = true
+        navigationController?.navigationBar.tintColor = .white
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,7 +40,7 @@ class SettingsViewController: UIViewController {
     func setBottomBorderForViews () {
         let grayColor = UIColor.lightGray
         let viewWidth: CGFloat = 1
-        let viewList = [firstCategoryView,resetPasswordSubcategoryView,cgvView,contactView]
+        let viewList = [firstCategoryView,resetPasswordSubcategoryView,cgvView,aboutView]
         for view in viewList {
             view?.addBottomBorderWithColor(color: grayColor, width: viewWidth)
         }
@@ -50,6 +54,9 @@ class SettingsViewController: UIViewController {
         appearance.barTintColor = UIColor(named: "navBarTint")
         appearance.tintColor = .white
         Buglife.shared().presentReporter()
+    }
+    
+    @IBAction func contactButtonPressed(_ sender: UIButton) {
     }
     
     @IBAction func cancelSettingsVC(_ sender: UIBarButtonItem) {

@@ -23,6 +23,7 @@
 		1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079520233FF4002F745C /* LaunchScreen.storyboard */; };
 		1D4B07A220233FF4002F745C /* MesFacturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07A120233FF4002F745C /* MesFacturesTests.swift */; };
 		1D4B07AD20233FF4002F745C /* MesFacturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */; };
+		1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4FDFE12084743400208108 /* AboutViewController.swift */; };
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
@@ -91,6 +92,9 @@
 		1D4B07A820233FF4002F745C /* MesFacturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MesFacturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesFacturesUITests.swift; sourceTree = "<group>"; };
 		1D4B07AE20233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +273,7 @@
 				1D00D4CF2044169F00759E9F /* PDFViewController.swift */,
 				1D370E17206A81E1005583BB /* SettingsViewController.swift */,
 				1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */,
+				1D4FDFE12084743400208108 /* AboutViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -352,7 +357,7 @@
 				1D4B078620233FF4002F745C /* Frameworks */,
 				1D4B078720233FF4002F745C /* Resources */,
 				E6FED2390AD44954F5413791 /* [CP] Embed Pods Frameworks */,
-				04F8CC462897C08B968744B3 /* [CP] Copy Pods Resources */,
+				1D65B47D2085DE3D00080C2A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -371,8 +376,6 @@
 				1D4B079920233FF4002F745C /* Sources */,
 				1D4B079A20233FF4002F745C /* Frameworks */,
 				1D4B079B20233FF4002F745C /* Resources */,
-				41F3F0E8F2DC3E23B569BF3C /* [CP] Embed Pods Frameworks */,
-				374BE4DA52875F36B681611D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -392,8 +395,6 @@
 				1D4B07A420233FF4002F745C /* Sources */,
 				1D4B07A520233FF4002F745C /* Frameworks */,
 				1D4B07A620233FF4002F745C /* Resources */,
-				2CFEA083BE46024019521D55 /* [CP] Embed Pods Frameworks */,
-				84FD66C5719AE2959A6A033A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -412,7 +413,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Sébastien Constant";
 				TargetAttributes = {
 					1D4B078820233FF4002F745C = {
@@ -481,20 +482,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		04F8CC462897C08B968744B3 /* [CP] Copy Pods Resources */ = {
+		1D65B47D2085DE3D00080C2A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" cd36415c6aedb89925857123a7d30d17be8d13e0 4512f55a185be3d3052cc35f62a0f20ab31d18babf2271b0e3dab2700d9f70e8";
 		};
 		20AD8486F7EEA20B43EECB1F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -512,66 +511,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2CFEA083BE46024019521D55 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		374BE4DA52875F36B681611D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		41F3F0E8F2DC3E23B569BF3C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		84FD66C5719AE2959A6A033A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BAEBD57DA9AB2F06D2A968BD /* [CP] Check Pods Manifest.lock */ = {
@@ -659,6 +598,7 @@
 				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
+				1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */,
 				1DB07FC82031FCAE00BDDDFB /* Invoice.swift in Sources */,
 				1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
@@ -715,6 +655,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1D4B079120233FF4002F745C /* Base */,
+				1D4FDFC12074D72400208108 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -723,6 +664,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				1D4B079620233FF4002F745C /* Base */,
+				1D4FDFC22074D72400208108 /* fr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -734,6 +676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -744,6 +687,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -751,6 +695,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -761,7 +706,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -778,7 +723,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -791,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -801,6 +747,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -808,6 +755,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -829,7 +777,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -845,11 +793,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
 				INFOPLIST_FILE = MesFactures/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = s0ta.MesFactures;
+				PRODUCT_BUNDLE_IDENTIFIER = sconstant.MesFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -861,11 +810,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
 				INFOPLIST_FILE = MesFactures/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = s0ta.MesFactures;
+				PRODUCT_BUNDLE_IDENTIFIER = sconstant.MesFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
