@@ -30,6 +30,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
+        ui_mesfacturesTextField.text = "MyFactures"
         
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         showHideCreateNewPasswordButton()
@@ -63,7 +64,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func unlockWithBiometrics () {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MesFactures", reply: { (isOwnerConfirmed, authError) in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MyFactures", reply: { (isOwnerConfirmed, authError) in
                 /**
                     Going back from secondary traitment to firt traitment /
                     Revenir à l'éxécution du code a premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée

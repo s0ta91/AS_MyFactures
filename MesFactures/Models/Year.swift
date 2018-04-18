@@ -77,6 +77,9 @@ class Year: Object {
         return groupNameExists
     }
     
+    func getGlobalGroupCount () -> Int {
+        return _groupList.count
+    }
     
     func getGroupCount () -> Int{
         return _groupListToShow.count
