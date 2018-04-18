@@ -49,7 +49,7 @@ extension SelectYearViewController: UITableViewDataSource {
         let cell_yearSelection = tableView.dequeueReusableCell(withIdentifier: "cell_yearSelection", for: indexPath) as! SelectYearTableViewCell
         if let year = _manager.getYear(atIndex: indexPath.row) {
             let yearString = String(describing: year.year)
-            let nbGroupForYear = year.getGroupCount()
+            let nbGroupForYear = year.getGlobalGroupCount()
             var numberOfGroup: String {
                 if nbGroupForYear > 1 {
                     return "\(nbGroupForYear) groupes"
