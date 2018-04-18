@@ -10,13 +10,14 @@ import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var ui_myfacturesTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        self.passwordTextField.delegate = self
+        ui_myfacturesTextField.text = "MyFactures"
+        passwordTextField.delegate = self
     }
     
     override func viewDidLoad() {
