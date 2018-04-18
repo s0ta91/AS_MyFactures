@@ -33,7 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        })
 //        Realm.Configuration.defaultConfiguration = config
         
-        Buglife.shared().start(withAPIKey: "H9aZT1n1CeWjSu0B7r9IWQtt")
+//        Buglife.shared().start(withAPIKey: "H9aZT1n1CeWjSu0B7r9IWQtt")
+        Buglife.shared().start(withEmail: "myfacturesapp@gmail.com")
         
         IQKeyboardManager.sharedManager().enable = true
         IQKeyboardManager.sharedManager().enableAutoToolbar = false

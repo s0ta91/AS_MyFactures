@@ -20,7 +20,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,7 +31,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trees_BGimage" translatesAutoresizingMaskIntoConstraints="NO" id="c2l-pK-DFJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mes Factures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RZg-Pt-dGW">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="MyFactures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RZg-Pt-dGW">
                                 <rect key="frame" x="16" y="94" width="343" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -139,7 +139,7 @@
         <!--Settings View Controller-->
         <scene sceneID="bHL-jp-Wkx">
             <objects>
-                <viewController id="VFO-Wq-h3u" customClass="SettingsViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VFO-Wq-h3u" customClass="SettingsViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V7R-7n-Z5L">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +148,7 @@
                                 <rect key="frame" x="0.0" y="96" width="375" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASSISTANCE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebQ-fS-L1C">
-                                        <rect key="frame" x="16" y="9.3333333333333304" width="359" height="20.666666666666671"/>
+                                        <rect key="frame" x="16" y="9.6666666666666696" width="359" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -269,7 +269,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mesfactures 1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xkR-Z2-hJa">
-                                <rect key="frame" x="119.66666666666669" y="754.66666666666663" width="135" height="23.333333333333371"/>
+                                <rect key="frame" x="120" y="754.66666666666663" width="135" height="23.333333333333371"/>
                                 <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
                                 <color key="textColor" white="0.29999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -320,7 +320,7 @@
         <!--Reset Password View Controller-->
         <scene sceneID="bhO-ic-j3i">
             <objects>
-                <viewController id="y7n-nc-NWs" customClass="ResetPasswordViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y7n-nc-NWs" customClass="ResetPasswordViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9Yy-pe-eun">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -416,7 +416,7 @@
         <!--Dossiers-->
         <scene sceneID="5N2-H2-Vgp">
             <objects>
-                <viewController id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dHV-vc-FxW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -431,7 +431,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell_group" id="8p1-xM-Udn" customClass="GroupCollectionViewCell" customModule="MesFactures" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell_group" id="8p1-xM-Udn" customClass="GroupCollectionViewCell" customModule="MyFactures" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="343" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -541,7 +541,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="group_header" id="Md9-SA-J3R" customClass="HeaderGroupView" customModule="MesFactures" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="group_header" id="Md9-SA-J3R" customClass="HeaderGroupView" customModule="MyFactures" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -752,7 +752,7 @@
         <!--Invoice Collection View Controller-->
         <scene sceneID="syR-r2-fVS">
             <objects>
-                <viewController id="t7y-qo-KY2" customClass="InvoiceCollectionViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="t7y-qo-KY2" customClass="InvoiceCollectionViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xq9-AB-Cw1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -777,63 +777,6 @@
                                     <constraint firstItem="tT3-pP-fqR" firstAttribute="leading" secondItem="JM3-IU-4oa" secondAttribute="leading" id="ueX-B5-xnu"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-kp-8Ma">
-                                <rect key="frame" x="0.0" y="728" width="375" height="84"/>
-                                <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJz-Fp-jCx">
-                                <rect key="frame" x="0.0" y="728" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-Q6-fgF">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="33.666666666666664"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="0Im-sF-Omd"/>
-                                        </constraints>
-                                        <state key="normal" image="edit(grey)"/>
-                                        <connections>
-                                            <segue destination="LFg-co-MqC" kind="presentation" identifier="manageCategoryVC" id="QTv-7c-avP"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Catégories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-j5-vtM">
-                                        <rect key="frame" x="32.666666666666664" y="33.666666666666629" width="59.999999999999993" height="16.333333333333329"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beG-Pj-Usu">
-                                        <rect key="frame" x="124.66666666666669" y="0.0" width="125" height="33.666666666666664"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="jcp-Hh-Twr"/>
-                                        </constraints>
-                                        <state key="normal" image="add(grey)"/>
-                                        <connections>
-                                            <action selector="addNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="S2h-Wc-1iM"/>
-                                            <action selector="addNewInvoiceButtonPressed:" destination="t7y-qo-KY2" eventType="touchUpInside" id="t75-u1-bJY"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouvelle facture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-DV-mzG">
-                                        <rect key="frame" x="142.66666666666666" y="33" width="90" height="17"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Rmd-j5-vtM" firstAttribute="top" secondItem="LqA-Q6-fgF" secondAttribute="bottom" id="5LJ-2Q-tun"/>
-                                    <constraint firstAttribute="bottom" secondItem="wuU-DV-mzG" secondAttribute="bottom" id="E9u-VQ-SFI"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="IwL-81-HNW"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="wuU-DV-mzG" secondAttribute="centerX" id="Opi-lF-cgb"/>
-                                    <constraint firstItem="wuU-DV-mzG" firstAttribute="top" secondItem="beG-Pj-Usu" secondAttribute="bottom" id="PVr-FZ-uMh"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="PXK-pm-xcX"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="centerX" secondItem="Rmd-j5-vtM" secondAttribute="centerX" id="QO2-c6-XeU"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="VKt-Ew-I0O"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="BJz-Fp-jCx" secondAttribute="centerX" id="W3C-5S-Jcm"/>
-                                    <constraint firstAttribute="height" constant="50" id="jDu-V1-iBf"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rmd-j5-vtM" secondAttribute="bottom" id="q2p-OK-QfQ"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="leading" secondItem="BJz-Fp-jCx" secondAttribute="leading" id="qVt-8r-aYo"/>
-                                </constraints>
-                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-Id-J85">
                                 <rect key="frame" x="16" y="140" width="343" height="588"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -844,7 +787,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="5"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" reuseIdentifier="cell_invoice" id="jNN-IC-Tzh" customClass="InvoiceCollectionViewCell" customModule="MesFactures" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" reuseIdentifier="cell_invoice" id="jNN-IC-Tzh" customClass="InvoiceCollectionViewCell" customModule="MyFactures" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="343" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -954,7 +897,7 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell_invoiceHeader" id="0Pz-Dn-94q" customClass="HeaderInvoiceCollectionReusableView" customModule="MesFactures" customModuleProvider="target">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell_invoiceHeader" id="0Pz-Dn-94q" customClass="HeaderInvoiceCollectionReusableView" customModule="MyFactures" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -988,6 +931,63 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-kp-8Ma">
+                                <rect key="frame" x="0.0" y="728" width="375" height="84"/>
+                                <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJz-Fp-jCx">
+                                <rect key="frame" x="0.0" y="728" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-Q6-fgF">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="33.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="0Im-sF-Omd"/>
+                                        </constraints>
+                                        <state key="normal" image="edit(grey)"/>
+                                        <connections>
+                                            <segue destination="LFg-co-MqC" kind="presentation" identifier="manageCategoryVC" id="QTv-7c-avP"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Catégories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-j5-vtM">
+                                        <rect key="frame" x="32.666666666666664" y="33.666666666666629" width="59.999999999999993" height="16.333333333333329"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beG-Pj-Usu">
+                                        <rect key="frame" x="124.66666666666669" y="0.0" width="125" height="33.666666666666664"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="125" id="jcp-Hh-Twr"/>
+                                        </constraints>
+                                        <state key="normal" image="add(grey)"/>
+                                        <connections>
+                                            <action selector="addNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="S2h-Wc-1iM"/>
+                                            <action selector="addNewInvoiceButtonPressed:" destination="t7y-qo-KY2" eventType="touchUpInside" id="t75-u1-bJY"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouvelle facture" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-DV-mzG">
+                                        <rect key="frame" x="142.66666666666666" y="33" width="90" height="17"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Rmd-j5-vtM" firstAttribute="top" secondItem="LqA-Q6-fgF" secondAttribute="bottom" id="5LJ-2Q-tun"/>
+                                    <constraint firstAttribute="bottom" secondItem="wuU-DV-mzG" secondAttribute="bottom" id="E9u-VQ-SFI"/>
+                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="IwL-81-HNW"/>
+                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="wuU-DV-mzG" secondAttribute="centerX" id="Opi-lF-cgb"/>
+                                    <constraint firstItem="wuU-DV-mzG" firstAttribute="top" secondItem="beG-Pj-Usu" secondAttribute="bottom" id="PVr-FZ-uMh"/>
+                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="PXK-pm-xcX"/>
+                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="centerX" secondItem="Rmd-j5-vtM" secondAttribute="centerX" id="QO2-c6-XeU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="VKt-Ew-I0O"/>
+                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="BJz-Fp-jCx" secondAttribute="centerX" id="W3C-5S-Jcm"/>
+                                    <constraint firstAttribute="height" constant="50" id="jDu-V1-iBf"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rmd-j5-vtM" secondAttribute="bottom" id="q2p-OK-QfQ"/>
+                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="leading" secondItem="BJz-Fp-jCx" secondAttribute="leading" id="qVt-8r-aYo"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1023,18 +1023,18 @@
         <!--About View Controller-->
         <scene sceneID="eq3-rN-DDq">
             <objects>
-                <viewController id="K4H-03-BN2" customClass="AboutViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="K4H-03-BN2" customClass="AboutViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k9H-T6-iZZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A propos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o30-7s-hxA">
-                                <rect key="frame" x="137" y="96" width="100.66666666666669" height="33"/>
+                                <rect key="frame" x="137" y="96" width="101" height="33"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon designed by IconTrack from the Noun Project" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-u6-WmP">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon designed by IconTrack from the Noun Project" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-u6-WmP">
                                 <rect key="frame" x="84" y="158" width="275" height="46.666666666666657"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1068,14 +1068,14 @@
         <!--View Controller-->
         <scene sceneID="hlw-1Z-WaR">
             <objects>
-                <viewController storyboardIdentifier="PDFViewController" id="R3r-wA-Nui" customClass="PDFViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PDFViewController" id="R3r-wA-Nui" customClass="PDFViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QhP-iH-Erm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-6L-N8C">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                <color key="backgroundColor" red="0.37254901959999998" green="0.49019607840000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="navBarTint"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-Nb-rUC">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1132,7 +1132,7 @@
         <!--Ajouter une facture-->
         <scene sceneID="RxR-pL-wFB">
             <objects>
-                <viewController storyboardIdentifier="AddNewInvoiceViewController" id="e6n-HW-sKX" customClass="AddNewInvoiceViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddNewInvoiceViewController" id="e6n-HW-sKX" customClass="AddNewInvoiceViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s6C-K1-iNz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1395,7 +1395,7 @@
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rxk-B9-zwV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                <color key="backgroundColor" red="0.37254901959999998" green="0.49019607840000001" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" name="navBarTint"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tN-Mm-8BR">
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -1573,7 +1573,7 @@
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
             <objects>
-                <viewController storyboardIdentifier="CreateAccountViewController" id="4FB-7Q-Yx0" customClass="CreateAccountViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountViewController" id="4FB-7Q-Yx0" customClass="CreateAccountViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7c-Cp-hjC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1584,7 +1584,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trees_BGimage" translatesAutoresizingMaskIntoConstraints="NO" id="ql9-b7-eiR">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                             </imageView>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Mes Factures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y9Z-UM-0vf">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="MyFactures" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y9Z-UM-0vf">
                                 <rect key="frame" x="16" y="94" width="343" height="126"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1661,6 +1661,7 @@
                     </view>
                     <connections>
                         <outlet property="passwordTextField" destination="oUb-vn-rbh" id="dS7-Wa-hfk"/>
+                        <outlet property="ui_myfacturesTextField" destination="y9Z-UM-0vf" id="kJ0-be-7gF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h1s-2i-0sD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1670,7 +1671,7 @@
         <!--Gestion des catégories-->
         <scene sceneID="Ui2-Dc-A1t">
             <objects>
-                <viewController id="I6y-V2-SJS" customClass="ManageCategoryTableViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="I6y-V2-SJS" customClass="ManageCategoryTableViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iW6-YY-3qe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1828,7 +1829,7 @@
         <!--Select Year View Controller-->
         <scene sceneID="zFI-73-kMm">
             <objects>
-                <viewController id="X9y-KE-RkV" customClass="SelectYearViewController" customModule="MesFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="X9y-KE-RkV" customClass="SelectYearViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mVc-XW-ynU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1857,7 +1858,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_yearSelection" rowHeight="60" id="rfA-KV-YkL" customClass="SelectYearTableViewCell" customModule="MesFactures" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell_yearSelection" rowHeight="60" id="rfA-KV-YkL" customClass="SelectYearTableViewCell" customModule="MyFactures" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rfA-KV-YkL" id="lLZ-3P-or9">
@@ -1916,7 +1917,7 @@
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" red="0.37254901960784315" green="0.49019607843137253" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" name="navBarTint"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
@@ -1942,7 +1943,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kxW-Us-1PT">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.58431372549019611" green="0.6705882352941176" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" name="navBarTint"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1972,6 +1973,9 @@
         </namedColor>
         <namedColor name="creeruncompteButton">
             <color red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="navBarTint">
+            <color red="0.51800000667572021" green="0.62000000476837158" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
