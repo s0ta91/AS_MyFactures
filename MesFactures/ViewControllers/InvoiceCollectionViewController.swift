@@ -176,18 +176,25 @@ class InvoiceCollectionViewController: UIViewController {
     
     //TODO: Create the function to share the invoice
     func share(invoice: InvoiceCollectionViewCell) {
-        if let indexPath = invoiceCollectionView.indexPath(for: invoice),
-            let month = getCurrentMonth(atIndex: indexPath.section) {
-            if let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
+        if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
+            
+            let monthIndex = _monthToShow[indexPath.section]
+            if let month = getCurrentMonth(atIndex: monthIndex),
+                let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
                 let invoiceIdentifier = selectedInvoice.identifier,
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
                 present(activityViewController, animated: true, completion: nil)
             }else {
+                /*** DEBUG ***/
+//                let month = getCurrentMonth(atIndex: monthIndex)
+//                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
+//                print("invoice: \(selectedInvoice)")
+                /*******************/
                 let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    self.dismiss(animated: true, completion: nil)
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
+//                    self.dismiss(animated: true, completion: nil)
                 })
                 alertController.addAction(validAction)
                 present(alertController, animated: true, completion: nil)

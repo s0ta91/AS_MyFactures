@@ -8,6 +8,7 @@
 
 import UIKit
 import Buglife
+import Crashlytics
 
 class SettingsViewController: UIViewController {
 
