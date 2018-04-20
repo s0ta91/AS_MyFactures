@@ -291,6 +291,12 @@ class AddNewInvoiceViewController: UIViewController {
         actionSheet.addAction(pickAPhoto)
         actionSheet.addAction(takeAPhoto)
         actionSheet.addAction(cancelActionSheet)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = view
+            popoverController.sourceRect = CGRect(x: sender.frame.midX, y: sender.frame.midY, width: 0, height: 0)
+        }
+        
         present(actionSheet, animated: true, completion: nil)
     }
     

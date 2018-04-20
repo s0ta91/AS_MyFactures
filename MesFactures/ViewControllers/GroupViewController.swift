@@ -207,15 +207,16 @@ class GroupViewController: UIViewController {
 extension GroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var headerView: HeaderGroupView!
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         switch kind {
         case UICollectionElementKindSectionHeader:
-           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
+           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
            headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
-            return headerView
         default:
             assert(false, "Unexpected element kind")
         }
+        return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -253,7 +254,7 @@ extension GroupViewController: UICollectionViewDelegateFlowLayout {
 
 extension GroupViewController: GroupCollectionViewCellDelegate {
     
-    func showGroupActions(groupCell: GroupCollectionViewCell) {
+    func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
@@ -289,6 +290,12 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = groupCell.contentView
+            popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX , y: buttonPressed.frame.maxY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = .up
+        }
         self.present(actionSheet, animated: true, completion: nil)
     }
 }
