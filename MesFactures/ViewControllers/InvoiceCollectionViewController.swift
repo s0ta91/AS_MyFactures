@@ -175,7 +175,7 @@ class InvoiceCollectionViewController: UIViewController {
     }
     
     //TODO: Create the function to share the invoice
-    func share(invoice: InvoiceCollectionViewCell) {
+    func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
             let monthIndex = _monthToShow[indexPath.section]
@@ -185,6 +185,12 @@ class InvoiceCollectionViewController: UIViewController {
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
+                
+                if let popoverController = activityViewController.popoverPresentationController {
+                    popoverController.sourceView = invoice.contentView
+                    popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
+                    popoverController.permittedArrowDirections = .up
+                }
                 present(activityViewController, animated: true, completion: nil)
             }else {
                 /*** DEBUG ***/
@@ -264,9 +270,10 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var headerDate: String = ""
         var monthAmount: String = ""
+        var invoiceHeaderView: HeaderInvoiceCollectionReusableView!
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
+            invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex) {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
@@ -274,10 +281,11 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
-            return invoiceHeaderView
+            
         default:
             assert(false, "Unexpected element kind")
         }
+        return invoiceHeaderView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -317,7 +325,7 @@ extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
 //TODO: Create the delegate to be conform to the cell
 extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     
-    func showAvailableActions(invoiceCell: InvoiceCollectionViewCell) {
+    func showAvailableActions(invoiceCell: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         let actionsController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modifyAction = UIAlertAction(title: "Modifier", style: .default) { (action: UIAlertAction) in
             self.modify(invoice: invoiceCell)
@@ -326,7 +334,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             self.delete(invoice: invoiceCell)
         }
         let shareAction = UIAlertAction(title: "Partager", style: .default) { (_) in
-            self.share(invoice: invoiceCell)
+            self.share(invoice: invoiceCell, buttonPressed: buttonPressed)
         }
         let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
         
@@ -334,6 +342,12 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
         actionsController.addAction(shareAction)
         actionsController.addAction(deleteAction)
         actionsController.addAction(cancelAction)
+        
+        if let popoverController = actionsController.popoverPresentationController {
+            popoverController.sourceView = invoiceCell.contentView
+            popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = .up
+        }
         present(actionsController, animated: true, completion: nil)
     }
     

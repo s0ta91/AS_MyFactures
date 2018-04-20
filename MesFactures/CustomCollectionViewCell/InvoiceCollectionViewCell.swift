@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InvoiceCollectionViewCellDelegate: class {
-    func showAvailableActions(invoiceCell: InvoiceCollectionViewCell)
+    func showAvailableActions(invoiceCell: InvoiceCollectionViewCell, buttonPressed: UIButton)
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell)
 }
 
@@ -58,8 +58,8 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - IBActions
-    @IBAction func showAvailableActionsForInvoice(_ sender: Any) {
-        delegate?.showAvailableActions(invoiceCell: self)
+    @IBAction func showAvailableActionsForInvoice(_ sender: UIButton) {
+        delegate?.showAvailableActions(invoiceCell: self, buttonPressed: sender)
     }
     
     @IBAction func showPdfButtonPressed(_ sender: UIButton) {
