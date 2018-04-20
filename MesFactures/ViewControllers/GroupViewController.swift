@@ -23,12 +23,8 @@ class GroupViewController: UIViewController {
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
-     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
-    
-    //MARK: - CreateGroupPopupView
-    @IBOutlet weak var ui_groupNameTextField: UITextField!
-    @IBOutlet weak var ui_addGroupButton: UIButton!
-    
+    @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
+
     
     //MARK: - Variables declaration
     private var _manager: Manager {
@@ -80,12 +76,13 @@ class GroupViewController: UIViewController {
     //MARK: -  Private functions
     private func animateIn() {
         self.navigationController!.view.addSubview(ui_createGroupView)
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let topAdjust = navigationBarHeight + 60
+//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+//        let topAdjust = navigationBarHeight + 60
         
         
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
-        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+//        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+        ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         ui_createGroupView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         ui_createGroupView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
@@ -126,7 +123,6 @@ class GroupViewController: UIViewController {
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
-//        ui_addGroupButton.setTitle("Valider", for: .normal)
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
@@ -260,7 +256,6 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
                     self.ui_newGroupNameTextField.text = group.title
-//                    self.ui_addGroupButton.setTitle("Modifier", for: .normal)
                     self.ui_newGroupNameTextField.becomeFirstResponder()
                     self._groupToModify = group
                     self.animateIn()
