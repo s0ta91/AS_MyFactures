@@ -56,6 +56,7 @@ class ManageCategoryTableViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
+        ui_manageCategoryVisualView.isHidden = false
         self.navigationController!.view.addSubview(subview)
 //        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
 //        let topAdjust = navigationBarHeight + 60
@@ -71,7 +72,7 @@ class ManageCategoryTableViewController: UIViewController {
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
         
-        ui_manageCategoryVisualView.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_manageCategoryVisualView.effect = self._visualEffect

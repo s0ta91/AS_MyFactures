@@ -75,6 +75,7 @@ class GroupViewController: UIViewController {
     
     //MARK: -  Private functions
     private func animateIn() {
+        ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)
 //        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
 //        let topAdjust = navigationBarHeight + 60
@@ -91,7 +92,7 @@ class GroupViewController: UIViewController {
         ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         ui_createGroupView.alpha = 0
         
-        ui_visualEffectView.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffectView.effect = self.effect

@@ -203,6 +203,7 @@ class AddNewInvoiceViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
+        ui_visualEffect.isHidden = false
         self.view.addSubview(subview)
 //        let navigationBarHeight: CGFloat = 44
 //        let topAdjust = navigationBarHeight + 60
@@ -218,7 +219,7 @@ class AddNewInvoiceViewController: UIViewController {
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
         
-        ui_visualEffect.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffect.effect = self._visualEffect
