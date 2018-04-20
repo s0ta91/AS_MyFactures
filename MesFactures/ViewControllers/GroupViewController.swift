@@ -23,12 +23,8 @@ class GroupViewController: UIViewController {
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
-     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
-    
-    //MARK: - CreateGroupPopupView
-    @IBOutlet weak var ui_groupNameTextField: UITextField!
-    @IBOutlet weak var ui_addGroupButton: UIButton!
-    
+    @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
+
     
     //MARK: - Variables declaration
     private var _manager: Manager {
@@ -79,13 +75,15 @@ class GroupViewController: UIViewController {
     
     //MARK: -  Private functions
     private func animateIn() {
+        ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let topAdjust = navigationBarHeight + 60
+//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+//        let topAdjust = navigationBarHeight + 60
         
         
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
-        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+//        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+        ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         ui_createGroupView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         ui_createGroupView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
@@ -94,7 +92,7 @@ class GroupViewController: UIViewController {
         ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         ui_createGroupView.alpha = 0
         
-        ui_visualEffectView.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffectView.effect = self.effect
@@ -126,7 +124,6 @@ class GroupViewController: UIViewController {
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
-//        ui_addGroupButton.setTitle("Valider", for: .normal)
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
@@ -207,15 +204,16 @@ class GroupViewController: UIViewController {
 extension GroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        var headerView: HeaderGroupView!
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         switch kind {
         case UICollectionElementKindSectionHeader:
-           let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
+           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
            headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
-            return headerView
         default:
             assert(false, "Unexpected element kind")
         }
+        return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -253,13 +251,12 @@ extension GroupViewController: UICollectionViewDelegateFlowLayout {
 
 extension GroupViewController: GroupCollectionViewCellDelegate {
     
-    func showGroupActions(groupCell: GroupCollectionViewCell) {
+    func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
                     self.ui_newGroupNameTextField.text = group.title
-//                    self.ui_addGroupButton.setTitle("Modifier", for: .normal)
                     self.ui_newGroupNameTextField.becomeFirstResponder()
                     self._groupToModify = group
                     self.animateIn()
@@ -289,6 +286,12 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = groupCell.contentView
+            popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX , y: buttonPressed.frame.maxY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = .up
+        }
         self.present(actionSheet, animated: true, completion: nil)
     }
 }

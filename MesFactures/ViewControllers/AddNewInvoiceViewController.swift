@@ -203,12 +203,14 @@ class AddNewInvoiceViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
+        ui_visualEffect.isHidden = false
         self.view.addSubview(subview)
-        let navigationBarHeight: CGFloat = 44
-        let topAdjust = navigationBarHeight + 60
+//        let navigationBarHeight: CGFloat = 44
+//        let topAdjust = navigationBarHeight + 60
         
         subview.translatesAutoresizingMaskIntoConstraints = false
-        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+//        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+        subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
@@ -217,7 +219,7 @@ class AddNewInvoiceViewController: UIViewController {
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
         
-        ui_visualEffect.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffect.effect = self._visualEffect
@@ -291,6 +293,12 @@ class AddNewInvoiceViewController: UIViewController {
         actionSheet.addAction(pickAPhoto)
         actionSheet.addAction(takeAPhoto)
         actionSheet.addAction(cancelActionSheet)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = view
+            popoverController.sourceRect = CGRect(x: sender.frame.midX, y: sender.frame.midY, width: 0, height: 0)
+        }
+        
         present(actionSheet, animated: true, completion: nil)
     }
     

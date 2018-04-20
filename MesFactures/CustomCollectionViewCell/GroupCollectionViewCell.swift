@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GroupCollectionViewCellDelegate: class {
-    func showGroupActions(groupCell: GroupCollectionViewCell)
+    func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton)
 }
 
 class GroupCollectionViewCell: UICollectionViewCell {
@@ -41,7 +41,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: - Actions
-    @IBAction func groupActions(_ sender: Any) {
-        delegate?.showGroupActions(groupCell: self)
+    @IBAction func groupActions(_ sender: UIButton) {
+        delegate?.showGroupActions(groupCell: self, buttonPressed: sender)
     }
 }

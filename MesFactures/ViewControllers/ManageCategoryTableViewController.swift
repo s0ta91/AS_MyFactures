@@ -56,12 +56,14 @@ class ManageCategoryTableViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
+        ui_manageCategoryVisualView.isHidden = false
         self.navigationController!.view.addSubview(subview)
-        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-        let topAdjust = navigationBarHeight + 60
+//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
+//        let topAdjust = navigationBarHeight + 60
         
         subview.translatesAutoresizingMaskIntoConstraints = false
-        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+//        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
+        subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
@@ -70,7 +72,7 @@ class ManageCategoryTableViewController: UIViewController {
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
         
-        ui_manageCategoryVisualView.isHidden = false
+        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_manageCategoryVisualView.effect = self._visualEffect
