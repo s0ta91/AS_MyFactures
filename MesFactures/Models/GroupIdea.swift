@@ -11,7 +11,7 @@ import RealmSwift
 
 class GroupIdea: Object {
     @objc private dynamic var _title: String = ""
-    
+
     var title: String {
         get {
             return _title

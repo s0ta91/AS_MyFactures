@@ -11,9 +11,9 @@ import UIKit
 class MonthsPicker: UIPickerView {
 
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-    
+
     var _monthTextField: UITextField!
-    
+
     func selectDefaultRow (forMonthIndex index: Int, forPickerView pickerView: UIPickerView) {
         pickerView.selectRow(index, inComponent: 0, animated: false)
     }
@@ -23,7 +23,7 @@ extension MonthsPicker: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return monthArray.count
     }
@@ -33,7 +33,7 @@ extension MonthsPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return monthArray[row]
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         _monthTextField.text = monthArray[row]
     }

@@ -9,9 +9,9 @@
 import UIKit
 
 class HeaderGroupView: UICollectionReusableView {
-    
+
     @IBOutlet weak var headerViewLabel: UILabel!
-    
+
     func setYear (withYear year: String, fontSize: CGFloat) {
         headerViewLabel.text = year
         setFontSize(with: fontSize)
