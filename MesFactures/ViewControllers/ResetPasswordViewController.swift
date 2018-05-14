@@ -21,6 +21,9 @@ class ResetPasswordViewController: UIViewController {
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ui_oldPasswordTextField.setPadding()
+        ui_newPasswordTextField.setPadding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
