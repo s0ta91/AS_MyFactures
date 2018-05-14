@@ -63,7 +63,7 @@ class ResetPasswordViewController: UIViewController {
                     present(confirmationAlert, animated: true)
                 }else {
                     //TODO: Else, show a error message
-                    let alert = UIAlertController(title: "Erreur!", message: "Le mot de passe actuel n'est pas correcte. Veuillez réessayer.", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Erreur!", message: "Le mot de passe actuel n'est pas correct. Veuillez réessayer.", preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Ré-essayer", style: .default, handler: nil)
                     alert.addAction(alertAction)
                     present(alert, animated: true, completion: nil)

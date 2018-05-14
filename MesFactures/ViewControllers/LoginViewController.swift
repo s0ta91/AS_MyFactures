@@ -16,17 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var ui_createNewPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        /** DEBUG **/
-//        DbManager().reInitMasterPassword()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
@@ -35,13 +26,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         showHideCreateNewPasswordButton()
         
+        // Set padding for password textField
+        ui_passwordTextField.setPadding()
+        ui_passwordTextField.setRadius()
+        
+        // Set radius for connexion button
+        ui_connexionButton.layer.cornerRadius = 5
+    }
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        /** DEBUG **/
+        // DbManager().reInitMasterPassword()
+        
         // Delegation for password textField
-        self.ui_passwordTextField.delegate = self
+        // self.ui_passwordTextField.delegate = self
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
