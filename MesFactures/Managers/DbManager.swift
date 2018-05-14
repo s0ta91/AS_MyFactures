@@ -20,7 +20,7 @@ class DbManager {
 
     /** INIT functions **/
     init () {
-        _keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "s0ta.MesFactures")
+        _keychain = Keychain(service: Bundle.main.bundleIdentifier ?? "com.sebconstant.MyFactures")
     }
     
     

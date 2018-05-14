@@ -46,7 +46,6 @@
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
-		1DFE14F42040517300176EF3 /* Boulanger.com.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 1DFE14F32040517200176EF3 /* Boulanger.com.pdf */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
@@ -116,9 +115,7 @@
 		1DFE14E5203B097F00176EF3 /* GroupPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPicker.swift; sourceTree = "<group>"; };
 		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
-		1DFE14EB203B2F3F00176EF3 /* TestDocuments */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestDocuments; sourceTree = "<group>"; };
 		1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryTableViewController.swift; sourceTree = "<group>"; };
-		1DFE14F32040517200176EF3 /* Boulanger.com.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Boulanger.com.pdf; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,7 +220,6 @@
 		1D4B078B20233FF4002F745C /* MesFactures */ = {
 			isa = PBXGroup;
 			children = (
-				1DFE14F32040517200176EF3 /* Boulanger.com.pdf */,
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
 				1D4809D92024B08900068094 /* Extensions */,
 				1D4809CD20248B4800068094 /* Models */,
@@ -233,7 +229,6 @@
 				1DD923582028C49900387FF8 /* CustomCollectionViewCell */,
 				1D07921420373FBA0097A354 /* pickersView */,
 				1DB07FC22031D2BD00BDDDFB /* Views */,
-				1DFE14EB203B2F3F00176EF3 /* TestDocuments */,
 				1DB07FCF2033550C00BDDDFB /* Storyboards */,
 				1D4B079320233FF4002F745C /* Assets.xcassets */,
 				1D4B079820233FF4002F745C /* Info.plist */,
@@ -459,7 +454,6 @@
 			files = (
 				1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */,
 				1D4B079420233FF4002F745C /* Assets.xcassets in Resources */,
-				1DFE14F42040517300176EF3 /* Boulanger.com.pdf in Resources */,
 				1D6220F320235D1300D25828 /* Abuget.ttf in Resources */,
 				1D4B079220233FF4002F745C /* Main.storyboard in Resources */,
 			);
