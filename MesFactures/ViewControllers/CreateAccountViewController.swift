@@ -11,23 +11,25 @@ import UIKit
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var ui_myfacturesTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ui_myfacturesTextField.text = "MyFactures"
-        passwordTextField.delegate = self
-    }
+    @IBOutlet weak var ui_passwordTextField: UITextField!
+    @IBOutlet weak var ui_createPasswordButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ui_myfacturesTextField.text = "MyFactures"
+        
+        // Delegation for password textField to have access to textfieldShouldReturn function
+        ui_passwordTextField.delegate = self
+        
+        ui_passwordTextField.setPadding()
+        ui_passwordTextField.setRadius()
+        ui_createPasswordButton.layer.cornerRadius = 5
         
     }
     
     private func createNewUser (){
-        if let password = passwordTextField.text,
+        if let password = ui_passwordTextField.text,
             let db = DbManager().getDb() {
                 db.savePassword(password)
         }

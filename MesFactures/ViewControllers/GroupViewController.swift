@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import IQKeyboardManagerSwift
 
 class GroupViewController: UIViewController {
     
@@ -45,6 +46,7 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        IQKeyboardManager.sharedManager().enableAutoToolbar = false
         groupCV.dataSource = self
         groupCV.delegate = self
         
