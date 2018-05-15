@@ -18,7 +18,9 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         ui_myfacturesTextField.text = "MyFactures"
-//        ui_passwordTextField.delegate = self
+        
+        // Delegation for password textField to have access to textfieldShouldReturn function
+        ui_passwordTextField.delegate = self
         
         ui_passwordTextField.setPadding()
         ui_passwordTextField.setRadius()

@@ -32,6 +32,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         // Set radius for connexion button
         ui_connexionButton.layer.cornerRadius = 5
+        
+        // Delegation for password textField to have access to textfieldShouldReturn function
+        self.ui_passwordTextField.delegate = self
     }
 
     
@@ -40,9 +43,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         /** DEBUG **/
         // DbManager().reInitMasterPassword()
-        
-        // Delegation for password textField
-        // self.ui_passwordTextField.delegate = self
     }
     
     
