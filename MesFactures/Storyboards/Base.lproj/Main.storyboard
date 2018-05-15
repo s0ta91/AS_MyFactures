@@ -945,16 +945,16 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="qtR-2D-3nf"/>
-                                                            <exclude reference="3HP-RX-jSQ"/>
                                                             <exclude reference="FgI-Pl-1jP"/>
+                                                            <exclude reference="3HP-RX-jSQ"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="constraints">
                                                             <include reference="qtR-2D-3nf"/>
-                                                            <exclude reference="3HP-RX-jSQ"/>
                                                             <include reference="FgI-Pl-1jP"/>
                                                             <exclude reference="fjX-fT-GlW"/>
+                                                            <exclude reference="3HP-RX-jSQ"/>
                                                         </mask>
                                                     </variation>
                                                 </stackView>
@@ -1690,7 +1690,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Créez votre mot de passe..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUb-vn-rbh">
-                                <rect key="frame" x="20" y="558" width="335" height="60"/>
+                                <rect key="frame" x="20" y="376" width="335" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="zIL-OR-SIn"/>
@@ -1700,7 +1700,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Pd-Yz-zyc">
-                                <rect key="frame" x="20" y="668" width="335" height="47"/>
+                                <rect key="frame" x="20" y="466" width="335" height="47"/>
                                 <color key="backgroundColor" name="ConnexionButton"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="25"/>
                                 <state key="normal" title="Créer">
@@ -1716,7 +1716,6 @@
                             <constraint firstItem="4Pd-Yz-zyc" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="2ym-yb-3Vr"/>
                             <constraint firstItem="4Pd-Yz-zyc" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="7ff-Vs-5Yg"/>
                             <constraint firstAttribute="bottom" secondItem="6QV-qp-y2K" secondAttribute="bottom" id="C9F-VY-q8e"/>
-                            <constraint firstItem="yBx-f8-b5K" firstAttribute="bottom" secondItem="4Pd-Yz-zyc" secondAttribute="bottom" constant="63" id="DdS-A2-aT3"/>
                             <constraint firstItem="6QV-qp-y2K" firstAttribute="trailing" secondItem="yBx-f8-b5K" secondAttribute="trailing" id="E9h-Ct-s8J"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="4Pd-Yz-zyc" secondAttribute="trailing" constant="20" id="EKp-Mo-Hd2"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="4Pd-Yz-zyc" secondAttribute="trailing" constant="217" id="Fc6-qI-Sfc"/>
@@ -1724,10 +1723,11 @@
                             <constraint firstItem="ql9-b7-eiR" firstAttribute="top" secondItem="l7c-Cp-hjC" secondAttribute="top" id="GN2-Zu-mjA"/>
                             <constraint firstItem="6QV-qp-y2K" firstAttribute="top" secondItem="l7c-Cp-hjC" secondAttribute="top" id="KZI-Ov-m9J"/>
                             <constraint firstItem="ql9-b7-eiR" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" id="Mxf-pb-VMA"/>
-                            <constraint firstItem="4Pd-Yz-zyc" firstAttribute="top" secondItem="oUb-vn-rbh" secondAttribute="bottom" constant="50" id="OQT-So-Li9"/>
+                            <constraint firstItem="4Pd-Yz-zyc" firstAttribute="top" secondItem="oUb-vn-rbh" secondAttribute="bottom" constant="30" id="OQT-So-Li9"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="oUb-vn-rbh" secondAttribute="trailing" constant="217" id="UA6-Em-9yn"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="oUb-vn-rbh" secondAttribute="trailing" constant="20" id="Wob-Cm-nI2"/>
                             <constraint firstItem="yBx-f8-b5K" firstAttribute="trailing" secondItem="y9Z-UM-0vf" secondAttribute="trailing" constant="16" id="YlY-rV-wFo"/>
+                            <constraint firstItem="oUb-vn-rbh" firstAttribute="centerY" secondItem="l7c-Cp-hjC" secondAttribute="centerY" id="Z3r-kD-WvV"/>
                             <constraint firstItem="oUb-vn-rbh" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="20" id="cJQ-Dr-IoX"/>
                             <constraint firstItem="y9Z-UM-0vf" firstAttribute="top" secondItem="yBx-f8-b5K" secondAttribute="top" constant="50" id="dfo-q8-8Mm"/>
                             <constraint firstItem="oUb-vn-rbh" firstAttribute="leading" secondItem="yBx-f8-b5K" secondAttribute="leading" constant="217" id="dgq-jf-b7s"/>
