@@ -60,14 +60,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-bF-X22">
-                                <rect key="frame" x="107.66666666666669" y="725" width="160" height="33"/>
+                                <rect key="frame" x="89.333333333333314" y="725" width="197" height="33"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
-                                <state key="normal" title="Créer un mot de passe">
+                                <state key="normal" title="Reinitialiser le mot de passe">
                                     <color key="titleColor" name="creeruncompteButton"/>
                                 </state>
-                                <connections>
-                                    <segue destination="4FB-7Q-Yx0" kind="presentation" identifier="show_createAcountVC" modalTransitionStyle="crossDissolve" id="SkO-hw-v9n"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -126,10 +123,10 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="ui_connexionButton" destination="slb-lc-DB2" id="54T-FB-i2h"/>
-                        <outlet property="ui_createNewPasswordButton" destination="BSc-bF-X22" id="wHY-AK-TqD"/>
+                        <outlet property="ui_connexionButton" destination="slb-lc-DB2" id="wRG-0V-26z"/>
                         <outlet property="ui_mesfacturesTextField" destination="RZg-Pt-dGW" id="qUj-Kj-vc6"/>
                         <outlet property="ui_passwordTextField" destination="0Df-Cs-8WS" id="cC5-M1-DQD"/>
+                        <outlet property="ui_resetPasswordButton" destination="BSc-bF-X22" id="izs-An-7Y6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -556,7 +553,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R8g-6v-AIg">
-                                            <rect key="frame" x="114" y="10" width="60" height="30"/>
+                                            <rect key="frame" x="141.66666666666666" y="10" width="60" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -989,7 +986,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100000 €" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTK-14-40r">
-                                            <rect key="frame" x="140.66666666666663" y="15.000000000000002" width="139.33333333333337" height="20.666666666666671"/>
+                                            <rect key="frame" x="140.66666666666663" y="15.000000000000002" width="194.33333333333337" height="20.666666666666671"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -1665,7 +1662,7 @@
         <!--Create Account View Controller-->
         <scene sceneID="CkU-Zu-Vqi">
             <objects>
-                <viewController storyboardIdentifier="CreateAccountViewController" id="4FB-7Q-Yx0" customClass="CreateAccountViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateAccountVC" id="4FB-7Q-Yx0" customClass="CreateAccountViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l7c-Cp-hjC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
