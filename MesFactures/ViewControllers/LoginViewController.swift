@@ -13,18 +13,34 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
-    @IBOutlet weak var ui_createNewPasswordButton: UIButton!
+    @IBOutlet weak var ui_lostPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
+    
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        /** DEBUG **/
+//        DbManager().reInitMasterPassword()
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
         
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
-        showHideCreateNewPasswordButton()
+        if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
+            ui_passwordTextField.isHidden = true
+            ui_lostPasswordButton.isHidden = true
+            ui_connexionButton.isHidden = true
+            unlockWithBiometrics()
+        }
         
         // Set padding for password textField
         ui_passwordTextField.setPadding()
@@ -37,34 +53,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.ui_passwordTextField.delegate = self
     }
 
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        /** DEBUG **/
-        // DbManager().reInitMasterPassword()
-    }
-    
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
-    
-    private func showHideCreateNewPasswordButton (){
-        if let db = DbManager().getDb() {
-            if db.hasMasterPassword() == true {
-                ui_createNewPasswordButton.isHidden = true
-                if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
-                    ui_passwordTextField.isHidden = true
-                    ui_connexionButton.isHidden = true
-                    unlockWithBiometrics()
-                }
-            }
-        }
-    }
-    
+
     private func unlockWithBiometrics () {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
@@ -74,7 +67,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     Revenir à l'éxécution du code a premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
                  **/
                 DispatchQueue.main.async {
-                     /** Unlock application and show group screnn **/
+                     /** Unlock application and show group screen **/
                     if isOwnerConfirmed == true {
                         self.displayGroupTableViewController()
                     }
@@ -95,9 +88,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func showPasswordField () {
         ui_passwordTextField.isHidden = false
+        ui_lostPasswordButton.isHidden = false
         ui_connexionButton.isHidden = false
     }
-    
+
     func displayGroupTableViewController () {
         if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
@@ -130,9 +124,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 displayGroupTableViewController()
             }else {
                 shakeTextField()
-                ui_passwordTextField.text = ""
             }
         }
     }
+    
+    @IBAction func LostPassword(_ sender: UIButton) {
+        _manager.sendPasswordToUser(fromViewController: self)
+//        if let userEmail = _manager.getUserEmail(),
+//            let userPassword = DbManager().getMasterPassword() {
+//
+//            if _manager.sendEmail(toEmail: userEmail, withPassword: userPassword) {
+//                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: self)
+//            } else {
+//                Alert.message(title: "Une erreur est survenue", message: "", vc: self)
+//            }
+//        }
+    }
+    
 }
 

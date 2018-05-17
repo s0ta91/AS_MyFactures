@@ -14,16 +14,24 @@ class ResetPasswordViewController: UIViewController {
     @IBOutlet weak var ui_oldPasswordTextField: UITextField!
     @IBOutlet weak var ui_newPasswordTextField: UITextField!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var ui_confirmButton: UIButton!
     
     //MARK: - Global Variables
-    let dbManager = DbManager()
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
+    }
     
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ui_oldPasswordTextField.setPadding()
-        ui_newPasswordTextField.setPadding()
+//        ui_oldPasswordTextField.setPadding()
+//        ui_newPasswordTextField.setPadding()
+        ui_confirmButton.layer.cornerRadius = 5.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,10 +60,10 @@ class ResetPasswordViewController: UIViewController {
         if oldPassword.count > 0 && newPassword.count > 0 {
             hideMessageLabel()
             //TODO: Change the password
-            if let oldPasswordInKeychain = dbManager.getMasterPassword() {
+            if let oldPasswordInKeychain = DbManager().getMasterPassword() {
                 if oldPassword == oldPasswordInKeychain {
-                    dbManager.reInitMasterPassword()
-                    dbManager.saveMasterPassword(newPassword)
+                    DbManager().reInitMasterPassword()
+                    DbManager().saveMasterPassword(newPassword)
                     
                     //TODO: Confirmation Message then Dismiss the screen
                     let confirmationAlert = UIAlertController(title: "Le mot de passe a été changé", message: nil, preferredStyle: .alert)
@@ -83,10 +91,11 @@ class ResetPasswordViewController: UIViewController {
             messageLabel.text = "Les champs ne peuvent être vides. Veuillez les compléter."
             unHideMessageLabel()
         }
-
-        
     }
     
+    @IBAction func LostPassword(_ sender: UIButton) {
+        _manager.sendPasswordToUser(fromViewController: self)
+    }
     
     @IBAction func cancelResetPasswordVC(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

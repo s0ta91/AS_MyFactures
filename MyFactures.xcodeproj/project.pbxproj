@@ -10,6 +10,9 @@
 		1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */; };
 		1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D00D4CF2044169F00759E9F /* PDFViewController.swift */; };
 		1D06376520A9D8880013E145 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06376420A9D8880013E145 /* TextField.swift */; };
+		1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1052A720ADD233007C5CCF /* AlertExtension.swift */; };
+		1D1052AB20ADE23E007C5CCF /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1052AA20ADE23E007C5CCF /* Settings.swift */; };
+		1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */; };
 		1D370E18206A81E1005583BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E17206A81E1005583BB /* SettingsViewController.swift */; };
 		1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */; };
 		1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */; };
@@ -28,6 +31,7 @@
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
+		1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */; };
 		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
@@ -47,7 +51,10 @@
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
+		32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
+		53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C4186133A6A4246E5035B /* Pods_MyFactures.framework */; };
+		DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,10 +76,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D00D4CF2044169F00759E9F /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		1D06376420A9D8880013E145 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		1D1052A720ADD233007C5CCF /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
+		1D1052AA20ADE23E007C5CCF /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		1D16E9FF20AD861F00A8A248 /* sendEmail_Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sendEmail_Bridge.h; sourceTree = "<group>"; };
+		1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1D370E17206A81E1005583BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +113,7 @@
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
+		1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verifyPasswordViewController.swift; sourceTree = "<group>"; };
 		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -119,11 +134,17 @@
 		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
 		1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryTableViewController.swift; sourceTree = "<group>"; };
 		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
+		268C4186133A6A4246E5035B /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.release.xcconfig"; sourceTree = "<group>"; };
 		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
 		50C1CE4DF75B7775D1BBF326 /* Pods-MesFacturesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.release.xcconfig"; sourceTree = "<group>"; };
+		A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		AA78293E56BFDAB3B4F37ED0 /* Pods-MesFacturesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -133,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */,
+				53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */,
+				DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */,
+				32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +189,14 @@
 			path = pickersView;
 			sourceTree = "<group>";
 		};
+		1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1D16E9FF20AD861F00A8A248 /* sendEmail_Bridge.h */,
+			);
+			path = MailCore2_Extensions;
+			sourceTree = "<group>";
+		};
 		1D4809CD20248B4800068094 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +207,7 @@
 				1DB07FCB2032094800BDDDFB /* Month.swift */,
 				1DB07FC9203200DA00BDDDFB /* Category.swift */,
 				1DB07FC72031FCAE00BDDDFB /* Invoice.swift */,
+				1D1052AA20ADE23E007C5CCF /* Settings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +227,8 @@
 			children = (
 				1D4809DA2024B0A400068094 /* DataExtension.swift */,
 				1D06376420A9D8880013E145 /* TextField.swift */,
+				1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */,
+				1D1052A720ADD233007C5CCF /* AlertExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -223,6 +258,7 @@
 		1D4B078B20233FF4002F745C /* MesFactures */ = {
 			isa = PBXGroup;
 			children = (
+				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
 				1D4809D92024B08900068094 /* Extensions */,
 				1D4809CD20248B4800068094 /* Models */,
@@ -263,6 +299,7 @@
 			children = (
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
+				1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */,
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
 				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
@@ -326,6 +363,9 @@
 				8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */,
 				89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */,
 				1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */,
+				268C4186133A6A4246E5035B /* Pods_MyFactures.framework */,
+				5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */,
+				031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -339,6 +379,12 @@
 				AA78293E56BFDAB3B4F37ED0 /* Pods-MesFacturesTests.release.xcconfig */,
 				50C1CE4DF75B7775D1BBF326 /* Pods-MesFacturesUITests.debug.xcconfig */,
 				33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */,
+				0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */,
+				9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */,
+				0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */,
+				28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */,
+				583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */,
+				A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -503,7 +549,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MesFacturesTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MyFacturesTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -521,7 +567,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MesFactures-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MyFactures-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -539,7 +585,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MesFacturesUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MyFacturesUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -552,7 +598,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -571,7 +617,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -589,12 +635,16 @@
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
+				1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */,
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
+				1D1052AB20ADE23E007C5CCF /* Settings.swift in Sources */,
+				1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
 				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
 				1D06376520A9D8880013E145 /* TextField.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
+				1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */,
 				1DB07FC82031FCAE00BDDDFB /* Invoice.swift in Sources */,
@@ -785,16 +835,23 @@
 		};
 		1D4B07B220233FF4002F745C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */;
+			baseConfigurationReference = 0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios\"",
+					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
+				);
 				INFOPLIST_FILE = MesFactures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MesFactures/MailCore2_Extensions/sendEmail_Bridge.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -802,16 +859,23 @@
 		};
 		1D4B07B320233FF4002F745C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */;
+			baseConfigurationReference = 9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios\"",
+					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
+				);
 				INFOPLIST_FILE = MesFactures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MesFactures/MailCore2_Extensions/sendEmail_Bridge.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -819,7 +883,7 @@
 		};
 		1D4B07B520233FF4002F745C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */;
+			baseConfigurationReference = 0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -837,7 +901,7 @@
 		};
 		1D4B07B620233FF4002F745C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA78293E56BFDAB3B4F37ED0 /* Pods-MesFacturesTests.release.xcconfig */;
+			baseConfigurationReference = 28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -855,7 +919,7 @@
 		};
 		1D4B07B820233FF4002F745C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50C1CE4DF75B7775D1BBF326 /* Pods-MesFacturesUITests.debug.xcconfig */;
+			baseConfigurationReference = 583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -872,7 +936,7 @@
 		};
 		1D4B07B920233FF4002F745C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */;
+			baseConfigurationReference = A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
