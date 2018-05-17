@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Realm.Configuration.defaultConfiguration = config
         
         
-        Buglife.shared().start(withEmail: "myfacturesapp@gmail.com")
+        Buglife.shared().start(withEmail: Settings().emailAdress)
         
         
         

@@ -11,6 +11,7 @@ import RealmSwift
 import KeychainAccess
 
 class Manager {
+    private let USER_EMAIL_KEY = "USER_EMAIL"
     
     private var _realm: Realm
     private var _yearsList: Results<Year>
@@ -18,7 +19,7 @@ class Manager {
     private var _categoryList: Results<Category>
     private var _groupIdeaList: Results<GroupIdea>
     
-    /** INIT functions **/
+    // MARK: -  INIT functions
     init (withRealm realm: Realm) {
         _realm = realm
         _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
@@ -53,7 +54,7 @@ class Manager {
     }
     
     
-    /** PRIVATE functions **/
+    // MARK: - PRIVATE functions
     private func getApplicationDataCount () -> Int {
         return _applicationDataList.count
     }
@@ -67,9 +68,22 @@ class Manager {
     }
     
     
-    /** PUBLIC functions **/
+    // PUBLIC functions
     
-    // Password management
+    // MARK: - Save in user Defaults
+    func saveInUserDefault(forKey key: String, andValue value: String) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    func getFromUserDefault(forKey key: String) -> String? {
+        return UserDefaults.standard.string(forKey: key)
+    }
+    
+    // MARK: - Generate a random 4 digit code
+    func generateRandomCode() -> String? {
+        return String(1000+arc4random_uniform(8999))
+    }
+    
+    // MARK: - Password management
     func savePassword (_ password: String) {
         DbManager().saveMasterPassword(password)
     }
@@ -78,7 +92,83 @@ class Manager {
         return DbManager().getMasterPassword() != nil
     }
     
-    // APPLICATIONDATA functions
+    func sendPasswordToUser(fromViewController originViewController: UIViewController) {
+        print("email: \(getUserEmail())")
+        print("password: \(DbManager().getMasterPassword())")
+        if let userEmail = getUserEmail(),
+            let userPassword = DbManager().getMasterPassword() {
+            
+            if sendEmail(toEmail: userEmail, withPassword: userPassword) {
+                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: originViewController)
+            } else {
+                Alert.message(title: "Une erreur est survenue lors de l'envoi du message", message: "", vc: originViewController)
+            }
+        }else {
+            Alert.message(title: "Error retreiving user informations", message: "", vc: originViewController)
+            print("Error retreiving user informations")
+        }
+    }
+    // MARK: - Email management
+    func sendEmail(toEmail email: String, withCode code: String? = nil, withPassword password: String? = nil) -> Bool {
+        var didComplete: Bool!
+        
+        let smtpSession = MCOSMTPSession()
+        smtpSession.hostname = Settings().hostname
+        smtpSession.username = Settings().emailAdress
+        smtpSession.password = Settings().emailPassword
+        smtpSession.port = Settings().port
+        smtpSession.authType = MCOAuthType.saslPlain
+        smtpSession.connectionType = MCOConnectionType.TLS
+        smtpSession.connectionLogger = {(connectionID, type, data) in
+            if data != nil {
+                if let string = NSString(data: data!, encoding: String.Encoding.utf8.rawValue){
+                    //                    NSLog("Connectionlogger: \(string)")
+                }
+            }
+        }
+        
+        let builder = MCOMessageBuilder()
+        builder.header.to = [MCOAddress(displayName: email, mailbox: email)]
+        builder.header.from = MCOAddress(displayName: "MyFacturesApp", mailbox: Settings().emailAdress)
+        
+        if let codeForUser = code {
+            builder.header.subject = "Vérification de votre adresse email"
+            builder.htmlBody = "Bonjour,<br/><br/> Veuillez recopier le code suivant dans l'application afin de vérifier votre adresse email.<br/><br/>code: \(codeForUser)<br/><br/> Merci<br/> MyFacturesApp"
+        }
+        if let userPassword = password {
+            builder.header.subject = "Récupération de votre mot de passe"
+            builder.htmlBody = "Bonjour,<br/><br/> Veuillez trouver ci-dessous votre mot de passe.<br/><br/> Mot de passe: \(userPassword)<br/><br/> MyFacturesApp"
+        }
+        
+        let rfc822Data = builder.data()
+        if let sendOperation = smtpSession.sendOperation(with: rfc822Data) {
+            sendOperation.start { (error) -> Void in
+                if (error != nil) {
+                    NSLog("Error sending email: \(String(describing: error))")
+                } else {
+                    NSLog("Successfully sent email!")
+
+                }
+            }
+            didComplete = true
+        } else {
+            didComplete = false
+        }
+        return didComplete
+    }
+    
+    // MARK: - User management
+    func createUser(with password: String, andEmail email: String) {
+        savePassword(password)
+        saveInUserDefault(forKey: USER_EMAIL_KEY, andValue: email)
+    }
+    
+    func getUserEmail() -> String? {
+        return getFromUserDefault(forKey: USER_EMAIL_KEY)
+    }
+    
+    
+    // MARK: - APPLICATIONDATA functions
     func updateApplicationData () {
         let applicationData = ApplicationData()
         _realm.beginWrite()
@@ -86,7 +176,7 @@ class Manager {
         try? _realm.commitWrite()
     }
     
-    // YEAR functions
+    // MARK: - YEAR functions
     func getyearsCount () -> Int {
         return _yearsList.count
     }
@@ -112,7 +202,7 @@ class Manager {
     }
 
     
-    // GROUPIDEA functions
+    // MARK: - GROUPIDEA functions
     func getGroupIdeaCount () -> Int {
         return _groupIdeaList.count
     }
@@ -139,7 +229,7 @@ class Manager {
         return groupIdeaName
     }
     
-    // CATEGORY Functions
+    // MARK: - CATEGORY Functions
     func getCategoryCount () -> Int {
         return _categoryList.count
     }
@@ -208,7 +298,7 @@ class Manager {
     }
     
     
-    // Other functions
+    // MARK: - Other functions
     func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
         let textFieldToConvert = textField
         let labelToConvert = label

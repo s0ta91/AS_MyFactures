@@ -13,14 +13,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
-    @IBOutlet weak var ui_resetPasswordButton: UIButton!
+    @IBOutlet weak var ui_lostPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
+    
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         /** DEBUG **/
-//         DbManager().reInitMasterPassword()
+//        DbManager().reInitMasterPassword()
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
@@ -29,7 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
             ui_passwordTextField.isHidden = true
-            ui_resetPasswordButton.isHidden = true
+            ui_lostPasswordButton.isHidden = true
             ui_connexionButton.isHidden = true
             unlockWithBiometrics()
         }
@@ -80,7 +88,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func showPasswordField () {
         ui_passwordTextField.isHidden = false
-        ui_resetPasswordButton.isHidden = false
+        ui_lostPasswordButton.isHidden = false
         ui_connexionButton.isHidden = false
     }
 
@@ -119,5 +127,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    @IBAction func LostPassword(_ sender: UIButton) {
+        _manager.sendPasswordToUser(fromViewController: self)
+//        if let userEmail = _manager.getUserEmail(),
+//            let userPassword = DbManager().getMasterPassword() {
+//
+//            if _manager.sendEmail(toEmail: userEmail, withPassword: userPassword) {
+//                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: self)
+//            } else {
+//                Alert.message(title: "Une erreur est survenue", message: "", vc: self)
+//            }
+//        }
+    }
+    
 }
 
