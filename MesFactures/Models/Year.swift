@@ -14,9 +14,8 @@ class Year: Object {
     @objc private dynamic var _selected: Bool = false
     private var _groupList = List<Group>()
     private var _groupArray: [String] = []
-    private var _groupListToShow : [Group] = []
+    private var _groupListToShow: [Group] = []
 
-    
     var year: Int {
         get {
             return _year
@@ -26,7 +25,7 @@ class Year: Object {
             try? realm?.commitWrite()
         }
     }
-    
+
     var selected: Bool {
         get {
             return _selected
@@ -36,8 +35,7 @@ class Year: Object {
             try? realm?.commitWrite()
         }
     }
-    
-    
+
     // GROUP functions
     func addGroup (withTitle title: String, _ isListFiltered: Bool) -> Group? {
         let newGroupIndex = getNewGroupIndex(withTitle: title, isListFiltered)
@@ -64,7 +62,7 @@ class Year: Object {
         _groupArray.removeAll()
         return groupIndex!
     }
-    
+
     func checkForDuplicate (forGroupName groupName: String, _ isListFiltered: Bool) -> Bool {
         var groupNameExists: Bool = false
         for groupIndex in 0..<getGroupCount() {
@@ -76,37 +74,37 @@ class Year: Object {
         }
         return groupNameExists
     }
-    
+
     func getGlobalGroupCount () -> Int {
         return _groupList.count
     }
-    
-    func getGroupCount () -> Int{
+
+    func getGroupCount () -> Int {
         return _groupListToShow.count
     }
-    
+
     func getGroup (atIndex index: Int, _ isListFiltered: Bool = false) -> Group? {
         if isListFiltered == true {
             return _groupListToShow[index]
-        }else {
+        } else {
             return _groupList[index]
         }
     }
-    
-    func setGroupList (containing nameParts: String = ""){
+
+    func setGroupList (containing nameParts: String = "") {
         _groupListToShow.removeAll(keepingCapacity: false)
         var groupResults: Results<Group>
         if nameParts != "" {
             let groupIndexPredicate = NSPredicate(format: "_title CONTAINS[cd] %@", nameParts)
             groupResults = _groupList.filter(groupIndexPredicate)
-        }else {
+        } else {
             groupResults = _groupList.filter("TRUEPREDICATE")
         }
         for group in groupResults {
             _groupListToShow.append(group)
         }
     }
-    
+
     func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
@@ -118,25 +116,25 @@ class Year: Object {
         }
         return group
     }
-    
+
     func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
         group.title = newTitle
     }
-    
-    func removeGroup (atIndex index:Int) {
+
+    func removeGroup (atIndex index: Int) {
         if let groupToDelete = getGroup(atIndex: index) {
             realm?.beginWrite()
             realm?.delete(groupToDelete)
             do {
                 try realm?.commitWrite()
-            }catch{
+            } catch {
                 print("can't delete group at index :\(index)")
             }
-        }else {
+        } else {
             print("This group at index '\(index)' does not exists")
         }
     }
-    
+
     func removeGroupinListToShow (atIndex index: Int) {
         _groupListToShow.remove(at: index)
     }

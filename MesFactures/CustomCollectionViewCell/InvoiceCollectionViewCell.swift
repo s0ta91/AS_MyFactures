@@ -14,19 +14,18 @@ protocol InvoiceCollectionViewCellDelegate: class {
 }
 
 class InvoiceCollectionViewCell: UICollectionViewCell {
-    
-    //MARK: - IBOutlets
+
+    // MARK: - IBOutlets
     @IBOutlet weak var ui_amountLabel: UILabel!
     @IBOutlet weak var ui_categoryLabel: UILabel!
     @IBOutlet weak var ui_invoiceTitleLabel: UILabel!
     @IBOutlet weak var ui_invoiceDocumentThumbnail: UIButton!
-    
-    //MARK: - Global variables
+
+    // MARK: - Global variables
     var _ptManager: Manager?
     weak var delegate: InvoiceCollectionViewCellDelegate?
-    
-    
-    //MARK: - Functions
+
+    // MARK: - Functions
     //TODO: Create a function to set values for the cell
     func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
         guard let _manager = _ptManager else {fatalError("passthrough _ptManager does not exists")}
@@ -50,18 +49,18 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         _manager.convertToCurrencyNumber(forLabel: ui_amountLabel)
         setFontSize(with: fontSize)
     }
-    
+
     func setFontSize (with fontSize: CGFloat) {
         ui_amountLabel.font = ui_amountLabel.font.withSize(fontSize)
         ui_categoryLabel.font = ui_categoryLabel.font.withSize(fontSize)
         ui_invoiceTitleLabel.font = ui_invoiceTitleLabel.font.withSize(fontSize)
     }
-    
-    //MARK: - IBActions
+
+    // MARK: - IBActions
     @IBAction func showAvailableActionsForInvoice(_ sender: UIButton) {
         delegate?.showAvailableActions(invoiceCell: self, buttonPressed: sender)
     }
-    
+
     @IBAction func showPdfButtonPressed(_ sender: UIButton) {
         delegate?.showPdfDocument(invoiceCell: self)
     }

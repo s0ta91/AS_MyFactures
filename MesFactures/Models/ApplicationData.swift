@@ -11,7 +11,7 @@ import RealmSwift
 
 class ApplicationData: Object {
     @objc private dynamic var _currentDate: Date = Date()
-    
+
     var currentDate: Date {
         return _currentDate
     }

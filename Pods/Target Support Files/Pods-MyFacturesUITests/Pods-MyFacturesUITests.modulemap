@@ -1,0 +1,6 @@
+framework module Pods_MyFacturesUITests {
+  umbrella header "Pods-MyFacturesUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

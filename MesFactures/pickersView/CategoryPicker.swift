@@ -12,7 +12,7 @@ class CategoryPicker: UIPickerView {
 
     var _manager: Manager?
     var _categoryTextField: UITextField!
-    
+
     func getCategoryTitle(forRow row: Int) -> String? {
         var categoryTitle: String?
         if let manager = _manager,
@@ -27,7 +27,7 @@ extension CategoryPicker: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentCategory: Int = 0
         if let manager = _manager {
@@ -35,8 +35,7 @@ extension CategoryPicker: UIPickerViewDataSource {
         }
         return numberOfRowInComponentCategory
     }
-    
-    
+
 }
 
 extension CategoryPicker: UIPickerViewDelegate {
@@ -44,13 +43,13 @@ extension CategoryPicker: UIPickerViewDelegate {
         // First category title must never be shown in the pickerView
         return getCategoryTitle(forRow: row + 1)
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // First category title must never be shown in the pickerView
         let categoryTitle = getCategoryTitle(forRow: row + 1)
         if categoryTitle != nil {
             _categoryTextField.text = categoryTitle
-        }else {
+        } else {
             _categoryTextField.text = "Error"
         }
     }

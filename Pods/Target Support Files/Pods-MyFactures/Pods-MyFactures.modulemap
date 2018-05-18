@@ -1,0 +1,6 @@
+framework module Pods_MyFactures {
+  umbrella header "Pods-MyFactures-umbrella.h"
+
+  export *
+  module * { export * }
+}
