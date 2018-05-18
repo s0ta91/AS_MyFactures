@@ -46,7 +46,7 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self
         groupCV.delegate = self
         

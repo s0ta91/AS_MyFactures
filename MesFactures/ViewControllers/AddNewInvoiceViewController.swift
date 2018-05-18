@@ -79,7 +79,7 @@ class AddNewInvoiceViewController: UIViewController {
         ui_amountTextField.autocorrectionType = .no
         ui_createCategoryView.layer.cornerRadius = 10
         
-        IQKeyboardManager.sharedManager().keyboardDistanceFromTextField = 20.0
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,10 +8,10 @@ target 'MyFactures' do
   use_frameworks!
 
   # Pods for MyFactures
-  pod 'RealmSwift', '3.3.2'
-  pod 'IQKeyboardManagerSwift', '5.0.7'
+  pod 'RealmSwift', '3.5.0'
+  pod 'IQKeyboardManagerSwift', '6.0.3'
   pod 'KeychainAccess', '3.1.1'
-  pod 'DZNEmptyDataSet'
+  pod 'DZNEmptyDataSet', '1.8.1'
   pod 'Buglife', '2.8.0'
   pod 'Fabric', '1.7.6'
   pod 'Crashlytics', '3.10.1'
