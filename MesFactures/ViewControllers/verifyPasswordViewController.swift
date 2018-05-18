@@ -45,7 +45,6 @@ class verifyPasswordViewController: UIViewController {
     func showConfirmationAlertMessage () {
         let alertMessageSent = UIAlertController(title: "Merci!", message: "Adresse email confirmée", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "OK", style: .default) { (_) in
-//            self.dismiss(animated: true, completion: nil)
             self._manager.createUser(with: self.password, andEmail: self.emailAdress)
             self.displayGroupTableViewController()
         }
@@ -67,6 +66,7 @@ class verifyPasswordViewController: UIViewController {
             showConfirmationAlertMessage()
         } else {
             //TODO: Faire vibrer le champs texte
+            _manager.shake(ui_codeTextField)
         }
     }
 }
