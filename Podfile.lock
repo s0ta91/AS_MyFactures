@@ -20,7 +20,7 @@ DEPENDENCIES:
   - Fabric (= 1.7.6)
   - IQKeyboardManagerSwift (= 5.0.7)
   - KeychainAccess (= 3.1.1)
-  - mailcore2-ios
+  - mailcore2-ios (= 0.6.4)
   - RealmSwift (= 3.3.2)
 
 SPEC REPOS:
@@ -46,6 +46,6 @@ SPEC CHECKSUMS:
   Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
   RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
 
-PODFILE CHECKSUM: 2ed05ed2b12ec9f7af8108159b50e08e9a5f6fe6
+PODFILE CHECKSUM: 969e6c1bb35c968d14340a048835b915d120beca
 
 COCOAPODS: 1.5.0
