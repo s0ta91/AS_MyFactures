@@ -9,7 +9,7 @@
 import UIKit
 import LocalAuthentication
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
         /** DEBUG **/
 //        DbManager().reInitMasterPassword()
+//        _manager.reinitUserDefaultValue(forKey: Settings().USER_EMAIL_KEY)
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
@@ -53,10 +54,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.ui_passwordTextField.delegate = self
     }
 
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
+    
 
     private func unlockWithBiometrics () {
         let context = LAContext()
@@ -64,7 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MyFactures", reply: { (isOwnerConfirmed, authError) in
                 /**
                     Going back from secondary traitment to firt traitment /
-                    Revenir à l'éxécution du code a premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
+                    Revenir à l'éxécution du code au premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
                  **/
                 DispatchQueue.main.async {
                      /** Unlock application and show group screen **/
@@ -106,40 +104,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }))
     }
     
-    func shakeTextField() {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.05
-        animation.repeatCount = 5
-        animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x - 4, y: ui_passwordTextField.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x + 4, y: ui_passwordTextField.center.y))
-        
-        ui_passwordTextField.layer.add(animation, forKey: "position")
-    }
-    
     @IBAction func unlockWithPassword(_ sender: Any) {
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
                 displayGroupTableViewController()
             }else {
-                shakeTextField()
+                _manager.shake(ui_passwordTextField)
             }
         }
     }
     
     @IBAction func LostPassword(_ sender: UIButton) {
         _manager.sendPasswordToUser(fromViewController: self)
-//        if let userEmail = _manager.getUserEmail(),
-//            let userPassword = DbManager().getMasterPassword() {
-//
-//            if _manager.sendEmail(toEmail: userEmail, withPassword: userPassword) {
-//                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: self)
-//            } else {
-//                Alert.message(title: "Une erreur est survenue", message: "", vc: self)
-//            }
-//        }
     }
     
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 }
 

@@ -11,7 +11,7 @@ import RealmSwift
 import KeychainAccess
 
 class Manager {
-    private let USER_EMAIL_KEY = "USER_EMAIL"
+    
     
     private var _realm: Realm
     private var _yearsList: Results<Year>
@@ -77,6 +77,9 @@ class Manager {
     func getFromUserDefault(forKey key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }
+    func reinitUserDefaultValue(forKey key: String) {
+        UserDefaults.standard.set(nil, forKey: Settings().USER_EMAIL_KEY)
+    }
     
     // MARK: - Generate a random 4 digit code
     func generateRandomCode() -> String? {
@@ -93,8 +96,6 @@ class Manager {
     }
     
     func sendPasswordToUser(fromViewController originViewController: UIViewController) {
-        print("email: \(getUserEmail())")
-        print("password: \(DbManager().getMasterPassword())")
         if let userEmail = getUserEmail(),
             let userPassword = DbManager().getMasterPassword() {
             
@@ -121,7 +122,7 @@ class Manager {
         smtpSession.connectionType = MCOConnectionType.TLS
         smtpSession.connectionLogger = {(connectionID, type, data) in
             if data != nil {
-                if let string = NSString(data: data!, encoding: String.Encoding.utf8.rawValue){
+                if let _ = NSString(data: data!, encoding: String.Encoding.utf8.rawValue){
                     //                    NSLog("Connectionlogger: \(string)")
                 }
             }
@@ -160,11 +161,11 @@ class Manager {
     // MARK: - User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
-        saveInUserDefault(forKey: USER_EMAIL_KEY, andValue: email)
+        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
     }
     
     func getUserEmail() -> String? {
-        return getFromUserDefault(forKey: USER_EMAIL_KEY)
+        return getFromUserDefault(forKey: Settings().USER_EMAIL_KEY)
     }
     
     
@@ -383,5 +384,16 @@ class Manager {
             image = nil
         }
         return image
+    }
+
+    func shake(_ textField: UITextField) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 5
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 4, y: textField.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 4, y: textField.center.y))
+        
+        textField.layer.add(animation, forKey: "position")
     }
 }

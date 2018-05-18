@@ -14,6 +14,7 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var ui_emailTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
     @IBOutlet weak var ui_createPasswordButton: UIButton!
+    @IBOutlet weak var ui_informationsLabel: UILabel!
     
     private var _manager: Manager {
         if let database =  DbManager().getDb() {
@@ -23,12 +24,16 @@ class CreateAccountViewController: UIViewController {
         }
     }
 
+    var isPasswordSet: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ui_myfacturesTextField.text = "MyFactures"
+        ui_informationsLabel.text = "* Votre adresse email sera stockée localement. En aucun cas elle ne sera partagée, ni connue de tierces personnes."
         
         // Delegation for password textField to have access to textfieldShouldReturn function
+        ui_emailTextField.delegate = self
         ui_passwordTextField.delegate = self
         
         ui_emailTextField.setPadding()
@@ -37,6 +42,10 @@ class CreateAccountViewController: UIViewController {
         ui_passwordTextField.setRadius()
         ui_createPasswordButton.layer.cornerRadius = 5
         
+        if isPasswordSet {
+            setPasswordAndDesableField()
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,6 +53,14 @@ class CreateAccountViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    private func setPasswordAndDesableField() {
+        ui_emailTextField.placeholder = "Ajouter une adresse email *"
+        ui_passwordTextField.text = DbManager().getMasterPassword()
+        ui_passwordTextField.isEnabled = false
+        ui_passwordTextField.backgroundColor = UIColor.darkGray
+        ui_createPasswordButton.setTitle("Ajouter", for: .normal)
+    }
+    
     func verifyEmail() {
         if (ui_emailTextField.text?.isValidEmail) != false {
             guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? verifyPasswordViewController else { return }
@@ -62,9 +79,8 @@ class CreateAccountViewController: UIViewController {
             
         } else {
             //TODO: Faire vibrer le champs
-            print("Adresse email erronée")
+            _manager.shake(ui_emailTextField)
         }
-        
     }
 
     @IBAction func createAccountButtonPressed(_ sender: Any) {

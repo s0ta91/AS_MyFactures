@@ -258,8 +258,8 @@
 		1D4B078B20233FF4002F745C /* MesFactures */ = {
 			isa = PBXGroup;
 			children = (
-				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
+				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
 				1D4809D92024B08900068094 /* Extensions */,
 				1D4809CD20248B4800068094 /* Models */,
 				1D4809D82024AA7F00068094 /* Managers */,

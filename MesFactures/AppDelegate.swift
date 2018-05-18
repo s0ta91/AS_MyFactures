@@ -53,7 +53,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // TODO: - Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
-            displayCreateAccountVC()
+            displayCreateAccountVC(withPassword: false)
+        } else {
+            if database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
+                displayCreateAccountVC(withPassword: true)
+            }
         }
         
         
@@ -94,12 +98,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - My private functions
-    private func displayCreateAccountVC () {
+    private func displayCreateAccountVC (withPassword: Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
+        createAccountVC.isPasswordSet = withPassword
         self.window?.rootViewController = createAccountVC
     }
-
-
 }
 
