@@ -9,68 +9,63 @@
 import UIKit
 import LocalAuthentication
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController {
     
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
-    @IBOutlet weak var ui_createNewPasswordButton: UIButton!
+    @IBOutlet weak var ui_lostPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
     }
-
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
         /** DEBUG **/
 //        DbManager().reInitMasterPassword()
+//        _manager.reinitUserDefaultValue(forKey: Settings().USER_EMAIL_KEY)
         
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
         
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
-        showHideCreateNewPasswordButton()
+        if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
+            ui_passwordTextField.isHidden = true
+            ui_lostPasswordButton.isHidden = true
+            ui_connexionButton.isHidden = true
+            unlockWithBiometrics()
+        }
         
-        // Delegation for password textField
+        // Set padding for password textField
+        ui_passwordTextField.setPadding()
+        ui_passwordTextField.setRadius()
+        
+        // Set radius for connexion button
+        ui_connexionButton.layer.cornerRadius = 5
+        
+        // Delegation for password textField to have access to textfieldShouldReturn function
         self.ui_passwordTextField.delegate = self
     }
+
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
-    
-    private func showHideCreateNewPasswordButton (){
-        if let db = DbManager().getDb() {
-            if db.hasMasterPassword() == true {
-                ui_createNewPasswordButton.isHidden = true
-                if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
-                    ui_passwordTextField.isHidden = true
-                    ui_connexionButton.isHidden = true
-                    unlockWithBiometrics()
-                }
-            }
-        }
-    }
-    
+
     private func unlockWithBiometrics () {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MyFactures", reply: { (isOwnerConfirmed, authError) in
                 /**
                     Going back from secondary traitment to firt traitment /
-                    Revenir à l'éxécution du code a premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
+                    Revenir à l'éxécution du code au premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
                  **/
                 DispatchQueue.main.async {
-                     /** Unlock application and show group screnn **/
+                     /** Unlock application and show group screen **/
                     if isOwnerConfirmed == true {
                         self.displayGroupTableViewController()
                     }
@@ -91,9 +86,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func showPasswordField () {
         ui_passwordTextField.isHidden = false
+        ui_lostPasswordButton.isHidden = false
         ui_connexionButton.isHidden = false
     }
-    
+
     func displayGroupTableViewController () {
         if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
@@ -108,27 +104,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }))
     }
     
-    func shakeTextField() {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.05
-        animation.repeatCount = 5
-        animation.autoreverses = true
-        animation.fromValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x - 4, y: ui_passwordTextField.center.y))
-        animation.toValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x + 4, y: ui_passwordTextField.center.y))
-        
-        ui_passwordTextField.layer.add(animation, forKey: "position")
-    }
-    
     @IBAction func unlockWithPassword(_ sender: Any) {
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
                 displayGroupTableViewController()
             }else {
-                shakeTextField()
-                ui_passwordTextField.text = ""
+                _manager.shake(ui_passwordTextField)
             }
         }
+    }
+    
+    @IBAction func LostPassword(_ sender: UIButton) {
+        _manager.sendPasswordToUser(fromViewController: self)
+    }
+    
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
 }
 

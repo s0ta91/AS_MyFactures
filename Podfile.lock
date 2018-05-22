@@ -4,22 +4,24 @@ PODS:
     - Fabric (~> 1.7.5)
   - DZNEmptyDataSet (1.8.1)
   - Fabric (1.7.6)
-  - IQKeyboardManagerSwift (5.0.7)
+  - IQKeyboardManagerSwift (6.0.3)
   - KeychainAccess (3.1.1)
-  - Realm (3.3.2):
-    - Realm/Headers (= 3.3.2)
-  - Realm/Headers (3.3.2)
-  - RealmSwift (3.3.2):
-    - Realm (= 3.3.2)
+  - mailcore2-ios (0.6.4)
+  - Realm (3.5.0):
+    - Realm/Headers (= 3.5.0)
+  - Realm/Headers (3.5.0)
+  - RealmSwift (3.5.0):
+    - Realm (= 3.5.0)
 
 DEPENDENCIES:
   - Buglife (= 2.8.0)
   - Crashlytics
-  - DZNEmptyDataSet
+  - DZNEmptyDataSet (= 1.8.1)
   - Fabric
-  - IQKeyboardManagerSwift (= 5.0.7)
+  - IQKeyboardManagerSwift (= 6.0.3)
   - KeychainAccess (= 3.1.1)
-  - RealmSwift (= 3.3.2)
+  - mailcore2-ios (= 0.6.4)
+  - RealmSwift (= 3.5.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -29,6 +31,7 @@ SPEC REPOS:
     - Fabric
     - IQKeyboardManagerSwift
     - KeychainAccess
+    - mailcore2-ios
     - Realm
     - RealmSwift
 
@@ -37,11 +40,12 @@ SPEC CHECKSUMS:
   Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
-  IQKeyboardManagerSwift: 30fb3a61de1af53a95e02b80fb54ed0a19d5ede5
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
-  Realm: d927fbf66df5532cfafc08afb5f7e53ded37b894
-  RealmSwift: 4e903a494e05d866581d69ad6f7e7b879d446baf
+  mailcore2-ios: 3ff0be2fa553d4da9c11d39c11d51863c768f24f
+  Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
+  RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
 
-PODFILE CHECKSUM: 4b74c9fd01e21ce797feedca4ae91f981bb3b13d
+PODFILE CHECKSUM: b7fce01b0365df439c370a8ad0dc5edd2ae9daf8
 
 COCOAPODS: 1.5.0

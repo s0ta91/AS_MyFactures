@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import IQKeyboardManagerSwift
 
 class AddNewInvoiceViewController: UIViewController {
 
@@ -74,8 +75,12 @@ class AddNewInvoiceViewController: UIViewController {
         ui_monthSelectionTextField.delegate = self
         ui_groupSelectionTextField.delegate = self
         ui_categorySelectionTextField.delegate = self
+        ui_addNewCategoryTextField.delegate = self
         ui_amountTextField.delegate = self
+        ui_amountTextField.autocorrectionType = .no
         ui_createCategoryView.layer.cornerRadius = 10
+        
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -434,6 +439,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ui_descriptionTextField.resignFirstResponder()
+        ui_createCategoryView.endEditing(false)
         return true
     }
 }

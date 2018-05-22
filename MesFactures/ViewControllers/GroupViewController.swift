@@ -8,6 +8,7 @@
 
 import UIKit
 import DZNEmptyDataSet
+import IQKeyboardManagerSwift
 
 class GroupViewController: UIViewController {
     
@@ -45,6 +46,8 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_newGroupNameTextField.delegate = self
+        IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self
         groupCV.delegate = self
         
@@ -77,12 +80,9 @@ class GroupViewController: UIViewController {
     private func animateIn() {
         ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)
-//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-//        let topAdjust = navigationBarHeight + 60
-        
+
         
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
-//        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
         ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         ui_createGroupView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
@@ -335,6 +335,13 @@ extension GroupViewController: DZNEmptyDataSetSource {
         let str = "Tapez sur l'icone 'Nouveau dossier' ci-dessous pour créer un dossier"
         let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
+    }
+}
+
+extension GroupViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.ui_createGroupView.endEditing(false)
+        return true
     }
 }
 

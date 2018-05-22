@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //TODO: - Add crashLytics
         Fabric.with([Crashlytics.self])
@@ -33,20 +33,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        })
 //        Realm.Configuration.defaultConfiguration = config
         
-//        Buglife.shared().start(withAPIKey: "H9aZT1n1CeWjSu0B7r9IWQtt")
-        Buglife.shared().start(withEmail: "myfacturesapp@gmail.com")
         
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
+        Buglife.shared().start(withEmail: Settings().emailAdress)
         
-        if let database = DbManager().getDb() {
-            database.initYear()
-            database.initCategory()
-            database.updateApplicationData()
+
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        
+        
+        // TODO: -  try to create the database
+        guard let database = DbManager().getDb() else { fatalError("No database found") }
+        
+        // TODO: - Initialize all default data in database
+        database.initYear()
+        database.initCategory()
+        database.updateApplicationData()
+        
+        // TODO: - Check if password is already set ELSE show createAccount screen instead of login screen
+        if database.hasMasterPassword() == false {
+            displayCreateAccountVC(withPassword: false)
+        } else {
+            if database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
+                displayCreateAccountVC(withPassword: true)
+            }
         }
+        
+        
         return true
     }
 
+    //MARK: - Other functions
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -78,7 +95,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    // MARK: - My private functions
+    private func displayCreateAccountVC (withPassword: Bool) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
+        createAccountVC.isPasswordSet = withPassword
+        self.window?.rootViewController = createAccountVC
+    }
 }
 

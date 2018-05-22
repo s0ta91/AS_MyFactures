@@ -30,6 +30,7 @@ class ManageCategoryTableViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_modifyCategoryTextField.delegate = self
         ui_manageCategoryTableView.dataSource = self
         ui_manageCategoryTableView.delegate = self
     }
@@ -58,11 +59,8 @@ class ManageCategoryTableViewController: UIViewController {
     private func animateIn(forSubview subview: UIView) {
         ui_manageCategoryVisualView.isHidden = false
         self.navigationController!.view.addSubview(subview)
-//        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
-//        let topAdjust = navigationBarHeight + 60
         
         subview.translatesAutoresizingMaskIntoConstraints = false
-//        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
         subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
@@ -71,7 +69,6 @@ class ManageCategoryTableViewController: UIViewController {
         
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
-        
         
         
         UIView.animate(withDuration: 0.4) {
@@ -197,5 +194,12 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         }
     }
 
+}
+
+extension ManageCategoryTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        ui_modifyCategoryView.endEditing(false)
+        return true
+    }
 }
 
