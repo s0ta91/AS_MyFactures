@@ -10,19 +10,19 @@ import UIKit
 
 class ResetPasswordViewController: UIViewController {
 
-    // MARK: - Outlets
+    //MARK: - Outlets
     @IBOutlet weak var ui_oldPasswordTextField: UITextField!
     @IBOutlet weak var ui_newPasswordTextField: UITextField!
     @IBOutlet weak var messageLabel: UILabel!
-
-    // MARK: - Global Variables
+    
+    //MARK: - Global Variables
     let dbManager = DbManager()
-
-    // MARK: - Controller functions
+    
+    //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hideMessageLabel()
@@ -31,8 +31,8 @@ class ResetPasswordViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-    // MARK: - Private functions
+    
+    //MARK: - Private functions
     private func hideMessageLabel() {
         messageLabel.isHidden = true
     }
@@ -40,8 +40,8 @@ class ResetPasswordViewController: UIViewController {
         messageLabel.isHidden = false
     }
 
-    // MARK: - Actions
-
+    //MARK: - Actions
+    
     @IBAction func resetPassword(_ sender: UIButton) {
         //TODO: Check if textFields are not empty
         guard let oldPassword = ui_oldPasswordTextField.text else { return print("textField 'ui_oldPasswordTextField' is empty") }
@@ -53,7 +53,7 @@ class ResetPasswordViewController: UIViewController {
                 if oldPassword == oldPasswordInKeychain {
                     dbManager.reInitMasterPassword()
                     dbManager.saveMasterPassword(newPassword)
-
+                    
                     //TODO: Confirmation Message then Dismiss the screen
                     let confirmationAlert = UIAlertController(title: "Le mot de passe a été changé", message: nil, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
@@ -61,28 +61,30 @@ class ResetPasswordViewController: UIViewController {
                     }
                     confirmationAlert.addAction(alertAction)
                     present(confirmationAlert, animated: true)
-                } else {
+                }else {
                     //TODO: Else, show a error message
                     let alert = UIAlertController(title: "Erreur!", message: "Le mot de passe actuel n'est pas correcte. Veuillez réessayer.", preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Ré-essayer", style: .default, handler: nil)
                     alert.addAction(alertAction)
                     present(alert, animated: true, completion: nil)
-
+                    
                     print("Old password entered does not match the passord in KeyChain")
                 }
-
-            } else {
+                
+            }else {
                 //TODO: If no password in keychain show an error message
                 messageLabel.text = "Error! - No password found in keychain"
                 unHideMessageLabel()
             }
-        } else {
+        }else {
             messageLabel.text = "Les champs ne peuvent être vides. Veuillez les compléter."
             unHideMessageLabel()
         }
 
+        
     }
-
+    
+    
     @IBAction func cancelResetPasswordVC(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }

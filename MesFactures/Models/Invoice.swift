@@ -15,7 +15,7 @@ class Invoice: Object {
     @objc private dynamic var _detailedDescription: String = ""
     @objc private dynamic var _categoryobject: Category?
     @objc private dynamic var _amount: Double = 0
-
+    
     var identifier: String? {
         get {
             return _identifier
@@ -25,7 +25,7 @@ class Invoice: Object {
             try? realm?.commitWrite()
         }
     }
-
+    
     var documentType: String? {
         get {
             return _documentType
@@ -45,7 +45,7 @@ class Invoice: Object {
             try? realm?.commitWrite()
         }
     }
-
+    
     var categoryObject: Category? {
         get {
             return _categoryobject
@@ -55,7 +55,7 @@ class Invoice: Object {
             try? realm?.commitWrite()
         }
     }
-
+    
     var amount: Double {
         get {
             return _amount

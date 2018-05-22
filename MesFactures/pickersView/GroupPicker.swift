@@ -12,7 +12,7 @@ class GroupPicker: UIPickerView {
 
     var _year: Year?
     var _groupTextField: UITextField!
-
+    
     func getGroupTitle(forRow row: Int) -> String? {
         var groupTitle: String?
         if let year = _year,
@@ -21,7 +21,7 @@ class GroupPicker: UIPickerView {
         }
         return groupTitle
     }
-
+    
     func selectDefaultRow (forGroup group: Group, forPickerView pickerView: UIPickerView) {
         if let year = _year,
             let groupIndex = year.getGroupIndex(forGroup: group) {
@@ -34,7 +34,7 @@ extension GroupPicker: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentGroup: Int = 0
         if let year = _year {
@@ -48,14 +48,16 @@ extension GroupPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return getGroupTitle(forRow: row)
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let groupTitle = getGroupTitle(forRow: row)
         if groupTitle != nil {
             _groupTextField.text = groupTitle
-        } else {
+        }else {
             _groupTextField.text = "Error"
         }
     }
 
 }
+
+

@@ -10,44 +10,45 @@ import UIKit
 import LocalAuthentication
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var ui_mesfacturesTextField: UITextField!
     @IBOutlet weak var ui_passwordTextField: UITextField!
     @IBOutlet weak var ui_createNewPasswordButton: UIButton!
     @IBOutlet weak var ui_connexionButton: UIButton!
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         /** DEBUG **/
 //        DbManager().reInitMasterPassword()
-
+        
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
-
+        
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         showHideCreateNewPasswordButton()
-
+        
         // Delegation for password textField
         self.ui_passwordTextField.delegate = self
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
-
-    private func showHideCreateNewPasswordButton () {
+    
+    private func showHideCreateNewPasswordButton (){
         if let db = DbManager().getDb() {
             if db.hasMasterPassword() == true {
                 ui_createNewPasswordButton.isHidden = true
@@ -59,10 +60,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
     private func unlockWithBiometrics () {
         let context = LAContext()
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MyFactures", reply: { (isOwnerConfirmed, authError) in
                 /**
                     Going back from secondary traitment to firt traitment /
@@ -87,26 +88,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             })
         }
     }
-
+    
     private func showPasswordField () {
         ui_passwordTextField.isHidden = false
         ui_connexionButton.isHidden = false
     }
-
+    
     func displayGroupTableViewController () {
         if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
             present(GroupTableVC, animated: true, completion: nil)
         }
     }
-
+    
     private func showAlertMessage (_ errorMessage: String) {
         let alertBox = UIAlertController(title: "Une erreur est survenue", message: errorMessage, preferredStyle: .alert)
         alertBox.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction) in
             self.showPasswordField()
         }))
     }
-
+    
     func shakeTextField() {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.05
@@ -114,19 +115,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         animation.autoreverses = true
         animation.fromValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x - 4, y: ui_passwordTextField.center.y))
         animation.toValue = NSValue(cgPoint: CGPoint(x: ui_passwordTextField.center.x + 4, y: ui_passwordTextField.center.y))
-
+        
         ui_passwordTextField.layer.add(animation, forKey: "position")
     }
-
+    
     @IBAction func unlockWithPassword(_ sender: Any) {
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
                 displayGroupTableViewController()
-            } else {
+            }else {
                 shakeTextField()
                 ui_passwordTextField.text = ""
             }
         }
     }
 }
+

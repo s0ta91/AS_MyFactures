@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_MyFacturesTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_MyFacturesTestsVersionString[];
+FOUNDATION_EXPORT double Pods_MesFacturesUITestsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_MesFacturesUITestsVersionString[];
 

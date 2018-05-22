@@ -10,26 +10,27 @@ import UIKit
 import DZNEmptyDataSet
 
 class GroupViewController: UIViewController {
-
-    // MARK: - GroupViewController
+    
+    //MARK: - GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
     @IBOutlet weak var ui_searchBarView: UIView!
-
+    
     @IBOutlet weak var ui_searchBar: UISearchBar!
     @IBOutlet weak var ui_tabBarView: UIView!
-
+    
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet weak var ui_visualEffectView: UIVisualEffectView!
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
-
+    
     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
 
-    // MARK: - Variables declaration
+    
+    //MARK: - Variables declaration
     private var _manager: Manager {
         if let database =  DbManager().getDb() {
             return database
-        } else {
+        }else {
             fatalError("Database doesn't exists")
         }
     }
@@ -39,30 +40,31 @@ class GroupViewController: UIViewController {
     let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     var isListFiltered = false
     var collectionViewFontSize: CGFloat!
-
-    // MARK: - ViewController functions
+    
+    
+    //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
         groupCV.dataSource = self
         groupCV.delegate = self
-
+        
         groupCV.emptyDataSetSource = self
-
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         _currentYear = _manager.getSelectedYear()
         _currentYear.setGroupList()
         setFontSize()
-
+        
         ui_visualEffectView.isHidden = true
         effect = ui_visualEffectView.effect
         ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
-
+        
         _manager.setHeaderClippedToBound(groupCV)
-
+        
         groupCV.reloadData()
     }
 
@@ -70,24 +72,28 @@ class GroupViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Private functions
+    
+    //MARK: -  Private functions
     private func animateIn() {
         ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)
 //        let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
 //        let topAdjust = navigationBarHeight + 60
-
+        
+        
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
 //        ui_createGroupView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
         ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-
+        
         ui_createGroupView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         ui_createGroupView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-
+        
+        
         ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         ui_createGroupView.alpha = 0
-
+        
+        
+        
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffectView.effect = self.effect
             self.ui_createGroupView.alpha = 1
@@ -98,7 +104,7 @@ class GroupViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             self.ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             self.ui_createGroupView.alpha = 0
-
+            
             self.ui_visualEffectView.effect = nil
         }) { (success: Bool) in
             self.ui_createGroupView.removeFromSuperview()
@@ -106,27 +112,27 @@ class GroupViewController: UIViewController {
         ui_visualEffectView.isHidden = true
         searchBarSearchButtonClicked(self.ui_searchBar)
     }
-    private func setFontSize () {
+    private func setFontSize (){
         let collectionViewWidth = groupCV.frame.size.width
         if collectionViewWidth == 288 {
             collectionViewFontSize = 15
-        } else if collectionViewWidth >= 343 {
+        }else if collectionViewWidth >= 343 {
             collectionViewFontSize = 17
         }
     }
-
-    // MARK: - Actions
+    
+    //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
         ui_newGroupNameTextField.becomeFirstResponder()
         animateIn()
     }
-
+    
     @IBAction func cancelButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.resignFirstResponder()
         animateOut()
     }
-
+    
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.resignFirstResponder()
         guard let newGroupName = ui_newGroupNameTextField.text else {return print("textFiled is empty")}
@@ -134,7 +140,7 @@ class GroupViewController: UIViewController {
             _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
             _groupToModify = nil
             animateOut()
-        } else {
+        }else {
             let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName, isListFiltered)
             if groupExists == false {
                 if let newGroup = _currentYear.addGroup(withTitle: newGroupName, isListFiltered) {
@@ -143,7 +149,7 @@ class GroupViewController: UIViewController {
                     }
                 }
                 animateOut()
-            } else {
+            }else {
                 let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)
                 let createAction = UIAlertAction(title: "Créer", style: .default, handler: { (_) in
                     if let newGroup = self._currentYear.addGroup(withTitle: newGroupName, self.isListFiltered) {
@@ -169,15 +175,15 @@ class GroupViewController: UIViewController {
             self.ui_searchBarView.layoutIfNeeded()
         }
     }
-
-    // MARK: - Prepare for Navigation
+    
+    //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showModaly_yearSelectionVC" {
             if let destinationVC = segue.destination as? SelectYearViewController {
                 destinationVC._manager = _manager
             }
         }
-
+        
         // FIXME: Bug here when swipe on groupCell to the right in the cell. selectedGroup is nil so the App crash
         if segue.identifier == "show_invoiceCollectionVC" {
             if let destinationVC = segue.destination as? InvoiceCollectionViewController,
@@ -187,7 +193,7 @@ class GroupViewController: UIViewController {
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
                     destinationVC._ptFontSize = collectionViewFontSize
-            } else {
+            }else {
                 fatalError("One of these variable is nil (destinationVC / selectedGroupindex / selectedGroup)")
             }
         }
@@ -196,7 +202,7 @@ class GroupViewController: UIViewController {
 }
 
 extension GroupViewController: UICollectionViewDataSource {
-
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var headerView: HeaderGroupView!
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
@@ -209,11 +215,11 @@ extension GroupViewController: UICollectionViewDataSource {
         }
         return headerView
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return _currentYear.getGroupCount()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
@@ -225,12 +231,12 @@ extension GroupViewController: UICollectionViewDataSource {
         cell_group.layer.borderWidth = 1.0
         cell_group.layer.borderColor = UIColor.clear.cgColor
         cell_group.layer.shadowColor = UIColor.lightGray.cgColor
-        cell_group.layer.shadowOffset = CGSize(width:2, height: 2)
+        cell_group.layer.shadowOffset = CGSize(width:2,height: 2)
         cell_group.layer.shadowRadius = 2.0
         cell_group.layer.shadowOpacity = 1.0
-        cell_group.layer.masksToBounds = false
+        cell_group.layer.masksToBounds = false;
         cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
-
+        
         cell_group.delegate = self
         return cell_group
     }
@@ -244,7 +250,7 @@ extension GroupViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension GroupViewController: GroupCollectionViewCellDelegate {
-
+    
     func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
@@ -275,15 +281,15 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             alertDeletion.addAction(cancelDeletion)
             self.present(alertDeletion, animated: true, completion: nil)
         }
-
+        
         let cancel = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
-
+        
         if let popoverController = actionSheet.popoverPresentationController {
             popoverController.sourceView = groupCell.contentView
-            popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
+            popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX , y: buttonPressed.frame.maxY, width: 0, height: 0)
             popoverController.permittedArrowDirections = .up
         }
         self.present(actionSheet, animated: true, completion: nil)
@@ -301,16 +307,17 @@ extension GroupViewController: UISearchBarDelegate {
         groupCV.reloadData()
     }
 
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isListFiltered = false
-
+        
         searchBarViewHeight.constant = 0
         UIView.animate(withDuration: 0.25) {
             self.ui_searchBarView.layoutIfNeeded()
         }
         _currentYear.setGroupList()
         groupCV.reloadData()
-
+        
         // resignFirstResponder is executed in the main thread whatever if the action above are completed or not
         DispatchQueue.main.async {
             searchBar.resignFirstResponder()
@@ -319,7 +326,7 @@ extension GroupViewController: UISearchBarDelegate {
 }
 
 extension GroupViewController: DZNEmptyDataSetSource {
-
+    
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "folderCollectionViewBackground_128")
     }
@@ -330,3 +337,4 @@ extension GroupViewController: DZNEmptyDataSetSource {
         return NSAttributedString(string: str, attributes: attr)
     }
 }
+

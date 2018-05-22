@@ -11,9 +11,10 @@ import UIKit
 class SelectYearViewController: UIViewController {
 
     @IBOutlet weak var ui_selectYearTableView: UITableView!
-
+    
+    
     var _manager: Manager!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,23 +27,24 @@ class SelectYearViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func closeSelectYearVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
 
 }
 
 extension SelectYearViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return _manager.getyearsCount()
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell_yearSelection = tableView.dequeueReusableCell(withIdentifier: "cell_yearSelection", for: indexPath) as! SelectYearTableViewCell
         if let year = _manager.getYear(atIndex: indexPath.row) {
@@ -51,14 +53,14 @@ extension SelectYearViewController: UITableViewDataSource {
             var numberOfGroup: String {
                 if nbGroupForYear > 1 {
                     return "\(nbGroupForYear) groupes"
-                } else {
+                }else {
                     return "\(nbGroupForYear) groupe"
                 }
             }
             cell_yearSelection.setValues(yearString, numberOfGroup)
             if year.selected == true {
                 cell_yearSelection.accessoryType = .checkmark
-            } else {
+            }else {
                 cell_yearSelection.accessoryType = .none
             }
         }

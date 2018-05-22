@@ -12,15 +12,16 @@ import Crashlytics
 
 class SettingsViewController: UIViewController {
 
-    // MARK: - Outlets
-
+    //MARK: - Outlets
+    
     @IBOutlet weak var firstCategoryView: UIView!
     @IBOutlet weak var resetPasswordSubcategoryView: UIView!
     @IBOutlet weak var cgvView: UIView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var contactButton: UIButton!
-
-    // MARK: - Controller functions
+    
+    
+    //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         contactButton.isHidden = true
@@ -35,28 +36,29 @@ class SettingsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     func setBottomBorderForViews () {
         let grayColor = UIColor.lightGray
         let viewWidth: CGFloat = 1
-        let viewList = [firstCategoryView, resetPasswordSubcategoryView, cgvView, aboutView]
+        let viewList = [firstCategoryView,resetPasswordSubcategoryView,cgvView,aboutView]
         for view in viewList {
             view?.addBottomBorderWithColor(color: grayColor, width: viewWidth)
         }
     }
 
-    // MARK: - Actions
 
+    //MARK: - Actions
+    
     @IBAction func reportBug(_ sender: UIButton) {
         let appearance = Buglife.shared().appearance
         appearance.barTintColor = UIColor(named: "navBarTint")
         appearance.tintColor = .white
         Buglife.shared().presentReporter()
     }
-
+    
     @IBAction func contactButtonPressed(_ sender: UIButton) {
     }
-
+    
     @IBAction func cancelSettingsVC(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

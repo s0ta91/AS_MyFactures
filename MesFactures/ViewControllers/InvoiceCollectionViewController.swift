@@ -11,53 +11,54 @@ import RealmSwift
 import DZNEmptyDataSet
 
 class InvoiceCollectionViewController: UIViewController {
-
-    // MARK: - Declarations
+    
+    //MARK: - Declarations
     //TODO: Outlets
     @IBOutlet weak var invoiceCollectionView: UICollectionView!
     @IBOutlet weak var ui_searchBarView: UIView!
     @IBOutlet weak var ui_searchBar: UISearchBar!
-
+    
     @IBOutlet weak var ui_searchBarHeightConstraint: NSLayoutConstraint!
     private var ui_searchButton: UIBarButtonItem!
-
+    
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
     var _ptCurrentGroup: Group?
     var _ptYear: Year?
     var _ptFontSize: CGFloat?
-
+    
     //TODO: Internal variables
     private var _invoiceCollectionManager: Manager!
     private var _invoiceCollectionCurrentGroup: Group!
     private var _invoiceCollectionCurrentYear: Year!
-
+    
     // To store the months that need to be shown if they contains at least an invoice
     private var _monthToShow: [Int] = []
-
+    
     // To define if the list is filtered by a search or not
     private var isListFiltered = false
     var searchText: String = ""
     var collectionViewFontSize: CGFloat!
-
+    
     let searchButtonImage = UIImage(named: "search(grey)")
-
-    // MARK: - Controller functions
+    
+    
+    //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
         invoiceCollectionView.emptyDataSetSource = self
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         invoiceCollectionView.clipsToBounds = false
-
+        
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-
+        
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
         invoiceCollectionView.reloadData()
     }
@@ -66,33 +67,33 @@ class InvoiceCollectionViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - PRIVATE FUNCTIONS
+    
+    //MARK: - PRIVATE FUNCTIONS
     //TODO: Check if the data recieved from previous controller are ok
     private func checkReceivedData () {
         if let _manager = _ptManager {
             _invoiceCollectionManager = _manager
-        } else {
+        }else {
             fatalError("_manager data are missing")
         }
-
+        
         if let _group = _ptCurrentGroup {
             _invoiceCollectionCurrentGroup = _group
-        } else {
+        }else {
             fatalError("_group data are missing")
         }
-
+        
         if let _year = _ptYear {
             _invoiceCollectionCurrentYear = _year
-        } else {
+        }else {
             fatalError("_year data are missing")
         }
-
+        
         if let receivedFontSize = _ptFontSize {
             collectionViewFontSize = receivedFontSize
         }
     }
-
+    
     //TODO: Set the navigationBar title with the name of the current group
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
@@ -108,7 +109,7 @@ class InvoiceCollectionViewController: UIViewController {
         }
         return month
     }
-
+    
     //TODO: Get the number of sections for the current group
     private func getNumberOfSections () -> Int {
         _monthToShow.removeAll()
@@ -122,7 +123,7 @@ class InvoiceCollectionViewController: UIViewController {
         }
         return numberOfSection
     }
-
+    
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
         var numberOfInvoice = 0
@@ -131,13 +132,13 @@ class InvoiceCollectionViewController: UIViewController {
         }
         return numberOfInvoice
     }
-
+    
     private func getSelectedInvoice (for month: Month, atInvoiceIndex invoiceIndex: Int) -> Invoice? {
         var invoice: Invoice? = nil
         invoice = month.getInvoice(atIndex: invoiceIndex, isListFiltered)
         return invoice
     }
-
+    
     //TODO: Create the function to delete a cell
     func delete(invoice: InvoiceCollectionViewCell) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
@@ -147,36 +148,36 @@ class InvoiceCollectionViewController: UIViewController {
                 let invoiceToDelete = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
                 let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
                 let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
-
+                    
                     // Delete invoice object from DB
                     _ = month.removeInvoice(invoice: invoiceToDelete)
                     month.removeFromInvoiceToShow (atIndex: indexPath.row)
-
+                    
                     // If there isn't any invoice left we need to delete the section from the collectionView
                     if self.getNumberOfInvoice(atMonthIndex: monthIndex) == 0 {
                         self.invoiceCollectionView.deleteSections(sectionIndexSet)
                         self.invoiceCollectionView.reloadData()
-                    } else { // otherwise we can delete only the item
+                    }else { // otherwise we can delete only the item
                         self.invoiceCollectionView.deleteItems(at: [indexPath])
                         self.invoiceCollectionView.reloadSections(sectionIndexSet)
                         self.invoiceCollectionView.reloadData()
                     }
                 })
-
+                
                 let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
                 })
-
+                
                 alert.addAction(deleteAction)
                 alert.addAction(cancelAction)
                 present(alert, animated: true, completion: nil)
             }
         }
     }
-
+    
     //TODO: Create the function to share the invoice
     func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
-
+            
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex),
                 let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
@@ -184,14 +185,14 @@ class InvoiceCollectionViewController: UIViewController {
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
-
+                
                 if let popoverController = activityViewController.popoverPresentationController {
                     popoverController.sourceView = invoice.contentView
                     popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
                     popoverController.permittedArrowDirections = .up
                 }
                 present(activityViewController, animated: true, completion: nil)
-            } else {
+            }else {
                 /*** DEBUG ***/
 //                let month = getCurrentMonth(atIndex: monthIndex)
 //                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
@@ -206,12 +207,12 @@ class InvoiceCollectionViewController: UIViewController {
             }
         }
     }
-
+    
     //TODO: - Create the function to modify an invoice
     func modify(invoice: InvoiceCollectionViewCell) {
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
-
+            
                 let monthIndex = _monthToShow[cell_indexPath.section]
                 if let month = getCurrentMonth(atIndex: monthIndex),
                     let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) {
@@ -222,11 +223,11 @@ class InvoiceCollectionViewController: UIViewController {
                     destinationVC._ptMonth = month
                     destinationVC._ptInvoice = selectedInvoice
                 }
-
+            
                 present(destinationVC, animated: true, completion: nil)
         }
     }
-
+    
     @objc func search () {
         ui_searchBar.text = ""
         ui_searchBar.becomeFirstResponder()
@@ -235,7 +236,8 @@ class InvoiceCollectionViewController: UIViewController {
             self.ui_searchBarView.layoutIfNeeded()
         }
     }
-
+    
+    
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
@@ -257,14 +259,14 @@ class InvoiceCollectionViewController: UIViewController {
     }
 }
 
-// MARK: - Extensions
+//MARK: - Extensions
 //TODO: Create the extension for the CollectionView Datasource here :
-extension InvoiceCollectionViewController: UICollectionViewDataSource {
-
+extension InvoiceCollectionViewController: UICollectionViewDataSource  {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return getNumberOfSections()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         var headerDate: String = ""
         var monthAmount: String = ""
@@ -279,18 +281,18 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource {
             }
             invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
-
+            
         default:
             assert(false, "Unexpected element kind")
         }
         return invoiceHeaderView
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let monthIndex = _monthToShow[section]
         return getNumberOfInvoice(atMonthIndex: monthIndex)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
         cell_invoice._ptManager = _invoiceCollectionManager
@@ -304,10 +306,10 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource {
         cell_invoice.layer.borderWidth = 1.0
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
         cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
-        cell_invoice.layer.shadowOffset = CGSize(width:2, height: 2)
+        cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
         cell_invoice.layer.shadowRadius = 2.0
         cell_invoice.layer.shadowOpacity = 1.0
-        cell_invoice.layer.masksToBounds = false
+        cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         return cell_invoice
     }
@@ -322,7 +324,7 @@ extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 //TODO: Create the delegate to be conform to the cell
 extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
-
+    
     func showAvailableActions(invoiceCell: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         let actionsController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let modifyAction = UIAlertAction(title: "Modifier", style: .default) { (action: UIAlertAction) in
@@ -335,12 +337,12 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             self.share(invoice: invoiceCell, buttonPressed: buttonPressed)
         }
         let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
-
+        
         actionsController.addAction(modifyAction)
         actionsController.addAction(shareAction)
         actionsController.addAction(deleteAction)
         actionsController.addAction(cancelAction)
-
+        
         if let popoverController = actionsController.popoverPresentationController {
             popoverController.sourceView = invoiceCell.contentView
             popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
@@ -348,7 +350,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
         }
         present(actionsController, animated: true, completion: nil)
     }
-
+    
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
         guard let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) else {return print("No cell found")}
         let monthIndex = _monthToShow[indexPath.section]
@@ -363,7 +365,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 destinationVC._ptDocumentType = invoiceDocumentExtension
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)
-        } else {
+        }else {
             let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
             let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(validAction)
@@ -379,13 +381,13 @@ extension InvoiceCollectionViewController: UISearchBarDelegate {
         if let searchBarText = searchBar.text {
             if searchBarText != "" {
                 searchText = searchBarText
-            } else {
+            }else {
                 searchBarCancelButtonClicked(searchBar)
             }
         }
         invoiceCollectionView.reloadData()
     }
-
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isListFiltered = false
         ui_searchBarHeightConstraint.constant = 0
@@ -394,7 +396,7 @@ extension InvoiceCollectionViewController: UISearchBarDelegate {
         }
         searchText = ""
         invoiceCollectionView.reloadData()
-
+        
         DispatchQueue.main.async {
             searchBar.resignFirstResponder()
         }

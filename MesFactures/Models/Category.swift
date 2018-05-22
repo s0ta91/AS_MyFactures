@@ -12,7 +12,7 @@ import RealmSwift
 class Category: Object {
     @objc private dynamic var _title: String = ""
     @objc private dynamic var _selected = false
-
+    
     var title: String {
         get {
             return _title
@@ -22,7 +22,7 @@ class Category: Object {
             try? realm?.commitWrite()
         }
     }
-
+    
     var selected: Bool {
         get {
             return _selected

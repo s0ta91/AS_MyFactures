@@ -9,33 +9,35 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var ui_myfacturesTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ui_myfacturesTextField.text = "MyFactures"
         passwordTextField.delegate = self
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
     }
-
-    private func createNewUser () {
+    
+    private func createNewUser (){
         if let password = passwordTextField.text,
             let db = DbManager().getDb() {
                 db.savePassword(password)
         }
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
     }
-
+    
     func displayGroupTableViewController () {
         if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
             GroupTableVC.modalTransitionStyle = .crossDissolve
