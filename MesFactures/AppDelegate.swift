@@ -36,11 +36,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Buglife.shared().start(withEmail: Settings().emailAdress)
         
-        
-        
-        IQKeyboardManager.sharedManager().enable = true
-        IQKeyboardManager.sharedManager().enableAutoToolbar = false
-        IQKeyboardManager.sharedManager().shouldResignOnTouchOutside = true
+
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         
         // TODO: -  try to create the database
