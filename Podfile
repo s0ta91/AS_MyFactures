@@ -9,22 +9,12 @@ target 'MyFactures' do
 
   # Pods for MyFactures
   pod 'RealmSwift', '3.5.0'
-  pod 'IQKeyboardManagerSwift', '6.0.3'
   pod 'KeychainAccess', '3.1.1'
   pod 'DZNEmptyDataSet', '1.8.1'
   pod 'Buglife', '2.8.0'
   pod 'Fabric', '1.7.6'
   pod 'Crashlytics', '3.10.1'
   pod 'mailcore2-ios', '0.6.4'
-
-  target 'MyFacturesTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'MyFacturesUITests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  pod 'IQKeyboardManagerSwift', '6.0.3'
 
 end

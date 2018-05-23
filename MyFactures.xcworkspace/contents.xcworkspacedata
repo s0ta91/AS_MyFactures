@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Volumes/Media-int/Work/Dev/Swift/App/MesFactures/MyFactures.xcodeproj">
+      location = "group:MyFactures.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */; };
+		1AE8EB1FB13E6138656536FE /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */; };
 		1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D00D4CF2044169F00759E9F /* PDFViewController.swift */; };
 		1D06376520A9D8880013E145 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06376420A9D8880013E145 /* TextField.swift */; };
 		1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1052A720ADD233007C5CCF /* AlertExtension.swift */; };
@@ -25,8 +25,6 @@
 		1D4B079220233FF4002F745C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079020233FF4002F745C /* Main.storyboard */; };
 		1D4B079420233FF4002F745C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079320233FF4002F745C /* Assets.xcassets */; };
 		1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079520233FF4002F745C /* LaunchScreen.storyboard */; };
-		1D4B07A220233FF4002F745C /* MesFacturesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07A120233FF4002F745C /* MesFacturesTests.swift */; };
-		1D4B07AD20233FF4002F745C /* MesFacturesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */; };
 		1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4FDFE12084743400208108 /* AboutViewController.swift */; };
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
@@ -52,10 +50,10 @@
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
 		32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */; };
-		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */; };
+		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */; };
 		53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C4186133A6A4246E5035B /* Pods_MyFactures.framework */; };
 		DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */; };
-		FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */; };
+		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,23 +62,22 @@
 			containerPortal = 1D4B078120233FF4002F745C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1D4B078820233FF4002F745C;
-			remoteInfo = MesFactures;
+			remoteInfo = MyFactures;
 		};
 		1D4B07A920233FF4002F745C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1D4B078120233FF4002F745C /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1D4B078820233FF4002F745C;
-			remoteInfo = MesFactures;
+			remoteInfo = MyFactures;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.debug.xcconfig"; sourceTree = "<group>"; };
-		1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D00D4CF2044169F00759E9F /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		1D06376420A9D8880013E145 /* TextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		1D1052A720ADD233007C5CCF /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
@@ -102,11 +99,7 @@
 		1D4B079620233FF4002F745C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D4B079820233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D4B079D20233FF4002F745C /* MyFacturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFacturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D4B07A120233FF4002F745C /* MesFacturesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesFacturesTests.swift; sourceTree = "<group>"; };
-		1D4B07A320233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D4B07A820233FF4002F745C /* MyFacturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFacturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MesFacturesUITests.swift; sourceTree = "<group>"; };
-		1D4B07AE20233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -133,19 +126,14 @@
 		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
 		1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryTableViewController.swift; sourceTree = "<group>"; };
-		226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		268C4186133A6A4246E5035B /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.release.xcconfig"; sourceTree = "<group>"; };
-		33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
-		3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFactures/Pods-MesFactures.release.xcconfig"; sourceTree = "<group>"; };
-		50C1CE4DF75B7775D1BBF326 /* Pods-MesFacturesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesUITests/Pods-MesFacturesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MesFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.release.xcconfig"; sourceTree = "<group>"; };
 		A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
-		AA78293E56BFDAB3B4F37ED0 /* Pods-MesFacturesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MesFacturesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MesFacturesTests/Pods-MesFacturesTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFDF43D1656995A2790C6A24 /* Pods_MesFactures.framework in Frameworks */,
+				FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */,
 				53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,7 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B6B3D1AC1544FA3AAEAFD3D /* Pods_MesFacturesTests.framework in Frameworks */,
+				4B6B3D1AC1544FA3AAEAFD3D /* Pods_MyFacturesTests.framework in Frameworks */,
 				DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +159,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AE8EB1FB13E6138656536FE /* Pods_MesFacturesUITests.framework in Frameworks */,
+				1AE8EB1FB13E6138656536FE /* Pods_MyFacturesUITests.framework in Frameworks */,
 				32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,9 +224,7 @@
 		1D4B078020233FF4002F745C = {
 			isa = PBXGroup;
 			children = (
-				1D4B078B20233FF4002F745C /* MesFactures */,
-				1D4B07A020233FF4002F745C /* MyFacturesTests */,
-				1D4B07AB20233FF4002F745C /* MyFacturesUITests */,
+				1D4B078B20233FF4002F745C /* MyFactures */,
 				1D4B078A20233FF4002F745C /* Products */,
 				F969AC461B7DF10C2695440A /* Pods */,
 				4038E0185330D3C1844EB1A9 /* Frameworks */,
@@ -255,7 +241,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1D4B078B20233FF4002F745C /* MesFactures */ = {
+		1D4B078B20233FF4002F745C /* MyFactures */ = {
 			isa = PBXGroup;
 			children = (
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
@@ -273,25 +259,7 @@
 				1D4B079820233FF4002F745C /* Info.plist */,
 				1D6220F120235CBA00D25828 /* Ressources */,
 			);
-			path = MesFactures;
-			sourceTree = "<group>";
-		};
-		1D4B07A020233FF4002F745C /* MyFacturesTests */ = {
-			isa = PBXGroup;
-			children = (
-				1D4B07A120233FF4002F745C /* MesFacturesTests.swift */,
-				1D4B07A320233FF4002F745C /* Info.plist */,
-			);
-			path = MyFacturesTests;
-			sourceTree = "<group>";
-		};
-		1D4B07AB20233FF4002F745C /* MyFacturesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1D4B07AC20233FF4002F745C /* MesFacturesUITests.swift */,
-				1D4B07AE20233FF4002F745C /* Info.plist */,
-			);
-			path = MyFacturesUITests;
+			path = MyFactures;
 			sourceTree = "<group>";
 		};
 		1D4B07BA20234026002F745C /* ViewControllers */ = {
@@ -360,9 +328,9 @@
 		4038E0185330D3C1844EB1A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C0522B5D728EB59F48D195D /* Pods_MesFactures.framework */,
-				89936F80E410EF0264FED47B /* Pods_MesFacturesTests.framework */,
-				1A97801A3F720D8C4798144A /* Pods_MesFacturesUITests.framework */,
+				8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */,
+				89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */,
+				1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */,
 				268C4186133A6A4246E5035B /* Pods_MyFactures.framework */,
 				5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */,
 				031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */,
@@ -373,12 +341,6 @@
 		F969AC461B7DF10C2695440A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				226C783B47913956636D916A /* Pods-MesFactures.debug.xcconfig */,
-				3FB59C34460382B69E0CCA56 /* Pods-MesFactures.release.xcconfig */,
-				07AE08675B6904FDE94652C6 /* Pods-MesFacturesTests.debug.xcconfig */,
-				AA78293E56BFDAB3B4F37ED0 /* Pods-MesFacturesTests.release.xcconfig */,
-				50C1CE4DF75B7775D1BBF326 /* Pods-MesFacturesUITests.debug.xcconfig */,
-				33646AF45CCE906F2F82896A /* Pods-MesFacturesUITests.release.xcconfig */,
 				0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */,
 				9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */,
 				0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */,
@@ -408,7 +370,7 @@
 			dependencies = (
 			);
 			name = MyFactures;
-			productName = MesFactures;
+			productName = MyFactures;
 			productReference = 1D4B078920233FF4002F745C /* MyFactures.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -427,7 +389,7 @@
 				1D4B079F20233FF4002F745C /* PBXTargetDependency */,
 			);
 			name = MyFacturesTests;
-			productName = MesFacturesTests;
+			productName = MyFacturesTests;
 			productReference = 1D4B079D20233FF4002F745C /* MyFacturesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -446,7 +408,7 @@
 				1D4B07AA20233FF4002F745C /* PBXTargetDependency */,
 			);
 			name = MyFacturesUITests;
-			productName = MesFacturesUITests;
+			productName = MyFacturesUITests;
 			productReference = 1D4B07A820233FF4002F745C /* MyFacturesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -671,7 +633,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D4B07A220233FF4002F745C /* MesFacturesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,7 +640,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D4B07AD20233FF4002F745C /* MesFacturesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,12 +806,12 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios\"",
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
-				INFOPLIST_FILE = MesFactures/Info.plist;
+				INFOPLIST_FILE = MyFactures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MesFactures/MailCore2_Extensions/sendEmail_Bridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -870,12 +830,12 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios\"",
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
-				INFOPLIST_FILE = MesFactures/Info.plist;
+				INFOPLIST_FILE = MyFactures/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MesFactures/MailCore2_Extensions/sendEmail_Bridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -889,9 +849,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MesFacturesTests/Info.plist;
+				INFOPLIST_FILE = MyFacturesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MesFacturesTests;
+				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -907,9 +867,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MesFacturesTests/Info.plist;
+				INFOPLIST_FILE = MyFacturesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MesFacturesTests;
+				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -924,13 +884,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MesFacturesUITests/Info.plist;
+				INFOPLIST_FILE = MyFacturesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MesFacturesUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MesFactures;
+				TEST_TARGET_NAME = MyFactures;
 			};
 			name = Debug;
 		};
@@ -941,13 +901,13 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MesFacturesUITests/Info.plist;
+				INFOPLIST_FILE = MyFacturesUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MesFacturesUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MesFactures;
+				TEST_TARGET_NAME = MyFactures;
 			};
 			name = Release;
 		};

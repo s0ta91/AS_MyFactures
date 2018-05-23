@@ -15,16 +15,16 @@ PODS:
 
 DEPENDENCIES:
   - Buglife (= 2.8.0)
-  - Crashlytics
+  - Crashlytics (= 3.10.1)
   - DZNEmptyDataSet (= 1.8.1)
-  - Fabric
-  - IQKeyboardManagerSwift (= 6.0.3)
+  - Fabric (= 1.7.6)
+  - IQKeyboardManagerSwift
   - KeychainAccess (= 3.1.1)
   - mailcore2-ios (= 0.6.4)
   - RealmSwift (= 3.5.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - Buglife
     - Crashlytics
     - DZNEmptyDataSet
@@ -46,6 +46,6 @@ SPEC CHECKSUMS:
   Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
   RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
 
-PODFILE CHECKSUM: b7fce01b0365df439c370a8ad0dc5edd2ae9daf8
+PODFILE CHECKSUM: 1b4f913d1d2778507145e20a23d2a0ae9c479f52
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
