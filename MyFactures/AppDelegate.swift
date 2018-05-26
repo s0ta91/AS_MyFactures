@@ -17,6 +17,7 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let APP_VERSION = "MyAppVersion"
 
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -63,12 +64,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        print("Should save data")
+        coder.encode(Settings().APP_VERSION_NUMBER, forKey: APP_VERSION)
+        UserDefaults.standard.set(true, forKey: "savedApplicationState")
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+
+        let version = coder.decodeObject(forKey: APP_VERSION) as! String
+
+        // Restore the state only if the app version matches.
+        if version == Settings().APP_VERSION_NUMBER {
+            print("Should restore data")
+            return true
+        }
+
+        // Do not restore from old data.
+        return false
+    }
+    
+//    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
+//
+//    }
+    
+
     //MARK: - Other functions
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        if let vc = application.topMostViewController() {
+            vc.present(loginVC, animated: true, completion: nil)
+        }
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -78,14 +109,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        self.window?.rootViewController?.dismiss(animated: false, completion: {
-            if self.window != nil {
-                self.window!.rootViewController = rootController
-            }
-        })
+
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -101,7 +125,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
         createAccountVC.isPasswordSet = withPassword
-        self.window?.rootViewController = createAccountVC
+        window?.rootViewController = createAccountVC
     }
+
 }
 

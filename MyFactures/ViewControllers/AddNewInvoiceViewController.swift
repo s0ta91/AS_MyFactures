@@ -98,6 +98,59 @@ class AddNewInvoiceViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+//    override func encodeRestorableState(with coder: NSCoder) {
+//        super.encodeRestorableState(with: coder)
+//
+//        if let description =  ui_descriptionTextField.text {
+//            coder.encode(description, forKey: "Description")
+//            if ui_descriptionTextField.isFirstResponder {
+//                coder.encode(Int32(1), forKey: "EditField")
+//            }
+//        }
+//        if let amount = ui_amountTextField.text {
+//            coder.encode(amount, forKey: "Amount")
+//            if ui_amountTextField.isFirstResponder {
+//                coder.encode(Int32(2), forKey: "EditField")
+//            }
+//        }
+//
+//        coder.encode(ui_monthSelectionTextField.text, forKey: "Month")
+//        coder.encode(ui_groupSelectionTextField.text, forKey: "Group")
+//        coder.encode(ui_categorySelectionTextField.text, forKey: "Category")
+//
+//        print("Encode data")
+//    }
+//
+//    override func decodeRestorableState(with coder: NSCoder) {
+//        super .decodeRestorableState(with: coder)
+//
+//        let activeField = coder.decodeInteger(forKey: "EditField")
+//        let savedDescription = coder.decodeObject(forKey: "Description") as? String
+//        let savedAmout = coder.decodeObject(forKey: "Amount") as? String
+//        let savedMonth = coder.decodeObject(forKey: "Month") as? String
+//        let savedGroup = coder.decodeObject(forKey: "Group") as? String
+//        let savedCategory = coder.decodeObject(forKey: "Category") as? String
+//
+//        ui_descriptionTextField.text = savedDescription
+//        ui_amountTextField.text = savedAmout
+//        ui_monthSelectionTextField.text = savedMonth
+//        ui_groupSelectionTextField.text = savedGroup
+//        ui_categorySelectionTextField.text = savedCategory
+//
+//        switch activeField {
+//        case 1:
+//            ui_descriptionTextField.becomeFirstResponder()
+//            break
+//        case 2:
+//            ui_amountTextField.becomeFirstResponder()
+//            break
+//        default:
+//            break
+//        }
+//
+//        print("decode data")
+//    }
+    
     
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
@@ -210,21 +263,13 @@ class AddNewInvoiceViewController: UIViewController {
     private func animateIn(forSubview subview: UIView) {
         ui_visualEffect.isHidden = false
         self.view.addSubview(subview)
-//        let navigationBarHeight: CGFloat = 44
-//        let topAdjust = navigationBarHeight + 60
-        
+
         subview.translatesAutoresizingMaskIntoConstraints = false
-//        subview.topAnchor.constraint(equalTo: self.view.topAnchor, constant: topAdjust).isActive = true
         subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
         subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
         subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        
-        
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
-        
-        
         
         UIView.animate(withDuration: 0.4) {
             self.ui_visualEffect.effect = self._visualEffect

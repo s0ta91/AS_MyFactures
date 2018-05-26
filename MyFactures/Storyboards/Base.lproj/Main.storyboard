@@ -311,6 +311,7 @@
                         <outlet property="contactButton" destination="VNh-e6-bgf" id="RaT-Tz-LnO"/>
                         <outlet property="firstCategoryView" destination="b1R-zC-cXL" id="z8j-j8-aCw"/>
                         <outlet property="resetPasswordSubcategoryView" destination="htJ-WW-JPY" id="lEr-o6-Gbb"/>
+                        <outlet property="ui_appVersionNumberLabel" destination="xkR-Z2-hJa" id="LKB-GC-U0U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LNM-10-hkl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -455,13 +456,13 @@
         <!--Dossiers-->
         <scene sceneID="5N2-H2-Vgp">
             <objects>
-                <viewController id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GroupViewController" id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dHV-vc-FxW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
-                                <rect key="frame" x="16" y="113" width="288" height="405"/>
+                                <rect key="frame" x="16" y="116" width="288" height="402"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
                                     <size key="itemSize" width="343" height="115"/>
@@ -610,7 +611,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
-                                <rect key="frame" x="0.0" y="113" width="320" height="0.0"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -785,13 +786,13 @@
         <!--Invoice Collection View Controller-->
         <scene sceneID="syR-r2-fVS">
             <objects>
-                <viewController id="t7y-qo-KY2" customClass="InvoiceCollectionViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InvoiceCollectionViewController" id="t7y-qo-KY2" customClass="InvoiceCollectionViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xq9-AB-Cw1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-IU-4oa">
-                                <rect key="frame" x="0.0" y="113" width="320" height="0.0"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-pP-fqR">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -811,7 +812,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-Id-J85">
-                                <rect key="frame" x="16" y="113" width="288" height="405"/>
+                                <rect key="frame" x="16" y="116" width="288" height="402"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="d1o-bD-UgL">
                                     <size key="itemSize" width="736" height="113"/>
@@ -1239,7 +1240,7 @@
         <!--Ajouter une facture-->
         <scene sceneID="RxR-pL-wFB">
             <objects>
-                <viewController storyboardIdentifier="AddNewInvoiceViewController" id="e6n-HW-sKX" customClass="AddNewInvoiceViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddNewInvoiceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="e6n-HW-sKX" customClass="AddNewInvoiceViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s6C-K1-iNz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2062,10 +2063,10 @@
         <!--Navigation Controller-->
         <scene sceneID="mab-3Q-qA1">
             <objects>
-                <navigationController storyboardIdentifier="NavGroupContoller" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a55-X9-wAt" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavGroupContoller" automaticallyAdjustsScrollViewInsets="NO" id="a55-X9-wAt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9jl-vg-yyV">
-                        <rect key="frame" x="0.0" y="20" width="320" height="93"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" name="navBarTint"/>
