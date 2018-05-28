@@ -17,10 +17,11 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let APP_VERSION = "MyAppVersion"
 
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        //TODO: - Add crashLytics
+        //TODO: Add crashLytics
         Fabric.with([Crashlytics.self])
         
         // realm migration configuration
@@ -33,24 +34,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        })
 //        Realm.Configuration.defaultConfiguration = config
         
+        //TODO:  Set to false because the app is not in restauration mode
+        UserDefaults.standard.set(false, forKey: "savedApplicationState")
         
+        // TODO: buglife configuration
         Buglife.shared().start(withEmail: Settings().emailAdress)
         
-
+        // TODO: IQKeyboardManager configuration
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         
-        // TODO: -  try to create the database
+        // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         
-        // TODO: - Initialize all default data in database
+        // TODO: Initialize all default data in database
         database.initYear()
         database.initCategory()
         database.updateApplicationData()
         
-        // TODO: - Check if password is already set ELSE show createAccount screen instead of login screen
+        // TODO: Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
             displayCreateAccountVC(withPassword: false)
         } else {
@@ -63,12 +67,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    //MARK: - Restauration states functions
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        print("Should save data")
+        coder.encode(Settings().APP_VERSION_NUMBER, forKey: APP_VERSION)
+        UserDefaults.standard.set(true, forKey: "savedApplicationState")
+        return true
+    }
+    
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+
+        let version = coder.decodeObject(forKey: APP_VERSION) as! String
+
+        // Restore the state only if the app version matches.
+        if version == Settings().APP_VERSION_NUMBER {
+            print("Should restore data")
+            return true
+        }
+
+        // Do not restore from old data.
+        return false
+    }
+    
+//    func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
+//
+//    }
+    
+
     //MARK: - Other functions
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-        
-        
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -79,13 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        self.window?.rootViewController?.dismiss(animated: false, completion: {
-            if self.window != nil {
-                self.window!.rootViewController = rootController
-            }
-        })
+        let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        if let vc = application.topMostViewController() {
+            vc.present(loginVC, animated: true, completion: nil)
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -97,11 +123,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // MARK: - My private functions
+    //TODO: Display the create account VC
     private func displayCreateAccountVC (withPassword: Bool) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
         createAccountVC.isPasswordSet = withPassword
-        self.window?.rootViewController = createAccountVC
+        window?.rootViewController = createAccountVC
     }
+
 }
 

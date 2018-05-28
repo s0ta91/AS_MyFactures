@@ -19,13 +19,14 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var cgvView: UIView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var contactButton: UIButton!
-    
+    @IBOutlet weak var ui_appVersionNumberLabel: UILabel!
     
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         contactButton.isHidden = true
         navigationController?.navigationBar.tintColor = .white
+        ui_appVersionNumberLabel.text = "MyFactures \(Settings().APP_VERSION_NUMBER)"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

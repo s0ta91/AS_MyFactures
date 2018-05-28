@@ -44,6 +44,8 @@
 		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
 		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
 		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
+		1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */; };
+		1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */; };
 		1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */; };
 		1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E5203B097F00176EF3 /* GroupPicker.swift */; };
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
@@ -121,6 +123,8 @@
 		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
 		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
+		1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsPicker.swift; sourceTree = "<group>"; };
 		1DFE14E5203B097F00176EF3 /* GroupPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPicker.swift; sourceTree = "<group>"; };
 		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				1D06376420A9D8880013E145 /* TextField.swift */,
 				1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */,
 				1D1052A720ADD233007C5CCF /* AlertExtension.swift */,
+				1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */,
+				1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -592,11 +598,13 @@
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
+				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
 				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
 				1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */,
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
+				1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */,
 				1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */,
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,

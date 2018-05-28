@@ -31,6 +31,8 @@ class LoginViewController: UIViewController {
 //        DbManager().reInitMasterPassword()
 //        _manager.reinitUserDefaultValue(forKey: Settings().USER_EMAIL_KEY)
         
+        ui_passwordTextField.text = ""
+        
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
@@ -65,9 +67,19 @@ class LoginViewController: UIViewController {
                     Revenir à l'éxécution du code au premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
                  **/
                 DispatchQueue.main.async {
-                     /** Unlock application and show group screen **/
+                     /** Unlock application **/
                     if isOwnerConfirmed == true {
-                        self.displayGroupTableViewController()
+                        let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
+                        // If application returning from background, just dismiss the loginScreen
+                        // Else show groupScreen
+                        if savedApplicationState {
+                            self.modalTransitionStyle = .crossDissolve
+                            self.view.endEditing(true)
+                            self.dismiss(animated: true, completion: nil)
+                            UserDefaults.standard.set(false, forKey: "savedApplicationState")
+                        } else {
+                            self.displayGroupTableViewController()
+                        }
                     }
                     if let error = authError {
                         switch error {
@@ -97,6 +109,12 @@ class LoginViewController: UIViewController {
         }
     }
     
+    func displayAddNewInvoideVC() {
+        if let addNewInvoideVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
+            present(addNewInvoideVC, animated: false, completion: nil)
+        }
+    }
+    
     private func showAlertMessage (_ errorMessage: String) {
         let alertBox = UIAlertController(title: "Une erreur est survenue", message: errorMessage, preferredStyle: .alert)
         alertBox.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction) in
@@ -105,10 +123,18 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func unlockWithPassword(_ sender: Any) {
+        let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
-                displayGroupTableViewController()
+                if savedApplicationState {
+                    self.modalTransitionStyle = .crossDissolve
+                    self.view.endEditing(true)
+                    self.dismiss(animated: true, completion: nil)
+                    UserDefaults.standard.set(false, forKey: "savedApplicationState")
+                } else {
+                    displayGroupTableViewController()
+                }
             }else {
                 _manager.shake(ui_passwordTextField)
             }
