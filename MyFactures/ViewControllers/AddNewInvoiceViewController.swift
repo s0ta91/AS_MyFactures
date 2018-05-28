@@ -39,6 +39,8 @@ class AddNewInvoiceViewController: UIViewController {
     var _ptMonth: Month?
     var _ptInvoice: Invoice?
     var _modifyInvoice: Bool = false
+    var _fromOtherApp: Bool = false
+    var _ptLoginVC: UIViewController?
     
     //MARK: - Global variable filled with passthrough Managers/objects
     private var _manager: Manager!
@@ -46,6 +48,7 @@ class AddNewInvoiceViewController: UIViewController {
     private var _group: Group!
     private var _month: Month!
     private var _invoice: Invoice!
+    private var _loginVC: UIViewController!
     
     //MARK: - Others
     //TODO: PickerView Initializer
@@ -177,6 +180,10 @@ class AddNewInvoiceViewController: UIViewController {
             }else {
                 fatalError("Error recieving path_through month/invoice objects")
             }
+        }
+        
+        if let loginVC = self._ptLoginVC {
+            _loginVC = loginVC
         }
     }
 
@@ -423,7 +430,14 @@ class AddNewInvoiceViewController: UIViewController {
                     SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
                     
                 }
-                dismiss(animated: true, completion: nil )
+            
+            dismiss(animated: true, completion: {
+                if self._fromOtherApp{
+                    print("dismiss loginVC")
+                    self._loginVC.modalTransitionStyle = .crossDissolve
+                    self._loginVC.dismiss(animated: true, completion: nil)
+                }
+            })
         }else {
             print("Something went wrong")
         }
