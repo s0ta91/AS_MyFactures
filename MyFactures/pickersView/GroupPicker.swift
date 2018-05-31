@@ -38,8 +38,9 @@ extension GroupPicker: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentGroup: Int = 0
         if let year = _year {
-            numberOfRowInComponentGroup = year.getGroupCount()
+            numberOfRowInComponentGroup = year.getGlobalGroupCount()
         }
+        print(numberOfRowInComponentGroup)
         return numberOfRowInComponentGroup
     }
 }

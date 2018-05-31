@@ -181,8 +181,15 @@ class Manager {
     func getyearsCount () -> Int {
         return _yearsList.count
     }
+    
     func getYear (atIndex index: Int) -> Year? {
         return _yearsList[index]
+    }
+    
+    func getYear (forValue value: Int) -> Year? {
+        let yearPredicate = NSPredicate(format: "_year == %i", value)
+        guard let yearIndex = _yearsList.index(matching: yearPredicate) else { return nil }
+        return getYear(atIndex: yearIndex)
     }
     
     func setSelectedYear (forYear newSelectedYear: Year) {

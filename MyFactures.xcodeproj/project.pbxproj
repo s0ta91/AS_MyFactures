@@ -46,6 +46,7 @@
 		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
 		1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */; };
 		1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */; };
+		1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD207820BDA3FF009546C2 /* YearsPicker.swift */; };
 		1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */; };
 		1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E5203B097F00176EF3 /* GroupPicker.swift */; };
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
@@ -53,7 +54,6 @@
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
 		32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */; };
 		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */; };
-		53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C4186133A6A4246E5035B /* Pods_MyFactures.framework */; };
 		DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
@@ -125,6 +125,7 @@
 		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
 		1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		1DFD207820BDA3FF009546C2 /* YearsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsPicker.swift; sourceTree = "<group>"; };
 		1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsPicker.swift; sourceTree = "<group>"; };
 		1DFE14E5203B097F00176EF3 /* GroupPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPicker.swift; sourceTree = "<group>"; };
 		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */,
-				53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +174,7 @@
 		1D07921420373FBA0097A354 /* pickersView */ = {
 			isa = PBXGroup;
 			children = (
+				1DFD207820BDA3FF009546C2 /* YearsPicker.swift */,
 				1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */,
 				1DFE14E5203B097F00176EF3 /* GroupPicker.swift */,
 				1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */,
@@ -425,7 +426,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Sébastien Constant";
 				TargetAttributes = {
 					1D4B078820233FF4002F745C = {
@@ -633,6 +634,7 @@
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
+				1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */,
 				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -52,6 +52,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     //MARK: - Others
     //TODO: PickerView Initializer
+    private var yearsPickerView: YearsPicker!
     private var monthsPickerView: MonthsPicker!
     private var groupPickerView: GroupPicker!
     private var categoryPickerView: CategoryPicker!
@@ -75,6 +76,7 @@ class AddNewInvoiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ui_descriptionTextField.delegate = self
+        ui_yearSelectionTextField.delegate = self
         ui_monthSelectionTextField.delegate = self
         ui_groupSelectionTextField.delegate = self
         ui_categorySelectionTextField.delegate = self
@@ -100,60 +102,6 @@ class AddNewInvoiceViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-//    override func encodeRestorableState(with coder: NSCoder) {
-//        super.encodeRestorableState(with: coder)
-//
-//        if let description =  ui_descriptionTextField.text {
-//            coder.encode(description, forKey: "Description")
-//            if ui_descriptionTextField.isFirstResponder {
-//                coder.encode(Int32(1), forKey: "EditField")
-//            }
-//        }
-//        if let amount = ui_amountTextField.text {
-//            coder.encode(amount, forKey: "Amount")
-//            if ui_amountTextField.isFirstResponder {
-//                coder.encode(Int32(2), forKey: "EditField")
-//            }
-//        }
-//
-//        coder.encode(ui_monthSelectionTextField.text, forKey: "Month")
-//        coder.encode(ui_groupSelectionTextField.text, forKey: "Group")
-//        coder.encode(ui_categorySelectionTextField.text, forKey: "Category")
-//
-//        print("Encode data")
-//    }
-//
-//    override func decodeRestorableState(with coder: NSCoder) {
-//        super .decodeRestorableState(with: coder)
-//
-//        let activeField = coder.decodeInteger(forKey: "EditField")
-//        let savedDescription = coder.decodeObject(forKey: "Description") as? String
-//        let savedAmout = coder.decodeObject(forKey: "Amount") as? String
-//        let savedMonth = coder.decodeObject(forKey: "Month") as? String
-//        let savedGroup = coder.decodeObject(forKey: "Group") as? String
-//        let savedCategory = coder.decodeObject(forKey: "Category") as? String
-//
-//        ui_descriptionTextField.text = savedDescription
-//        ui_amountTextField.text = savedAmout
-//        ui_monthSelectionTextField.text = savedMonth
-//        ui_groupSelectionTextField.text = savedGroup
-//        ui_categorySelectionTextField.text = savedCategory
-//
-//        switch activeField {
-//        case 1:
-//            ui_descriptionTextField.becomeFirstResponder()
-//            break
-//        case 2:
-//            ui_amountTextField.becomeFirstResponder()
-//            break
-//        default:
-//            break
-//        }
-//
-//        print("decode data")
-//    }
-    
     
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
@@ -198,6 +146,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     //TODO: Set the custom view under the keyboard
     private func setAccessoryViewForPickersView() {
+        ui_yearSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_monthSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_groupSelectionTextField.inputAccessoryView = ui_keyboardToolbarView
         ui_categorySelectionTextField.inputAccessoryView = ui_keyboardToolbarView
@@ -220,7 +169,7 @@ class AddNewInvoiceViewController: UIViewController {
                         ui_groupSelectionTextField.text = _group.title
                         ui_categorySelectionTextField.text = "Non-classée"
                 }
-            }else {
+            } else {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
                 ui_groupSelectionTextField.text = _group.title
@@ -306,6 +255,14 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_amountTextField.text = "0"
             }
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+        }
+        
+        if _activeTextField == ui_yearSelectionTextField {
+            ui_groupSelectionTextField.text = "Selectionnez un Dossier"
+            print("Refresh all values")
+            guard let selectedYear = ui_yearSelectionTextField.text,
+                let newSelectedYear = _manager.getYear(forValue: Int(selectedYear)!) else { fatalError("No year selected in the years field")}
+            _year = newSelectedYear
         }
     }
     
@@ -457,8 +414,15 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         // Store textfield clicked
         _activeTextField = textField
-        
+
         // Define actions for each textFields
+        if (textField == ui_yearSelectionTextField) {
+            yearsPickerView = YearsPicker()
+            ui_yearSelectionTextField.inputView = _pickerView
+            _pickerView.delegate = yearsPickerView
+            yearsPickerView._yearTextField = ui_yearSelectionTextField
+        }
+        
         if (textField == ui_monthSelectionTextField) {
             monthsPickerView = MonthsPicker()
             ui_monthSelectionTextField.inputView = _pickerView
@@ -470,6 +434,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             }
         }
         if (textField == ui_groupSelectionTextField) {
+//            print("textField selected with year: \(_year)")
             groupPickerView = GroupPicker()
             ui_groupSelectionTextField.inputView = _pickerView
             _pickerView.delegate = groupPickerView
