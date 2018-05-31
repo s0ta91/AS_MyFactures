@@ -134,15 +134,26 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func unlockWithPassword(_ sender: Any) {
-        let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
+                let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
+                let fromOtherApp = UserDefaults.standard.bool(forKey: "fromOtherApp")
+                // If application returning from background, just dismiss the loginScreen
+                // Else show groupScreen
                 if savedApplicationState {
-                    self.modalTransitionStyle = .crossDissolve
-                    self.view.endEditing(true)
-                    self.dismiss(animated: true, completion: nil)
                     UserDefaults.standard.set(false, forKey: "savedApplicationState")
+                    if fromOtherApp {
+                        UserDefaults.standard.set(false, forKey: "fromOtherApp")
+                        let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
+                        addNewInvoiceVC._ptManager = DbManager().getDb()
+                        addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
+                        addNewInvoiceVC._ptGroup = DbManager().getDb()?.getYear(atIndex: 0)?.getGroup(atIndex: 0)
+                        addNewInvoiceVC._fromOtherApp = true
+                        addNewInvoiceVC._ptLoginVC = self
+                        addNewInvoiceVC.modalTransitionStyle = .crossDissolve
+                        self.present(addNewInvoiceVC, animated: true, completion: nil)
+                    }
                 } else {
                     displayGroupTableViewController()
                 }
