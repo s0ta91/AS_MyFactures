@@ -259,7 +259,6 @@ class AddNewInvoiceViewController: UIViewController {
         
         if _activeTextField == ui_yearSelectionTextField {
             ui_groupSelectionTextField.text = "Selectionnez un Dossier"
-            print("Refresh all values")
             guard let selectedYear = ui_yearSelectionTextField.text,
                 let newSelectedYear = _manager.getYear(forValue: Int(selectedYear)!) else { fatalError("No year selected in the years field")}
             _year = newSelectedYear

@@ -40,7 +40,6 @@ extension GroupPicker: UIPickerViewDataSource {
         if let year = _year {
             numberOfRowInComponentGroup = year.getGlobalGroupCount()
         }
-        print(numberOfRowInComponentGroup)
         return numberOfRowInComponentGroup
     }
 }
