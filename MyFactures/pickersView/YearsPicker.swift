@@ -17,6 +17,11 @@ class YearsPicker: UIPickerView {
         guard let year = _manager?.getYear(atIndex: row)?.year else { return nil }
         return String(year)
     }
+    
+    func selectDefaultRow (forYearName yearName: String, forPickerView pickerView: UIPickerView) {
+        guard let yearIndex = _manager?.getYearIndex(forValue: Int(yearName)!) else { fatalError("index of year could not be retreived") }
+        pickerView.selectRow(yearIndex, inComponent: 0, animated: false)
+    }
 
 }
 

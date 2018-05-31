@@ -110,6 +110,7 @@ class Year: Object {
     func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
+    
     func getGroup (forName groupName: String, _ isListFiltered: Bool = false) -> Group? {
         var group: Group? = nil
         let groupPredicate = NSPredicate(format: "_title == %@", groupName)

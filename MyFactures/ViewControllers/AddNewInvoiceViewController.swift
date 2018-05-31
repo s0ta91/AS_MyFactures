@@ -244,6 +244,13 @@ class AddNewInvoiceViewController: UIViewController {
         ui_visualEffect.isHidden = true
     }
 
+    private func isGroup(forYear year: Year) -> Bool {
+        if year.getGlobalGroupCount() != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
     
     //MARK: - IBAction functions
     //TODO: Hide the keyboard
@@ -257,10 +264,11 @@ class AddNewInvoiceViewController: UIViewController {
         }
         
         if _activeTextField == ui_yearSelectionTextField {
-            ui_groupSelectionTextField.text = "Selectionnez un Dossier"
             guard let selectedYear = ui_yearSelectionTextField.text,
                 let newSelectedYear = _manager.getYear(forValue: Int(selectedYear)!) else { fatalError("No year selected in the years field")}
             _year = newSelectedYear
+            ui_groupSelectionTextField.text = isGroup(forYear: newSelectedYear) ? newSelectedYear.getGroup(atIndex: 0)?.title : "Aucun dossier disponible"
+            ui_groupSelectionTextField.isEnabled = isGroup(forYear: newSelectedYear) ? true : false
         }
     }
     
@@ -419,6 +427,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             ui_yearSelectionTextField.inputView = _pickerView
             _pickerView.delegate = yearsPickerView
             yearsPickerView._yearTextField = ui_yearSelectionTextField
+            yearsPickerView.selectDefaultRow(forYearName: ui_yearSelectionTextField.text!, forPickerView: _pickerView)
         }
         
         if (textField == ui_monthSelectionTextField) {
@@ -426,36 +435,28 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
-            
-            if _modifyInvoice == true {
-                monthsPickerView.selectDefaultRow(forMonthIndex: _group.getMonthIndexFromTable(forMonthName: ui_monthSelectionTextField!.text!), forPickerView: _pickerView)
-            }
+            monthsPickerView._group = _group
+            monthsPickerView.selectDefaultRow(forMonthName: ui_monthSelectionTextField.text!, forPickerView: _pickerView)
         }
-        if (textField == ui_groupSelectionTextField) {
-//            print("textField selected with year: \(_year)")
+        
+        if (textField == ui_groupSelectionTextField && isGroup(forYear: _year)) {
             groupPickerView = GroupPicker()
             ui_groupSelectionTextField.inputView = _pickerView
             _pickerView.delegate = groupPickerView
             groupPickerView._year = _year
             groupPickerView._groupTextField = ui_groupSelectionTextField
-            groupPickerView.selectDefaultRow(forGroup: _group, forPickerView: _pickerView)
+            groupPickerView.selectDefaultRow(forGroupName: ui_groupSelectionTextField.text!, forPickerView: _pickerView)
         }
+        
         if (textField == ui_categorySelectionTextField) {
             categoryPickerView = CategoryPicker()
             ui_categorySelectionTextField.inputView = _pickerView
             _pickerView.delegate = categoryPickerView
             categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
-            
-            if (_manager.getCategoryCount() > 0) {
-                // First category title must never be shown in the pickerView
-                if let category = _manager.getCategory(atIndex: 1) {
-                    ui_categorySelectionTextField.text = category.title
-                }else {
-                    ui_categorySelectionTextField.text = nil
-                }
-            }
+            categoryPickerView.selectDefaultRow(forCategoryName: ui_categorySelectionTextField.text!, forPickerView: _pickerView)
         }
+        
         return true
     }
     

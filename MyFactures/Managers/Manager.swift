@@ -192,6 +192,11 @@ class Manager {
         return getYear(atIndex: yearIndex)
     }
     
+    func getYearIndex (forValue value: Int) -> Int? {
+        guard let year = getYear(forValue: value) else { return 0 }
+        return _yearsList.index(of: year)
+    }
+    
     func setSelectedYear (forYear newSelectedYear: Year) {
         let oldSelectedYear = getSelectedYear()
         oldSelectedYear?.selected = false

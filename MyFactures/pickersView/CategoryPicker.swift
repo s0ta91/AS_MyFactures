@@ -21,6 +21,14 @@ class CategoryPicker: UIPickerView {
         }
         return categoryTitle
     }
+    
+    func selectDefaultRow (forCategoryName categoryName: String, forPickerView pickerView: UIPickerView) {
+        guard let manager = _manager else { fatalError("Manager cannot be found")}
+        guard let category = _manager?.getCategory(forName: categoryName) else { fatalError("Cannot find any category with name :\(categoryName)") }
+        
+        // There is one hidden category so the number of rows is minus 1
+        pickerView.selectRow(manager.getCategoryIndex(forCategory: category) - 1, inComponent: 0, animated: false)
+    }
 }
 
 extension CategoryPicker: UIPickerViewDataSource {
@@ -31,6 +39,7 @@ extension CategoryPicker: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentCategory: Int = 0
         if let manager = _manager {
+            // There is one hidden category so the number of rows is minus 1
             numberOfRowInComponentCategory = manager.getCategoryCount() - 1
         }
         return numberOfRowInComponentCategory

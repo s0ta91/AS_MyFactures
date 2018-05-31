@@ -69,12 +69,13 @@ class Group: Object {
             month = nil
         }
         return month
+        
     }
     func getMonthIndex (forMonth month: Month) -> Int? {
         return _monthList.index(of: month)
     }
-    func getMonthIndexFromTable (forMonthName monthName: String) -> Int! {
-        return _monthArray.index(of: monthName)
+    func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
+        return _monthArray.index(of: monthName)!
     }
     
     func removeMonth (atIndex index: Int) {
