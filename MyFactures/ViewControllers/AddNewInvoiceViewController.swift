@@ -162,10 +162,9 @@ class AddNewInvoiceViewController: UIViewController {
             
             if _modifyInvoice == false {
                 ui_descriptionTextField.becomeFirstResponder()
-                if let firstMonth = _group.getMonth(atIndex: 0),
-                    let currentYear = _manager.getYear(atIndex: 0) {
+                if let firstMonth = _group.getMonth(atIndex: 0) {
                         ui_monthSelectionTextField.text = firstMonth.month
-                        ui_yearSelectionTextField.text = String(currentYear.year)
+                        ui_yearSelectionTextField.text = String(_year.year)
                         ui_groupSelectionTextField.text = _group.title
                         ui_categorySelectionTextField.text = "Non-classée"
                 }
