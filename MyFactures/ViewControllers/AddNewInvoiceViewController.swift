@@ -107,39 +107,27 @@ class AddNewInvoiceViewController: UIViewController {
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
     private func checkReceivedData () {
-        if let recievedManager = _ptManager,
-            let recievedYear = _ptYear,
-            let recievedGroup = _ptGroup {
-            _manager = recievedManager
-            _year = recievedYear
-            _group = recievedGroup
-            
-        }else {
-            print("manager: \(_manager)")
-            print("year: \(_year)")
-            print("group: \(_group)")
-            fatalError("Error recieving path_through managers/objects")
+        
+        guard let receivedManager = _ptManager else { fatalError("Manager :\(String(describing: _ptManager)) unknown") }
+        guard let recievedYear = _ptYear else { fatalError("Year :\(String(describing: _ptYear)) unknown") }
+        guard let recievedGroup = _ptGroup else { fatalError("Group :\(String(describing: _ptGroup)) unknown") }
+        _manager = receivedManager
+        _year = recievedYear
+        _group = recievedGroup
+        
+        if _modifyInvoice {
+            guard let receivedMonth = _ptMonth else { fatalError("Month \(String(describing: _ptMonth)) unknown") }
+            guard let receivedInvoice = _ptInvoice else { fatalError("Invoice \(String(describing: _ptInvoice)) unknown")}
+            _month = receivedMonth
+            _invoice = receivedInvoice
         }
         
-        if _modifyInvoice == true {
-            if let receivedMonth = _ptMonth,
-                let receivedInvoice = _ptInvoice {
-                _month = receivedMonth
-                _invoice = receivedInvoice
-            }else {
-                fatalError("Error recieving path_through month/invoice objects")
-            }
-        }
-        
-        if let loginVC = self._ptLoginVC,
-            let documentFromOtherApp = _ptPickedDocument {
+        if _fromOtherApp {
+            guard let loginVC = _ptLoginVC else { fatalError("LoginVC Unknown") }
+            guard let documentFromOtherApp = _ptPickedDocument else { fatalError("No URL received in parameter")  }
             _loginVC = loginVC
             setDocument(withUrl: documentFromOtherApp, documentExtension: "PDF")
-        } else {
-            fatalError("Error receiving path_through loginVC/documentUrl objects")
         }
-        
-        
     }
 
     //TODO: Add a separator line between all stack view
@@ -408,16 +396,16 @@ class AddNewInvoiceViewController: UIViewController {
                     
                 }
             
-            dismiss(animated: true, completion: {
-                if self._fromOtherApp{
-                    print("dismiss loginVC")
-                    //FIXME: _loginVC nil
-                    self._loginVC.modalTransitionStyle = .crossDissolve
-                    self._loginVC.dismiss(animated: true, completion: nil)
+                if self._fromOtherApp {
+                    print("if fromOtherApp")
+                    if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
+                        GroupTableVC.modalTransitionStyle = .crossDissolve
+                        print("Present GroupTableVC")
+                        present(GroupTableVC, animated: true, completion: nil)
+                    }
+                } else {
+                    print("Something went wrong")
                 }
-            })
-        }else {
-            print("Something went wrong")
         }
     }
 

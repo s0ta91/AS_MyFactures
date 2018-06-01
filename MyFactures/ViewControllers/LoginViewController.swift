@@ -76,6 +76,7 @@ class LoginViewController: UIViewController {
                         if savedApplicationState {
                             UserDefaults.standard.set(false, forKey: "savedApplicationState")
                             if fromOtherApp {
+                                
                                 UserDefaults.standard.set(false, forKey: "fromOtherApp")
                                 let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
                                 addNewInvoiceVC._ptManager = DbManager().getDb()
@@ -86,6 +87,8 @@ class LoginViewController: UIViewController {
                                 addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
                                 addNewInvoiceVC.modalTransitionStyle = .crossDissolve
                                 self.present(addNewInvoiceVC, animated: true, completion: nil)
+                            } else {
+                                self.displayGroupTableViewController()
                             }
                         } else {
                             self.displayGroupTableViewController()
@@ -152,8 +155,11 @@ class LoginViewController: UIViewController {
                         addNewInvoiceVC._ptGroup = DbManager().getDb()?.getYear(atIndex: 0)?.getGroup(atIndex: 0)
                         addNewInvoiceVC._fromOtherApp = true
                         addNewInvoiceVC._ptLoginVC = self
+                        addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
                         addNewInvoiceVC.modalTransitionStyle = .crossDissolve
                         self.present(addNewInvoiceVC, animated: true, completion: nil)
+                    } else {
+                        displayGroupTableViewController()
                     }
                 } else {
                     displayGroupTableViewController()

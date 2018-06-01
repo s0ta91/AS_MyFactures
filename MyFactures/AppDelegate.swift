@@ -111,8 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let topMostVCName = topMostVC.classForCoder.description().components(separatedBy: ".").last else {
                 fatalError("Unknown topMostVC")
         }
-        print("ControllerName: \(topMostVCName)")
-        if topMostVCName != "VerifyPasswordViewController" && topMostVCName != "CreateAccountViewController" {
+        if topMostVCName != "VerifyPasswordViewController" && topMostVCName != "CreateAccountViewController" && topMostVCName != "LoginViewController" {
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
             topMostVC.present(loginVC, animated: false, completion: nil)
         }
