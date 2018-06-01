@@ -412,7 +412,12 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
         ui_descriptionTextField.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            if self._fromOtherApp {
+                self._loginVC.modalTransitionStyle = .crossDissolve
+                self._loginVC.dismiss(animated: true, completion: nil)
+            }
+        })
     }
     
 }
