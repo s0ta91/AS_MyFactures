@@ -35,6 +35,7 @@ class GroupViewController: UIViewController {
             fatalError("Database doesn't exists")
         }
     }
+    
     private var _currentYear: Year!
     private var _groupToModify: Group?
     var effect: UIVisualEffect!
@@ -46,6 +47,12 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Manager.isFirstLoad() {
+            Manager.presentLoginScreen(fromViewController: self)
+            Manager.setIsFirstLoad(false)
+        }
+        
         ui_newGroupNameTextField.delegate = self
         IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self

@@ -27,12 +27,13 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     
     
     //MARK: - Functions
-    //TODO: Create a function to set values for the cell
+    //TODO: Set values for the cell
     func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
         guard let _manager = _ptManager else {fatalError("passthrough _ptManager does not exists")}
+        //FIXME: load the images in a background thread
         var imageToShow = UIImage(named: "missing_document")
         if let invoiceIdentifier = invoice.identifier,
-            let invoiceDocumentExtension = invoice.documentType,
+            let invoiceDocumentExtension = invoice.documentType ,
             let documentUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                 switch invoiceDocumentExtension {
                     case "PDF":

@@ -15,7 +15,7 @@ import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     let APP_VERSION = "MyAppVersion"
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -23,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
+        print("didFinishLaunchingWithOptions")
+        
         //TODO: - Add crashLytics
         Fabric.with([Crashlytics.self])
         
@@ -36,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        })
 //        Realm.Configuration.defaultConfiguration = config
         
-        //TODO:  Set to false because the app is not in restauration mode
+        //TODO:  Set UserDefaults initialisation values
+        Manager.setIsFirstLoad(true)
         UserDefaults.standard.set(false, forKey: "savedApplicationState")
         UserDefaults.standard.set(false, forKey: "fromOtherApp")
         
@@ -60,12 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
             displayCreateAccountVC(withPassword: false)
-        } else {
-            if database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
-                displayCreateAccountVC(withPassword: true)
-            }
+        } else if database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
+            displayCreateAccountVC(withPassword: true)
         }
-        
         
         return true
     }
@@ -107,14 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        guard let topMostVC = application.topMostViewController(),
-            let topMostVCName = topMostVC.classForCoder.description().components(separatedBy: ".").last else {
-                fatalError("Unknown topMostVC")
-        }
-        if topMostVCName != "VerifyPasswordViewController" && topMostVCName != "CreateAccountViewController" && topMostVCName != "LoginViewController" {
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            topMostVC.present(loginVC, animated: false, completion: nil)
-        }
+        
+        print("WillEnterForground")
+        displayLoginScreen(application)
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -141,6 +136,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
         createAccountVC.isPasswordSet = withPassword
         window?.rootViewController = createAccountVC
+    }
+    
+    private func displayLoginScreen(_ application: UIApplication) {
+        guard let topMostVC = application.topMostViewController(),
+            let topMostVCName = topMostVC.classForCoder.description().components(separatedBy: ".").last else {
+                fatalError("Unknown topMostVC")
+        }
+        if topMostVCName != "VerifyPasswordViewController" && topMostVCName != "CreateAccountViewController" && topMostVCName != "LoginViewController" {
+            Manager.presentLoginScreen(fromViewController: topMostVC)
+        }
     }
 
 }

@@ -69,7 +69,7 @@ class AddNewInvoiceViewController: UIViewController {
     private var _documentHasBeenAdded: Bool = false
     private var _documentExtension: String = ""
     private var _deletePreviousDocument: Bool = false
-    private var firstLoad: Bool = true
+    private var _firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
     
     
@@ -150,8 +150,8 @@ class AddNewInvoiceViewController: UIViewController {
 
     //TODO: Set defaults values for all fields
     private func setDefaultValues () {
-        if firstLoad == true {
-            firstLoad = false
+        if _firstLoad == true {
+            _firstLoad = false
             _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
             ui_addOrModifyButton.layer.cornerRadius = 10
             
@@ -397,15 +397,15 @@ class AddNewInvoiceViewController: UIViewController {
                 }
             
                 if self._fromOtherApp {
-                    print("if fromOtherApp")
-                    if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
-                        GroupTableVC.modalTransitionStyle = .crossDissolve
-                        print("Present GroupTableVC")
-                        present(GroupTableVC, animated: true, completion: nil)
+                    self.modalTransitionStyle = .coverVertical
+                    self.dismiss(animated: true) {
+                        self._loginVC.modalTransitionStyle = .crossDissolve
+                        self._loginVC.dismiss(animated: true, completion: nil)
                     }
-                } else {
-                    print("Something went wrong")
                 }
+            
+        } else {
+            print("Something went wrong")
         }
     }
 
