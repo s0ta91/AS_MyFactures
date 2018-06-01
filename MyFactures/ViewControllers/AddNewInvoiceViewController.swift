@@ -41,6 +41,7 @@ class AddNewInvoiceViewController: UIViewController {
     var _modifyInvoice: Bool = false
     var _fromOtherApp: Bool = false
     var _ptLoginVC: UIViewController?
+    var _ptPickedDocument: Any?
     
     //MARK: - Global variable filled with passthrough Managers/objects
     private var _manager: Manager!
@@ -130,9 +131,15 @@ class AddNewInvoiceViewController: UIViewController {
             }
         }
         
-        if let loginVC = self._ptLoginVC {
+        if let loginVC = self._ptLoginVC,
+            let documentFromOtherApp = _ptPickedDocument {
             _loginVC = loginVC
+            setDocument(withUrl: documentFromOtherApp, documentExtension: "PDF")
+        } else {
+            fatalError("Error receiving path_through loginVC/documentUrl objects")
         }
+        
+        
     }
 
     //TODO: Add a separator line between all stack view
@@ -213,6 +220,13 @@ class AddNewInvoiceViewController: UIViewController {
         if request == true {
             SaveManager.removeDocument(forIdentifier: documentId, andExtension: documentExtension)
         }
+    }
+    
+    func setDocument(withUrl url: Any?, documentExtension: String) {
+        _pickedDocument = url
+        _documentExtension = documentExtension
+        _documentHasBeenAdded = true
+        updateDocumentInfo()
     }
     
     private func animateIn(forSubview subview: UIView) {
@@ -397,6 +411,7 @@ class AddNewInvoiceViewController: UIViewController {
             dismiss(animated: true, completion: {
                 if self._fromOtherApp{
                     print("dismiss loginVC")
+                    //FIXME: _loginVC nil
                     self._loginVC.modalTransitionStyle = .crossDissolve
                     self._loginVC.dismiss(animated: true, completion: nil)
                 }

@@ -107,10 +107,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        print("Will enter foreground")
-        if let vc = application.topMostViewController() {
+        guard let topMostVC = application.topMostViewController(),
+            let topMostVCName = topMostVC.classForCoder.description().components(separatedBy: ".").last else {
+                fatalError("Unknown topMostVC")
+        }
+        print("ControllerName: \(topMostVCName)")
+        if topMostVCName != "VerifyPasswordViewController" && topMostVCName != "CreateAccountViewController" {
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-            vc.present(loginVC, animated: false, completion: nil)
+            topMostVC.present(loginVC, animated: false, completion: nil)
         }
     }
 
@@ -126,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         print("Arrive from an other app")
         UserDefaults.standard.set(true, forKey: "fromOtherApp")
+        UserDefaults.standard.set(url, forKey: "fileFromOtherAppUrl")
         print("URL: \(url)")
         return true
     }

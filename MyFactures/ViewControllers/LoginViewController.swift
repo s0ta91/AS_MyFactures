@@ -83,6 +83,7 @@ class LoginViewController: UIViewController {
                                 addNewInvoiceVC._ptGroup = DbManager().getDb()?.getYear(atIndex: 0)?.getGroup(atIndex: 0)
                                 addNewInvoiceVC._fromOtherApp = true
                                 addNewInvoiceVC._ptLoginVC = self
+                                addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
                                 addNewInvoiceVC.modalTransitionStyle = .crossDissolve
                                 self.present(addNewInvoiceVC, animated: true, completion: nil)
                             }

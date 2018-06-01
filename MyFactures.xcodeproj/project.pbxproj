@@ -29,7 +29,7 @@
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
-		1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */; };
+		1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */; };
 		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
@@ -108,7 +108,7 @@
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
-		1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verifyPasswordViewController.swift; sourceTree = "<group>"; };
+		1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordViewController.swift; sourceTree = "<group>"; };
 		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 			children = (
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
-				1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */,
+				1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */,
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
 				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
@@ -610,7 +610,7 @@
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1D1052AB20ADE23E007C5CCF /* Settings.swift in Sources */,
-				1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */,
+				1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
 				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
 				1D06376520A9D8880013E145 /* TextField.swift in Sources */,
