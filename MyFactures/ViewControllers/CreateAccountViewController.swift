@@ -63,7 +63,7 @@ class CreateAccountViewController: UIViewController {
     
     func verifyEmail() {
         if (ui_emailTextField.text?.isValidEmail) != false {
-            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? verifyPasswordViewController else { return }
+            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? VerifyPasswordViewController else { return }
             if let newRandomCode = _manager.generateRandomCode(),
                 let password = ui_passwordTextField.text {
                 verifyEmailVC.randomCode = newRandomCode
