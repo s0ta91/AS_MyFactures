@@ -78,14 +78,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let rootController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        
-        self.window?.rootViewController?.dismiss(animated: false, completion: {
-            if self.window != nil {
-                self.window!.rootViewController = rootController
-            }
-        })
+        guard let topMostVC = application.topMostViewController(),
+            let topMostVCName = topMostVC.classForCoder.description().components(separatedBy: ".").last else {
+                fatalError("Unknown topMostVC")
+        }
+        print("topMost: \(topMostVCName)")
+        if topMostVCName != "VerifyPasswordViewController" {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let rootController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+            
+            self.window?.rootViewController?.dismiss(animated: false, completion: {
+                if self.window != nil {
+                    self.window!.rootViewController = rootController
+                }
+            })
+        }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

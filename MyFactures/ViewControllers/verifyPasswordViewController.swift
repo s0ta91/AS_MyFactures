@@ -8,7 +8,7 @@
 
 import UIKit
 
-class verifyPasswordViewController: UIViewController {
+class VerifyPasswordViewController: UIViewController {
 
     
     @IBOutlet weak var ui_messageTextView: UITextView!

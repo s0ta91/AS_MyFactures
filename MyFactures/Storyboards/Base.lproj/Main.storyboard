@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -461,7 +461,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
-                                <rect key="frame" x="16" y="113" width="288" height="405"/>
+                                <rect key="frame" x="16" y="116" width="288" height="402"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
                                     <size key="itemSize" width="343" height="115"/>
@@ -610,7 +610,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
-                                <rect key="frame" x="0.0" y="113" width="320" height="0.0"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -791,7 +791,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JM3-IU-4oa">
-                                <rect key="frame" x="0.0" y="113" width="320" height="0.0"/>
+                                <rect key="frame" x="0.0" y="116" width="320" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-pP-fqR">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
@@ -811,7 +811,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-Id-J85">
-                                <rect key="frame" x="16" y="113" width="288" height="405"/>
+                                <rect key="frame" x="16" y="116" width="288" height="402"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="d1o-bD-UgL">
                                     <size key="itemSize" width="736" height="113"/>
@@ -2065,7 +2065,7 @@
                 <navigationController storyboardIdentifier="NavGroupContoller" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="a55-X9-wAt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9jl-vg-yyV">
-                        <rect key="frame" x="0.0" y="20" width="320" height="93"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" name="navBarTint"/>
@@ -2089,7 +2089,7 @@
         <!--Verify Password View Controller-->
         <scene sceneID="dNo-j1-89a">
             <objects>
-                <viewController storyboardIdentifier="verifyEmailVC" id="gGI-4G-kWS" customClass="verifyPasswordViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="verifyEmailVC" id="gGI-4G-kWS" customClass="VerifyPasswordViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VUR-KO-rYO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
