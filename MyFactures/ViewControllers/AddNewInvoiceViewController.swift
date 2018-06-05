@@ -158,12 +158,10 @@ class AddNewInvoiceViewController: UIViewController {
             
             if _modifyInvoice == false {
                 ui_descriptionTextField.becomeFirstResponder()
-                if let firstMonth = _group.getMonth(atIndex: 0) {
-                        ui_monthSelectionTextField.text = firstMonth.month
-                        ui_yearSelectionTextField.text = String(_year.year)
-                        ui_groupSelectionTextField.text = _group.title
-                        ui_categorySelectionTextField.text = "Non-classée"
-                }
+                ui_monthSelectionTextField.text = Date().currentMonth
+                ui_yearSelectionTextField.text = String(_year.year)
+                ui_groupSelectionTextField.text = _group.title
+                ui_categorySelectionTextField.text = "Non-classée"
             } else {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
@@ -457,12 +455,13 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
         }
         
         if (textField == ui_monthSelectionTextField) {
+            guard let monthName = ui_monthSelectionTextField.text else { fatalError("MonthName is nill")}
             monthsPickerView = MonthsPicker()
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
             monthsPickerView._group = _group
-            monthsPickerView.selectDefaultRow(forMonthName: ui_monthSelectionTextField.text!, forPickerView: _pickerView)
+            monthsPickerView.selectDefaultRow(forMonthName: monthName, forPickerView: _pickerView)
         }
         
         if (textField == ui_groupSelectionTextField && isGroup(forYear: _year)) {
