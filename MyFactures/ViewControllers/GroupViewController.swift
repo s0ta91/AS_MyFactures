@@ -150,11 +150,7 @@ class GroupViewController: UIViewController {
         }else {
             let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName, isListFiltered)
             if groupExists == false {
-                if let newGroup = _currentYear.addGroup(withTitle: newGroupName, isListFiltered) {
-                    for monthName in monthArray {
-                        newGroup.addMonth(monthName)
-                    }
-                }
+                _ = _currentYear.addGroup(withTitle: newGroupName, isListFiltered)
                 animateOut()
             }else {
                 let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)

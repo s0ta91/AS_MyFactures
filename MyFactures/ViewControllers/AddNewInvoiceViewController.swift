@@ -14,8 +14,8 @@ class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
     
-    @IBOutlet var ui_createCategoryView: UIView!
-    @IBOutlet weak var ui_addNewCategoryTextField: UITextField!
+    @IBOutlet var ui_createGroupOrCategoryView: UIView!
+    @IBOutlet weak var ui_addNewGroupOrCategoryTextField: UITextField!
     
     
     @IBOutlet weak var ui_descriptionTextField: UITextField!
@@ -64,6 +64,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Create variable to hold textField in use
     private var _activeTextField: UITextField!
     
+    private var _isNewGroup: Bool = false
     private var _pickedDocument: Any?
     private var _photoFromCamera: Bool = false
     private var _documentHasBeenAdded: Bool = false
@@ -81,10 +82,10 @@ class AddNewInvoiceViewController: UIViewController {
         ui_monthSelectionTextField.delegate = self
         ui_groupSelectionTextField.delegate = self
         ui_categorySelectionTextField.delegate = self
-        ui_addNewCategoryTextField.delegate = self
+        ui_addNewGroupOrCategoryTextField.delegate = self
         ui_amountTextField.delegate = self
         ui_amountTextField.autocorrectionType = .no
-        ui_createCategoryView.layer.cornerRadius = 10
+        ui_createGroupOrCategoryView.layer.cornerRadius = 10
         
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
     }
@@ -210,7 +211,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
     
-    func setDocument(withUrl url: Any?, documentExtension: String) {
+    private func setDocument(withUrl url: Any?, documentExtension: String) {
         _pickedDocument = url
         _documentExtension = documentExtension
         _documentHasBeenAdded = true
@@ -324,30 +325,45 @@ class AddNewInvoiceViewController: UIViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func addNewGroupButtonPressed(_ sender: UIButton) {
+        _isNewGroup = true
+        ui_addNewGroupOrCategoryTextField.text = ""
+        ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
+        animateIn(forSubview: ui_createGroupOrCategoryView)
+    }
+    
     @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
-        ui_addNewCategoryTextField.text = ""
-        ui_addNewCategoryTextField.becomeFirstResponder()
-        animateIn(forSubview: ui_createCategoryView)
+        _isNewGroup = false
+        ui_addNewGroupOrCategoryTextField.text = ""
+        ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
+        animateIn(forSubview: ui_createGroupOrCategoryView)
     }
     
     @IBAction func cancelNewCategoryView(_ sender: UIButton) {
-        ui_addNewCategoryTextField.resignFirstResponder()
-        animateOut(forSubview: ui_createCategoryView)
+        ui_addNewGroupOrCategoryTextField.resignFirstResponder()
+        animateOut(forSubview: ui_createGroupOrCategoryView)
     }
     
-    @IBAction func createNewCategory(_ sender: UIButton) {
-        if let newCategoryName = ui_addNewCategoryTextField.text {
-            let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: newCategoryName)
-            if categoryExists == false {
-                let createdCategory = _manager.addCategory(newCategoryName)
-                ui_categorySelectionTextField.text = createdCategory.title
-                ui_addNewCategoryTextField.resignFirstResponder()
-                animateOut(forSubview: ui_createCategoryView)
-            }else {
-                let alertController = UIAlertController(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(newCategoryName)'", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                alertController.addAction(cancelAction)
-                present(alertController, animated: true, completion: nil)
+    @IBAction func createNewGroupOrCategory(_ sender: UIButton) {
+        if let textFieldValue = ui_addNewGroupOrCategoryTextField.text {
+            if _isNewGroup {
+                if !_year.groupExist(forGroupName: textFieldValue) {
+                    ui_groupSelectionTextField.text = _year.addGroup(withTitle: textFieldValue, false)?.title
+                    ui_addNewGroupOrCategoryTextField.resignFirstResponder()
+                    animateOut(forSubview: ui_createGroupOrCategoryView)
+                } else {
+                    Alert.message(title: "Attention", message: "Un group existe déjà avec le nom '\(textFieldValue)'", vc: self)
+                }
+            } else {
+                let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: textFieldValue)
+                if categoryExists == false {
+                    let createdCategory = _manager.addCategory(textFieldValue)
+                    ui_categorySelectionTextField.text = createdCategory.title
+                    ui_addNewGroupOrCategoryTextField.resignFirstResponder()
+                    animateOut(forSubview: ui_createGroupOrCategoryView)
+                }else {
+                    Alert.message(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(textFieldValue)'", vc: self)
+                }
             }
         }
     }
@@ -402,7 +418,9 @@ class AddNewInvoiceViewController: UIViewController {
                         self._loginVC.modalTransitionStyle = .crossDissolve
                         self._loginVC.dismiss(animated: true, completion: nil)
                     }
-                }
+                } else {
+                    dismiss(animated: true, completion: nil)
+            }
             
         } else {
             print("Something went wrong")
@@ -470,7 +488,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         ui_descriptionTextField.resignFirstResponder()
-        ui_createCategoryView.endEditing(false)
+        ui_createGroupOrCategoryView.endEditing(false)
         return true
     }
 }

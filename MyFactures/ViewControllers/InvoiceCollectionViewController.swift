@@ -243,6 +243,7 @@ class InvoiceCollectionViewController: UIViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
+            print("group: \(self._invoiceCollectionCurrentGroup)")
             self.present(destinationVC, animated: true, completion: nil)
         }
     }
@@ -301,6 +302,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         if let invoiceToShow = invoice {
             cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
+        
         cell_invoice.delegate = self
         cell_invoice.layer.borderWidth = 1.0
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
