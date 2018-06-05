@@ -243,7 +243,6 @@ class InvoiceCollectionViewController: UIViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
-            print("group: \(self._invoiceCollectionCurrentGroup)")
             self.present(destinationVC, animated: true, completion: nil)
         }
     }

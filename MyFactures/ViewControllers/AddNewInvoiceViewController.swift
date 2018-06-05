@@ -280,9 +280,22 @@ class AddNewInvoiceViewController: UIViewController {
         imagePickerController.delegate = self
         
         //TODO: DocumentPickerViewController to selected a document
+        let pdf                                 = String(kUTTypePDF)
+//        let spreadsheet                         = String(kUTTypeSpreadsheet)
+//        let movie                               = String(kUTTypeMovie)
+//        let aviMovie                            = String(kUTTypeAVIMovie)
+//        let docs                                = String(kUTTypeCompositeContent)
+        let img                                 = String(kUTTypeImage)
+        let png                                 = String(kUTTypePNG)
+        let jpeg                                = String(kUTTypeJPEG)
+//        let txt                                 = String(kUTTypeText)
+//        let zip                                 = String(kUTTypeZipArchive)
+//        let msg1                                = String(kUTTypeEmailMessage)
+//        let msg2                                = String(kUTTypeMessage)
+        let allowedDocumentsTypes = [pdf,img,jpeg,png]
+        
         let pickADocument = UIAlertAction(title: "Choisir un document", style: .default) { (_) in
-            
-            let documentPicker = UIDocumentPickerViewController(documentTypes: [String(kUTTypePDF)] , in: .import)
+            let documentPicker = UIDocumentPickerViewController(documentTypes:  allowedDocumentsTypes, in: .import)
             documentPicker.delegate = self
             documentPicker.modalPresentationStyle = .formSheet
             self.present(documentPicker, animated: true, completion: nil)
@@ -495,8 +508,28 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
 extension AddNewInvoiceViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         _pickedDocument = urls.first
-        _documentExtension = "PDF"
-        _documentHasBeenAdded = true
+        guard let document = _pickedDocument else {fatalError("No document found")}
+        if String(describing: document).hasSuffix("pdf") {
+            _documentExtension = "PDF"
+            _documentHasBeenAdded = true
+        }
+        if String(describing: document).hasSuffix("jpeg") {
+            _documentExtension = "JPEG"
+            _documentHasBeenAdded = true
+        }
+        if String(describing: document).hasSuffix("jpg") {
+            _documentExtension = "JPG"
+            _documentHasBeenAdded = true
+        }
+        if  String(describing: document).hasSuffix("img"){
+            _documentExtension = "IMG"
+            _documentHasBeenAdded = true
+        }
+        if  String(describing: document).hasSuffix("png"){
+            _documentExtension = "PNG"
+            _documentHasBeenAdded = true
+        }
+        
         updateDocumentInfo()
     }
 }

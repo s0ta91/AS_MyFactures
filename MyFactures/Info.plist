@@ -62,11 +62,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Please allow access to your camera to take a photo</string>
+	<string>MyFactures à besoin d'accéder à votre appareil photo.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Allow Access to faceID recognition</string>
+	<string>Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to upload your photo</string>
+	<string>MyFactures à besoin d'accéder à votre bibliothèque photo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Abuget.ttf</string>
