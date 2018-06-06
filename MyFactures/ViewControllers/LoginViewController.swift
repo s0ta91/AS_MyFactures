@@ -31,29 +31,17 @@ class LoginViewController: UIViewController {
 //        DbManager().reInitMasterPassword()
 //        _manager.reinitUserDefaultValue(forKey: Settings().USER_EMAIL_KEY)
         
-        ui_passwordTextField.text = ""
-        
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
         
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
-            ui_passwordTextField.isHidden = true
-            ui_lostPasswordButton.isHidden = true
-            ui_connexionButton.isHidden = true
+            showConnexionFields(false)
             unlockWithBiometrics()
+        } else {
+            showConnexionFields(true)
         }
-        
-        // Set padding for password textField
-        ui_passwordTextField.setPadding()
-        ui_passwordTextField.setRadius()
-        
-        // Set radius for connexion button
-        ui_connexionButton.layer.cornerRadius = 5
-        
-        // Delegation for password textField to have access to textfieldShouldReturn function
-        self.ui_passwordTextField.delegate = self
     }
 
     
@@ -69,17 +57,7 @@ class LoginViewController: UIViewController {
                 DispatchQueue.main.async {
                      /** Unlock application **/
                     if isOwnerConfirmed == true {
-                        let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
-                        // If application returning from background, just dismiss the loginScreen
-                        // Else show groupScreen
-                        if savedApplicationState {
-                            self.modalTransitionStyle = .crossDissolve
-                            self.view.endEditing(true)
-                            self.dismiss(animated: true, completion: nil)
-                            UserDefaults.standard.set(false, forKey: "savedApplicationState")
-                        } else {
-                            self.displayGroupTableViewController()
-                        }
+                        self.unlock()
                     }
                     if let error = authError {
                         switch error {
@@ -93,6 +71,8 @@ class LoginViewController: UIViewController {
                     }
                 }
             })
+        } else {
+            print("device already unlocked")
         }
     }
     
@@ -102,11 +82,30 @@ class LoginViewController: UIViewController {
         ui_connexionButton.isHidden = false
     }
 
-    func displayGroupTableViewController () {
-        if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
-            GroupTableVC.modalTransitionStyle = .crossDissolve
-            present(GroupTableVC, animated: true, completion: nil)
+    func showConnexionFields(_ value: Bool) {
+        if value {
+            ui_passwordTextField.becomeFirstResponder()
+            ui_passwordTextField.text = ""
+            
+            // Set padding for password textField
+            ui_passwordTextField.setPadding()
+            ui_passwordTextField.setRadius()
+            
+            // Set radius for connexion button
+            ui_connexionButton.layer.cornerRadius = 5
+            
+            // Delegation for password textField to have access to textfieldShouldReturn function
+            self.ui_passwordTextField.delegate = self
+        } else {
+            ui_passwordTextField.isHidden = true
+            ui_lostPasswordButton.isHidden = true
+            ui_connexionButton.isHidden = true
         }
+    }
+    
+    func displayGroupTableViewController () {
+        ui_passwordTextField.resignFirstResponder()
+        Manager.dismissVC(thisViewController: self, withTransition: .crossDissolve, animated: true)
     }
     
     func displayAddNewInvoideVC() {
@@ -122,19 +121,37 @@ class LoginViewController: UIViewController {
         }))
     }
     
-    @IBAction func unlockWithPassword(_ sender: Any) {
+    private func unlock() {
         let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
+        let fromOtherApp = UserDefaults.standard.bool(forKey: "fromOtherApp")
+        // If application returning from background, just dismiss the loginScreen
+        // Else show groupScreen
+        if savedApplicationState {
+            UserDefaults.standard.set(false, forKey: "savedApplicationState")
+            if fromOtherApp {
+                UserDefaults.standard.set(false, forKey: "fromOtherApp")
+                let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
+                addNewInvoiceVC._ptManager = DbManager().getDb()
+                addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
+                addNewInvoiceVC._ptGroup = DbManager().getDb()?.getYear(atIndex: 0)?.getGroup(atIndex: 0)
+                addNewInvoiceVC._fromOtherApp = true
+                addNewInvoiceVC._ptLoginVC = self
+                addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
+                addNewInvoiceVC.modalTransitionStyle = .crossDissolve
+                self.present(addNewInvoiceVC, animated: true, completion: nil)
+            } else {
+                self.displayGroupTableViewController()
+            }
+        } else {
+            self.displayGroupTableViewController()
+        }
+    }
+    
+    @IBAction func unlockWithPassword(_ sender: Any) {
         if let typedPassword = ui_passwordTextField.text,
             let storedPassword = DbManager().getMasterPassword() {
             if typedPassword == storedPassword {
-                if savedApplicationState {
-                    self.modalTransitionStyle = .crossDissolve
-                    self.view.endEditing(true)
-                    self.dismiss(animated: true, completion: nil)
-                    UserDefaults.standard.set(false, forKey: "savedApplicationState")
-                } else {
-                    displayGroupTableViewController()
-                }
+                unlock()
             }else {
                 _manager.shake(ui_passwordTextField)
             }

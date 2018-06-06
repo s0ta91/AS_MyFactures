@@ -46,6 +46,7 @@ class Year: Object {
         realm?.beginWrite()
         _groupList.insert(newGroup, at: newGroupIndex)
         try? realm?.commitWrite()
+        newGroup.initMonthList()
         setGroupList()
         return newGroup
     }
@@ -110,6 +111,7 @@ class Year: Object {
     func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
+    
     func getGroup (forName groupName: String, _ isListFiltered: Bool = false) -> Group? {
         var group: Group? = nil
         let groupPredicate = NSPredicate(format: "_title == %@", groupName)
@@ -121,6 +123,10 @@ class Year: Object {
     
     func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
         group.title = newTitle
+    }
+    
+    func groupExist(forGroupName groupName: String) -> Bool {
+        return _groupList.filter(NSPredicate(format: "_title == %@", groupName)).isEmpty ? false : true
     }
     
     func removeGroup (atIndex index:Int) {

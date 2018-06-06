@@ -12,7 +12,6 @@ import KeychainAccess
 
 class Manager {
     
-    
     private var _realm: Realm
     private var _yearsList: Results<Year>
     private var _applicationDataList: Results<ApplicationData>
@@ -181,8 +180,20 @@ class Manager {
     func getyearsCount () -> Int {
         return _yearsList.count
     }
+    
     func getYear (atIndex index: Int) -> Year? {
         return _yearsList[index]
+    }
+    
+    func getYear (forValue value: Int) -> Year? {
+        let yearPredicate = NSPredicate(format: "_year == %i", value)
+        guard let yearIndex = _yearsList.index(matching: yearPredicate) else { return nil }
+        return getYear(atIndex: yearIndex)
+    }
+    
+    func getYearIndex (forValue value: Int) -> Int? {
+        guard let year = getYear(forValue: value) else { return 0 }
+        return _yearsList.index(of: year)
     }
     
     func setSelectedYear (forYear newSelectedYear: Year) {
@@ -395,5 +406,23 @@ class Manager {
         animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 4, y: textField.center.y))
         
         textField.layer.add(animation, forKey: "position")
+    }
+
+    static func dismissVC (thisViewController vc: UIViewController, withTransition transition: UIModalTransitionStyle, animated: Bool! = false) {
+        vc.modalTransitionStyle = transition
+        vc.dismiss(animated: animated, completion: nil)
+    }
+    
+    static func presentLoginScreen(fromViewController vc: UIViewController){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { fatalError("Could not load LoginVC") }
+        vc.present(loginVC, animated: false, completion: nil)
+    }
+    
+    static func setIsFirstLoad(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: "firstLoad")
+    }
+    static func isFirstLoad() -> Bool {
+        return UserDefaults.standard.bool(forKey: "firstLoad")
     }
 }

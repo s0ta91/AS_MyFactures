@@ -10,12 +10,15 @@ import UIKit
 
 class MonthsPicker: UIPickerView {
 
-    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    var _group: Group?
+//    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
     
     var _monthTextField: UITextField!
-    
-    func selectDefaultRow (forMonthIndex index: Int, forPickerView pickerView: UIPickerView) {
-        pickerView.selectRow(index, inComponent: 0, animated: false)
+
+    func selectDefaultRow (forMonthName monthName: String, forPickerView pickerView: UIPickerView) {
+        guard let group = _group else { fatalError("Group cannot be found") }
+        let monthIndex = group.getMonthIndexFromTable(forMonthName: monthName)
+        pickerView.selectRow(monthIndex, inComponent: 0, animated: false)
     }
 }
 
@@ -25,16 +28,22 @@ extension MonthsPicker: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return monthArray.count
+        guard let group = _group else { fatalError("Group cannot be found") }
+        return group.getMonthCount()
     }
 }
 
 extension MonthsPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return monthArray[row]
+        guard let group = _group else { fatalError("Group cannot be found") }
+        return group.getMonth(atIndex: row)?.month
+//        return monthArray[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        _monthTextField.text = monthArray[row]
+        guard let group = _group else { fatalError("Group cannot be found") }
+        guard let monthName = group.getMonth(atIndex: row)?.month else { fatalError("Cannot retreive monthName for index: \(row)")}
+        _monthTextField.text = monthName
+//        _monthTextField.text = monthArray[row]
     }
 }

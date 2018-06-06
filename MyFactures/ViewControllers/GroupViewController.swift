@@ -35,6 +35,7 @@ class GroupViewController: UIViewController {
             fatalError("Database doesn't exists")
         }
     }
+    
     private var _currentYear: Year!
     private var _groupToModify: Group?
     var effect: UIVisualEffect!
@@ -46,6 +47,12 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Manager.isFirstLoad() {
+            Manager.presentLoginScreen(fromViewController: self)
+            Manager.setIsFirstLoad(false)
+        }
+        
         ui_newGroupNameTextField.delegate = self
         IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self
@@ -143,11 +150,7 @@ class GroupViewController: UIViewController {
         }else {
             let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName, isListFiltered)
             if groupExists == false {
-                if let newGroup = _currentYear.addGroup(withTitle: newGroupName, isListFiltered) {
-                    for monthName in monthArray {
-                        newGroup.addMonth(monthName)
-                    }
-                }
+                _ = _currentYear.addGroup(withTitle: newGroupName, isListFiltered)
                 animateOut()
             }else {
                 let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)

@@ -4,6 +4,33 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>PDF file</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.adobe.pdf</string>
+			</array>
+			<key>xyz</key>
+			<string>abcd</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeIconFiles</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Photo file</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.jpeg</string>
+			</array>
+			<key>xyz</key>
+			<string>abcd</string>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -35,11 +62,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Please allow access to your camera to take a photo</string>
+	<string>MyFactures à besoin d'accéder à votre appareil photo.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Allow Access to faceID recognition</string>
+	<string>Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Please allow access to upload your photo</string>
+	<string>MyFactures à besoin d'accéder à votre bibliothèque photo.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Abuget.ttf</string>

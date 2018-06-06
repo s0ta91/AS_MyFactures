@@ -247,8 +247,7 @@ class InvoiceCollectionViewController: UIViewController {
         }
     }
 
-    // MARK: - Navigation
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - Navigation to manageCategoyVC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "manageCategoryVC"{
             if let navigationVC = segue.destination as? UINavigationController,
@@ -302,6 +301,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         if let invoiceToShow = invoice {
             cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
+        
         cell_invoice.delegate = self
         cell_invoice.layer.borderWidth = 1.0
         cell_invoice.layer.borderColor = UIColor.clear.cgColor

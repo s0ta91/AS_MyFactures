@@ -18,7 +18,7 @@ DEPENDENCIES:
   - Crashlytics (= 3.10.1)
   - DZNEmptyDataSet (= 1.8.1)
   - Fabric (= 1.7.6)
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (= 6.0.3)
   - KeychainAccess (= 3.1.1)
   - mailcore2-ios (= 0.6.4)
   - RealmSwift (= 3.5.0)
@@ -46,6 +46,6 @@ SPEC CHECKSUMS:
   Realm: 0378021c424e4e2bd6a0e63b27881e929d9b9ad1
   RealmSwift: 3322562622fda2ad596985ead4d8d8be30cf838c
 
-PODFILE CHECKSUM: 1b4f913d1d2778507145e20a23d2a0ae9c479f52
+PODFILE CHECKSUM: becf4d29d335beb390d224f7e81d3efc0b80d889
 
 COCOAPODS: 1.5.2

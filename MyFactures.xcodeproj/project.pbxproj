@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1AE8EB1FB13E6138656536FE /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */; };
 		1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D00D4CF2044169F00759E9F /* PDFViewController.swift */; };
 		1D06376520A9D8880013E145 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D06376420A9D8880013E145 /* TextField.swift */; };
 		1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1052A720ADD233007C5CCF /* AlertExtension.swift */; };
@@ -29,7 +28,7 @@
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
-		1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */; };
+		1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */; };
 		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
@@ -44,17 +43,15 @@
 		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
 		1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923562028B4F200387FF8 /* GroupViewController.swift */; };
 		1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD923592028C4C800387FF8 /* HeaderGroupView.swift */; };
+		1DF4B0C820C6D600004376D9 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF4B0C720C6D600004376D9 /* DateExtension.swift */; };
 		1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */; };
 		1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */; };
+		1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFD207820BDA3FF009546C2 /* YearsPicker.swift */; };
 		1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */; };
 		1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E5203B097F00176EF3 /* GroupPicker.swift */; };
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
-		32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */; };
-		4B6B3D1AC1544FA3AAEAFD3D /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */; };
-		53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268C4186133A6A4246E5035B /* Pods_MyFactures.framework */; };
-		DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,7 +74,6 @@
 
 /* Begin PBXFileReference section */
 		031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.debug.xcconfig"; sourceTree = "<group>"; };
 		1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D00D4CF2044169F00759E9F /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
@@ -108,7 +104,7 @@
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
-		1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = verifyPasswordViewController.swift; sourceTree = "<group>"; };
+		1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordViewController.swift; sourceTree = "<group>"; };
 		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -123,21 +119,20 @@
 		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
 		1DD923562028B4F200387FF8 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		1DD923592028C4C800387FF8 /* HeaderGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderGroupView.swift; sourceTree = "<group>"; };
+		1DF4B0C720C6D600004376D9 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		1DFD207820BDA3FF009546C2 /* YearsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearsPicker.swift; sourceTree = "<group>"; };
 		1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthsPicker.swift; sourceTree = "<group>"; };
 		1DFE14E5203B097F00176EF3 /* GroupPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPicker.swift; sourceTree = "<group>"; };
 		1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPicker.swift; sourceTree = "<group>"; };
 		1DFE14E9203B238E00176EF3 /* SaveManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveManager.swift; sourceTree = "<group>"; };
 		1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoryTableViewController.swift; sourceTree = "<group>"; };
 		268C4186133A6A4246E5035B /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesTests/Pods-MyFacturesTests.release.xcconfig"; sourceTree = "<group>"; };
-		583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5B7E94F8DDE581F35155FBA8 /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.release.xcconfig"; sourceTree = "<group>"; };
-		A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFacturesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFacturesUITests/Pods-MyFacturesUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */,
-				53E4C22593BFE3E90188E363 /* Pods_MyFactures.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,8 +148,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B6B3D1AC1544FA3AAEAFD3D /* Pods_MyFacturesTests.framework in Frameworks */,
-				DE1B499DEEB1986B7960CBD3 /* Pods_MyFacturesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,8 +155,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AE8EB1FB13E6138656536FE /* Pods_MyFacturesUITests.framework in Frameworks */,
-				32359D3354CF60A9DBB4A412 /* Pods_MyFacturesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +164,7 @@
 		1D07921420373FBA0097A354 /* pickersView */ = {
 			isa = PBXGroup;
 			children = (
+				1DFD207820BDA3FF009546C2 /* YearsPicker.swift */,
 				1DFE14E3203ADF1500176EF3 /* MonthsPicker.swift */,
 				1DFE14E5203B097F00176EF3 /* GroupPicker.swift */,
 				1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */,
@@ -223,6 +214,7 @@
 				1D1052A720ADD233007C5CCF /* AlertExtension.swift */,
 				1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */,
 				1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */,
+				1DF4B0C720C6D600004376D9 /* DateExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -273,7 +265,7 @@
 			children = (
 				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
 				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
-				1D98E6F120AD685700580488 /* verifyPasswordViewController.swift */,
+				1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */,
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
 				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
 				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
@@ -349,10 +341,6 @@
 			children = (
 				0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */,
 				9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */,
-				0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */,
-				28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */,
-				583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */,
-				A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -384,7 +372,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D4B07B420233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesTests" */;
 			buildPhases = (
-				20AD8486F7EEA20B43EECB1F /* [CP] Check Pods Manifest.lock */,
 				1D4B079920233FF4002F745C /* Sources */,
 				1D4B079A20233FF4002F745C /* Frameworks */,
 				1D4B079B20233FF4002F745C /* Resources */,
@@ -403,7 +390,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D4B07B720233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesUITests" */;
 			buildPhases = (
-				E0F2772AA82B974E6B52D00A /* [CP] Check Pods Manifest.lock */,
 				1D4B07A420233FF4002F745C /* Sources */,
 				1D4B07A520233FF4002F745C /* Frameworks */,
 				1D4B07A620233FF4002F745C /* Resources */,
@@ -425,7 +411,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Sébastien Constant";
 				TargetAttributes = {
 					1D4B078820233FF4002F745C = {
@@ -506,24 +492,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" cd36415c6aedb89925857123a7d30d17be8d13e0 4512f55a185be3d3052cc35f62a0f20ab31d18babf2271b0e3dab2700d9f70e8";
 		};
-		20AD8486F7EEA20B43EECB1F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyFacturesTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BAEBD57DA9AB2F06D2A968BD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -536,24 +504,6 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-MyFactures-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E0F2772AA82B974E6B52D00A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MyFacturesUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -609,9 +559,10 @@
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,
 				1DD923572028B4F200387FF8 /* GroupViewController.swift in Sources */,
 				1D1052AB20ADE23E007C5CCF /* Settings.swift in Sources */,
-				1D98E6F220AD685700580488 /* verifyPasswordViewController.swift in Sources */,
+				1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
 				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
+				1DF4B0C820C6D600004376D9 /* DateExtension.swift in Sources */,
 				1D06376520A9D8880013E145 /* TextField.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */,
@@ -633,6 +584,7 @@
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
+				1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */,
 				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -851,7 +803,6 @@
 		};
 		1D4B07B520233FF4002F745C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0E7209DB1E2BABEE4AC8D092 /* Pods-MyFacturesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -869,7 +820,6 @@
 		};
 		1D4B07B620233FF4002F745C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 28BD2E23EEE6DC2F7B21C79D /* Pods-MyFacturesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -887,7 +837,6 @@
 		};
 		1D4B07B820233FF4002F745C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 583EB4782429B8A3B9170CA3 /* Pods-MyFacturesUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -904,7 +853,6 @@
 		};
 		1D4B07B920233FF4002F745C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A959712FA6A049EC2C84D22F /* Pods-MyFacturesUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

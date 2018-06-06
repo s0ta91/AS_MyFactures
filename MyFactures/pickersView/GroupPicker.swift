@@ -22,11 +22,10 @@ class GroupPicker: UIPickerView {
         return groupTitle
     }
     
-    func selectDefaultRow (forGroup group: Group, forPickerView pickerView: UIPickerView) {
-        if let year = _year,
-            let groupIndex = year.getGroupIndex(forGroup: group) {
-            pickerView.selectRow(groupIndex, inComponent: 0, animated: false)
-        }
+    func selectDefaultRow (forGroupName groupName: String, forPickerView pickerView: UIPickerView) {
+        guard let year = _year else { fatalError("Year cannot be found") }
+        guard let group = year.getGroup(forName: groupName) else { fatalError("Group cannot be found for name: \(groupName)")}
+        pickerView.selectRow(year.getGroupIndex(forGroup: group)!, inComponent: 0, animated: false)
     }
 }
 
@@ -38,7 +37,7 @@ extension GroupPicker: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         var numberOfRowInComponentGroup: Int = 0
         if let year = _year {
-            numberOfRowInComponentGroup = year.getGroupCount()
+            numberOfRowInComponentGroup = year.getGlobalGroupCount()
         }
         return numberOfRowInComponentGroup
     }

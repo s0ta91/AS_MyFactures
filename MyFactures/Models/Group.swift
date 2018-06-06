@@ -53,6 +53,12 @@ class Group: Object {
         return _monthList.count
     }
     
+    func initMonthList() {
+        for month in _monthArray {
+            self.addMonth(month)
+        }
+    }
+    
     func addMonth (_ monthName: String) {
         let newMonth = Month()
         newMonth.month = monthName
@@ -69,12 +75,13 @@ class Group: Object {
             month = nil
         }
         return month
+        
     }
     func getMonthIndex (forMonth month: Month) -> Int? {
         return _monthList.index(of: month)
     }
-    func getMonthIndexFromTable (forMonthName monthName: String) -> Int! {
-        return _monthArray.index(of: monthName)
+    func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
+        return _monthArray.index(of: monthName)!
     }
     
     func removeMonth (atIndex index: Int) {
@@ -92,7 +99,7 @@ class Group: Object {
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
         }else {
-            fatalError("month :\(monthName) does not exists in database")
+            fatalError("month '\(monthName)' does not exists in database")
         }
         return monthToReturn
     }
