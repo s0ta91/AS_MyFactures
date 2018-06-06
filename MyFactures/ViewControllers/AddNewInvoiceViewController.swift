@@ -396,6 +396,8 @@ class AddNewInvoiceViewController: UIViewController {
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         let categoryName = getCategoryName()
         var categoryObject: Category? = nil
+        
+        
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
@@ -434,7 +436,12 @@ class AddNewInvoiceViewController: UIViewController {
             }
             
         } else {
-            print("Something went wrong")
+            if ui_groupSelectionTextField.text == "Aucun dossier disponible" {
+                Alert.message(title: "Erreur", message: "Veuillez créer un dossier", vc: self)
+            } else {
+                Alert.message(title: "Erreur", message: "Problème avec l'un des champs", vc: self)
+                print("Something went wrong with one of the fields")
+            }
         }
     }
 
