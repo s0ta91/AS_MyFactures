@@ -108,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        print("WillEnterForground")
+//        print("WillEnterForground")
         displayLoginScreen(application)
     }
 
@@ -122,10 +122,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("Arrive from an other app")
+//        print("Arrive from an other app")
         UserDefaults.standard.set(true, forKey: "fromOtherApp")
         UserDefaults.standard.set(url, forKey: "fileFromOtherAppUrl")
-        print("URL: \(url)")
+//        print("URL: \(url)")
         return true
     }
     

@@ -133,7 +133,6 @@ class LoginViewController: UIViewController {
                 let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
                 addNewInvoiceVC._ptManager = DbManager().getDb()
                 addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
-                addNewInvoiceVC._ptGroup = DbManager().getDb()?.getYear(atIndex: 0)?.getGroup(atIndex: 0)
                 addNewInvoiceVC._fromOtherApp = true
                 addNewInvoiceVC._ptLoginVC = self
                 addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
