@@ -311,45 +311,45 @@ class Manager {
     
     
     // MARK: - Other functions
-    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
-        let textFieldToConvert = textField
-        let labelToConvert = label
-        
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-        currencyFormatter.locale = NSLocale.autoupdatingCurrent
-//        currencyFormatter.locale = Locale(identifier: "fr-FR")
-        currencyFormatter.decimalSeparator = "."
-        
-        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                textFieldToConvert?.text = numberToCurrencyType
-            }
-        }else if let amountString = labelToConvert?.text,
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                labelToConvert?.text = numberToCurrencyType
-            }
-        }
-    }
+//    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
+//        let textFieldToConvert = textField
+//        let labelToConvert = label
+//
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.usesGroupingSeparator = true
+//        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+//        currencyFormatter.locale = NSLocale.autoupdatingCurrent
+////        currencyFormatter.locale = Locale(identifier: "fr-FR")
+//        currencyFormatter.decimalSeparator = "."
+//
+//        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                textFieldToConvert?.text = numberToCurrencyType
+//            }
+//        }else if let amountString = labelToConvert?.text,
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                labelToConvert?.text = numberToCurrencyType
+//            }
+//        }
+//    }
     
-    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
-        let convertedResult: Decimal?
-        let textFieldToConvert = textField
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
-        if let amountString = textFieldToConvert.text,
-            let currencyToNumber = currencyFormatter.number(from: amountString) {
-            convertedResult = currencyToNumber.decimalValue
-        }else {
-            convertedResult = nil
-        }
-        return convertedResult
-    }
+//    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
+//        let convertedResult: Decimal?
+//        let textFieldToConvert = textField
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.numberStyle = .currency
+//        if let amountString = textFieldToConvert.text,
+//            let currencyToNumber = currencyFormatter.number(from: amountString) {
+//            convertedResult = currencyToNumber.decimalValue
+//        }else {
+//            convertedResult = nil
+//        }
+//        return convertedResult
+//    }
     
     func setButtonLayer (_ button: UIButton) {
         button.layer.cornerRadius = 17
@@ -367,6 +367,7 @@ class Manager {
     }
     
     //FIXME: TO DELETE
+    // Has been moved to SaveManager.swift
     func getImageFromURL (url: URL) -> UIImage? {
         let image: UIImage?
         if let data = NSData(contentsOf: url) {

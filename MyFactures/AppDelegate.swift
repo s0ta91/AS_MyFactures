@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        print("didFinishLaunchingWithOptions")
+//        print("didFinishLaunchingWithOptions")
         
         //TODO: - Add crashLytics
         Fabric.with([Crashlytics.self])

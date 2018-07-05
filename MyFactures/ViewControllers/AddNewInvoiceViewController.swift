@@ -156,7 +156,7 @@ class AddNewInvoiceViewController: UIViewController {
     private func setDefaultValues () {
         if _firstLoad == true {
             _firstLoad = false
-//            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+
             ui_addOrModifyButton.layer.cornerRadius = 10
             let groupTitle = isGroup(forYear: _year) ? _group.title : "Aucun dossier disponible"
             
@@ -179,7 +179,7 @@ class AddNewInvoiceViewController: UIViewController {
                 }
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            ui_amountTextField.convertToCurrencyNumber()
             
             // Set the background color of evry uiPickerVIew to white
             _pickerView.backgroundColor = .white
@@ -265,7 +265,7 @@ class AddNewInvoiceViewController: UIViewController {
             if ui_amountTextField.text == "" {
                 ui_amountTextField.text = "0"
             }
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            ui_amountTextField.convertToCurrencyNumber()
         }
         
         if _activeTextField == ui_yearSelectionTextField {
@@ -407,9 +407,8 @@ class AddNewInvoiceViewController: UIViewController {
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
             let group = _year.getGroup(forName: groupName),
-            let amount = ui_amountTextField,
-            let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
-            
+            let convertedAmount = ui_amountTextField.convertFromCurrencyNumber() {
+        
                 if categoryName != "" {
                     categoryObject = _manager.getCategory(forName: categoryName)
                 }

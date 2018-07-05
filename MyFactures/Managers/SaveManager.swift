@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum DocumentType {
+    case image
+    case thumbnail
+    case pdf
+}
+
 class SaveManager {
     
     static fileprivate func getDocumentDirectory () -> URL {
@@ -105,25 +111,36 @@ class SaveManager {
         return documentURL
     }
     
-    static func loadThumbnail(withIdentifier identifier: String) -> UIImage? {
-        let image: UIImage?
+    // TO DELETE
+//    static func loadThumbnail(withIdentifier identifier: String) -> UIImage? {
+//        let image: UIImage?
+//
+//        let thumbnailPath = "thumbnail_\(identifier).JPG"
+//        let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
+//        if !FileManager.default.fileExists(atPath: thumbnailDirectory.path) {
+//            fatalError("Directory not found at path \(thumbnailDirectory)")
+//        }
+//        let thumbnailUrl = thumbnailDirectory.appendingPathComponent(thumbnailPath)
+//        if FileManager.default.fileExists(atPath: thumbnailUrl.path) {
+//            if let imageFromUrl = getImageFromURL(url: thumbnailUrl) {
+//                image = imageFromUrl
+//            } else {
+//                image = nil
+//            }
+//            return image
+//        } else {
+//            fatalError("File unavailable at path \(thumbnailUrl)")
+//        }
+//    }
+    
+    static func getUrl(forIdentifier identifier: String, documentType: DocumentType) -> URL {
         
-        let thumbnailPath = "thumbnail_\(identifier).JPG"
+        let thumbnailPath = "\(documentType)_\(identifier).JPG"
         let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
         if !FileManager.default.fileExists(atPath: thumbnailDirectory.path) {
             fatalError("Directory not found at path \(thumbnailDirectory)")
         }
-        let thumbnailUrl = thumbnailDirectory.appendingPathComponent(thumbnailPath)
-        if FileManager.default.fileExists(atPath: thumbnailUrl.path) {
-            if let imageFromUrl = getImageFromURL(url: thumbnailUrl) {
-                image = imageFromUrl
-            } else {
-                image = nil
-            }
-            return image
-        } else {
-            fatalError("File unavailable at path \(thumbnailUrl)")
-        }
+        return thumbnailDirectory.appendingPathComponent(thumbnailPath)
     }
     
     static func removeDocument (forIdentifier identifier: String, andExtension documentExtension: String) {
