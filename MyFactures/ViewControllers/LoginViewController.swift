@@ -122,20 +122,20 @@ class LoginViewController: UIViewController {
     }
     
     private func unlock() {
-        let savedApplicationState = UserDefaults.standard.bool(forKey: "savedApplicationState")
-        let fromOtherApp = UserDefaults.standard.bool(forKey: "fromOtherApp")
+        let savedApplicationState = UserDefaults.standard.bool(forKey: UserDefaults.keys.savedApplicationState.rawValue)
+        let fromOtherApp = UserDefaults.standard.bool(forKey: UserDefaults.keys.fromOtherApp.rawValue)
         // If application returning from background, just dismiss the loginScreen
         // Else show groupScreen
         if savedApplicationState {
-            UserDefaults.standard.set(false, forKey: "savedApplicationState")
+            UserDefaults.standard.set(false, forKey: UserDefaults.keys.savedApplicationState.rawValue)
             if fromOtherApp {
-                UserDefaults.standard.set(false, forKey: "fromOtherApp")
+                UserDefaults.standard.set(false, forKey: UserDefaults.keys.fromOtherApp.rawValue)
                 let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
                 addNewInvoiceVC._ptManager = DbManager().getDb()
                 addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
                 addNewInvoiceVC._fromOtherApp = true
                 addNewInvoiceVC._ptLoginVC = self
-                addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: "fileFromOtherAppUrl")
+                addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: UserDefaults.keys.fileFromOtherAppUrl.rawValue)
                 addNewInvoiceVC.modalTransitionStyle = .crossDissolve
                 self.present(addNewInvoiceVC, animated: true, completion: nil)
             } else {

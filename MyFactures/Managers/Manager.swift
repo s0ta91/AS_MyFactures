@@ -160,7 +160,8 @@ class Manager {
     // MARK: - User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
-        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+//        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+        UserDefaults.standard.set(email, forKey: UserDefaults.keys.userEmail.rawValue)
     }
     
     func getUserEmail() -> String? {

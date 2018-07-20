@@ -26,6 +26,7 @@
 		1D4B079420233FF4002F745C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079320233FF4002F745C /* Assets.xcassets */; };
 		1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079520233FF4002F745C /* LaunchScreen.storyboard */; };
 		1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4FDFE12084743400208108 /* AboutViewController.swift */; };
+		1D5B510921020AEA003BC535 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */; };
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
@@ -104,6 +105,7 @@
 		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				1DF4B0C720C6D600004376D9 /* DateExtension.swift */,
 				1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */,
 				1D3FC04620EE281F00E9B5C5 /* UIButton.swift */,
+				1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -561,6 +564,7 @@
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
+				1D5B510921020AEA003BC535 /* UserDefaultsExtension.swift in Sources */,
 				1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */,
 				1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */,
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,

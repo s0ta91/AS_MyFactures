@@ -223,7 +223,7 @@ class InvoiceCollectionViewController: UIViewController {
                     destinationVC._ptMonth = month
                     destinationVC._ptInvoice = selectedInvoice
                 }
-            
+                destinationVC.modalTransitionStyle = .coverVertical
                 present(destinationVC, animated: true, completion: nil)
         }
     }
@@ -308,6 +308,11 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         return cell_invoice
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let invoiceCell = collectionView.cellForItem(at: indexPath) as! InvoiceCollectionViewCell
+        modify(invoice: invoiceCell)
     }
 }
 
