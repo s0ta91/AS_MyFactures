@@ -223,7 +223,7 @@ class InvoiceCollectionViewController: UIViewController {
                     destinationVC._ptMonth = month
                     destinationVC._ptInvoice = selectedInvoice
                 }
-            
+                destinationVC.modalTransitionStyle = .coverVertical
                 present(destinationVC, animated: true, completion: nil)
         }
     }
@@ -278,7 +278,6 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
                 monthAmount = String(describing: month.getTotalAmount())
             }
-            invoiceHeaderView._ptManager = _invoiceCollectionManager
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
             
         default:
@@ -294,11 +293,8 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
-        cell_invoice._ptManager = _invoiceCollectionManager
-        let monthIndex = _monthToShow[indexPath.section]
-        guard let month = getCurrentMonth(atIndex: monthIndex) else {fatalError("no month found at index \(monthIndex)")}
-        let invoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row)
-        if let invoiceToShow = invoice {
+        guard let month = getCurrentMonth(atIndex: _monthToShow[indexPath.section]) else {fatalError("no month found at index \(_monthToShow[indexPath.section])")}
+        if let invoiceToShow = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
             cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
         
@@ -312,6 +308,11 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         return cell_invoice
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let invoiceCell = collectionView.cellForItem(at: indexPath) as! InvoiceCollectionViewCell
+        modify(invoice: invoiceCell)
     }
 }
 

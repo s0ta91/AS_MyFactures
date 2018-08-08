@@ -14,6 +14,7 @@
 		1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */; };
 		1D370E18206A81E1005583BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E17206A81E1005583BB /* SettingsViewController.swift */; };
 		1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */; };
+		1D3FC04720EE281F00E9B5C5 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3FC04620EE281F00E9B5C5 /* UIButton.swift */; };
 		1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */; };
 		1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */; };
 		1D4809D12024900A00068094 /* DbManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809D02024900A00068094 /* DbManager.swift */; };
@@ -25,10 +26,12 @@
 		1D4B079420233FF4002F745C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079320233FF4002F745C /* Assets.xcassets */; };
 		1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079520233FF4002F745C /* LaunchScreen.storyboard */; };
 		1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4FDFE12084743400208108 /* AboutViewController.swift */; };
+		1D5B510921020AEA003BC535 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */; };
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
 		1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */; };
+		1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */; };
 		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
 		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
@@ -84,6 +87,7 @@
 		1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1D370E17206A81E1005583BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		1D3FC04620EE281F00E9B5C5 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearViewController.swift; sourceTree = "<group>"; };
 		1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		1D4809D02024900A00068094 /* DbManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DbManager.swift; sourceTree = "<group>"; };
@@ -101,10 +105,12 @@
 		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
 		1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordViewController.swift; sourceTree = "<group>"; };
+		1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
 		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -215,6 +221,9 @@
 				1DFD204420B9B276009546C2 /* UIViewControllerExtension.swift */,
 				1DFD204620B9BC8B009546C2 /* UIApplicationExtension.swift */,
 				1DF4B0C720C6D600004376D9 /* DateExtension.swift */,
+				1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */,
+				1D3FC04620EE281F00E9B5C5 /* UIButton.swift */,
+				1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -549,11 +558,13 @@
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
 				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
+				1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */,
 				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
 				1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */,
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
+				1D5B510921020AEA003BC535 /* UserDefaultsExtension.swift in Sources */,
 				1DFD204720B9BC8B009546C2 /* UIApplicationExtension.swift in Sources */,
 				1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */,
 				1D00D4D02044169F00759E9F /* PDFViewController.swift in Sources */,
@@ -583,6 +594,7 @@
 				1DB07FCC2032094800BDDDFB /* Month.swift in Sources */,
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
+				1D3FC04720EE281F00E9B5C5 /* UIButton.swift in Sources */,
 				1DAEAC242029E756001C144E /* Group.swift in Sources */,
 				1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */,
 				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,

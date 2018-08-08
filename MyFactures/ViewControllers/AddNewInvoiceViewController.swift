@@ -88,10 +88,7 @@ class AddNewInvoiceViewController: UIViewController {
         ui_createGroupOrCategoryView.layer.cornerRadius = 10
         
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         checkReceivedData()
         setSeparatorForFields()
         setAccessoryViewForPickersView()
@@ -108,26 +105,32 @@ class AddNewInvoiceViewController: UIViewController {
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
     private func checkReceivedData () {
-        
         guard let receivedManager = _ptManager else { fatalError("Manager :\(String(describing: _ptManager)) unknown") }
-        guard let recievedYear = _ptYear else { fatalError("Year :\(String(describing: _ptYear)) unknown") }
-        guard let recievedGroup = _ptGroup else { fatalError("Group :\(String(describing: _ptGroup)) unknown") }
+        guard let receivedYear = _ptYear else { fatalError("Year :\(String(describing: _ptYear)) unknown") }
         _manager = receivedManager
-        _year = recievedYear
-        _group = recievedGroup
-        
-        if _modifyInvoice {
-            guard let receivedMonth = _ptMonth else { fatalError("Month \(String(describing: _ptMonth)) unknown") }
-            guard let receivedInvoice = _ptInvoice else { fatalError("Invoice \(String(describing: _ptInvoice)) unknown")}
-            _month = receivedMonth
-            _invoice = receivedInvoice
-        }
+        _year = receivedYear
         
         if _fromOtherApp {
             guard let loginVC = _ptLoginVC else { fatalError("LoginVC Unknown") }
             guard let documentFromOtherApp = _ptPickedDocument else { fatalError("No URL received in parameter")  }
+            if isGroup(forYear: receivedYear) {
+                _group = _year.getGroup(atIndex: 0)
+            } else {
+                ui_groupSelectionTextField.isEnabled = false
+            }
+            
             _loginVC = loginVC
             setDocument(withUrl: documentFromOtherApp, documentExtension: "PDF")
+        } else {
+            guard let receivedGroup = _ptGroup else { fatalError("Group :\(String(describing: _ptGroup)) unknown") }
+            _group = receivedGroup
+            
+            if _modifyInvoice {
+                guard let receivedMonth = _ptMonth else { fatalError("Month \(String(describing: _ptMonth)) unknown") }
+                guard let receivedInvoice = _ptInvoice else { fatalError("Invoice \(String(describing: _ptInvoice)) unknown")}
+                _month = receivedMonth
+                _invoice = receivedInvoice
+            }
         }
     }
 
@@ -153,19 +156,20 @@ class AddNewInvoiceViewController: UIViewController {
     private func setDefaultValues () {
         if _firstLoad == true {
             _firstLoad = false
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+
             ui_addOrModifyButton.layer.cornerRadius = 10
+            let groupTitle = isGroup(forYear: _year) ? _group.title : "Aucun dossier disponible"
             
             if _modifyInvoice == false {
                 ui_descriptionTextField.becomeFirstResponder()
                 ui_monthSelectionTextField.text = Date().currentMonth
                 ui_yearSelectionTextField.text = String(_year.year)
-                ui_groupSelectionTextField.text = _group.title
+                ui_groupSelectionTextField.text = groupTitle
                 ui_categorySelectionTextField.text = "Non-classée"
             } else {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
-                ui_groupSelectionTextField.text = _group.title
+                ui_groupSelectionTextField.text = groupTitle
                 ui_monthSelectionTextField.text = _month.month
                 ui_categorySelectionTextField.text = _invoice.categoryObject?.title
                 ui_amountTextField.text = String(describing: _invoice.amount)
@@ -175,7 +179,7 @@ class AddNewInvoiceViewController: UIViewController {
                 }
                 ui_addOrModifyButton.setTitle("Modifier", for: .normal)
             }
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            ui_amountTextField.convertToCurrencyNumber()
             
             // Set the background color of evry uiPickerVIew to white
             _pickerView.backgroundColor = .white
@@ -261,7 +265,7 @@ class AddNewInvoiceViewController: UIViewController {
             if ui_amountTextField.text == "" {
                 ui_amountTextField.text = "0"
             }
-            _manager.convertToCurrencyNumber(forTextField: ui_amountTextField)
+            ui_amountTextField.convertToCurrencyNumber()
         }
         
         if _activeTextField == ui_yearSelectionTextField {
@@ -360,6 +364,7 @@ class AddNewInvoiceViewController: UIViewController {
             if _isNewGroup {
                 if !_year.groupExist(forGroupName: textFieldValue) {
                     ui_groupSelectionTextField.text = _year.addGroup(withTitle: textFieldValue, false)?.title
+                    ui_groupSelectionTextField.isEnabled = true
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
                 } else {
@@ -402,9 +407,8 @@ class AddNewInvoiceViewController: UIViewController {
             let monthString = ui_monthSelectionTextField.text,
             let groupName = ui_groupSelectionTextField.text,
             let group = _year.getGroup(forName: groupName),
-            let amount = ui_amountTextField,
-            let convertedAmount = _manager.convertFromCurrencyNumber(forTextField: amount) {
-            
+            let convertedAmount = ui_amountTextField.convertFromCurrencyNumber() {
+        
                 if categoryName != "" {
                     categoryObject = _manager.getCategory(forName: categoryName)
                 }
@@ -555,11 +559,9 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
     }
 }
 
-extension AddNewInvoiceViewController: UINavigationControllerDelegate {
-    
-}
+extension AddNewInvoiceViewController: UINavigationControllerDelegate {}
 
-//TODO: textField extension
+//TODO: textField extension limited to this file
 extension UITextField {
     func underlined(){
         let border = CALayer()

@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        print("didFinishLaunchingWithOptions")
+//        print("didFinishLaunchingWithOptions")
         
         //TODO: - Add crashLytics
         Fabric.with([Crashlytics.self])
@@ -40,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //TODO:  Set UserDefaults initialisation values
         Manager.setIsFirstLoad(true)
-        UserDefaults.standard.set(false, forKey: "savedApplicationState")
-        UserDefaults.standard.set(false, forKey: "fromOtherApp")
+        UserDefaults.standard.set(false, forKey: UserDefaults.keys.savedApplicationState.rawValue)
+        UserDefaults.standard.set(false, forKey: UserDefaults.keys.fromOtherApp.rawValue)
         
         // TODO: buglife configuration
         Buglife.shared().start(withEmail: Settings().emailAdress)
@@ -63,7 +63,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
             displayCreateAccountVC(withPassword: false)
-        } else if database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
+        } else if UserDefaults.standard.string(forKey: UserDefaults.keys.userEmail.rawValue) == nil {
+            // FIXME: Obsolete. To Delete
+            //            database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
+            
             displayCreateAccountVC(withPassword: true)
         }
         
@@ -74,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
 //        print("Should save data")
         coder.encode(Settings().APP_VERSION_NUMBER, forKey: APP_VERSION)
-        UserDefaults.standard.set(true, forKey: "savedApplicationState")
+        UserDefaults.standard.set(true, forKey: UserDefaults.keys.savedApplicationState.rawValue)
         return true
     }
     
@@ -108,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         
-        print("WillEnterForground")
+//        print("WillEnterForground")
         displayLoginScreen(application)
     }
 
@@ -122,10 +125,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print("Arrive from an other app")
-        UserDefaults.standard.set(true, forKey: "fromOtherApp")
-        UserDefaults.standard.set(url, forKey: "fileFromOtherAppUrl")
-        print("URL: \(url)")
+//        print("Arrive from an other app")
+        UserDefaults.standard.set(true, forKey: UserDefaults.keys.fromOtherApp.rawValue)
+        UserDefaults.standard.set(url, forKey: UserDefaults.keys.fileFromOtherAppUrl.rawValue)
+//        print("URL: \(url)")
         return true
     }
     

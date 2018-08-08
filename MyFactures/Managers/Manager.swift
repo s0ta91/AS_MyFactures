@@ -160,7 +160,8 @@ class Manager {
     // MARK: - User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
-        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+//        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+        UserDefaults.standard.set(email, forKey: UserDefaults.keys.userEmail.rawValue)
     }
     
     func getUserEmail() -> String? {
@@ -311,45 +312,45 @@ class Manager {
     
     
     // MARK: - Other functions
-    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
-        let textFieldToConvert = textField
-        let labelToConvert = label
-        
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-        currencyFormatter.locale = NSLocale.autoupdatingCurrent
-//        currencyFormatter.locale = Locale(identifier: "fr-FR")
-        currencyFormatter.decimalSeparator = "."
-        
-        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                textFieldToConvert?.text = numberToCurrencyType
-            }
-        }else if let amountString = labelToConvert?.text,
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                labelToConvert?.text = numberToCurrencyType
-            }
-        }
-    }
+//    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
+//        let textFieldToConvert = textField
+//        let labelToConvert = label
+//
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.usesGroupingSeparator = true
+//        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+//        currencyFormatter.locale = NSLocale.autoupdatingCurrent
+////        currencyFormatter.locale = Locale(identifier: "fr-FR")
+//        currencyFormatter.decimalSeparator = "."
+//
+//        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                textFieldToConvert?.text = numberToCurrencyType
+//            }
+//        }else if let amountString = labelToConvert?.text,
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                labelToConvert?.text = numberToCurrencyType
+//            }
+//        }
+//    }
     
-    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
-        let convertedResult: Decimal?
-        let textFieldToConvert = textField
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
-        if let amountString = textFieldToConvert.text,
-            let currencyToNumber = currencyFormatter.number(from: amountString) {
-            convertedResult = currencyToNumber.decimalValue
-        }else {
-            convertedResult = nil
-        }
-        return convertedResult
-    }
+//    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
+//        let convertedResult: Decimal?
+//        let textFieldToConvert = textField
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.numberStyle = .currency
+//        if let amountString = textFieldToConvert.text,
+//            let currencyToNumber = currencyFormatter.number(from: amountString) {
+//            convertedResult = currencyToNumber.decimalValue
+//        }else {
+//            convertedResult = nil
+//        }
+//        return convertedResult
+//    }
     
     func setButtonLayer (_ button: UIButton) {
         button.layer.cornerRadius = 17
@@ -366,27 +367,8 @@ class Manager {
         layout?.sectionHeadersPinToVisibleBounds = true
     }
     
-    func drawPDFfromURL (url: URL) -> UIImage? {
-        guard let document = CGPDFDocument(url as CFURL) else { print("error document")
-            return nil }
-        guard let page = document.page(at: 1) else { print("error page")
-            return nil }
-        
-        let pageRect = page.getBoxRect(.mediaBox)
-        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-        let img = renderer.image { ctx in
-            UIColor.white.set()
-            ctx.fill(pageRect)
-            
-            ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-            ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
-            
-            ctx.cgContext.drawPDFPage(page)
-        }
-        
-        return img
-    }
-
+    //FIXME: TO DELETE
+    // Has been moved to SaveManager.swift
     func getImageFromURL (url: URL) -> UIImage? {
         let image: UIImage?
         if let data = NSData(contentsOf: url) {

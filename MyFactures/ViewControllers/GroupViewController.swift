@@ -228,7 +228,7 @@ extension GroupViewController: UICollectionViewDataSource {
         let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
         if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
-            cell_group.setValues(_manager, group, fontSize: collectionViewFontSize)
+            cell_group.setValues(group, fontSize: collectionViewFontSize)
         }
 
         cell_group.layer.borderWidth = 1.0
