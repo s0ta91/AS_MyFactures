@@ -23,5 +23,4 @@ class SelectYearTableViewCell: UITableViewCell {
         ui_yearLabel.text = year
         ui_numberOfGroupLabel.text = numberOfGroup
     }
-
 }

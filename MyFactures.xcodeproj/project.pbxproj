@@ -14,6 +14,7 @@
 		1D16EA0120AD8F0C00A8A248 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */; };
 		1D370E18206A81E1005583BB /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E17206A81E1005583BB /* SettingsViewController.swift */; };
 		1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */; };
+		1D3F9B77211B2AD0008C44CF /* AddNewInvoiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D3F9B76211B2AD0008C44CF /* AddNewInvoiceViewController.storyboard */; };
 		1D3FC04720EE281F00E9B5C5 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3FC04620EE281F00E9B5C5 /* UIButton.swift */; };
 		1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */; };
 		1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */; };
@@ -26,11 +27,22 @@
 		1D4B079420233FF4002F745C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079320233FF4002F745C /* Assets.xcassets */; };
 		1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D4B079520233FF4002F745C /* LaunchScreen.storyboard */; };
 		1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4FDFE12084743400208108 /* AboutViewController.swift */; };
+		1D536229211B21FE008EA981 /* LoginViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D536228211B21FE008EA981 /* LoginViewController.storyboard */; };
+		1D53622C211B22A9008EA981 /* VerifyEmailPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D53622B211B22A9008EA981 /* VerifyEmailPasswordViewController.storyboard */; };
+		1D53622F211B2316008EA981 /* CreateAccountViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D53622E211B2316008EA981 /* CreateAccountViewController.storyboard */; };
+		1D536232211B246A008EA981 /* SelectYearViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D536231211B246A008EA981 /* SelectYearViewController.storyboard */; };
+		1D536237211B281A008EA981 /* SettingsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D536236211B281A008EA981 /* SettingsViewController.storyboard */; };
+		1D53623F211B2947008EA981 /* AboutViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D53623E211B2947008EA981 /* AboutViewController.storyboard */; };
+		1D536241211B296A008EA981 /* PDFViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D536240211B2969008EA981 /* PDFViewController.storyboard */; };
+		1D536243211B29A6008EA981 /* ResetPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D536242211B29A6008EA981 /* ResetPasswordViewController.storyboard */; };
 		1D5B510921020AEA003BC535 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */; };
 		1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */; };
 		1D6220F320235D1300D25828 /* Abuget.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1D6220F220235D1300D25828 /* Abuget.ttf */; };
 		1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */; };
 		1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */; };
+		1DAAF325211B2B59002F8649 /* ManageCategoryTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAAF324211B2B59002F8649 /* ManageCategoryTableViewController.storyboard */; };
+		1DAAF327211B2B98002F8649 /* GroupViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAAF326211B2B98002F8649 /* GroupViewController.storyboard */; };
+		1DAAF329211B2D0E002F8649 /* InvoiceCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DAAF328211B2D0E002F8649 /* InvoiceCollectionViewController.storyboard */; };
 		1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */; };
 		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
 		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
@@ -87,6 +99,7 @@
 		1D16EA0020AD8F0C00A8A248 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1D370E17206A81E1005583BB /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		1D3F9B76211B2AD0008C44CF /* AddNewInvoiceViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddNewInvoiceViewController.storyboard; sourceTree = "<group>"; };
 		1D3FC04620EE281F00E9B5C5 /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearViewController.swift; sourceTree = "<group>"; };
 		1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -105,11 +118,22 @@
 		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		1D536228211B21FE008EA981 /* LoginViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LoginViewController.storyboard; sourceTree = "<group>"; };
+		1D53622B211B22A9008EA981 /* VerifyEmailPasswordViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VerifyEmailPasswordViewController.storyboard; sourceTree = "<group>"; };
+		1D53622E211B2316008EA981 /* CreateAccountViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateAccountViewController.storyboard; sourceTree = "<group>"; };
+		1D536231211B246A008EA981 /* SelectYearViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SelectYearViewController.storyboard; sourceTree = "<group>"; };
+		1D536236211B281A008EA981 /* SettingsViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SettingsViewController.storyboard; sourceTree = "<group>"; };
+		1D53623E211B2947008EA981 /* AboutViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AboutViewController.storyboard; sourceTree = "<group>"; };
+		1D536240211B2969008EA981 /* PDFViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PDFViewController.storyboard; sourceTree = "<group>"; };
+		1D536242211B29A6008EA981 /* ResetPasswordViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ResetPasswordViewController.storyboard; sourceTree = "<group>"; };
 		1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		1D5F069D202DF50100FE2105 /* SelectYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectYearTableViewCell.swift; sourceTree = "<group>"; };
 		1D6220F220235D1300D25828 /* Abuget.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Abuget.ttf; sourceTree = "<group>"; };
 		1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewInvoiceViewController.swift; sourceTree = "<group>"; };
 		1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordViewController.swift; sourceTree = "<group>"; };
+		1DAAF324211B2B59002F8649 /* ManageCategoryTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ManageCategoryTableViewController.storyboard; sourceTree = "<group>"; };
+		1DAAF326211B2B98002F8649 /* GroupViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupViewController.storyboard; sourceTree = "<group>"; };
+		1DAAF328211B2D0E002F8649 /* InvoiceCollectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InvoiceCollectionViewController.storyboard; sourceTree = "<group>"; };
 		1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
 		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
@@ -272,20 +296,128 @@
 		1D4B07BA20234026002F745C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
-				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
-				1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */,
-				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
-				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
-				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
-				1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */,
-				1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */,
-				1D00D4CF2044169F00759E9F /* PDFViewController.swift */,
-				1D370E17206A81E1005583BB /* SettingsViewController.swift */,
-				1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */,
-				1D4FDFE12084743400208108 /* AboutViewController.swift */,
+				1D536227211B21E9008EA981 /* LoginViewController */,
+				1D53622D211B2308008EA981 /* CreateAccountViewController */,
+				1D53622A211B2298008EA981 /* VerifyEmailPasswordViewController */,
+				1D536230211B2449008EA981 /* SelectYearViewController */,
+				1D53623B211B28AA008EA981 /* ManagecategoryTableViewController */,
+				1D536221211B2095008EA981 /* GroupViewController */,
+				1D53623A211B2891008EA981 /* InvoiceCollectionViewController */,
+				1D536239211B2871008EA981 /* AddNewInvoiceViewController */,
+				1D53623C211B28C9008EA981 /* PDFViewConrtoller */,
+				1D536238211B2858008EA981 /* AboutViewController */,
+				1D536233211B24B8008EA981 /* SettingsViewController */,
+				1D53623D211B28E8008EA981 /* ResetPasswordViewController */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		1D536221211B2095008EA981 /* GroupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1DAAF326211B2B98002F8649 /* GroupViewController.storyboard */,
+				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
+			);
+			path = GroupViewController;
+			sourceTree = "<group>";
+		};
+		1D536227211B21E9008EA981 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D536228211B21FE008EA981 /* LoginViewController.storyboard */,
+				1D4B078E20233FF4002F745C /* LoginViewController.swift */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		1D53622A211B2298008EA981 /* VerifyEmailPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D53622B211B22A9008EA981 /* VerifyEmailPasswordViewController.storyboard */,
+				1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */,
+			);
+			path = VerifyEmailPasswordViewController;
+			sourceTree = "<group>";
+		};
+		1D53622D211B2308008EA981 /* CreateAccountViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D53622E211B2316008EA981 /* CreateAccountViewController.storyboard */,
+				1D4809CB2023AB0200068094 /* CreateAccountViewController.swift */,
+			);
+			path = CreateAccountViewController;
+			sourceTree = "<group>";
+		};
+		1D536230211B2449008EA981 /* SelectYearViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D536231211B246A008EA981 /* SelectYearViewController.storyboard */,
+				1D42C4A4202DB5BA0033BEF1 /* SelectYearViewController.swift */,
+			);
+			path = SelectYearViewController;
+			sourceTree = "<group>";
+		};
+		1D536233211B24B8008EA981 /* SettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D536236211B281A008EA981 /* SettingsViewController.storyboard */,
+				1D370E17206A81E1005583BB /* SettingsViewController.swift */,
+			);
+			path = SettingsViewController;
+			sourceTree = "<group>";
+		};
+		1D536238211B2858008EA981 /* AboutViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D53623E211B2947008EA981 /* AboutViewController.storyboard */,
+				1D4FDFE12084743400208108 /* AboutViewController.swift */,
+			);
+			path = AboutViewController;
+			sourceTree = "<group>";
+		};
+		1D536239211B2871008EA981 /* AddNewInvoiceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D3F9B76211B2AD0008C44CF /* AddNewInvoiceViewController.storyboard */,
+				1D6D531D20360152004160C4 /* AddNewInvoiceViewController.swift */,
+			);
+			path = AddNewInvoiceViewController;
+			sourceTree = "<group>";
+		};
+		1D53623A211B2891008EA981 /* InvoiceCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1DAAF328211B2D0E002F8649 /* InvoiceCollectionViewController.storyboard */,
+				1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */,
+			);
+			path = InvoiceCollectionViewController;
+			sourceTree = "<group>";
+		};
+		1D53623B211B28AA008EA981 /* ManagecategoryTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1DAAF324211B2B59002F8649 /* ManageCategoryTableViewController.storyboard */,
+				1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */,
+			);
+			path = ManagecategoryTableViewController;
+			sourceTree = "<group>";
+		};
+		1D53623C211B28C9008EA981 /* PDFViewConrtoller */ = {
+			isa = PBXGroup;
+			children = (
+				1D536240211B2969008EA981 /* PDFViewController.storyboard */,
+				1D00D4CF2044169F00759E9F /* PDFViewController.swift */,
+			);
+			path = PDFViewConrtoller;
+			sourceTree = "<group>";
+		};
+		1D53623D211B28E8008EA981 /* ResetPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1D536242211B29A6008EA981 /* ResetPasswordViewController.storyboard */,
+				1D370E19206A87ED005583BB /* ResetPasswordViewController.swift */,
+			);
+			path = ResetPasswordViewController;
 			sourceTree = "<group>";
 		};
 		1D5F069C202DF4CF00FE2105 /* CustomTableViewCell */ = {
@@ -465,8 +597,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D4B079720233FF4002F745C /* LaunchScreen.storyboard in Resources */,
+				1DAAF325211B2B59002F8649 /* ManageCategoryTableViewController.storyboard in Resources */,
 				1D4B079420233FF4002F745C /* Assets.xcassets in Resources */,
+				1DAAF327211B2B98002F8649 /* GroupViewController.storyboard in Resources */,
+				1D536237211B281A008EA981 /* SettingsViewController.storyboard in Resources */,
+				1D53623F211B2947008EA981 /* AboutViewController.storyboard in Resources */,
+				1D536241211B296A008EA981 /* PDFViewController.storyboard in Resources */,
+				1D536232211B246A008EA981 /* SelectYearViewController.storyboard in Resources */,
+				1D3F9B77211B2AD0008C44CF /* AddNewInvoiceViewController.storyboard in Resources */,
+				1DAAF329211B2D0E002F8649 /* InvoiceCollectionViewController.storyboard in Resources */,
+				1D536243211B29A6008EA981 /* ResetPasswordViewController.storyboard in Resources */,
+				1D53622F211B2316008EA981 /* CreateAccountViewController.storyboard in Resources */,
+				1D536229211B21FE008EA981 /* LoginViewController.storyboard in Resources */,
 				1D6220F320235D1300D25828 /* Abuget.ttf in Resources */,
+				1D53622C211B22A9008EA981 /* VerifyEmailPasswordViewController.storyboard in Resources */,
 				1D4B079220233FF4002F745C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let APP_VERSION = "MyAppVersion"
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -135,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - My private functions
     //TODO: Display the create account VC
     private func displayCreateAccountVC (withPassword: Bool) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "CreateAccountViewController", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController
         createAccountVC.isPasswordSet = withPassword
         window?.rootViewController = createAccountVC
