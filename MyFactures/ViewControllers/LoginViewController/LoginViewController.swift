@@ -108,9 +108,16 @@ class LoginViewController: UIViewController {
         Manager.dismissVC(thisViewController: self, withTransition: .crossDissolve, animated: true)
     }
     
-    func displayAddNewInvoideVC() {
-        if let addNewInvoideVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
-            present(addNewInvoideVC, animated: false, completion: nil)
+    func displayAddNewInvoiceVC() {
+        let addNewInvoiceStoryboard = UIStoryboard(name: "AddNewInvoiceViewController", bundle: .main)
+        if let addNewInvoiceVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
+            addNewInvoiceVC._ptManager = DbManager().getDb()
+            addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
+            addNewInvoiceVC._fromOtherApp = true
+            addNewInvoiceVC._ptLoginVC = self
+            addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: UserDefaults.keys.fileFromOtherAppUrl.rawValue)
+            addNewInvoiceVC.modalTransitionStyle = .crossDissolve
+            present(addNewInvoiceVC, animated: false, completion: nil)
         }
     }
     
@@ -130,14 +137,7 @@ class LoginViewController: UIViewController {
             UserDefaults.standard.set(false, forKey: UserDefaults.keys.savedApplicationState.rawValue)
             if fromOtherApp {
                 UserDefaults.standard.set(false, forKey: UserDefaults.keys.fromOtherApp.rawValue)
-                let addNewInvoiceVC = self.storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as! AddNewInvoiceViewController
-                addNewInvoiceVC._ptManager = DbManager().getDb()
-                addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
-                addNewInvoiceVC._fromOtherApp = true
-                addNewInvoiceVC._ptLoginVC = self
-                addNewInvoiceVC._ptPickedDocument = UserDefaults.standard.url(forKey: UserDefaults.keys.fileFromOtherAppUrl.rawValue)
-                addNewInvoiceVC.modalTransitionStyle = .crossDissolve
-                self.present(addNewInvoiceVC, animated: true, completion: nil)
+                self.displayAddNewInvoiceVC()
             } else {
                 self.displayGroupTableViewController()
             }

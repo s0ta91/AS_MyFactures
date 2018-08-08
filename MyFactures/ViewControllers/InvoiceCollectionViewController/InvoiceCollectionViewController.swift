@@ -21,6 +21,9 @@ class InvoiceCollectionViewController: UIViewController {
     @IBOutlet weak var ui_searchBarHeightConstraint: NSLayoutConstraint!
     private var ui_searchButton: UIBarButtonItem!
     
+    let addNewInvoiceStoryboard = UIStoryboard(name: "AddNewInvoiceViewController", bundle: .main)
+    let PDFStoryboard = UIStoryboard(name: "PDFViewController", bundle: .main)
+    
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
     var _ptCurrentGroup: Group?
@@ -210,7 +213,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     //TODO: - Create the function to modify an invoice
     func modify(invoice: InvoiceCollectionViewCell) {
-        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
+        if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController,
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
                 let monthIndex = _monthToShow[cell_indexPath.section]
@@ -239,7 +242,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
-        if let destinationVC = storyboard?.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
+        if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
@@ -355,8 +358,8 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
         guard let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) else {return print("No cell found")}
         let monthIndex = _monthToShow[indexPath.section]
-        let storyboard = UIStoryboard(name: "PDFViewController", bundle: .main)
-        if let destinationVC = storyboard.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
+        
+        if let destinationVC = PDFStoryboard.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
             let month = getCurrentMonth(atIndex: monthIndex),
             let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
             let invoiceIdentifier = selectedInvoice.identifier,
