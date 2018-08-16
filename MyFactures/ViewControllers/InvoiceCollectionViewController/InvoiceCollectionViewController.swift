@@ -57,6 +57,7 @@ class InvoiceCollectionViewController: UIViewController {
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.prefersLargeTitles = false
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
         invoiceCollectionView.emptyDataSetSource = self
