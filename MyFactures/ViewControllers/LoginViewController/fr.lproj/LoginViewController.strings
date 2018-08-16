@@ -1,0 +1,12 @@
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "0Df-Cs-8WS"; */
+"0Df-Cs-8WS.placeholder" = "Mot de passe";
+
+/* Class = "UIButton"; normalTitle = "Recover password"; ObjectID = "BSc-bF-X22"; */
+"BSc-bF-X22.normalTitle" = "Mot de passe perdu";
+
+/* Class = "UITextField"; text = "MyFactures"; ObjectID = "RZg-Pt-dGW"; */
+"RZg-Pt-dGW.text" = "MyFactures";
+
+/* Class = "UIButton"; normalTitle = "Log In"; ObjectID = "slb-lc-DB2"; */
+"slb-lc-DB2.normalTitle" = "Connexion";
+

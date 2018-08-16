@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About View Controller-->
+        <scene sceneID="eq3-rN-DDq">
+            <objects>
+                <viewController storyboardIdentifier="UIViewController-K4H-03-BN2" id="K4H-03-BN2" customClass="AboutViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="k9H-T6-iZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o30-7s-hxA">
+                                <rect key="frame" x="153.5" y="28" width="68.5" height="33"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App icon designed by IconTrack from the Noun Project" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-u6-WmP">
+                                <rect key="frame" x="84" y="90" width="275" height="46.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppIcon-60x60" translatesAutoresizingMaskIntoConstraints="NO" id="sfd-WS-hJc">
+                                <rect key="frame" x="16" y="81" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="o3F-ad-KnM"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="o30-7s-hxA" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="8" id="5ps-Gl-Thb"/>
+                            <constraint firstItem="IsE-u6-WmP" firstAttribute="leading" secondItem="sfd-WS-hJc" secondAttribute="trailing" constant="8" id="Hrr-fX-5Uk"/>
+                            <constraint firstItem="IsE-u6-WmP" firstAttribute="leading" secondItem="sfd-WS-hJc" secondAttribute="trailing" constant="8" id="PmV-Ev-WiO"/>
+                            <constraint firstItem="sfd-WS-hJc" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="61" id="W8w-H4-f0M"/>
+                            <constraint firstItem="IsE-u6-WmP" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="70" id="axV-cy-hfd"/>
+                            <constraint firstItem="o30-7s-hxA" firstAttribute="centerX" secondItem="k9H-T6-iZZ" secondAttribute="centerX" id="eax-H7-rFQ"/>
+                            <constraint firstItem="sfd-WS-hJc" firstAttribute="leading" secondItem="j1q-e7-fTq" secondAttribute="leading" constant="16" id="x1d-VD-BzT"/>
+                            <constraint firstAttribute="trailing" secondItem="IsE-u6-WmP" secondAttribute="trailing" constant="16" id="yQl-xI-jyQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j1q-e7-fTq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k4N-Tp-b4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2013" y="-1877"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="AppIcon-60x60" width="60" height="60"/>
+    </resources>
+</document>

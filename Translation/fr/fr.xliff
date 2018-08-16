@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="MyFactures/en.lproj/InfoPlist.strings" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleName">
+        <source>$(PRODUCT_NAME)</source>
+        <note>Bundle name</note><target></target>
+      </trans-unit>
+      <trans-unit id="NSCameraUsageDescription">
+        <source>Allow MyFactures to access your camera</source>
+        <note>Privacy - Camera Usage Description</note><target>Autoriser MyFactures à accéder à votre appareil photo</target>
+      </trans-unit>
+      <trans-unit id="NSFaceIDUsageDescription">
+        <source>Allow access to FaceID so that MyFactures can authenticate you by detecting your face.</source>
+        <note>Privacy - Face ID Usage Description</note><target>Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.</target>
+      </trans-unit>
+      <trans-unit id="NSPhotoLibraryAddUsageDescription">
+        <source>Allow MyFactures to access your photo library</source>
+        <note>Privacy - Photo Library Additions Usage Description</note><target>Autoriser MyFactures à accéder à votre bibliothèque photo</target>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/en.lproj/Localizable.strings" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="* Your email address will be stored localy. In no case it will be shared or known by thrid parties.">
+        <source>* Your email address will be stored localy. In no case it will be shared or known by thrid parties.</source>
+        <target>* Votre adresse email sera stockée localement. En aucun cas elle ne sera partagée, ni connue de tierces personnes.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add">
+        <source>Add</source>
+        <target>Créer</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="April">
+        <source>April</source>
+        <target>Avril</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Associated documents will not be deleted">
+        <source>Associated documents will not be deleted</source>
+        <target>Les documents associées ne seront pas supprimés</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="August">
+        <source>August</source>
+        <target>Août</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Camera">
+        <source>Camera</source>
+        <target>Prendre une photo</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Cancel">
+        <source>Cancel</source>
+        <target>Annuler</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Confirm">
+        <source>Confirm</source>
+        <target>Valider</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Current password is wrong. Please try again">
+        <source>Current password is wrong. Please try again</source>
+        <target>Le mot de passe actuel n'est pas correct. Veuillez réessayer.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="December">
+        <source>December</source>
+        <target>Décembre</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete">
+        <source>Delete</source>
+        <target>Supprimer</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete folder">
+        <source>Delete folder</source>
+        <target>Supprimer dossier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Deletion of this folder will errase all associated documents definitively.">
+        <source>Deletion of this folder will errase all associated documents definitively.</source>
+        <target>La suppression de ce dossier entrainera la suppression de toutes les factures associées sans possibilité de les récupérer. Souhaitez-vous continuer ?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Document">
+        <source>Document</source>
+        <target>Choisir un document</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit">
+        <source>Edit</source>
+        <target>Modifier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Edit folder name">
+        <source>Edit folder name</source>
+        <target>Modifier le nom du dossier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error">
+        <source>Error</source>
+        <target>Erreur</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error !">
+        <source>Error !</source>
+        <target>Erreur !</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Error! - No password found in keychain">
+        <source>Error! - No password found in keychain</source>
+        <target>Erreur! - Aucun mot de passe trouver dans la keychain</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="February">
+        <source>February</source>
+        <target>Février</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Fields can not be empty">
+        <source>Fields can not be empty</source>
+        <target>Les champs ne peuvent être vides.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="January">
+        <source>January</source>
+        <target>Janvier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="July">
+        <source>July</source>
+        <target>Juillet</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="June">
+        <source>June</source>
+        <target>Juin</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="March">
+        <source>March</source>
+        <target>Mars</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="May">
+        <source>May</source>
+        <target>Mai</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No file assiciated to this document">
+        <source>No file assiciated to this document</source>
+        <target>Aucun fichier n'est associé à ce document</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="No folder available">
+        <source>No folder available</source>
+        <target>Aucun dossier disponible</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="November">
+        <source>November</source>
+        <target>Novembre</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="October">
+        <source>October</source>
+        <target>Octobre</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Photo library">
+        <source>Photo library</source>
+        <target>Choisir une photo</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please check your emails and enter the confirmation code :">
+        <source>Please check your emails and enter the confirmation code :</source>
+        <target>Veuillez entrer le code de confirmation reçu par email :</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Please create a folder">
+        <source>Please create a folder</source>
+        <target>Veuillez créer un dossier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="September">
+        <source>September</source>
+        <target>Septembre</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Share">
+        <source>Share</source>
+        <target>Partager</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tap the 'New document' icon to create a new document">
+        <source>Tap the 'New document' icon to create a new document</source>
+        <target>Tapez sur l'icone 'Nouveau document'</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Tap the 'New folder' icon bellow to begin">
+        <source>Tap the 'New folder' icon bellow to begin</source>
+        <target>Tapez sur l'icone 'Nouveau dossier pour commencer'</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Thank you !">
+        <source>Thank you !</source>
+        <target>Merci !</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="There is an issue with one of the fields">
+        <source>There is an issue with one of the fields</source>
+        <target>Il y a un problème avec l'un des champs</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This category already exists">
+        <source>This category already exists</source>
+        <target>Cette catégorie existe déjà</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="This folder already exists">
+        <source>This folder already exists</source>
+        <target>Ce dossier existe déjà</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Unknown">
+        <source>Unknown</source>
+        <target>Non-classée</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Warning">
+        <source>Warning</source>
+        <target>Attention</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Would you like to delete this category ?">
+        <source>Would you like to delete this category ?</source>
+        <target>Voulez vous vraiment supprimer cette catégorie ?</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Your email address has been confirmed">
+        <source>Your email address has been confirmed</source>
+        <target>Votre addresse mail est confirmée</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Your password has been changed">
+        <source>Your password has been changed</source>
+        <target>Votre mot de passe a été changé</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="folder">
+        <source>folder</source>
+        <target>dossier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="folders">
+        <source>folders</source>
+        <target>dossiers</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/AboutViewController/Base.lproj/AboutViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="IsE-u6-WmP.text">
+        <source>App icon designed by IconTrack from the Noun Project</source>
+        <target>App icon designed by IconTrack from the Noun Project</target>
+        <note>Class = "UILabel"; text = "App icon designed by IconTrack from the Noun Project"; ObjectID = "IsE-u6-WmP";</note>
+      </trans-unit>
+      <trans-unit id="o30-7s-hxA.text">
+        <source>About</source>
+        <target>A propos</target>
+        <note>Class = "UILabel"; text = "About"; ObjectID = "o30-7s-hxA";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/AddNewInvoiceViewController/Base.lproj/AddNewInvoiceViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="1ZH-NR-pBV.text">
+        <source>Description</source>
+        <target>Description</target>
+        <note>Class = "UILabel"; text = "Description"; ObjectID = "1ZH-NR-pBV";</note>
+      </trans-unit>
+      <trans-unit id="6jO-05-mdG.text">
+        <source>Month</source>
+        <target>Mois</target>
+        <note>Class = "UILabel"; text = "Month"; ObjectID = "6jO-05-mdG";</note>
+      </trans-unit>
+      <trans-unit id="Cwp-ht-Ewx.normalTitle">
+        <source>Add</source>
+        <target>Ajouter</target>
+        <note>Class = "UIButton"; normalTitle = "Add"; ObjectID = "Cwp-ht-Ewx";</note>
+      </trans-unit>
+      <trans-unit id="DFt-jV-uN3.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "DFt-jV-uN3";</note>
+      </trans-unit>
+      <trans-unit id="M8M-XB-cr7.normalTitle">
+        <source>Done</source>
+        <target>Terminer</target>
+        <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "M8M-XB-cr7";</note>
+      </trans-unit>
+      <trans-unit id="NNm-sl-e8X.normalTitle">
+        <source>Add</source>
+        <target>Créer</target>
+        <note>Class = "UIButton"; normalTitle = "Add"; ObjectID = "NNm-sl-e8X";</note>
+      </trans-unit>
+      <trans-unit id="OIm-nc-13H.text">
+        <source>Document added</source>
+        <target>Document Ajouté</target>
+        <note>Class = "UILabel"; text = "Document added"; ObjectID = "OIm-nc-13H";</note>
+      </trans-unit>
+      <trans-unit id="Sh1-Vj-aLb.placeholder">
+        <source>Category name</source>
+        <target>Nom de la catégorie ...</target>
+        <note>Class = "UITextField"; placeholder = "Category name"; ObjectID = "Sh1-Vj-aLb";</note>
+      </trans-unit>
+      <trans-unit id="WLZ-2n-TCQ.text">
+        <source>Amount</source>
+        <target>Montant</target>
+        <note>Class = "UILabel"; text = "Amount"; ObjectID = "WLZ-2n-TCQ";</note>
+      </trans-unit>
+      <trans-unit id="Yh9-1a-Erf.text">
+        <source>0.00</source>
+        <target>0.00</target>
+        <note>Class = "UITextField"; text = "0.00"; ObjectID = "Yh9-1a-Erf";</note>
+      </trans-unit>
+      <trans-unit id="a6X-EZ-nrs.normalTitle">
+        <source>Delete</source>
+        <target>Supprimer</target>
+        <note>Class = "UIButton"; normalTitle = "Delete"; ObjectID = "a6X-EZ-nrs";</note>
+      </trans-unit>
+      <trans-unit id="ehC-7D-6wp.normalTitle">
+        <source>Cancel</source>
+        <target>Annuler</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ehC-7D-6wp";</note>
+      </trans-unit>
+      <trans-unit id="hIn-ia-eGm.text">
+        <source>Category</source>
+        <target>Catégorie</target>
+        <note>Class = "UILabel"; text = "Category"; ObjectID = "hIn-ia-eGm";</note>
+      </trans-unit>
+      <trans-unit id="hgq-cl-JvN.text">
+        <source>Add document</source>
+        <target>Ajouter un document</target>
+        <note>Class = "UILabel"; text = "Add document"; ObjectID = "hgq-cl-JvN";</note>
+      </trans-unit>
+      <trans-unit id="p83-jd-i6d.text">
+        <source>Year</source>
+        <target>Année</target>
+        <note>Class = "UILabel"; text = "Year"; ObjectID = "p83-jd-i6d";</note>
+      </trans-unit>
+      <trans-unit id="pUU-ka-z15.placeholder">
+        <source>Select a category (Optionnal)</source>
+        <target>Sélectionner une catégorie (Optionnel)</target>
+        <note>Class = "UITextField"; placeholder = "Select a category (Optionnal)"; ObjectID = "pUU-ka-z15";</note>
+      </trans-unit>
+      <trans-unit id="s3T-LL-EGX.title">
+        <source>Ajouter une facture</source>
+        <target>Ajouter une facture</target>
+        <note>Class = "UINavigationItem"; title = "Ajouter une facture"; ObjectID = "s3T-LL-EGX";</note>
+      </trans-unit>
+      <trans-unit id="wZq-nw-jpR.text">
+        <source>Folder</source>
+        <target>Dossier</target>
+        <note>Class = "UILabel"; text = "Folder"; ObjectID = "wZq-nw-jpR";</note>
+      </trans-unit>
+      <trans-unit id="xXh-de-DgM.placeholder">
+        <source>Add a description</source>
+        <target>Entrez une description</target>
+        <note>Class = "UITextField"; placeholder = "Add a description"; ObjectID = "xXh-de-DgM";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/CreateAccountViewController/Base.lproj/CreateAccountViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="4Pd-Yz-zyc.normalTitle">
+        <source>Sign Up</source>
+        <target>Créer</target>
+        <note>Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "4Pd-Yz-zyc";</note>
+      </trans-unit>
+      <trans-unit id="WDj-31-kxz.placeholder">
+        <source>Your email address *</source>
+        <target>Votre adresse email *</target>
+        <note>Class = "UITextField"; placeholder = "Your email address *"; ObjectID = "WDj-31-kxz";</note>
+      </trans-unit>
+      <trans-unit id="oUb-vn-rbh.placeholder">
+        <source>Your password</source>
+        <target>Votre mot de passe...</target>
+        <note>Class = "UITextField"; placeholder = "Your password"; ObjectID = "oUb-vn-rbh";</note>
+      </trans-unit>
+      <trans-unit id="y9Z-UM-0vf.text">
+        <source>MyFactures</source>
+        <target>MyFactures</target>
+        <note>Class = "UITextField"; text = "MyFactures"; ObjectID = "y9Z-UM-0vf";</note>
+      </trans-unit>
+      <trans-unit id="zkV-wK-dPd.text">
+        <source>[InformationLabel]</source>
+        <target>[InformationLabel]</target>
+        <note>Class = "UILabel"; text = "[InformationLabel]"; ObjectID = "zkV-wK-dPd";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/GroupViewController/Base.lproj/GroupViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="3wv-sk-5MF.text">
+        <source>5</source>
+        <target>5</target>
+        <note>Class = "UILabel"; text = "5"; ObjectID = "3wv-sk-5MF";</note>
+      </trans-unit>
+      <trans-unit id="932-2I-yon.text">
+        <source>DOCUMENTS</source>
+        <target>DOCUMENTS</target>
+        <note>Class = "UILabel"; text = "DOCUMENTS"; ObjectID = "932-2I-yon";</note>
+      </trans-unit>
+      <trans-unit id="Bta-nK-HT1.text">
+        <source>100000</source>
+        <target>100000</target>
+        <note>Class = "UILabel"; text = "100000"; ObjectID = "Bta-nK-HT1";</note>
+      </trans-unit>
+      <trans-unit id="CbX-l5-1eY.text">
+        <source>Switch year</source>
+        <target>Changer d'année</target>
+        <note>Class = "UILabel"; text = "Switch year"; ObjectID = "CbX-l5-1eY";</note>
+      </trans-unit>
+      <trans-unit id="KGe-hh-p1l.text">
+        <source>New folder</source>
+        <target>Nouveau dossier</target>
+        <note>Class = "UILabel"; text = "New folder"; ObjectID = "KGe-hh-p1l";</note>
+      </trans-unit>
+      <trans-unit id="LwW-La-Xw3.text">
+        <source>Achats en ligne njiznjcdbjinvo</source>
+        <target>Achats en ligne njiznjcdbjinvo</target>
+        <note>Class = "UILabel"; text = "Achats en ligne njiznjcdbjinvo"; ObjectID = "LwW-La-Xw3";</note>
+      </trans-unit>
+      <trans-unit id="R8g-6v-AIg.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "R8g-6v-AIg";</note>
+      </trans-unit>
+      <trans-unit id="Wj2-wx-S0b.title">
+        <source>Folders</source>
+        <target>Dossiers</target>
+        <note>Class = "UINavigationItem"; title = "Folders"; ObjectID = "Wj2-wx-S0b";</note>
+      </trans-unit>
+      <trans-unit id="iJi-0t-gCj.placeholder">
+        <source>Folder name</source>
+        <target>Nom du groupe ...</target>
+        <note>Class = "UITextField"; placeholder = "Folder name"; ObjectID = "iJi-0t-gCj";</note>
+      </trans-unit>
+      <trans-unit id="jPa-qy-NxT.text">
+        <source>TOTAL</source>
+        <target>TOTAL</target>
+        <note>Class = "UILabel"; text = "TOTAL"; ObjectID = "jPa-qy-NxT";</note>
+      </trans-unit>
+      <trans-unit id="mf3-bE-ceb.normalTitle">
+        <source>Cancel</source>
+        <target>Annuler</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mf3-bE-ceb";</note>
+      </trans-unit>
+      <trans-unit id="mo2-w9-xYy.normalTitle">
+        <source>Add</source>
+        <target>Valider</target>
+        <note>Class = "UIButton"; normalTitle = "Add"; ObjectID = "mo2-w9-xYy";</note>
+      </trans-unit>
+      <trans-unit id="xk5-3p-Ucc.normalTitle">
+        <source>...</source>
+        <target>...</target>
+        <note>Class = "UIButton"; normalTitle = "..."; ObjectID = "xk5-3p-Ucc";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/InvoiceCollectionViewController/Base.lproj/InvoiceCollectionViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="6qy-QY-PwY.normalTitle">
+        <source>...</source>
+        <target>...</target>
+        <note>Class = "UIButton"; normalTitle = "..."; ObjectID = "6qy-QY-PwY";</note>
+      </trans-unit>
+      <trans-unit id="8Qz-Br-IMQ.text">
+        <source>Septembre 2018</source>
+        <target>Septembre 2018</target>
+        <note>Class = "UILabel"; text = "Septembre 2018"; ObjectID = "8Qz-Br-IMQ";</note>
+      </trans-unit>
+      <trans-unit id="BTK-14-40r.text">
+        <source>100000 €</source>
+        <target>100000 €</target>
+        <note>Class = "UILabel"; text = "100000 €"; ObjectID = "BTK-14-40r";</note>
+      </trans-unit>
+      <trans-unit id="MMc-2q-GJl.text">
+        <source>Lyonnaise des eaux</source>
+        <target>Lyonnaise des eaux</target>
+        <note>Class = "UILabel"; text = "Lyonnaise des eaux"; ObjectID = "MMc-2q-GJl";</note>
+      </trans-unit>
+      <trans-unit id="Rmd-j5-vtM.text">
+        <source>Categories</source>
+        <target>Catégories</target>
+        <note>Class = "UILabel"; text = "Categories"; ObjectID = "Rmd-j5-vtM";</note>
+      </trans-unit>
+      <trans-unit id="ihm-5W-wYp.text">
+        <source>Aspirateur Dyson v8</source>
+        <target>Aspirateur Dyson v8</target>
+        <note>Class = "UILabel"; text = "Aspirateur Dyson v8"; ObjectID = "ihm-5W-wYp";</note>
+      </trans-unit>
+      <trans-unit id="lg5-Qc-SOH.text">
+        <source>Category:</source>
+        <target>Catégorie:</target>
+        <note>Class = "UILabel"; text = "Category:"; ObjectID = "lg5-Qc-SOH";</note>
+      </trans-unit>
+      <trans-unit id="lyo-Gw-o8M.text">
+        <source>Amount:</source>
+        <target>Montant:</target>
+        <note>Class = "UILabel"; text = "Amount:"; ObjectID = "lyo-Gw-o8M";</note>
+      </trans-unit>
+      <trans-unit id="wuU-DV-mzG.text">
+        <source>New document</source>
+        <target>Nouvelle facture</target>
+        <note>Class = "UILabel"; text = "New document"; ObjectID = "wuU-DV-mzG";</note>
+      </trans-unit>
+      <trans-unit id="yNB-V4-QW0.text">
+        <source>100000.00 €</source>
+        <target>100000.00 €</target>
+        <note>Class = "UILabel"; text = "100000.00 €"; ObjectID = "yNB-V4-QW0";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/LoginViewController/Base.lproj/LoginViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="0Df-Cs-8WS.placeholder">
+        <source>Password</source>
+        <target>Mot de passe</target>
+        <note>Class = "UITextField"; placeholder = "Password"; ObjectID = "0Df-Cs-8WS";</note>
+      </trans-unit>
+      <trans-unit id="BSc-bF-X22.normalTitle">
+        <source>Recover password</source>
+        <target>Mot de passe perdu</target>
+        <note>Class = "UIButton"; normalTitle = "Recover password"; ObjectID = "BSc-bF-X22";</note>
+      </trans-unit>
+      <trans-unit id="RZg-Pt-dGW.text">
+        <source>MyFactures</source>
+        <target>MyFactures</target>
+        <note>Class = "UITextField"; text = "MyFactures"; ObjectID = "RZg-Pt-dGW";</note>
+      </trans-unit>
+      <trans-unit id="slb-lc-DB2.normalTitle">
+        <source>Log In</source>
+        <target>Connexion</target>
+        <note>Class = "UIButton"; normalTitle = "Log In"; ObjectID = "slb-lc-DB2";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/ManagecategoryTableViewController/Base.lproj/ManageCategoryTableViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="Atk-yg-hmA.text">
+        <source>Title</source>
+        <target>Title</target>
+        <note>Class = "UILabel"; text = "Title"; ObjectID = "Atk-yg-hmA";</note>
+      </trans-unit>
+      <trans-unit id="E97-Vo-UpH.placeholder">
+        <source>Category name</source>
+        <target>Nom de la catégorie ...</target>
+        <note>Class = "UITextField"; placeholder = "Category name"; ObjectID = "E97-Vo-UpH";</note>
+      </trans-unit>
+      <trans-unit id="aDC-3A-06C.title">
+        <source>Manage categories</source>
+        <target>Gestion des catégories</target>
+        <note>Class = "UINavigationItem"; title = "Manage categories"; ObjectID = "aDC-3A-06C";</note>
+      </trans-unit>
+      <trans-unit id="egP-Bm-Isw.normalTitle">
+        <source>Cancel</source>
+        <target>Annuler</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "egP-Bm-Isw";</note>
+      </trans-unit>
+      <trans-unit id="leU-qq-Dx2.normalTitle">
+        <source>Edit</source>
+        <target>Modifier</target>
+        <note>Class = "UIButton"; normalTitle = "Edit"; ObjectID = "leU-qq-Dx2";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/ResetPasswordViewController/Base.lproj/ResetPasswordViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="3gq-8b-CoE.text">
+        <source>Old password</source>
+        <target>Ancien mot de passe</target>
+        <note>Class = "UILabel"; text = "Old password"; ObjectID = "3gq-8b-CoE";</note>
+      </trans-unit>
+      <trans-unit id="7Z5-cd-M6K.normalTitle">
+        <source>Confirm</source>
+        <target>Valider</target>
+        <note>Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "7Z5-cd-M6K";</note>
+      </trans-unit>
+      <trans-unit id="41Y-yk-D0Q.placeholder">
+        <source>New password</source>
+        <target>Nouveau mot de passe</target>
+        <note>Class = "UITextField"; placeholder = "New password"; ObjectID = "41Y-yk-D0Q";</note>
+      </trans-unit>
+      <trans-unit id="CXn-d9-2ay.normalTitle">
+        <source>Reset password</source>
+        <target>Mot de passe perdu</target>
+        <note>Class = "UIButton"; normalTitle = "Reset password"; ObjectID = "CXn-d9-2ay";</note>
+      </trans-unit>
+      <trans-unit id="W9n-d6-y6s.text">
+        <source>New password</source>
+        <target>Nouveau mot de passe</target>
+        <note>Class = "UILabel"; text = "New password"; ObjectID = "W9n-d6-y6s";</note>
+      </trans-unit>
+      <trans-unit id="XSY-sC-h4o.placeholder">
+        <source>Old password</source>
+        <target>Ancien mot de passe</target>
+        <note>Class = "UITextField"; placeholder = "Old password"; ObjectID = "XSY-sC-h4o";</note>
+      </trans-unit>
+      <trans-unit id="YH5-Dy-pnG.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "YH5-Dy-pnG";</note>
+      </trans-unit>
+      <trans-unit id="aCj-OK-YiM.text">
+        <source>In order to reset your password, please fill in the fields below:</source>
+        <target>Afin de réinitialiser votre mot de passer, veuillez compléter les champs ci-dessous :</target>
+        <note>Class = "UILabel"; text = "In order to reset your password, please fill in the fields below:"; ObjectID = "aCj-OK-YiM";</note>
+      </trans-unit>
+      <trans-unit id="igq-1G-jCU.text">
+        <source>If you have lost your password, please click here:</source>
+        <target>Si vous avez perdu votre mot de passe, veuillez cliquer ici:</target>
+        <note>Class = "UILabel"; text = "If you have lost your password, please click here:"; ObjectID = "igq-1G-jCU";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/SelectYearViewController/Base.lproj/SelectYearViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="4SU-JZ-ITp.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "4SU-JZ-ITp";</note>
+      </trans-unit>
+      <trans-unit id="MIh-5H-pF0.title">
+        <source>Year selection</source>
+        <target>Sélection de l'année</target>
+        <note>Class = "UINavigationItem"; title = "Year selection"; ObjectID = "MIh-5H-pF0";</note>
+      </trans-unit>
+      <trans-unit id="UAL-jF-2DQ.text">
+        <source>Label</source>
+        <target>Label</target>
+        <note>Class = "UILabel"; text = "Label"; ObjectID = "UAL-jF-2DQ";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/SettingsViewController/Base.lproj/SettingsViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="1Bk-I6-spS.normalTitle">
+        <source>Reset Password</source>
+        <target>Réinitialiser le mot de passe</target>
+        <note>Class = "UIButton"; normalTitle = "Reset Password"; ObjectID = "1Bk-I6-spS";</note>
+      </trans-unit>
+      <trans-unit id="4oa-fO-Y9k.normalTitle">
+        <source>Contact / Report a bug</source>
+        <target>Contact / Rapporter un bug</target>
+        <note>Class = "UIButton"; normalTitle = "Contact / Report a bug"; ObjectID = "4oa-fO-Y9k";</note>
+      </trans-unit>
+      <trans-unit id="VHD-nn-JGh.normalTitle">
+        <source>About</source>
+        <target>A propos</target>
+        <note>Class = "UIButton"; normalTitle = "About"; ObjectID = "VHD-nn-JGh";</note>
+      </trans-unit>
+      <trans-unit id="VNh-e6-bgf.normalTitle">
+        <source>CONTACT</source>
+        <target>CONTACT</target>
+        <note>Class = "UIButton"; normalTitle = "CONTACT"; ObjectID = "VNh-e6-bgf";</note>
+      </trans-unit>
+      <trans-unit id="ebQ-fS-L1C.text">
+        <source>ASSISTANCE</source>
+        <target>ASSISTANCE</target>
+        <note>Class = "UILabel"; text = "ASSISTANCE"; ObjectID = "ebQ-fS-L1C";</note>
+      </trans-unit>
+      <trans-unit id="xkR-Z2-hJa.text">
+        <source>MyFactures 1.1.1</source>
+        <target>MyFactures 1.1.1</target>
+        <note>Class = "UILabel"; text = "MyFactures 1.1.1"; ObjectID = "xkR-Z2-hJa";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="MyFactures/ViewControllers/VerifyEmailPasswordViewController/Base.lproj/VerifyEmailPasswordViewController.storyboard" source-language="en" datatype="plaintext" target-language="fr">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="9.4.1" build-num="9F2000"/>
+    </header>
+    <body>
+      <trans-unit id="F05-7o-Jfi.normalTitle">
+        <source>Confirm</source>
+        <target>Valider</target>
+        <note>Class = "UIButton"; normalTitle = "Confirm"; ObjectID = "F05-7o-Jfi";</note>
+      </trans-unit>
+      <trans-unit id="Y5m-UC-s8h.placeholder">
+        <source>Code</source>
+        <target>Code</target>
+        <note>Class = "UITextField"; placeholder = "Code"; ObjectID = "Y5m-UC-s8h";</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

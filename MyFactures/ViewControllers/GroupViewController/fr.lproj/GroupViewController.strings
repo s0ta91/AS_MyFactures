@@ -1,0 +1,39 @@
+/* Class = "UILabel"; text = "5"; ObjectID = "3wv-sk-5MF"; */
+"3wv-sk-5MF.text" = "5";
+
+/* Class = "UILabel"; text = "DOCUMENTS"; ObjectID = "932-2I-yon"; */
+"932-2I-yon.text" = "DOCUMENTS";
+
+/* Class = "UILabel"; text = "100000"; ObjectID = "Bta-nK-HT1"; */
+"Bta-nK-HT1.text" = "100000";
+
+/* Class = "UILabel"; text = "Switch year"; ObjectID = "CbX-l5-1eY"; */
+"CbX-l5-1eY.text" = "Changer d'année";
+
+/* Class = "UITextField"; placeholder = "Folder name"; ObjectID = "iJi-0t-gCj"; */
+"iJi-0t-gCj.placeholder" = "Nom du groupe ...";
+
+/* Class = "UILabel"; text = "TOTAL"; ObjectID = "jPa-qy-NxT"; */
+"jPa-qy-NxT.text" = "TOTAL";
+
+/* Class = "UILabel"; text = "New folder"; ObjectID = "KGe-hh-p1l"; */
+"KGe-hh-p1l.text" = "Nouveau dossier";
+
+/* Class = "UILabel"; text = "Achats en ligne njiznjcdbjinvo"; ObjectID = "LwW-La-Xw3"; */
+"LwW-La-Xw3.text" = "Achats en ligne njiznjcdbjinvo";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "mf3-bE-ceb"; */
+"mf3-bE-ceb.normalTitle" = "Annuler";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "mo2-w9-xYy"; */
+"mo2-w9-xYy.normalTitle" = "Valider";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "R8g-6v-AIg"; */
+"R8g-6v-AIg.text" = "Label";
+
+/* Class = "UINavigationItem"; title = "Folders"; ObjectID = "Wj2-wx-S0b"; */
+"Wj2-wx-S0b.title" = "Dossiers";
+
+/* Class = "UIButton"; normalTitle = "..."; ObjectID = "xk5-3p-Ucc"; */
+"xk5-3p-Ucc.normalTitle" = "...";
+

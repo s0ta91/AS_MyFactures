@@ -1,0 +1,57 @@
+/* Class = "UILabel"; text = "Description"; ObjectID = "1ZH-NR-pBV"; */
+"1ZH-NR-pBV.text" = "Description";
+
+/* Class = "UILabel"; text = "Month"; ObjectID = "6jO-05-mdG"; */
+"6jO-05-mdG.text" = "Mois";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "a6X-EZ-nrs"; */
+"a6X-EZ-nrs.normalTitle" = "Supprimer";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "Cwp-ht-Ewx"; */
+"Cwp-ht-Ewx.normalTitle" = "Ajouter";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "DFt-jV-uN3"; */
+"DFt-jV-uN3.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "ehC-7D-6wp"; */
+"ehC-7D-6wp.normalTitle" = "Annuler";
+
+/* Class = "UILabel"; text = "Add document"; ObjectID = "hgq-cl-JvN"; */
+"hgq-cl-JvN.text" = "Ajouter un document";
+
+/* Class = "UILabel"; text = "Category"; ObjectID = "hIn-ia-eGm"; */
+"hIn-ia-eGm.text" = "Catégorie";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "M8M-XB-cr7"; */
+"M8M-XB-cr7.normalTitle" = "Terminer";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "NNm-sl-e8X"; */
+"NNm-sl-e8X.normalTitle" = "Créer";
+
+/* Class = "UILabel"; text = "Document added"; ObjectID = "OIm-nc-13H"; */
+"OIm-nc-13H.text" = "Document Ajouté";
+
+/* Class = "UILabel"; text = "Year"; ObjectID = "p83-jd-i6d"; */
+"p83-jd-i6d.text" = "Année";
+
+/* Class = "UITextField"; placeholder = "Select a category (Optionnal)"; ObjectID = "pUU-ka-z15"; */
+"pUU-ka-z15.placeholder" = "Sélectionner une catégorie (Optionnel)";
+
+/* Class = "UINavigationItem"; title = "Ajouter une facture"; ObjectID = "s3T-LL-EGX"; */
+"s3T-LL-EGX.title" = "Ajouter une facture";
+
+/* Class = "UITextField"; placeholder = "Category name"; ObjectID = "Sh1-Vj-aLb"; */
+"Sh1-Vj-aLb.placeholder" = "Nom de la catégorie ...";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "WLZ-2n-TCQ"; */
+"WLZ-2n-TCQ.text" = "Montant";
+
+/* Class = "UILabel"; text = "Folder"; ObjectID = "wZq-nw-jpR"; */
+"wZq-nw-jpR.text" = "Dossier";
+
+/* Class = "UITextField"; placeholder = "Add a description"; ObjectID = "xXh-de-DgM"; */
+"xXh-de-DgM.placeholder" = "Entrez une description";
+
+/* Class = "UITextField"; text = "0.00"; ObjectID = "Yh9-1a-Erf"; */
+"Yh9-1a-Erf.text" = "0.00";
+
