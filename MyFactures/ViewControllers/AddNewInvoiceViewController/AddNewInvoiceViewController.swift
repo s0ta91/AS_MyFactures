@@ -13,11 +13,8 @@ import IQKeyboardManagerSwift
 class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
-    
     @IBOutlet var ui_createGroupOrCategoryView: UIView!
     @IBOutlet weak var ui_addNewGroupOrCategoryTextField: UITextField!
-    
-    
     @IBOutlet weak var ui_descriptionTextField: UITextField!
     @IBOutlet weak var ui_monthSelectionTextField: UITextField!
     @IBOutlet weak var ui_yearSelectionTextField: UITextField!
@@ -73,6 +70,20 @@ class AddNewInvoiceViewController: UIViewController {
     private var _firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
     
+    //TODO: Localized text
+    let noFolderAvailable = NSLocalizedString("No folder available", comment: "")
+    let unknownCategory = NSLocalizedString("unknown", comment: "")
+    let editActionTitle = NSLocalizedString("Edit", comment: "")
+    let pickADocumentTitle = NSLocalizedString("Document", comment: "")
+    let pickAPhotoTitle = NSLocalizedString("Photo library", comment: "")
+    let takeAPhotoTitle = NSLocalizedString("Camera", comment: "")
+    let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+    let warningActionTitle = NSLocalizedString("Warning", comment: "")
+    let folderExistsMessage = NSLocalizedString("This folder already exists", comment: "")
+    let categoryExistsMessage = NSLocalizedString("This category already exists", comment: "")
+    let errorActionTitle = NSLocalizedString("Error", comment: "")
+    let createFolderActionMessage = NSLocalizedString("Please create a folder", comment: "")
+    let someFieldError = NSLocalizedString("There is an issue with one of the fields", comment: "")
     
     //MARK: - Controller functions
     override func viewDidLoad() {
@@ -158,7 +169,7 @@ class AddNewInvoiceViewController: UIViewController {
             _firstLoad = false
 
             ui_addOrModifyButton.layer.cornerRadius = 10
-            let groupTitle = isGroup(forYear: _year) ? _group.title : "Aucun dossier disponible"
+            let groupTitle = isGroup(forYear: _year) ? _group.title : noFolderAvailable
             
             if _modifyInvoice == false {
                 ui_descriptionTextField.becomeFirstResponder()
@@ -166,6 +177,7 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_yearSelectionTextField.text = String(_year.year)
                 ui_groupSelectionTextField.text = groupTitle
                 ui_categorySelectionTextField.text = "Non-classée"
+//                ui_categorySelectionTextField.text = unknownCategory
             } else {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
@@ -177,7 +189,7 @@ class AddNewInvoiceViewController: UIViewController {
                 if _invoice.identifier != nil {
                     _documentHasBeenAdded = true
                 }
-                ui_addOrModifyButton.setTitle("Modifier", for: .normal)
+                ui_addOrModifyButton.setTitle(editActionTitle, for: .normal)
             }
             ui_amountTextField.convertToCurrencyNumber()
             
@@ -237,6 +249,7 @@ class AddNewInvoiceViewController: UIViewController {
             subview.transform = CGAffineTransform.identity
         }
     }
+    
     private func animateOut (forSubview subview: UIView) {
         UIView.animate(withDuration: 0.3, animations: {
             subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
@@ -272,7 +285,7 @@ class AddNewInvoiceViewController: UIViewController {
             guard let selectedYear = ui_yearSelectionTextField.text,
                 let newSelectedYear = _manager.getYear(forValue: Int(selectedYear)!) else { fatalError("No year selected in the years field")}
             _year = newSelectedYear
-            ui_groupSelectionTextField.text = isGroup(forYear: newSelectedYear) ? newSelectedYear.getGroup(atIndex: 0)?.title : "Aucun dossier disponible"
+            ui_groupSelectionTextField.text = isGroup(forYear: newSelectedYear) ? newSelectedYear.getGroup(atIndex: 0)?.title : noFolderAvailable
             ui_groupSelectionTextField.isEnabled = isGroup(forYear: newSelectedYear) ? true : false
         }
     }
@@ -298,7 +311,7 @@ class AddNewInvoiceViewController: UIViewController {
 //        let msg2                                = String(kUTTypeMessage)
         let allowedDocumentsTypes = [pdf,img,jpeg,png]
         
-        let pickADocument = UIAlertAction(title: "Choisir un document", style: .default) { (_) in
+        let pickADocument = UIAlertAction(title: pickADocumentTitle, style: .default) { (_) in
             let documentPicker = UIDocumentPickerViewController(documentTypes:  allowedDocumentsTypes, in: .import)
             documentPicker.delegate = self
             documentPicker.modalPresentationStyle = .formSheet
@@ -306,7 +319,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
         
         //TODO: ImagePickerController to selected a photo in photoLibrary
-        let pickAPhoto = UIAlertAction(title: "Choisir une photo", style: .default) { (_) in
+        let pickAPhoto = UIAlertAction(title: pickAPhotoTitle, style: .default) { (_) in
             
             self._photoFromCamera = false
             imagePickerController.sourceType = .photoLibrary
@@ -314,7 +327,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
         
         //TODO: Open photoApp to take a photo of a document
-        let takeAPhoto = UIAlertAction(title: "Prendre une photo", style: .default) { (_) in
+        let takeAPhoto = UIAlertAction(title: takeAPhotoTitle, style: .default) { (_) in
             
             self._photoFromCamera = true
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -325,7 +338,7 @@ class AddNewInvoiceViewController: UIViewController {
             }
         }
         
-        let cancelActionSheet = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancelActionSheet = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
         
         actionSheet.addAction(pickADocument)
         actionSheet.addAction(pickAPhoto)
@@ -368,7 +381,7 @@ class AddNewInvoiceViewController: UIViewController {
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
                 } else {
-                    Alert.message(title: "Attention", message: "Un group existe déjà avec le nom '\(textFieldValue)'", vc: self)
+                    Alert.message(title: warningActionTitle, message: folderExistsMessage, vc: self)
                 }
             } else {
                 let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: textFieldValue)
@@ -378,7 +391,7 @@ class AddNewInvoiceViewController: UIViewController {
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
                 }else {
-                    Alert.message(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(textFieldValue)'", vc: self)
+                    Alert.message(title: warningActionTitle, message: categoryExistsMessage, vc: self)
                 }
             }
         }
@@ -440,10 +453,10 @@ class AddNewInvoiceViewController: UIViewController {
             }
             
         } else {
-            if ui_groupSelectionTextField.text == "Aucun dossier disponible" {
-                Alert.message(title: "Erreur", message: "Veuillez créer un dossier", vc: self)
+            if ui_groupSelectionTextField.text == noFolderAvailable {
+                Alert.message(title: errorActionTitle, message: createFolderActionMessage, vc: self)
             } else {
-                Alert.message(title: "Erreur", message: "Problème avec l'un des champs", vc: self)
+                Alert.message(title: errorActionTitle, message: someFieldError, vc: self)
                 print("Something went wrong with one of the fields")
             }
         }

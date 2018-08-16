@@ -25,6 +25,14 @@ class ResetPasswordViewController: UIViewController {
         }
     }
     
+    //TODO: Localized text
+    let confirmationMessageTitle = NSLocalizedString("Your password has been changed", comment: "")
+    let errorActionTitle = NSLocalizedString("Error", comment: "")
+    let passwordErrorMessage = NSLocalizedString("Current password is wrong. Please try again", comment: "")
+    let noPasswordInKeychainText = NSLocalizedString("Error! - No password found in keychain", comment: "")
+    let emptyFieldText = NSLocalizedString("Fields can not be empty", comment: "")
+    
+    
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +74,7 @@ class ResetPasswordViewController: UIViewController {
                     DbManager().saveMasterPassword(newPassword)
                     
                     //TODO: Confirmation Message then Dismiss the screen
-                    let confirmationAlert = UIAlertController(title: "Le mot de passe a été changé", message: nil, preferredStyle: .alert)
+                    let confirmationAlert = UIAlertController(title: confirmationMessageTitle, message: nil, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .default) { (_) in
                         self.dismiss(animated: true, completion: nil)
                     }
@@ -74,8 +82,8 @@ class ResetPasswordViewController: UIViewController {
                     present(confirmationAlert, animated: true)
                 }else {
                     //TODO: Else, show a error message
-                    let alert = UIAlertController(title: "Erreur!", message: "Le mot de passe actuel n'est pas correct. Veuillez réessayer.", preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "Ré-essayer", style: .default, handler: nil)
+                    let alert = UIAlertController(title: errorActionTitle, message: passwordErrorMessage, preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(alertAction)
                     present(alert, animated: true, completion: nil)
                     
@@ -84,11 +92,11 @@ class ResetPasswordViewController: UIViewController {
                 
             }else {
                 //TODO: If no password in keychain show an error message
-                messageLabel.text = "Error! - No password found in keychain"
+                messageLabel.text = noPasswordInKeychainText
                 unHideMessageLabel()
             }
         }else {
-            messageLabel.text = "Les champs ne peuvent être vides. Veuillez les compléter."
+            messageLabel.text = emptyFieldText
             unHideMessageLabel()
         }
     }
