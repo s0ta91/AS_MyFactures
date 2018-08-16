@@ -39,9 +39,31 @@ class GroupViewController: UIViewController {
     private var _currentYear: Year!
     private var _groupToModify: Group?
     var effect: UIVisualEffect!
-    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    let monthArray = [NSLocalizedString("January", comment: ""),
+                      NSLocalizedString("February", comment: ""),
+                      NSLocalizedString("March", comment: ""),
+                      NSLocalizedString("April", comment: ""),
+                      NSLocalizedString("May", comment: ""),
+                      NSLocalizedString("June", comment: ""),
+                      NSLocalizedString("July", comment: ""),
+                      NSLocalizedString("August", comment: ""),
+                      NSLocalizedString("September", comment: ""),
+                      NSLocalizedString("October", comment: ""),
+                      NSLocalizedString("November", comment: ""),
+                      NSLocalizedString("December", comment: "")]
     var isListFiltered = false
     var collectionViewFontSize: CGFloat!
+    
+    //TODO: Localized text
+    let createNewFolderWarningTitle = NSLocalizedString("Warning", comment: "")
+    let createNewFolderWarningMessage = NSLocalizedString("This folder already exists", comment: "")
+    let createAddActionTitle = NSLocalizedString("Add", comment: "")
+    let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+    let deleteActionTitle = NSLocalizedString("Delete", comment: "")
+    let descriptionStr = NSLocalizedString("Tap the 'New folder' icon bellow to begin", comment: "")
+    let editFolderActionTitle = NSLocalizedString("Edit folder name", comment: "")
+    let deleteFolderActionTitle = NSLocalizedString("Delete folder", comment: "")
+    let deleteFolderActionMessage = NSLocalizedString("Deletion of this folder will errase all associated documents definitively.", comment: "")
     
     
     //MARK: -  ViewController functions
@@ -153,8 +175,8 @@ class GroupViewController: UIViewController {
                 _ = _currentYear.addGroup(withTitle: newGroupName, isListFiltered)
                 animateOut()
             }else {
-                let alertController = UIAlertController(title: "Attention", message: "Un groupe existe déjà avec le nom '\(newGroupName)'!", preferredStyle: .alert)
-                let createAction = UIAlertAction(title: "Créer", style: .default, handler: { (_) in
+                let alertController = UIAlertController(title: createNewFolderWarningTitle, message: createNewFolderWarningMessage, preferredStyle: .alert)
+                let createAction = UIAlertAction(title: createAddActionTitle, style: .default, handler: { (_) in
                     if let newGroup = self._currentYear.addGroup(withTitle: newGroupName, self.isListFiltered) {
                         for monthName in self.monthArray {
                             newGroup.addMonth(monthName)
@@ -162,7 +184,7 @@ class GroupViewController: UIViewController {
                     }
                     self.animateOut()
                 })
-                let cancelCreationAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+                let cancelCreationAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
                 alertController.addAction(createAction)
                 alertController.addAction(cancelCreationAction)
                 present(alertController, animated: true, completion: nil)
@@ -256,7 +278,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
     
     func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let modify = UIAlertAction(title: "Modifier le nom du groupe", style: .default) { (_) in
+        let modify = UIAlertAction(title: editFolderActionTitle, style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
                     self.ui_newGroupNameTextField.text = group.title
@@ -266,9 +288,9 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             }
         }
 
-        let delete = UIAlertAction(title: "Supprimer le groupe", style: .destructive) { (_) in
-            let alertDeletion = UIAlertController(title: "Attention", message: "La suppression de ce dossier entrainera la suppression de toutes les factures associées sans possibilité de les récupérer. Souhaitez-vous continuer ?", preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: "Supprimer définitivement", style: .destructive, handler: { (_) in
+        let delete = UIAlertAction(title: deleteFolderActionTitle, style: .destructive) { (_) in
+            let alertDeletion = UIAlertController(title: self.createNewFolderWarningTitle, message: self.deleteFolderActionMessage, preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: self.deleteActionTitle, style: .destructive, handler: { (_) in
                 if let indexPath = self.groupCV.indexPath(for: groupCell),
                     let groupNameToDelete = groupCell.ui_titleLabel.text,
                     let group = self._currentYear.getGroup(forName: groupNameToDelete, self.isListFiltered),
@@ -279,13 +301,13 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
                         self.groupCV.reloadData()
                 }
             })
-            let cancelDeletion = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+            let cancelDeletion = UIAlertAction(title: self.cancelActionTitle, style: .cancel, handler: nil)
             alertDeletion.addAction(deleteAction)
             alertDeletion.addAction(cancelDeletion)
             self.present(alertDeletion, animated: true, completion: nil)
         }
         
-        let cancel = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
@@ -335,7 +357,7 @@ extension GroupViewController: DZNEmptyDataSetSource {
     }
 
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let str = "Tapez sur l'icone 'Nouveau dossier' ci-dessous pour créer un dossier"
+        let str = descriptionStr
         let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
     }

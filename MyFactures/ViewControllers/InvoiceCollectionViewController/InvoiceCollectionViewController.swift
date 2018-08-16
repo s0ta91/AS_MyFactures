@@ -45,6 +45,14 @@ class InvoiceCollectionViewController: UIViewController {
     
     let searchButtonImage = UIImage(named: "search(grey)")
     
+    //TODO: Localized text
+    let deleteDocumentTitle = NSLocalizedString("Delete this document ?", comment: "")
+    let deleteActionTitle = NSLocalizedString("Delete", comment: "")
+    let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+    let editActionTitle = NSLocalizedString("Edit", comment: "")
+    let shareActionTitle = NSLocalizedString("Share", comment: "")
+    let noDocumentAssociatedTitle = NSLocalizedString("No file assiciated to this document", comment: "")
+    let descriptionStr = NSLocalizedString("Tap the 'New document' icon to create a new document", comment: "")
     
     //MARK: - Controller functions
     override func viewDidLoad() {
@@ -149,8 +157,8 @@ class InvoiceCollectionViewController: UIViewController {
             let sectionIndexSet = IndexSet(integer: indexPath.section)
             if let month = self.getCurrentMonth(atIndex: monthIndex),
                 let invoiceToDelete = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
-                let alert = UIAlertController(title: "Supprimer cette facture ?", message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
-                let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive, handler: { (_) in
+                let alert = UIAlertController(title: deleteDocumentTitle, message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
+                let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive, handler: { (_) in
                     
                     // Delete invoice object from DB
                     _ = month.removeInvoice(invoice: invoiceToDelete)
@@ -167,7 +175,7 @@ class InvoiceCollectionViewController: UIViewController {
                     }
                 })
                 
-                let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: { (_) in
+                let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: { (_) in
                 })
                 
                 alert.addAction(deleteAction)
@@ -201,7 +209,7 @@ class InvoiceCollectionViewController: UIViewController {
 //                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
 //                print("invoice: \(selectedInvoice)")
                 /*******************/
-                let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+                let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
                 let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
 //                    self.dismiss(animated: true, completion: nil)
                 })
@@ -331,16 +339,16 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     
     func showAvailableActions(invoiceCell: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         let actionsController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let modifyAction = UIAlertAction(title: "Modifier", style: .default) { (action: UIAlertAction) in
+        let modifyAction = UIAlertAction(title: editActionTitle, style: .default) { (action: UIAlertAction) in
             self.modify(invoice: invoiceCell)
         }
-        let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive) { (_) in
+        let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive) { (_) in
             self.delete(invoice: invoiceCell)
         }
-        let shareAction = UIAlertAction(title: "Partager", style: .default) { (_) in
+        let shareAction = UIAlertAction(title: shareActionTitle, style: .default) { (_) in
             self.share(invoice: invoiceCell, buttonPressed: buttonPressed)
         }
-        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
         
         actionsController.addAction(modifyAction)
         actionsController.addAction(shareAction)
@@ -371,7 +379,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 destinationVC.modalTransitionStyle = .crossDissolve
                 self.present(destinationVC, animated: true, completion: nil)
         }else {
-            let alertController = UIAlertController(title: "Aucun document n'est attaché à cette facture", message: nil, preferredStyle: .alert)
+            let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
             let validAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(validAction)
             self.present(alertController, animated: true, completion: nil)
@@ -420,7 +428,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
         return UIImage(named: "documentCollectionViewBackground_128")
     }
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        let str = "Tapez sur l'icone 'Nouvelle facture' pour ajouter une facture"
+        let str = descriptionStr
         let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
     }

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Dossiers-->
+        <!--Folders-->
         <scene sceneID="5N2-H2-Vgp">
             <objects>
                 <viewController storyboardIdentifier="GroupViewController" id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
@@ -211,14 +211,14 @@
                                             <segue destination="Mor-nh-USR" kind="presentation" identifier="showModaly_yearSelectionVC" id="ZqW-x3-tG2"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Changer d'année" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbX-l5-1eY">
-                                        <rect key="frame" x="265.5" y="33.5" width="94" height="16.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbX-l5-1eY">
+                                        <rect key="frame" x="281.5" y="33.5" width="62.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                         <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nouveau dossier" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-hh-p1l">
-                                        <rect key="frame" x="141.5" y="33" width="92" height="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New folder" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGe-hh-p1l">
+                                        <rect key="frame" x="157" y="33" width="61.5" height="17"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
                                         <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -266,7 +266,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qWy-3l-pJt"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Dossiers" id="Wj2-wx-S0b">
+                    <navigationItem key="navigationItem" title="Folders" id="Wj2-wx-S0b">
                         <barButtonItem key="leftBarButtonItem" image="settings" id="CtK-x0-BdT">
                             <connections>
                                 <segue destination="Z20-Rn-zhP" kind="presentation" modalTransitionStyle="flipHorizontal" id="OIL-RT-T9W"/>
@@ -295,9 +295,9 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mf3-bE-ceb">
-                            <rect key="frame" x="50" y="64" width="68" height="36"/>
+                            <rect key="frame" x="50" y="64" width="61" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Annuler">
+                            <state key="normal" title="Cancel">
                                 <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -305,14 +305,14 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mo2-w9-xYy">
-                            <rect key="frame" x="234" y="64" width="60" height="36"/>
+                            <rect key="frame" x="258" y="64" width="36" height="36"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                            <state key="normal" title="Valider"/>
+                            <state key="normal" title="Add"/>
                             <connections>
                                 <action selector="createNewGroupButtonPressed:" destination="D5B-Ih-OFp" eventType="touchUpInside" id="leC-6o-pRW"/>
                             </connections>
                         </button>
-                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nom du groupe ..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iJi-0t-gCj">
+                        <textField opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Folder name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="iJi-0t-gCj">
                             <rect key="frame" x="10" y="20" width="324" height="24"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>

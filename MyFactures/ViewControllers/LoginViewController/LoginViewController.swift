@@ -24,6 +24,10 @@ class LoginViewController: UIViewController {
         }
     }
     
+    //TODO: Localize text
+    let localizedReasonText = NSLocalizedString("Unlock MyFactures", comment: "")
+    let alertErrorText = NSLocalizedString("Une erreur est survenue", comment: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,7 +53,7 @@ class LoginViewController: UIViewController {
     private func unlockWithBiometrics () {
         let context = LAContext()
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)  {
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Déverouiller MyFactures", reply: { (isOwnerConfirmed, authError) in
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReasonText, reply: { (isOwnerConfirmed, authError) in
                 /**
                     Going back from secondary traitment to firt traitment /
                     Revenir à l'éxécution du code au premier plan après que le traitement en arrière plan (Identifiaction empreinte ou visage) soit effectuée
@@ -122,7 +126,7 @@ class LoginViewController: UIViewController {
     }
     
     private func showAlertMessage (_ errorMessage: String) {
-        let alertBox = UIAlertController(title: "Une erreur est survenue", message: errorMessage, preferredStyle: .alert)
+        let alertBox = UIAlertController(title: alertErrorText, message: errorMessage, preferredStyle: .alert)
         alertBox.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { (action: UIAlertAction) in
             self.showPasswordField()
         }))

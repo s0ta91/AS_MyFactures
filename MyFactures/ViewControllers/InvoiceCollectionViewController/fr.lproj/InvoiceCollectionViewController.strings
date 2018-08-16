@@ -1,0 +1,30 @@
+/* Class = "UIButton"; normalTitle = "..."; ObjectID = "6qy-QY-PwY"; */
+"6qy-QY-PwY.normalTitle" = "...";
+
+/* Class = "UILabel"; text = "Septembre 2018"; ObjectID = "8Qz-Br-IMQ"; */
+"8Qz-Br-IMQ.text" = "Septembre 2018";
+
+/* Class = "UILabel"; text = "100000 €"; ObjectID = "BTK-14-40r"; */
+"BTK-14-40r.text" = "100000 €";
+
+/* Class = "UILabel"; text = "Aspirateur Dyson v8"; ObjectID = "ihm-5W-wYp"; */
+"ihm-5W-wYp.text" = "Aspirateur Dyson v8";
+
+/* Class = "UILabel"; text = "Category:"; ObjectID = "lg5-Qc-SOH"; */
+"lg5-Qc-SOH.text" = "Catégorie:";
+
+/* Class = "UILabel"; text = "Amount:"; ObjectID = "lyo-Gw-o8M"; */
+"lyo-Gw-o8M.text" = "Montant:";
+
+/* Class = "UILabel"; text = "Lyonnaise des eaux"; ObjectID = "MMc-2q-GJl"; */
+"MMc-2q-GJl.text" = "Lyonnaise des eaux";
+
+/* Class = "UILabel"; text = "Categories"; ObjectID = "Rmd-j5-vtM"; */
+"Rmd-j5-vtM.text" = "Catégories";
+
+/* Class = "UILabel"; text = "New document"; ObjectID = "wuU-DV-mzG"; */
+"wuU-DV-mzG.text" = "Nouvelle facture";
+
+/* Class = "UILabel"; text = "100000.00 €"; ObjectID = "yNB-V4-QW0"; */
+"yNB-V4-QW0.text" = "100000.00 €";
+

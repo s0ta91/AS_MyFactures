@@ -52,9 +52,9 @@ extension SelectYearViewController: UITableViewDataSource {
             let nbGroupForYear = year.getGlobalGroupCount()
             var numberOfGroup: String {
                 if nbGroupForYear > 1 {
-                    return "\(nbGroupForYear) dossiers"
+                    return "\(nbGroupForYear) \(NSLocalizedString("folders", comment: ""))"
                 }else {
-                    return "\(nbGroupForYear) dossier"
+                    return "\(nbGroupForYear) \(NSLocalizedString("folder", comment: ""))"
                 }
             }
             cell_yearSelection.setValues(yearString, numberOfGroup)

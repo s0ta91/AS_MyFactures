@@ -27,6 +27,18 @@ class ManageCategoryTableViewController: UIViewController {
     private var _manager: Manager!
     private var _selectedCategoryToModify: Category!
     private var _visualEffect: UIVisualEffect!
+    
+    //TODO: Localized text
+    let addNewCategoryButtonAddText = NSLocalizedString("Add", comment: "")
+    let addNewCategoryButtonConfirmText = NSLocalizedString("Confirm", comment: "")
+    let modifyCategoryWarningTitle = NSLocalizedString("Warning", comment: "")
+    let modifyCategoryWarningMessage = NSLocalizedString("This category already exists", comment: "")
+    let editRowActionTitle = NSLocalizedString("Edit", comment: "")
+    let deleteRowActionTitle = NSLocalizedString("Delete", comment: "")
+    let deleteCategoryAlertTitle = NSLocalizedString("Would you like to delete this category ?", comment: "")
+    let deleteCategoryAlertMessage = NSLocalizedString("Associated documents will not be deleted", comment: "")
+    let cancelActionTitle = NSLocalizedString("Cancel", comment: "")
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +111,7 @@ class ManageCategoryTableViewController: UIViewController {
         animateIn(forSubview: ui_modifyCategoryView)
         ui_modifyCategoryTextField.text = ""
         ui_modifyCategoryTextField.becomeFirstResponder()
-        ui_addNewCategoryButton.setTitle("Créer", for: .normal)
+        ui_addNewCategoryButton.setTitle(addNewCategoryButtonAddText, for: .normal)
     }
     
     @IBAction func cancelCreateCategoryView(_ sender: UIButton) {
@@ -111,16 +123,16 @@ class ManageCategoryTableViewController: UIViewController {
         guard let newCategoryName = ui_modifyCategoryTextField.text else {return print("textField is empty")}
         let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: newCategoryName)
         if categoryExists == false {
-            if ui_addNewCategoryButton.titleLabel?.text == "Créer" {
+            if ui_addNewCategoryButton.titleLabel?.text == addNewCategoryButtonAddText {
                 _ = _manager.addCategory(newCategoryName)
             }
-            else if ui_addNewCategoryButton.titleLabel?.text == "Valider" {
+            else if ui_addNewCategoryButton.titleLabel?.text == addNewCategoryButtonConfirmText {
                 _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
             }
             ui_manageCategoryTableView.reloadData()
             animateOut(forSubview: ui_modifyCategoryView)
         }else {
-            let alertController = UIAlertController(title: "Attention", message: "Une catégorie existe déjà avec le nom '\(newCategoryName)'", preferredStyle: .alert)
+            let alertController = UIAlertController(title: modifyCategoryWarningTitle, message: modifyCategoryWarningMessage, preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alertController.addAction(cancelAction)
             present(alertController, animated: true, completion: nil)
@@ -158,25 +170,25 @@ extension ManageCategoryTableViewController: UITableViewDataSource {
 //MARK: - Table view delegate
 extension ManageCategoryTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: .normal, title: "Modifier") { (action: UITableViewRowAction, indexPath: IndexPath) in
+        let editAction = UITableViewRowAction(style: .normal, title: editRowActionTitle) { (action: UITableViewRowAction, indexPath: IndexPath) in
             if let category = self._manager.getCategory(atIndex: indexPath.row) {
                 self._selectedCategoryToModify = category
                 self.ui_modifyCategoryTextField.text = category.title
                 self.ui_modifyCategoryTextField.becomeFirstResponder()
-                self.ui_addNewCategoryButton.setTitle("Valider", for: .normal)
+                self.ui_addNewCategoryButton.setTitle(self.addNewCategoryButtonConfirmText, for: .normal)
                 self.animateIn(forSubview: self.ui_modifyCategoryView)
             }
         }
         editAction.backgroundColor = UIColor(named: "EditButtonGrey")
         
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            let alert = UIAlertController(title: "Voulez vous vraiment supprimer cette catégorie?", message: "Les factures associées ne seront pas supprimées", preferredStyle: .alert)
-            let deleteAction = UIAlertAction(title: "Supprimer", style: .destructive) { (_) in
+        let deleteAction = UITableViewRowAction(style: .destructive, title: deleteRowActionTitle) { (action: UITableViewRowAction, indexPath: IndexPath) in
+            let alert = UIAlertController(title: self.deleteCategoryAlertTitle, message: self.deleteCategoryAlertMessage, preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: self.deleteRowActionTitle, style: .destructive) { (_) in
                 self._manager.removeCategory(atIndex: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             
-            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: self.cancelActionTitle, style: .cancel, handler: nil)
             
             alert.addAction(deleteAction)
             alert.addAction(cancelAction)

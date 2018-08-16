@@ -26,11 +26,17 @@ class CreateAccountViewController: UIViewController {
 
     var isPasswordSet: Bool = false
     
+    //TODO: Localized text
+    let informationText = NSLocalizedString("* Your email address will be stored localy. In no case it will be shared or known by thrid parties.", comment: "")
+    let emailPlaceholderText = NSLocalizedString("Add your email address *", comment: "")
+    let ui_createPasswordButtonText = NSLocalizedString("Add", comment: "")
+    let alertErrorTitle = NSLocalizedString("An error occured", comment: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ui_myfacturesTextField.text = "MyFactures"
-        ui_informationsLabel.text = "* Votre adresse email sera stockée localement. En aucun cas elle ne sera partagée, ni connue de tierces personnes."
+        ui_informationsLabel.text = informationText
         
         // Delegation for password textField to have access to textfieldShouldReturn function
         ui_emailTextField.delegate = self
@@ -54,11 +60,11 @@ class CreateAccountViewController: UIViewController {
     }
 
     private func setPasswordAndDesableField() {
-        ui_emailTextField.placeholder = "Ajouter une adresse email *"
+        ui_emailTextField.placeholder = emailPlaceholderText
         ui_passwordTextField.text = DbManager().getMasterPassword()
         ui_passwordTextField.isEnabled = false
         ui_passwordTextField.backgroundColor = UIColor.darkGray
-        ui_createPasswordButton.setTitle("Ajouter", for: .normal)
+        ui_createPasswordButton.setTitle(ui_createPasswordButtonText, for: .normal)
     }
     
     func verifyEmail() {
@@ -74,7 +80,7 @@ class CreateAccountViewController: UIViewController {
                     verifyEmailVC.modalTransitionStyle = .crossDissolve
                     present(verifyEmailVC, animated: true, completion: nil)
                 } else {
-                    Alert.message(title: "Une erreur est survenue", message: "", vc: self)
+                    Alert.message(title: alertErrorTitle, message: "", vc: self)
                 }
             }
             
