@@ -99,12 +99,12 @@ class Manager {
             let userPassword = DbManager().getMasterPassword() {
             
             if sendEmail(toEmail: userEmail, withPassword: userPassword) {
-                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: originViewController)
+                Alert.message(title: NSLocalizedString("Password sent", comment: ""), message: NSLocalizedString("An email containing your password as been sent", comment: ""), vc: originViewController)
             } else {
-                Alert.message(title: "Une erreur est survenue lors de l'envoi du message", message: "", vc: originViewController)
+                Alert.message(title: NSLocalizedString("An error occured. Message has not been sent.", comment: ""), message: "", vc: originViewController)
             }
         }else {
-            Alert.message(title: "Error retreiving user informations", message: "", vc: originViewController)
+            Alert.message(title: NSLocalizedString("Error retreiving user informations", comment: ""), message: "", vc: originViewController)
             print("Error retreiving user informations")
         }
     }
@@ -132,12 +132,16 @@ class Manager {
         builder.header.from = MCOAddress(displayName: "MyFacturesApp", mailbox: Settings().emailAdress)
         
         if let codeForUser = code {
-            builder.header.subject = "Vérification de votre adresse email"
-            builder.htmlBody = "Bonjour,<br/><br/> Veuillez recopier le code suivant dans l'application afin de vérifier votre adresse email.<br/><br/>code: \(codeForUser)<br/><br/> Merci<br/> MyFacturesApp"
+            builder.header.subject = NSLocalizedString("Confirm your email address", comment: "")
+            builder.htmlBody = NSLocalizedString("Hello,<br/><br/> Please copy/paste the code bellow in the app to verify your email address.<br/><br/>code:", comment: "")
+                + "\(codeForUser)"
+                + NSLocalizedString("<br/><br/> Thank you<br/> MyFacturesApp", comment: "")
         }
         if let userPassword = password {
-            builder.header.subject = "Récupération de votre mot de passe"
-            builder.htmlBody = "Bonjour,<br/><br/> Veuillez trouver ci-dessous votre mot de passe.<br/><br/> Mot de passe: \(userPassword)<br/><br/> MyFacturesApp"
+            builder.header.subject = NSLocalizedString("Password recovery", comment: "")
+            builder.htmlBody = NSLocalizedString("Hello,<br/><br/> Please find bellow your password.<br/><br/> Password:", comment: "")
+                + "\(userPassword)"
+                + "<br/><br/> MyFacturesApp"
         }
         
         let rfc822Data = builder.data()

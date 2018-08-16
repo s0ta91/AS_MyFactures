@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
     
     //TODO: Localize text
     let localizedReasonText = NSLocalizedString("Unlock MyFactures", comment: "")
-    let alertErrorText = NSLocalizedString("Une erreur est survenue", comment: "")
+    let alertErrorText = NSLocalizedString("An error occured", comment: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()

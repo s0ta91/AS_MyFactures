@@ -30,7 +30,7 @@ class VerifyPasswordViewController: UIViewController {
     //TODO: Localized text
     let messageText = NSLocalizedString("Please check your emails and enter the confirmation code :", comment: "")
     let confirmationTitle = NSLocalizedString("Thank you !", comment: "")
-    let confirmationMessage = NSLocalizedString("Adresse email confirmée", comment: "")
+    let confirmationMessage = NSLocalizedString("Email address is confirmed", comment: "")
     
     
     override func viewDidLoad() {

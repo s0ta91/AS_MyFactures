@@ -6,19 +6,23 @@
     <body>
       <trans-unit id="CFBundleName">
         <source>$(PRODUCT_NAME)</source>
-        <note>Bundle name</note><target></target>
+        <target/>
+        <note>Bundle name</note>
       </trans-unit>
       <trans-unit id="NSCameraUsageDescription">
-        <source>Allow MyFactures to access your camera</source>
-        <note>Privacy - Camera Usage Description</note><target>Autoriser MyFactures à accéder à votre appareil photo</target>
+        <source>Allow MyFactures to access your Camera</source>
+        <target>Autoriser MyFactures à accéder à votre appareil photo</target>
+        <note>Privacy - Camera Usage Description</note>
       </trans-unit>
       <trans-unit id="NSFaceIDUsageDescription">
         <source>Allow access to FaceID so that MyFactures can authenticate you by detecting your face.</source>
-        <note>Privacy - Face ID Usage Description</note><target>Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.</target>
+        <target>Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.</target>
+        <note>Privacy - Face ID Usage Description</note>
       </trans-unit>
       <trans-unit id="NSPhotoLibraryAddUsageDescription">
         <source>Allow MyFactures to access your photo library</source>
-        <note>Privacy - Photo Library Additions Usage Description</note><target>Autoriser MyFactures à accéder à votre bibliothèque photo</target>
+        <target>Autoriser MyFactures à accéder à votre bibliothèque photo</target>
+        <note>Privacy - Photo Library Additions Usage Description</note>
       </trans-unit>
     </body>
   </file>
@@ -32,9 +36,34 @@
         <target>* Votre adresse email sera stockée localement. En aucun cas elle ne sera partagée, ni connue de tierces personnes.</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="&lt;br/&gt;&lt;br/&gt; Thank you&lt;br/&gt; MyFacturesApp">
+        <source>&lt;br/&gt;&lt;br/&gt; Thank you&lt;br/&gt; MyFacturesApp</source>
+        <target>&lt;br/&gt;&lt;br/&gt; Merci&lt;br/&gt; MyFacturesApp</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Add">
         <source>Add</source>
         <target>Créer</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Add your email address *">
+        <source>Add your email address *</source>
+        <target>Entrez votre adresse mail *</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="An email containing your password as been sent">
+        <source>An email containing your password as been sent</source>
+        <target>Un email contenant votre mot de passe vous a été envoyé</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="An error occured">
+        <source>An error occured</source>
+        <target>Une erreur est survenue.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="An error occured. Message has not been sent.">
+        <source>An error occured. Message has not been sent.</source>
+        <target>Une erreur est survenue lors de l'envoi du message</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="April">
@@ -67,6 +96,11 @@
         <target>Valider</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Confirm your email address">
+        <source>Confirm your email address</source>
+        <target>Vérification de votre adresse email</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
       <trans-unit id="Current password is wrong. Please try again">
         <source>Current password is wrong. Please try again</source>
         <target>Le mot de passe actuel n'est pas correct. Veuillez réessayer.</target>
@@ -85,6 +119,11 @@
       <trans-unit id="Delete folder">
         <source>Delete folder</source>
         <target>Supprimer dossier</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Delete this document ?">
+        <source>Delete this document ?</source>
+        <target>Supprimer ce document ?</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Deletion of this folder will errase all associated documents definitively.">
@@ -107,14 +146,18 @@
         <target>Modifier le nom du dossier</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
+      <trans-unit id="Email address is confirmed">
+        <source>Email address is confirmed</source>
+        <note>No comment provided by engineer.</note><target>Adresse email confirmée</target>
+      </trans-unit>
       <trans-unit id="Error">
         <source>Error</source>
         <target>Erreur</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Error !">
-        <source>Error !</source>
-        <target>Erreur !</target>
+      <trans-unit id="Error retreiving user informations">
+        <source>Error retreiving user informations</source>
+        <target>Erreur lors de la récupération des informations de l'utilisateur</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Error! - No password found in keychain">
@@ -130,6 +173,16 @@
       <trans-unit id="Fields can not be empty">
         <source>Fields can not be empty</source>
         <target>Les champs ne peuvent être vides.</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello,&lt;br/&gt;&lt;br/&gt; Please copy/paste the code bellow in the app to verify your email address.&lt;br/&gt;&lt;br/&gt;code:">
+        <source>Hello,&lt;br/&gt;&lt;br/&gt; Please copy/paste the code bellow in the app to verify your email address.&lt;br/&gt;&lt;br/&gt;code:</source>
+        <target>Bonjour,&lt;br/&gt;&lt;br/&gt; Veuillez recopier le code suivant dans l'application afin de vérifier votre adresse email.&lt;br/&gt;&lt;br/&gt;code:</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Hello,&lt;br/&gt;&lt;br/&gt; Please find bellow your password.&lt;br/&gt;&lt;br/&gt; Password:">
+        <source>Hello,&lt;br/&gt;&lt;br/&gt; Please find bellow your password.&lt;br/&gt;&lt;br/&gt; Password:</source>
+        <target>Bonjour,&lt;br/&gt;&lt;br/&gt; Veuillez trouver ci-dessous votre mot de passe.&lt;br/&gt;&lt;br/&gt; Mot de passe:</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="January">
@@ -175,6 +228,16 @@
       <trans-unit id="October">
         <source>October</source>
         <target>Octobre</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Password recovery">
+        <source>Password recovery</source>
+        <target>Récupération de votre mot de passe</target>
+        <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="Password sent">
+        <source>Password sent</source>
+        <target>Mot de passe envoyé</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Photo library">
@@ -232,9 +295,9 @@
         <target>Ce dossier existe déjà</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
-      <trans-unit id="Unknown">
-        <source>Unknown</source>
-        <target>Non-classée</target>
+      <trans-unit id="Unlock MyFactures">
+        <source>Unlock MyFactures</source>
+        <target>Déverrouiller MyFactures</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Warning">
@@ -245,11 +308,6 @@
       <trans-unit id="Would you like to delete this category ?">
         <source>Would you like to delete this category ?</source>
         <target>Voulez vous vraiment supprimer cette catégorie ?</target>
-        <note>No comment provided by engineer.</note>
-      </trans-unit>
-      <trans-unit id="Your email address has been confirmed">
-        <source>Your email address has been confirmed</source>
-        <target>Votre addresse mail est confirmée</target>
         <note>No comment provided by engineer.</note>
       </trans-unit>
       <trans-unit id="Your password has been changed">
@@ -266,6 +324,10 @@
         <source>folders</source>
         <target>dossiers</target>
         <note>No comment provided by engineer.</note>
+      </trans-unit>
+      <trans-unit id="unknown">
+        <source>unknown</source>
+        <note>No comment provided by engineer.</note><target>Non-Classée</target>
       </trans-unit>
     </body>
   </file>
