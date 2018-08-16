@@ -9,6 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 import IQKeyboardManagerSwift
+import StoreKit
 
 class GroupViewController: UIViewController {
     
@@ -69,6 +70,7 @@ class GroupViewController: UIViewController {
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupReviewController()
         
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
@@ -106,6 +108,10 @@ class GroupViewController: UIViewController {
     }
     
     //MARK: -  Private functions
+    private func setupReviewController() {
+        SKStoreReviewController.requestReview()
+    }
+    
     private func animateIn() {
         ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)

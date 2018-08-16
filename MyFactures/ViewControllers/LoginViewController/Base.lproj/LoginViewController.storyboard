@@ -58,7 +58,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BSc-bF-X22">
-                                <rect key="frame" x="123.33333333333331" y="725" width="129" height="33"/>
+                                <rect key="frame" x="123" y="714" width="129" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="IAr-pw-CZr"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
                                 <state key="normal" title="Recover password">
                                     <color key="titleColor" name="creeruncompteButton"/>
@@ -79,6 +82,7 @@
                             <constraint firstItem="RZg-Pt-dGW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A9o-pJ-6tD"/>
                             <constraint firstItem="RZg-Pt-dGW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="G4y-Oi-uQa"/>
                             <constraint firstItem="BSc-bF-X22" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Gjm-02-cZF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BSc-bF-X22" secondAttribute="bottom" constant="20" id="JRo-PZ-XgA"/>
                             <constraint firstItem="c2l-pK-DFJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LfI-of-iyK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="slb-lc-DB2" secondAttribute="trailing" constant="20" id="NXU-Gj-pf7"/>
                             <constraint firstItem="0Df-Cs-8WS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UhX-Ek-WJK"/>
@@ -94,9 +98,6 @@
                             <constraint firstItem="c2l-pK-DFJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="dgh-Au-IZO"/>
                             <constraint firstItem="slb-lc-DB2" firstAttribute="top" secondItem="0Df-Cs-8WS" secondAttribute="bottom" constant="30" id="e20-hE-1Il"/>
                             <constraint firstItem="5F5-WH-3jO" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="f4S-WY-ZFW"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BSc-bF-X22" secondAttribute="bottom" constant="20" id="fMW-XH-nKj">
-                                <variation key="widthClass=regular" constant="120"/>
-                            </constraint>
                             <constraint firstAttribute="bottom" secondItem="5F5-WH-3jO" secondAttribute="bottom" id="fYn-Gh-n74"/>
                             <constraint firstItem="0Df-Cs-8WS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ua5-JK-lWe"/>
                             <constraint firstItem="5F5-WH-3jO" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="vuB-AM-Aru"/>
@@ -132,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4458" y="-760"/>
+            <point key="canvasLocation" x="-4458.3999999999996" y="-760.34482758620697"/>
         </scene>
     </scenes>
     <resources>

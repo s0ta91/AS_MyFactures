@@ -28,6 +28,8 @@ class LoginViewController: UIViewController {
     let localizedReasonText = NSLocalizedString("Unlock MyFactures", comment: "")
     let alertErrorText = NSLocalizedString("An error occured", comment: "")
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,7 +40,7 @@ class LoginViewController: UIViewController {
         // Set the font for title
         ui_mesfacturesTextField.font = UIFont(name: "Abuget", size: 100)
         ui_mesfacturesTextField.text = "MyFactures"
-        
+//        setupCustomFont()
         // Hide 'createNewPasswordButton' if a user password exists in the iPhone Keychain
         if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) == true {
             showConnexionFields(false)
@@ -48,7 +50,18 @@ class LoginViewController: UIViewController {
         }
     }
 
+    private func setupCustomFont() {
+        guard let customFont = UIFont(name: "Avenir", size: 20) else {
+            fatalError("Failed to load the 'Avenir' font. Make sure the font file is included in the project and the font name is spelled correctly.")
+        }
     
+        ui_passwordTextField.font = UIFontMetrics.default.scaledFont(for: customFont)
+        ui_passwordTextField.adjustsFontForContentSizeCategory = true
+        ui_lostPasswordButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
+        ui_lostPasswordButton.titleLabel?.adjustsFontForContentSizeCategory = true
+        ui_connexionButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
+        ui_connexionButton.titleLabel?.adjustsFontForContentSizeCategory = true
+    }
 
     private func unlockWithBiometrics () {
         let context = LAContext()
