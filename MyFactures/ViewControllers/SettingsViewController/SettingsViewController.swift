@@ -20,23 +20,15 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var cgvView: UIView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var contactButton: UIButton!
-<<<<<<< HEAD:MyFactures/ViewControllers/SettingsViewController/SettingsViewController.swift
     @IBOutlet weak var ui_appVersionNumberLabel: UILabel!
-=======
-    @IBOutlet weak var appVersion: UILabel!
-    
->>>>>>> master:MyFactures/ViewControllers/SettingsViewController.swift
     
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         contactButton.isHidden = true
         navigationController?.navigationBar.tintColor = .white
-<<<<<<< HEAD:MyFactures/ViewControllers/SettingsViewController/SettingsViewController.swift
         ui_appVersionNumberLabel.text = "MyFactures \(Settings().APP_VERSION_NUMBER)"
-=======
-        appVersion.text = "Version \(Settings().APP_VERSION_NUMBER)"
->>>>>>> master:MyFactures/ViewControllers/SettingsViewController.swift
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

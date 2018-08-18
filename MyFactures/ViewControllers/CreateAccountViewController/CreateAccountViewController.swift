@@ -69,17 +69,17 @@ class CreateAccountViewController: UIViewController {
     
     func verifyEmail() {
         if (ui_emailTextField.text?.isValidEmail) != false {
-guard let password = ui_passwordTextField.text,
-let emailAddress = ui_emailTextField.text else {
-Alert.message(title: "Veuillez compléter tous les champs", message: "", vc: self)
-return
-}
-_manager.createUser(with: password, andEmail: emailAddress)
-
-if let GroupTableVC = storyboard?.instantiateViewController(withIdentifier: "NavGroupContoller") {
-GroupTableVC.modalTransitionStyle = .crossDissolve
-present(GroupTableVC, animated: true, completion: nil)
-}
+            guard let password = ui_passwordTextField.text,
+                let emailAddress = ui_emailTextField.text else {
+                    Alert.message(title: "Veuillez compléter tous les champs", message: "", vc: self)
+                    return
+            }
+            _manager.createUser(with: password, andEmail: emailAddress)
+            let storyboard = UIStoryboard(name: "GroupViewController", bundle: .main)
+            let GroupTableVC = storyboard.instantiateViewController(withIdentifier: "NavGroupContoller")
+            GroupTableVC.modalTransitionStyle = .crossDissolve
+            present(GroupTableVC, animated: true, completion: nil)
+            
 
 //            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? VerifyPasswordViewController else { return }
 //            if let newRandomCode = _manager.generateRandomCode(),
