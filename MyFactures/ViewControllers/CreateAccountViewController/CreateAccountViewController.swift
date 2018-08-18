@@ -80,28 +80,28 @@ class CreateAccountViewController: UIViewController {
             GroupTableVC.modalTransitionStyle = .crossDissolve
             present(GroupTableVC, animated: true, completion: nil)
             
-
-//            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? VerifyPasswordViewController else { return }
-//            if let newRandomCode = _manager.generateRandomCode(),
-//                let password = ui_passwordTextField.text {
-//                verifyEmailVC.randomCode = newRandomCode
-//                verifyEmailVC.emailAdress = ui_emailTextField.text!
-//                verifyEmailVC.password = password
-//                if _manager.sendEmail(toEmail: ui_emailTextField.text!, withCode: newRandomCode) {
-//                    verifyEmailVC.modalTransitionStyle = .crossDissolve
-//                    present(verifyEmailVC, animated: true, completion: nil)
-//                } else {
-//                    Alert.message(title: "Une erreur est survenue", message: "", vc: self)
-//                }
-//            }
-//
-//        } else {
-//            //TODO: Faire vibrer le champs
-//            _manager.shake(ui_emailTextField)
-
+            
+            //            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? VerifyPasswordViewController else { return }
+            //            if let newRandomCode = _manager.generateRandomCode(),
+            //                let password = ui_passwordTextField.text {
+            //                verifyEmailVC.randomCode = newRandomCode
+            //                verifyEmailVC.emailAdress = ui_emailTextField.text!
+            //                verifyEmailVC.password = password
+            //                if _manager.sendEmail(toEmail: ui_emailTextField.text!, withCode: newRandomCode) {
+            //                    verifyEmailVC.modalTransitionStyle = .crossDissolve
+            //                    present(verifyEmailVC, animated: true, completion: nil)
+            //                } else {
+            //                    Alert.message(title: "Une erreur est survenue", message: "", vc: self)
+            //                }
+            //            }
+            //
+            //        } else {
+            //            //TODO: Faire vibrer le champs
+            //            _manager.shake(ui_emailTextField)
+            
         }
     }
-
+    
     @IBAction func createAccountButtonPressed(_ sender: Any) {
         verifyEmail()
     }

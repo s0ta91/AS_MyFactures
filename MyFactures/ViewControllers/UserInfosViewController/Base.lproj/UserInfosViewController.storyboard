@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OI6-uy-oMs">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--User Infos View Controller-->
+        <scene sceneID="ncA-5P-LI2">
+            <objects>
+                <viewController id="OI6-uy-oMs" customClass="UserInfosViewController" customModule="MyFactures" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dCg-NA-6GU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your email address :" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rtn-cm-wkn">
+                                <rect key="frame" x="8" y="28" width="359" height="23.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Vii-13-cT8">
+                                <rect key="frame" x="16" y="59" width="343" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vrG-SS-wep"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5TJ-5F-Lzl">
+                                <rect key="frame" x="16" y="590" width="343" height="57"/>
+                                <color key="backgroundColor" red="0.33725490200000002" green="0.63921568630000003" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="57" id="JJW-qO-COk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                                <state key="normal" title="Confirm">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="XoD-vM-s7Y" firstAttribute="trailing" secondItem="5TJ-5F-Lzl" secondAttribute="trailing" constant="16" id="6Rw-If-0JJ"/>
+                            <constraint firstItem="rtn-cm-wkn" firstAttribute="leading" secondItem="XoD-vM-s7Y" secondAttribute="leading" constant="8" id="Bcw-Fr-p0v"/>
+                            <constraint firstItem="XoD-vM-s7Y" firstAttribute="trailing" secondItem="rtn-cm-wkn" secondAttribute="trailing" constant="8" id="Bgg-hd-jDb"/>
+                            <constraint firstItem="rtn-cm-wkn" firstAttribute="top" secondItem="XoD-vM-s7Y" secondAttribute="top" constant="8" id="PfL-BE-YkD"/>
+                            <constraint firstItem="Vii-13-cT8" firstAttribute="leading" secondItem="XoD-vM-s7Y" secondAttribute="leading" constant="16" id="eMo-VM-e8P"/>
+                            <constraint firstItem="Vii-13-cT8" firstAttribute="top" secondItem="rtn-cm-wkn" secondAttribute="bottom" constant="8" id="gsp-ML-cpx"/>
+                            <constraint firstItem="5TJ-5F-Lzl" firstAttribute="leading" secondItem="XoD-vM-s7Y" secondAttribute="leading" constant="16" id="onl-3d-uDA"/>
+                            <constraint firstItem="XoD-vM-s7Y" firstAttribute="bottom" secondItem="5TJ-5F-Lzl" secondAttribute="bottom" constant="20" id="utZ-Eg-ywb"/>
+                            <constraint firstItem="XoD-vM-s7Y" firstAttribute="trailing" secondItem="Vii-13-cT8" secondAttribute="trailing" constant="16" id="ySD-lX-1jn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="XoD-vM-s7Y"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailAddressTextField" destination="Vii-13-cT8" id="N2E-Ia-Adr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i55-Yh-Gzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2951" y="-2615"/>
+        </scene>
+    </scenes>
+</document>
