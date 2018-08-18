@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         contactButton.isHidden = true
         navigationController?.navigationBar.tintColor = .white
-        appVersion.text = Settings().APP_VERSION_NUMBER
+        appVersion.text = "Version \(Settings().APP_VERSION_NUMBER)"
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
