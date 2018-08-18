@@ -8,7 +8,7 @@ target 'MyFactures' do
   use_frameworks!
 
   # Pods for MyFactures
-  pod 'RealmSwift', '3.5.0'
+  pod 'RealmSwift', '3.7.5'
   pod 'KeychainAccess', '3.1.1'
   pod 'DZNEmptyDataSet', '1.8.1'
   pod 'Buglife', '2.8.0'

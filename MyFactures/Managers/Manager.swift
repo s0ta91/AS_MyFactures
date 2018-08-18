@@ -164,6 +164,10 @@ class Manager {
         saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
     }
     
+    func setUserEmail() {
+        
+    }
+    
     func getUserEmail() -> String? {
         return getFromUserDefault(forKey: Settings().USER_EMAIL_KEY)
     }
