@@ -15,18 +15,28 @@ class SettingsViewController: UIViewController {
     //MARK: - Outlets
     
     @IBOutlet weak var firstCategoryView: UIView!
+    @IBOutlet weak var userInfosView: UIView!
     @IBOutlet weak var resetPasswordSubcategoryView: UIView!
     @IBOutlet weak var cgvView: UIView!
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var contactButton: UIButton!
+<<<<<<< HEAD:MyFactures/ViewControllers/SettingsViewController/SettingsViewController.swift
     @IBOutlet weak var ui_appVersionNumberLabel: UILabel!
+=======
+    @IBOutlet weak var appVersion: UILabel!
+    
+>>>>>>> master:MyFactures/ViewControllers/SettingsViewController.swift
     
     //MARK: - Controller functions
     override func viewDidLoad() {
         super.viewDidLoad()
         contactButton.isHidden = true
         navigationController?.navigationBar.tintColor = .white
+<<<<<<< HEAD:MyFactures/ViewControllers/SettingsViewController/SettingsViewController.swift
         ui_appVersionNumberLabel.text = "MyFactures \(Settings().APP_VERSION_NUMBER)"
+=======
+        appVersion.text = "Version \(Settings().APP_VERSION_NUMBER)"
+>>>>>>> master:MyFactures/ViewControllers/SettingsViewController.swift
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,7 +51,7 @@ class SettingsViewController: UIViewController {
     func setBottomBorderForViews () {
         let grayColor = UIColor.lightGray
         let viewWidth: CGFloat = 1
-        let viewList = [firstCategoryView,resetPasswordSubcategoryView,cgvView,aboutView]
+        let viewList = [firstCategoryView,userInfosView,resetPasswordSubcategoryView,cgvView,aboutView]
         for view in viewList {
             view?.addBottomBorderWithColor(color: grayColor, width: viewWidth)
         }

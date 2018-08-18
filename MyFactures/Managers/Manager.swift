@@ -168,6 +168,10 @@ class Manager {
         UserDefaults.standard.set(email, forKey: UserDefaults.keys.userEmail.rawValue)
     }
     
+    func setUserEmail() {
+        
+    }
+    
     func getUserEmail() -> String? {
         return getFromUserDefault(forKey: Settings().USER_EMAIL_KEY)
     }
