@@ -222,7 +222,7 @@ extension GroupViewController: UICollectionViewDataSource {
         var headerView: HeaderGroupView!
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
            headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
            headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
         default:
@@ -348,7 +348,7 @@ extension GroupViewController: DZNEmptyDataSetSource {
 
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let str = descriptionStr
-        let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        let attr = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
     }
 }

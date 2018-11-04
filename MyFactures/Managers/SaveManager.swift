@@ -165,7 +165,7 @@ class SaveManager {
     }
     
     static private func save(image: UIImage, atPath imageDestinationPath: String, completion: () -> ()) {
-        let JPGImage = UIImageJPEGRepresentation(image, 1.0)
+        let JPGImage = image.jpegData(compressionQuality: 1.0)
         let createFileIsSuccess = FileManager.default.createFile(atPath: imageDestinationPath, contents: JPGImage, attributes: nil)
         if !createFileIsSuccess {
             print("Error. The document has not been written to path : \(imageDestinationPath)")
@@ -178,7 +178,7 @@ class SaveManager {
             data = getThumbnailData(forUrl: url, documentExtension: documentExtension)
         }
         if let selectedImage = image {
-            data = UIImageJPEGRepresentation(selectedImage, 1.0)
+            data = selectedImage.jpegData(compressionQuality: 1.0)
         }
         if let thumbnailData = data {
             let createFileIsSuccess = FileManager.default.createFile(atPath: thumbnailDestinationURL.path, contents: thumbnailData, attributes: nil)
@@ -206,7 +206,7 @@ class SaveManager {
             ctx.cgContext.drawPDFPage(page)
         }
         
-        let imageData = UIImageJPEGRepresentation(img, 1.0)
+        let imageData = img.jpegData(compressionQuality: 1.0)
         
         return imageData
     }
@@ -215,7 +215,7 @@ class SaveManager {
         let imageData: Data?
         if let data = NSData(contentsOf: url),
             let image = UIImage(data: data as Data) {
-            imageData = UIImageJPEGRepresentation(image, 1.0)
+            imageData = image.jpegData(compressionQuality: 1.0)
         }else {
             imageData = nil
         }

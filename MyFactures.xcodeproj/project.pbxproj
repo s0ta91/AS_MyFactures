@@ -74,23 +74,6 @@
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1D4B079E20233FF4002F745C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D4B078120233FF4002F745C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D4B078820233FF4002F745C;
-			remoteInfo = MyFactures;
-		};
-		1D4B07A920233FF4002F745C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1D4B078120233FF4002F745C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1D4B078820233FF4002F745C;
-			remoteInfo = MyFactures;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,8 +102,6 @@
 		1D4B079320233FF4002F745C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D4B079620233FF4002F745C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D4B079820233FF4002F745C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1D4B079D20233FF4002F745C /* MyFacturesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFacturesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1D4B07A820233FF4002F745C /* MyFacturesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyFacturesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D4FDFC12074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		1D4FDFC22074D72400208108 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1D4FDFE12084743400208108 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
@@ -191,20 +172,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D4B079A20233FF4002F745C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D4B07A520233FF4002F745C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,8 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				1D4B078920233FF4002F745C /* MyFactures.app */,
-				1D4B079D20233FF4002F745C /* MyFacturesTests.xctest */,
-				1D4B07A820233FF4002F745C /* MyFacturesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -533,42 +498,6 @@
 			productReference = 1D4B078920233FF4002F745C /* MyFactures.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1D4B079C20233FF4002F745C /* MyFacturesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D4B07B420233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesTests" */;
-			buildPhases = (
-				1D4B079920233FF4002F745C /* Sources */,
-				1D4B079A20233FF4002F745C /* Frameworks */,
-				1D4B079B20233FF4002F745C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1D4B079F20233FF4002F745C /* PBXTargetDependency */,
-			);
-			name = MyFacturesTests;
-			productName = MyFacturesTests;
-			productReference = 1D4B079D20233FF4002F745C /* MyFacturesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		1D4B07A720233FF4002F745C /* MyFacturesUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1D4B07B720233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesUITests" */;
-			buildPhases = (
-				1D4B07A420233FF4002F745C /* Sources */,
-				1D4B07A520233FF4002F745C /* Frameworks */,
-				1D4B07A620233FF4002F745C /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1D4B07AA20233FF4002F745C /* PBXTargetDependency */,
-			);
-			name = MyFacturesUITests;
-			productName = MyFacturesUITests;
-			productReference = 1D4B07A820233FF4002F745C /* MyFacturesUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -581,17 +510,8 @@
 				TargetAttributes = {
 					1D4B078820233FF4002F745C = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
-					};
-					1D4B079C20233FF4002F745C = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1D4B078820233FF4002F745C;
-					};
-					1D4B07A720233FF4002F745C = {
-						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1D4B078820233FF4002F745C;
 					};
 				};
 			};
@@ -610,8 +530,6 @@
 			projectRoot = "";
 			targets = (
 				1D4B078820233FF4002F745C /* MyFactures */,
-				1D4B079C20233FF4002F745C /* MyFacturesTests */,
-				1D4B07A720233FF4002F745C /* MyFacturesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -640,20 +558,6 @@
 				1D4B079220233FF4002F745C /* Main.storyboard in Resources */,
 				1D95B6362125D26A008BBA52 /* SettingsViewController.storyboard in Resources */,
 				1D95B6222125B4D9008BBA52 /* ManageCategoryTableViewController.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D4B079B20233FF4002F745C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D4B07A620233FF4002F745C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,34 +678,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1D4B079920233FF4002F745C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1D4B07A420233FF4002F745C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		1D4B079F20233FF4002F745C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D4B078820233FF4002F745C /* MyFactures */;
-			targetProxy = 1D4B079E20233FF4002F745C /* PBXContainerItemProxy */;
-		};
-		1D4B07AA20233FF4002F745C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1D4B078820233FF4002F745C /* MyFactures */;
-			targetProxy = 1D4B07A920233FF4002F745C /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1D08F51C2128284500563B27 /* UserInfosViewController.storyboard */ = {
@@ -1081,7 +958,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1105,74 +982,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1D4B07B520233FF4002F745C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MyFacturesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFactures.app/MyFactures";
-			};
-			name = Debug;
-		};
-		1D4B07B620233FF4002F745C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MyFacturesTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MyFactures.app/MyFactures";
-			};
-			name = Release;
-		};
-		1D4B07B820233FF4002F745C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MyFacturesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MyFactures;
-			};
-			name = Debug;
-		};
-		1D4B07B920233FF4002F745C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T496A6N9T8;
-				INFOPLIST_FILE = MyFacturesUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sebline.MyFacturesUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MyFactures;
 			};
 			name = Release;
 		};
@@ -1193,24 +1004,6 @@
 			buildConfigurations = (
 				1D4B07B220233FF4002F745C /* Debug */,
 				1D4B07B320233FF4002F745C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D4B07B420233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D4B07B520233FF4002F745C /* Debug */,
-				1D4B07B620233FF4002F745C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1D4B07B720233FF4002F745C /* Build configuration list for PBXNativeTarget "MyFacturesUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1D4B07B820233FF4002F745C /* Debug */,
-				1D4B07B920233FF4002F745C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

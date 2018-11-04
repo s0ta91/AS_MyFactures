@@ -290,7 +290,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         var monthAmount: String = ""
         var invoiceHeaderView: HeaderInvoiceCollectionReusableView!
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex) {
@@ -437,7 +437,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
     }
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let str = descriptionStr
-        let attr = [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)]
+        let attr = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
     }
 }

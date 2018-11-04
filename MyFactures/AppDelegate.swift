@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let APP_VERSION = "MyAppVersion"
 
     // MARK: - Launching treatment
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
 //        print("didFinishLaunchingWithOptions")
         
@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 //        print("Arrive from an other app")
         UserDefaults.standard.set(true, forKey: UserDefaults.keys.fromOtherApp.rawValue)
         UserDefaults.standard.set(url, forKey: UserDefaults.keys.fileFromOtherAppUrl.rawValue)

@@ -91,7 +91,7 @@ class PDFViewController: UIViewController {
                     ui_scrollView.addSubview(ui_jpgImageView)
                     ui_jpgImageView.isUserInteractionEnabled = true
                     ui_jpgImageView.image = imageToShow
-                    ui_jpgImageView.contentMode = UIViewContentMode.center
+                    ui_jpgImageView.contentMode = UIView.ContentMode.center
                     ui_jpgImageView.frame = CGRect(x: 0, y: 0, width: imageToShow.size.width, height: imageToShow.size.height)
                     ui_scrollView.contentSize = imageToShow.size
                     
