@@ -20,7 +20,6 @@ class GroupViewController: UIViewController {
     @IBOutlet weak var ui_tabBarView: UIView!
     
     @IBOutlet weak var ui_newGroupButton: UIButton!
-    @IBOutlet weak var ui_visualEffectView: UIVisualEffectView!
     @IBOutlet var ui_createGroupView: UIView!
     @IBOutlet weak var ui_newGroupNameTextField: UITextField!
     
@@ -89,10 +88,6 @@ class GroupViewController: UIViewController {
         _currentYear = _manager.getSelectedYear()
         _currentYear.setGroupList()
         setFontSize()
-        
-        ui_visualEffectView.isHidden = true
-        effect = ui_visualEffectView.effect
-        ui_visualEffectView.effect = nil
         ui_createGroupView.layer.cornerRadius = 10
         
         _manager.setHeaderClippedToBound(groupCV)
@@ -107,10 +102,8 @@ class GroupViewController: UIViewController {
     
     //MARK: -  Private functions
     private func animateIn() {
-        ui_visualEffectView.isHidden = false
         self.navigationController!.view.addSubview(ui_createGroupView)
 
-        
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
         ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
@@ -124,7 +117,7 @@ class GroupViewController: UIViewController {
         
         
         UIView.animate(withDuration: 0.4) {
-            self.ui_visualEffectView.effect = self.effect
+            self.view.alpha = 0.4
             self.ui_createGroupView.alpha = 1
             self.ui_createGroupView.transform = CGAffineTransform.identity
         }
@@ -132,13 +125,11 @@ class GroupViewController: UIViewController {
     private func animateOut () {
         UIView.animate(withDuration: 0.3, animations: {
             self.ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.view.alpha = 1
             self.ui_createGroupView.alpha = 0
-            
-            self.ui_visualEffectView.effect = nil
         }) { (success: Bool) in
             self.ui_createGroupView.removeFromSuperview()
         }
-        ui_visualEffectView.isHidden = true
         searchBarSearchButtonClicked(self.ui_searchBar)
     }
     private func setFontSize (){
@@ -158,7 +149,6 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        ui_newGroupNameTextField.resignFirstResponder()
         animateOut()
     }
     

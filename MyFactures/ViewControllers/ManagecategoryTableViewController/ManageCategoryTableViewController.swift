@@ -14,7 +14,6 @@ class ManageCategoryTableViewController: UIViewController {
     //TODO: Outlets
     @IBOutlet var ui_modifyCategoryView: UIView!
     @IBOutlet weak var ui_manageCategoryTableView: UITableView!
-    @IBOutlet weak var ui_manageCategoryVisualView: UIVisualEffectView!
     @IBOutlet weak var ui_modifyCategoryTextField: UITextField!
     @IBOutlet weak var ui_addNewCategoryButton: UIButton!
     
@@ -50,9 +49,6 @@ class ManageCategoryTableViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         checkRecievedData()
-        ui_manageCategoryVisualView.isHidden = true
-        _visualEffect = ui_manageCategoryVisualView.effect
-        ui_manageCategoryVisualView.effect = nil
         ui_modifyCategoryView.layer.cornerRadius = 10
     }
 
@@ -69,7 +65,6 @@ class ManageCategoryTableViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
-        ui_manageCategoryVisualView.isHidden = false
         self.navigationController!.view.addSubview(subview)
         
         subview.translatesAutoresizingMaskIntoConstraints = false
@@ -84,7 +79,7 @@ class ManageCategoryTableViewController: UIViewController {
         
         
         UIView.animate(withDuration: 0.4) {
-            self.ui_manageCategoryVisualView.effect = self._visualEffect
+            self.view.alpha = 0.4
             subview.alpha = 1
             subview.transform = CGAffineTransform.identity
         }
@@ -93,12 +88,11 @@ class ManageCategoryTableViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             subview.alpha = 0
+            self.view.alpha = 1
             
-            self.ui_manageCategoryVisualView.effect = nil
         }) { (success: Bool) in
             subview.removeFromSuperview()
         }
-        ui_manageCategoryVisualView.isHidden = true
     }
     
     

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
-                                <rect key="frame" x="16" y="113" width="343" height="504"/>
+                                <rect key="frame" x="16" y="116" width="343" height="501"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
                                     <size key="itemSize" width="343" height="115"/>
@@ -156,16 +156,8 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qze-eK-bL4">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BYn-sw-wa0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <blurEffect style="dark"/>
-                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
-                                <rect key="frame" x="0.0" y="113" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="116" width="375" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -243,18 +235,12 @@
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="qze-eK-bL4" firstAttribute="trailing" secondItem="qWy-3l-pJt" secondAttribute="trailing" id="2q3-nM-BDU"/>
-                            <constraint firstItem="qze-eK-bL4" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="6IN-3B-MId"/>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="top" secondItem="iv6-Xj-pPe" secondAttribute="top" id="CXj-7z-KYC"/>
                             <constraint firstItem="5eM-Ih-UfD" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="HI9-cP-IR0"/>
-                            <constraint firstAttribute="bottom" secondItem="qze-eK-bL4" secondAttribute="bottom" id="I4T-h6-KEt"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>
                             <constraint firstAttribute="bottom" secondItem="5eM-Ih-UfD" secondAttribute="bottom" id="Wbu-zY-1Ku"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="jLd-mf-zNG" secondAttribute="bottom" id="ZmL-WA-6bK"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="bottom" secondItem="iv6-Xj-pPe" secondAttribute="bottom" id="a4k-eo-CFX"/>
-                            <constraint firstItem="qze-eK-bL4" firstAttribute="top" secondItem="dHV-vc-FxW" secondAttribute="top" id="cUX-kz-HNx">
-                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
-                            </constraint>
                             <constraint firstItem="jLd-mf-zNG" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="dPY-8y-LBV"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" constant="16" id="fuO-tA-gb9"/>
                             <constraint firstItem="iv6-Xj-pPe" firstAttribute="top" secondItem="4ky-NB-Zlg" secondAttribute="bottom" id="hbZ-03-3H1"/>
@@ -287,7 +273,6 @@
                         <outlet property="ui_searchBar" destination="dGI-Rd-UgG" id="ywb-rf-Pvp"/>
                         <outlet property="ui_searchBarView" destination="jLd-mf-zNG" id="OZT-4l-90E"/>
                         <outlet property="ui_tabBarView" destination="iv6-Xj-pPe" id="CC5-6p-U52"/>
-                        <outlet property="ui_visualEffectView" destination="qze-eK-bL4" id="WdG-fa-zzN"/>
                     </connections>
                 </viewController>
                 <view contentMode="scaleToFill" id="dwn-tA-1vZ">
@@ -342,7 +327,7 @@
                 <navigationController storyboardIdentifier="NavGroupContoller" automaticallyAdjustsScrollViewInsets="NO" id="a55-X9-wAt" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9jl-vg-yyV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="93"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" name="navBarTint"/>

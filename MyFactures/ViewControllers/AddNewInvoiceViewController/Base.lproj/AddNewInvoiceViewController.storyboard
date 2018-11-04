@@ -307,7 +307,7 @@
                             </view>
                             <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dj2-0d-An5">
                                 <rect key="frame" x="0.0" y="62" width="375" height="605"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DnE-1u-eub">
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.40000000000000002" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DnE-1u-eub">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="605"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>

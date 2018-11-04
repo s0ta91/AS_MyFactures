@@ -347,9 +347,9 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     
     func showAvailableActions(invoiceCell: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         let actionsController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let modifyAction = UIAlertAction(title: editActionTitle, style: .default) { (action: UIAlertAction) in
-            self.modify(invoice: invoiceCell)
-        }
+//        let modifyAction = UIAlertAction(title: editActionTitle, style: .default) { (action: UIAlertAction) in
+//            self.modify(invoice: invoiceCell)
+//        }
         let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive) { (_) in
             self.delete(invoice: invoiceCell)
         }
@@ -358,7 +358,7 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
         }
         let cancelAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
         
-        actionsController.addAction(modifyAction)
+//        actionsController.addAction(modifyAction)
         actionsController.addAction(shareAction)
         actionsController.addAction(deleteAction)
         actionsController.addAction(cancelAction)

@@ -40,40 +40,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kCq-Z1-kKi">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eto-cg-Tdc">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aLq-LL-jA2">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Kyk-V5-9Xo">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </view>
-                                            <blurEffect style="dark"/>
-                                        </visualEffectView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="aLq-LL-jA2" secondAttribute="trailing" id="38d-vM-wU5"/>
-                                        <constraint firstAttribute="bottom" secondItem="aLq-LL-jA2" secondAttribute="bottom" id="EBj-6K-CA7"/>
-                                        <constraint firstItem="aLq-LL-jA2" firstAttribute="leading" secondItem="eto-cg-Tdc" secondAttribute="leading" id="EOa-S3-ggz"/>
-                                        <constraint firstItem="aLq-LL-jA2" firstAttribute="top" secondItem="eto-cg-Tdc" secondAttribute="top" id="pin-KZ-1WJ"/>
-                                    </constraints>
-                                </view>
-                                <blurEffect style="light"/>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="kCq-Z1-kKi" firstAttribute="trailing" secondItem="qhC-Wm-tUm" secondAttribute="trailing" id="AvC-z4-MUN"/>
                             <constraint firstItem="hYg-mv-AbO" firstAttribute="leading" secondItem="qhC-Wm-tUm" secondAttribute="leading" id="PFJ-ud-ubv"/>
                             <constraint firstItem="hYg-mv-AbO" firstAttribute="bottom" secondItem="iW6-YY-3qe" secondAttribute="bottom" id="aPP-Sf-evq"/>
-                            <constraint firstItem="kCq-Z1-kKi" firstAttribute="bottom" secondItem="iW6-YY-3qe" secondAttribute="bottom" id="gT7-Nw-Nvz"/>
-                            <constraint firstItem="kCq-Z1-kKi" firstAttribute="top" secondItem="qhC-Wm-tUm" secondAttribute="top" id="nWq-Wd-NiQ"/>
                             <constraint firstItem="hYg-mv-AbO" firstAttribute="trailing" secondItem="qhC-Wm-tUm" secondAttribute="trailing" id="tzj-iI-VsJ"/>
-                            <constraint firstItem="kCq-Z1-kKi" firstAttribute="leading" secondItem="qhC-Wm-tUm" secondAttribute="leading" id="vGM-kM-yGN"/>
                             <constraint firstItem="hYg-mv-AbO" firstAttribute="top" secondItem="qhC-Wm-tUm" secondAttribute="top" id="yhs-C7-bq3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qhC-Wm-tUm"/>
@@ -95,7 +67,6 @@
                     <connections>
                         <outlet property="ui_addNewCategoryButton" destination="leU-qq-Dx2" id="QaE-Pf-3NE"/>
                         <outlet property="ui_manageCategoryTableView" destination="hYg-mv-AbO" id="sTz-lT-hWr"/>
-                        <outlet property="ui_manageCategoryVisualView" destination="kCq-Z1-kKi" id="eo9-3n-HPL"/>
                         <outlet property="ui_modifyCategoryTextField" destination="E97-Vo-UpH" id="uTw-XD-0wN"/>
                         <outlet property="ui_modifyCategoryView" destination="CSn-tg-h4I" id="yGD-is-Jzd"/>
                     </connections>
