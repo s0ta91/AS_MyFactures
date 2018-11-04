@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import DZNEmptyDataSet
+import StoreKit
 
 class InvoiceCollectionViewController: UIViewController {
     
@@ -58,6 +59,7 @@ class InvoiceCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
+        setupReviewController()
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
         invoiceCollectionView.emptyDataSetSource = self
@@ -80,8 +82,13 @@ class InvoiceCollectionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: - PRIVATE FUNCTIONS
-    //TODO: Check if the data recieved from previous controller are ok
+    //MARK: - Private functions
+    /** Show the review window to note the app */
+    private func setupReviewController() {
+        SKStoreReviewController.requestReview()
+    }
+    
+    /** Check if the data recieved from previous controller are ok */
     private func checkReceivedData () {
         if let _manager = _ptManager {
             _invoiceCollectionManager = _manager
