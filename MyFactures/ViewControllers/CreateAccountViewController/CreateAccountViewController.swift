@@ -75,6 +75,7 @@ class CreateAccountViewController: UIViewController {
                     return
             }
             _manager.createUser(with: password, andEmail: emailAddress)
+            Manager.setIsFirstLoad(false)
             let storyboard = UIStoryboard(name: "GroupViewController", bundle: .main)
             let GroupTableVC = storyboard.instantiateViewController(withIdentifier: "NavGroupContoller")
             GroupTableVC.modalTransitionStyle = .crossDissolve
