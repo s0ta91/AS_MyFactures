@@ -176,7 +176,7 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_monthSelectionTextField.text = Date().currentMonth
                 ui_yearSelectionTextField.text = String(_year.year)
                 ui_groupSelectionTextField.text = groupTitle
-                ui_categorySelectionTextField.text = "Non-classée"
+                ui_categorySelectionTextField.text = NSLocalizedString("Unclassified", comment: "")
 //                ui_categorySelectionTextField.text = unknownCategory
             } else {
                 ui_descriptionTextField.text = _invoice.detailedDescription

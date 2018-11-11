@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        })
 //        Realm.Configuration.defaultConfiguration = config
+        print("[REALM] - \(Realm.Configuration.defaultConfiguration.fileURL)")
         
         //TODO:  Set UserDefaults initialisation values
         Manager.setIsFirstLoad(true)

@@ -164,9 +164,6 @@
 "This folder already exists" = "Ce dossier existe déjà";
 
 /* No comment provided by engineer. */
-"unknown" = "Non-Classée";
-
-/* No comment provided by engineer. */
 "Unlock MyFactures" = "Déverrouiller MyFactures";
 
 /* No comment provided by engineer. */
@@ -183,3 +180,9 @@
 
 /* No comment provided by engineer. */
 "Changes has been saved" = "Modification sauvegardée";
+
+/* No comment provided by engineer. */
+"All categories" = "Toutes les catégories";
+
+/* No comment provided by engineer. */
+"Unclassified" = "Non-classée";

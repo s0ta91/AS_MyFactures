@@ -13,7 +13,7 @@ extension Date {
     var currentMonth: String {
         let strMonth = DateFormatter()
         strMonth.dateFormat = "MMMM"
-        strMonth.locale = Locale(identifier: "fr-FR")
+//        strMonth.locale = Locale(identifier: "fr-FR")
         return strMonth.string(from: self).prefix(1).uppercased() + strMonth.string(from: self).dropFirst()
     }
 }

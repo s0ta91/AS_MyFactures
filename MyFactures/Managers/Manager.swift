@@ -47,8 +47,8 @@ class Manager {
     
     func initCategory () {
         if getApplicationDataCount() == 0 {
-            _ = addCategory("Toutes les catégories", isSelected: true)
-            _ = addCategory("Non-classée")
+            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
+            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
         }
     }
     
