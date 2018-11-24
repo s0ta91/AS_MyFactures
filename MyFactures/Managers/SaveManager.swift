@@ -42,6 +42,7 @@ class SaveManager {
             
             let destinationDirectory = getDocumentDirectory().appendingPathComponent(documentExtension, isDirectory: true)
             let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
+            
             createDirectory(atPath: thumbnailDirectory.path)
             createDirectory(atPath: destinationDirectory.path)
             
@@ -111,28 +112,6 @@ class SaveManager {
         return documentURL
     }
     
-    // TO DELETE
-//    static func loadThumbnail(withIdentifier identifier: String) -> UIImage? {
-//        let image: UIImage?
-//
-//        let thumbnailPath = "thumbnail_\(identifier).JPG"
-//        let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
-//        if !FileManager.default.fileExists(atPath: thumbnailDirectory.path) {
-//            fatalError("Directory not found at path \(thumbnailDirectory)")
-//        }
-//        let thumbnailUrl = thumbnailDirectory.appendingPathComponent(thumbnailPath)
-//        if FileManager.default.fileExists(atPath: thumbnailUrl.path) {
-//            if let imageFromUrl = getImageFromURL(url: thumbnailUrl) {
-//                image = imageFromUrl
-//            } else {
-//                image = nil
-//            }
-//            return image
-//        } else {
-//            fatalError("File unavailable at path \(thumbnailUrl)")
-//        }
-//    }
-    
     static func getUrl(forIdentifier identifier: String, documentType: DocumentType) -> URL {
         
         let thumbnailPath = "\(documentType)_\(identifier).JPG"
@@ -170,21 +149,27 @@ class SaveManager {
         if !createFileIsSuccess {
             print("Error. The document has not been written to path : \(imageDestinationPath)")
         }
+        completion()
     }
     
     static private func saveThumbnail(withFilename thumbnailFilename: String, fromUrl documentUrl: URL? = nil, withImage image: UIImage? = nil, to thumbnailDestinationURL: URL, withDocumentExtention documentExtension: String) {
         var data: Data?
         if let url = documentUrl {
             data = getThumbnailData(forUrl: url, documentExtension: documentExtension)
+            print("[INFO] - thumbnail data: \(data)")
         }
         if let selectedImage = image {
             data = selectedImage.jpegData(compressionQuality: 1.0)
+            print("[INFO] - thumbnail image data: \(data)")
         }
         if let thumbnailData = data {
+            print("[INFO] - write thumbnail data")
             let createFileIsSuccess = FileManager.default.createFile(atPath: thumbnailDestinationURL.path, contents: thumbnailData, attributes: nil)
             if !createFileIsSuccess {
                 print("Error. The document has not been written to path : \(thumbnailDestinationURL.path)")
             }
+        } else {
+            print("[ERROR] - No thumbnail data")
         }
     }
     
