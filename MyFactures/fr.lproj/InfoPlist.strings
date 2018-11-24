@@ -1,0 +1,12 @@
+/* Bundle name */
+"CFBundleName" = "";
+
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "Autoriser MyFactures à accéder à votre appareil photo";
+
+/* Privacy - Face ID Usage Description */
+"NSFaceIDUsageDescription" = "Autoriser l'accès à FaceID afin que MyFactures puisse vous authentifier en détectant votre visage.";
+
+/* Privacy - Photo Library Additions Usage Description */
+"NSPhotoLibraryAddUsageDescription" = "Autoriser MyFactures à accéder à votre bibliothèque photo";
+

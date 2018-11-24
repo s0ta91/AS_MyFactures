@@ -14,6 +14,8 @@ class DbManager {
     private static let REALM_ENCRYPTION_KEY = "REALM_ENCRYPTION_KEY"
     private static let MASTER_PASSWORD = "MESFACTURES_MASTER_PASSWORD"
     private static let ENCRYPT_FILE = true
+    /** DEBUG */
+//    private static let ENCRYPT_FILE = false
     
     private var _database: Manager?
     private var _keychain: Keychain

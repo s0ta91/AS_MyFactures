@@ -12,7 +12,6 @@ import KeychainAccess
 
 class Manager {
     
-    
     private var _realm: Realm
     private var _yearsList: Results<Year>
     private var _applicationDataList: Results<ApplicationData>
@@ -48,8 +47,8 @@ class Manager {
     
     func initCategory () {
         if getApplicationDataCount() == 0 {
-            _ = addCategory("Toutes les catégories", isSelected: true)
-            _ = addCategory("Non-classée")
+            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
+            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
         }
     }
     
@@ -100,12 +99,12 @@ class Manager {
             let userPassword = DbManager().getMasterPassword() {
             
             if sendEmail(toEmail: userEmail, withPassword: userPassword) {
-                Alert.message(title: "Message envoyé", message: "Un email contenant votre mot de passe vous a été envoyé", vc: originViewController)
+                Alert.message(title: NSLocalizedString("Password sent", comment: ""), message: NSLocalizedString("An email containing your password as been sent", comment: ""), vc: originViewController)
             } else {
-                Alert.message(title: "Une erreur est survenue lors de l'envoi du message", message: "", vc: originViewController)
+                Alert.message(title: NSLocalizedString("An error occured. Message has not been sent.", comment: ""), message: "", vc: originViewController)
             }
         }else {
-            Alert.message(title: "Error retreiving user informations", message: "", vc: originViewController)
+            Alert.message(title: NSLocalizedString("Error retreiving user informations", comment: ""), message: "", vc: originViewController)
             print("Error retreiving user informations")
         }
     }
@@ -133,12 +132,16 @@ class Manager {
         builder.header.from = MCOAddress(displayName: "MyFacturesApp", mailbox: Settings().emailAdress)
         
         if let codeForUser = code {
-            builder.header.subject = "Vérification de votre adresse email"
-            builder.htmlBody = "Bonjour,<br/><br/> Veuillez recopier le code suivant dans l'application afin de vérifier votre adresse email.<br/><br/>code: \(codeForUser)<br/><br/> Merci<br/> MyFacturesApp"
+            builder.header.subject = NSLocalizedString("Confirm your email address", comment: "")
+            builder.htmlBody = NSLocalizedString("Hello,<br/><br/> Please copy/paste the code bellow in the app to verify your email address.<br/><br/>code:", comment: "")
+                + "\(codeForUser)"
+                + NSLocalizedString("<br/><br/> Thank you<br/> MyFacturesApp", comment: "")
         }
         if let userPassword = password {
-            builder.header.subject = "Récupération de votre mot de passe"
-            builder.htmlBody = "Bonjour,<br/><br/> Veuillez trouver ci-dessous votre mot de passe.<br/><br/> Mot de passe: \(userPassword)<br/><br/> MyFacturesApp"
+            builder.header.subject = NSLocalizedString("Password recovery", comment: "")
+            builder.htmlBody = NSLocalizedString("Hello,<br/><br/> Please find bellow your password.<br/><br/> Password:", comment: "")
+                + "\(userPassword)"
+                + "<br/><br/> MyFacturesApp"
         }
         
         let rfc822Data = builder.data()
@@ -161,7 +164,8 @@ class Manager {
     // MARK: - User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
-        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+//        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
+        UserDefaults.standard.set(email, forKey: UserDefaults.keys.userEmail.rawValue)
     }
     
     func setUserEmail() {
@@ -185,8 +189,20 @@ class Manager {
     func getyearsCount () -> Int {
         return _yearsList.count
     }
+    
     func getYear (atIndex index: Int) -> Year? {
         return _yearsList[index]
+    }
+    
+    func getYear (forValue value: Int) -> Year? {
+        let yearPredicate = NSPredicate(format: "_year == %i", value)
+        guard let yearIndex = _yearsList.index(matching: yearPredicate) else { return nil }
+        return getYear(atIndex: yearIndex)
+    }
+    
+    func getYearIndex (forValue value: Int) -> Int? {
+        guard let year = getYear(forValue: value) else { return 0 }
+        return _yearsList.index(of: year)
     }
     
     func setSelectedYear (forYear newSelectedYear: Year) {
@@ -304,45 +320,45 @@ class Manager {
     
     
     // MARK: - Other functions
-    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
-        let textFieldToConvert = textField
-        let labelToConvert = label
-        
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-        currencyFormatter.locale = NSLocale.autoupdatingCurrent
-//        currencyFormatter.locale = Locale(identifier: "fr-FR")
-        currencyFormatter.decimalSeparator = "."
-        
-        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                textFieldToConvert?.text = numberToCurrencyType
-            }
-        }else if let amountString = labelToConvert?.text,
-            let amountDouble = Double(amountString) {
-            let amountNumber = NSNumber(value: amountDouble)
-            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-                labelToConvert?.text = numberToCurrencyType
-            }
-        }
-    }
+//    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
+//        let textFieldToConvert = textField
+//        let labelToConvert = label
+//
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.usesGroupingSeparator = true
+//        currencyFormatter.numberStyle = NumberFormatter.Style.currency
+//        currencyFormatter.locale = NSLocale.autoupdatingCurrent
+////        currencyFormatter.locale = Locale(identifier: "fr-FR")
+//        currencyFormatter.decimalSeparator = "."
+//
+//        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                textFieldToConvert?.text = numberToCurrencyType
+//            }
+//        }else if let amountString = labelToConvert?.text,
+//            let amountDouble = Double(amountString) {
+//            let amountNumber = NSNumber(value: amountDouble)
+//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
+//                labelToConvert?.text = numberToCurrencyType
+//            }
+//        }
+//    }
     
-    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
-        let convertedResult: Decimal?
-        let textFieldToConvert = textField
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.numberStyle = .currency
-        if let amountString = textFieldToConvert.text,
-            let currencyToNumber = currencyFormatter.number(from: amountString) {
-            convertedResult = currencyToNumber.decimalValue
-        }else {
-            convertedResult = nil
-        }
-        return convertedResult
-    }
+//    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
+//        let convertedResult: Decimal?
+//        let textFieldToConvert = textField
+//        let currencyFormatter = NumberFormatter()
+//        currencyFormatter.numberStyle = .currency
+//        if let amountString = textFieldToConvert.text,
+//            let currencyToNumber = currencyFormatter.number(from: amountString) {
+//            convertedResult = currencyToNumber.decimalValue
+//        }else {
+//            convertedResult = nil
+//        }
+//        return convertedResult
+//    }
     
     func setButtonLayer (_ button: UIButton) {
         button.layer.cornerRadius = 17
@@ -359,27 +375,8 @@ class Manager {
         layout?.sectionHeadersPinToVisibleBounds = true
     }
     
-    func drawPDFfromURL (url: URL) -> UIImage? {
-        guard let document = CGPDFDocument(url as CFURL) else { print("error document")
-            return nil }
-        guard let page = document.page(at: 1) else { print("error page")
-            return nil }
-        
-        let pageRect = page.getBoxRect(.mediaBox)
-        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
-        let img = renderer.image { ctx in
-            UIColor.white.set()
-            ctx.fill(pageRect)
-            
-            ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
-            ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
-            
-            ctx.cgContext.drawPDFPage(page)
-        }
-        
-        return img
-    }
-
+    //FIXME: TO DELETE
+    // Has been moved to SaveManager.swift
     func getImageFromURL (url: URL) -> UIImage? {
         let image: UIImage?
         if let data = NSData(contentsOf: url) {
@@ -399,5 +396,23 @@ class Manager {
         animation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 4, y: textField.center.y))
         
         textField.layer.add(animation, forKey: "position")
+    }
+
+    static func dismissVC (thisViewController vc: UIViewController, withTransition transition: UIModalTransitionStyle, animated: Bool! = false) {
+        vc.modalTransitionStyle = transition
+        vc.dismiss(animated: animated, completion: nil)
+    }
+    
+    static func presentLoginScreen(fromViewController vc: UIViewController){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { fatalError("Could not load LoginVC") }
+        vc.present(loginVC, animated: false, completion: nil)
+    }
+    
+    static func setIsFirstLoad(_ value: Bool) {
+        UserDefaults.standard.set(value, forKey: "firstLoad")
+    }
+    static func isFirstLoad() -> Bool {
+        return UserDefaults.standard.bool(forKey: "firstLoad")
     }
 }

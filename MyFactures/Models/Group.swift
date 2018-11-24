@@ -15,7 +15,18 @@ class Group: Object {
     @objc private dynamic var _totalPrice = 0.0
     @objc private dynamic var _totalDocuments = 0
     private var _monthList = List<Month>()
-    let _monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+    let _monthArray = [NSLocalizedString("January", comment: ""),
+                       NSLocalizedString("February", comment: ""),
+                       NSLocalizedString("March", comment: ""),
+                       NSLocalizedString("April", comment: ""),
+                       NSLocalizedString("May", comment: ""),
+                       NSLocalizedString("June", comment: ""),
+                       NSLocalizedString("July", comment: ""),
+                       NSLocalizedString("August", comment: ""),
+                       NSLocalizedString("September", comment: ""),
+                       NSLocalizedString("October", comment: ""),
+                       NSLocalizedString("November", comment: ""),
+                       NSLocalizedString("december", comment: "")]
     
     var title: String {
         get {
@@ -53,6 +64,12 @@ class Group: Object {
         return _monthList.count
     }
     
+    func initMonthList() {
+        for month in _monthArray {
+            self.addMonth(month)
+        }
+    }
+    
     func addMonth (_ monthName: String) {
         let newMonth = Month()
         newMonth.month = monthName
@@ -69,12 +86,13 @@ class Group: Object {
             month = nil
         }
         return month
+        
     }
     func getMonthIndex (forMonth month: Month) -> Int? {
         return _monthList.index(of: month)
     }
-    func getMonthIndexFromTable (forMonthName monthName: String) -> Int! {
-        return _monthArray.index(of: monthName)
+    func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
+        return _monthArray.index(of: monthName)!
     }
     
     func removeMonth (atIndex index: Int) {
@@ -87,12 +105,23 @@ class Group: Object {
     
     func checkIfMonthExist (forMonthName monthName: String) -> Month {
         let monthToReturn: Month
-        let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
+        let monthArray = [NSLocalizedString("January", comment: ""),
+                           NSLocalizedString("February", comment: ""),
+                           NSLocalizedString("March", comment: ""),
+                           NSLocalizedString("April", comment: ""),
+                           NSLocalizedString("May", comment: ""),
+                           NSLocalizedString("June", comment: ""),
+                           NSLocalizedString("July", comment: ""),
+                           NSLocalizedString("August", comment: ""),
+                           NSLocalizedString("September", comment: ""),
+                           NSLocalizedString("October", comment: ""),
+                           NSLocalizedString("November", comment: ""),
+                           NSLocalizedString("december", comment: "")]
         guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
         }else {
-            fatalError("month :\(monthName) does not exists in database")
+            fatalError("month '\(monthName)' does not exists in database")
         }
         return monthToReturn
     }

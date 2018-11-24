@@ -1,0 +1,15 @@
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "4Pd-Yz-zyc"; */
+"4Pd-Yz-zyc.normalTitle" = "Créer";
+
+/* Class = "UITextField"; placeholder = "Your password"; ObjectID = "oUb-vn-rbh"; */
+"oUb-vn-rbh.placeholder" = "Votre mot de passe...";
+
+/* Class = "UITextField"; placeholder = "Your email address *"; ObjectID = "WDj-31-kxz"; */
+"WDj-31-kxz.placeholder" = "Votre adresse email *";
+
+/* Class = "UITextField"; text = "MyFactures"; ObjectID = "y9Z-UM-0vf"; */
+"y9Z-UM-0vf.text" = "MyFactures";
+
+/* Class = "UILabel"; text = "[InformationLabel]"; ObjectID = "zkV-wK-dPd"; */
+"zkV-wK-dPd.text" = "[InformationLabel]";
+

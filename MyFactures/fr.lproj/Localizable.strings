@@ -1,0 +1,188 @@
+/* No comment provided by engineer. */
+"* Your email address will be stored localy. In no case it will be shared or known by thrid parties." = "* Votre adresse email sera stockée localement. En aucun cas elle ne sera partagée, ni connue de tierces personnes.";
+
+/* No comment provided by engineer. */
+"<br/><br/> Thank you<br/> MyFacturesApp" = "<br/><br/> Merci<br/> MyFacturesApp";
+
+/* No comment provided by engineer. */
+"Add" = "Créer";
+
+/* No comment provided by engineer. */
+"Add your email address *" = "Entrez votre adresse mail *";
+
+/* No comment provided by engineer. */
+"An email containing your password as been sent" = "Un email contenant votre mot de passe vous a été envoyé";
+
+/* No comment provided by engineer. */
+"An error occured" = "Une erreur est survenue.";
+
+/* No comment provided by engineer. */
+"An error occured. Message has not been sent." = "Une erreur est survenue lors de l'envoi du message";
+
+/* No comment provided by engineer. */
+"April" = "Avril";
+
+/* No comment provided by engineer. */
+"Associated documents will not be deleted" = "Les documents associées ne seront pas supprimés";
+
+/* No comment provided by engineer. */
+"August" = "Août";
+
+/* No comment provided by engineer. */
+"Camera" = "Prendre une photo";
+
+/* No comment provided by engineer. */
+"Cancel" = "Annuler";
+
+/* No comment provided by engineer. */
+"Confirm" = "Valider";
+
+/* No comment provided by engineer. */
+"Confirm your email address" = "Vérification de votre adresse email";
+
+/* No comment provided by engineer. */
+"Current password is wrong. Please try again" = "Le mot de passe actuel n'est pas correct. Veuillez réessayer.";
+
+/* No comment provided by engineer. */
+"December" = "Décembre";
+
+/* No comment provided by engineer. */
+"Delete" = "Supprimer";
+
+/* No comment provided by engineer. */
+"Delete folder" = "Supprimer dossier";
+
+/* No comment provided by engineer. */
+"Delete this document ?" = "Supprimer ce document ?";
+
+/* No comment provided by engineer. */
+"Deletion of this folder will errase all associated documents definitively." = "La suppression de ce dossier entrainera la suppression de toutes les factures associées sans possibilité de les récupérer. Souhaitez-vous continuer ?";
+
+/* No comment provided by engineer. */
+"Document" = "Choisir un document";
+
+/* No comment provided by engineer. */
+"Edit" = "Modifier";
+
+/* No comment provided by engineer. */
+"Edit folder name" = "Modifier le nom du dossier";
+
+/* No comment provided by engineer. */
+"Email address is confirmed" = "Adresse email confirmée";
+
+/* No comment provided by engineer. */
+"Error" = "Erreur";
+
+/* No comment provided by engineer. */
+"Error retreiving user informations" = "Erreur lors de la récupération des informations de l'utilisateur";
+
+/* No comment provided by engineer. */
+"Error! - No password found in keychain" = "Erreur! - Aucun mot de passe trouver dans la keychain";
+
+/* No comment provided by engineer. */
+"February" = "Février";
+
+/* No comment provided by engineer. */
+"Fields can not be empty" = "Les champs ne peuvent être vides.";
+
+/* No comment provided by engineer. */
+"folder" = "dossier";
+
+/* No comment provided by engineer. */
+"folders" = "dossiers";
+
+/* No comment provided by engineer. */
+"Hello,<br/><br/> Please copy/paste the code bellow in the app to verify your email address.<br/><br/>code:" = "Bonjour,<br/><br/> Veuillez recopier le code suivant dans l'application afin de vérifier votre adresse email.<br/><br/>code:";
+
+/* No comment provided by engineer. */
+"Hello,<br/><br/> Please find bellow your password.<br/><br/> Password:" = "Bonjour,<br/><br/> Veuillez trouver ci-dessous votre mot de passe.<br/><br/> Mot de passe:";
+
+/* No comment provided by engineer. */
+"January" = "Janvier";
+
+/* No comment provided by engineer. */
+"July" = "Juillet";
+
+/* No comment provided by engineer. */
+"June" = "Juin";
+
+/* No comment provided by engineer. */
+"March" = "Mars";
+
+/* No comment provided by engineer. */
+"May" = "Mai";
+
+/* No comment provided by engineer. */
+"No file assiciated to this document" = "Aucun fichier n'est associé à ce document";
+
+/* No comment provided by engineer. */
+"No folder available" = "Aucun dossier disponible";
+
+/* No comment provided by engineer. */
+"November" = "Novembre";
+
+/* No comment provided by engineer. */
+"October" = "Octobre";
+
+/* No comment provided by engineer. */
+"Password recovery" = "Récupération de votre mot de passe";
+
+/* No comment provided by engineer. */
+"Password sent" = "Mot de passe envoyé";
+
+/* No comment provided by engineer. */
+"Photo library" = "Choisir une photo";
+
+/* No comment provided by engineer. */
+"Please check your emails and enter the confirmation code :" = "Veuillez entrer le code de confirmation reçu par email :";
+
+/* No comment provided by engineer. */
+"Please create a folder" = "Veuillez créer un dossier";
+
+/* No comment provided by engineer. */
+"September" = "Septembre";
+
+/* No comment provided by engineer. */
+"Share" = "Partager";
+
+/* No comment provided by engineer. */
+"Tap the 'New document' icon to create a new document" = "Tapez sur l'icone 'Nouveau document'";
+
+/* No comment provided by engineer. */
+"Tap the 'New folder' icon bellow to begin" = "Tapez sur l'icone 'Nouveau dossier pour commencer'";
+
+/* No comment provided by engineer. */
+"Thank you !" = "Merci !";
+
+/* No comment provided by engineer. */
+"There is an issue with one of the fields" = "Il y a un problème avec l'un des champs";
+
+/* No comment provided by engineer. */
+"This category already exists" = "Cette catégorie existe déjà";
+
+/* No comment provided by engineer. */
+"This folder already exists" = "Ce dossier existe déjà";
+
+/* No comment provided by engineer. */
+"Unlock MyFactures" = "Déverrouiller MyFactures";
+
+/* No comment provided by engineer. */
+"Warning" = "Attention";
+
+/* No comment provided by engineer. */
+"Would you like to delete this category ?" = "Voulez vous vraiment supprimer cette catégorie ?";
+
+/* No comment provided by engineer. */
+"Your password has been changed" = "Votre mot de passe a été changé";
+
+/* No comment provided by engineer. */
+"The email address is not valid" = "L'adresse email n'est pas valide";
+
+/* No comment provided by engineer. */
+"Changes has been saved" = "Modification sauvegardée";
+
+/* No comment provided by engineer. */
+"All categories" = "Toutes les catégories";
+
+/* No comment provided by engineer. */
+"Unclassified" = "Non-classée";

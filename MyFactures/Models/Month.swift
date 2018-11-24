@@ -16,7 +16,7 @@ class Month: Object {
     private var _invoiceList = List<Invoice>()
     private var filteredInvoiceList: Results<Invoice>?
     var _invoiceListToShow : [Invoice] = []
-    let ALL_CATEGORY_TEXT = "Toutes les catégories"
+    let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
     
     var month: String {
         get {

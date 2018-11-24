@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+enum DocumentType {
+    case image
+    case thumbnail
+    case pdf
+}
+
 class SaveManager {
     
     static fileprivate func getDocumentDirectory () -> URL {
@@ -34,34 +40,30 @@ class SaveManager {
                 identifier = getNewIdentifier().uuidString
             }
             
-            let filename = "\(identifier!).\(documentExtension)"
             let destinationDirectory = getDocumentDirectory().appendingPathComponent(documentExtension, isDirectory: true)
-            let destinationURL = destinationDirectory.appendingPathComponent(filename, isDirectory: false)
-            if !FileManager.default.fileExists(atPath: destinationDirectory.path, isDirectory: nil) {
-                do {
-                    try FileManager.default.createDirectory(atPath: destinationDirectory.path, withIntermediateDirectories: false, attributes: nil)
-                }catch {
-                    fatalError("Cannot create destination directory -> \(error.localizedDescription)")
-                }
-            }
+            let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
+            
+            createDirectory(atPath: thumbnailDirectory.path)
+            createDirectory(atPath: destinationDirectory.path)
+            
+            let filename = "\(identifier!).\(documentExtension)"
+            let thumbnailFilename = "thumbnail_\(identifier!).JPG"
+            
+            let documentDestinationURL = destinationDirectory.appendingPathComponent(filename, isDirectory: false)
+            let thumbnailDestinationURL = thumbnailDirectory.appendingPathComponent(thumbnailFilename, isDirectory: false)
             
             if let documentUrl = document as? URL {
-                do {
-                    try FileManager.default.copyItem(at: documentUrl, to: destinationURL)
-                }catch {
-                    fatalError("Connot create file -> \(error.localizedDescription)")
+                save(documentAtUrl: documentUrl, to: documentDestinationURL) {
+                    saveThumbnail(withFilename: thumbnailFilename, fromUrl: documentUrl, to: thumbnailDestinationURL, withDocumentExtention: documentExtension)
                 }
             }else {
                 if let image = document as? UIImage {
-                    let JPGImage = UIImageJPEGRepresentation(image, 1.0)
-                    let createFileIsSuccess = FileManager.default.createFile(atPath: destinationURL.path, contents: JPGImage, attributes: nil)
-                    if !createFileIsSuccess {
-                        print("An error occurs. The document has not been written to path : \(destinationURL.path)")
+                    save(image: image, atPath: documentDestinationURL.path) {
+                        saveThumbnail(withFilename: thumbnailFilename, withImage: image, to: thumbnailDestinationURL, withDocumentExtention: documentExtension)
                     }
-
                 }
             }
-        }else {
+        } else {
             print("No document receive in parameter")
         }
         
@@ -84,6 +86,16 @@ class SaveManager {
         }
     }
     
+    static func createDirectory(atPath destinationDirectory: String) {
+        if !FileManager.default.fileExists(atPath: destinationDirectory, isDirectory: nil) {
+            do {
+                try FileManager.default.createDirectory(atPath: destinationDirectory, withIntermediateDirectories: false, attributes: nil)
+            }catch {
+                fatalError("Cannot create destination directory -> \(error.localizedDescription)")
+            }
+        }
+    }
+    
     static func loadDocument (withIdentifier identifier: String, andExtension documentExtension: String) -> URL? {
         let documentURL: URL?
         let filePath = "\(identifier).\(documentExtension)"
@@ -94,10 +106,20 @@ class SaveManager {
         let Url = documentDirectory.appendingPathComponent(filePath)
         if FileManager.default.fileExists(atPath: Url.path) {
             documentURL = Url
-        }else {
+        } else {
             fatalError("File unavailable at path \(Url)")
         }
         return documentURL
+    }
+    
+    static func getUrl(forIdentifier identifier: String, documentType: DocumentType) -> URL {
+        
+        let thumbnailPath = "\(documentType)_\(identifier).JPG"
+        let thumbnailDirectory = getDocumentDirectory().appendingPathComponent("thumbnails", isDirectory: true)
+        if !FileManager.default.fileExists(atPath: thumbnailDirectory.path) {
+            fatalError("Directory not found at path \(thumbnailDirectory)")
+        }
+        return thumbnailDirectory.appendingPathComponent(thumbnailPath)
     }
     
     static func removeDocument (forIdentifier identifier: String, andExtension documentExtension: String) {
@@ -109,6 +131,97 @@ class SaveManager {
             try FileManager.default.removeItem(at: fileUrl)
         }catch {
             fatalError("Cannot remove file. It does not exists")
+        }
+    }
+
+    static private func save(documentAtUrl url: URL, to destination: URL, completion: () -> Void) {
+        do {
+            try FileManager.default.copyItem(at: url, to: destination)
+            completion()
+        }catch {
+            fatalError("Connot create file -> \(error.localizedDescription)")
+        }
+    }
+    
+    static private func save(image: UIImage, atPath imageDestinationPath: String, completion: () -> ()) {
+        let JPGImage = image.jpegData(compressionQuality: 1.0)
+        let createFileIsSuccess = FileManager.default.createFile(atPath: imageDestinationPath, contents: JPGImage, attributes: nil)
+        if !createFileIsSuccess {
+            print("Error. The document has not been written to path : \(imageDestinationPath)")
+        }
+        completion()
+    }
+    
+    static private func saveThumbnail(withFilename thumbnailFilename: String, fromUrl documentUrl: URL? = nil, withImage image: UIImage? = nil, to thumbnailDestinationURL: URL, withDocumentExtention documentExtension: String) {
+        var data: Data?
+        if let url = documentUrl {
+            data = getThumbnailData(forUrl: url, documentExtension: documentExtension)
+            print("[INFO] - thumbnail data: \(data)")
+        }
+        if let selectedImage = image {
+            data = selectedImage.jpegData(compressionQuality: 1.0)
+            print("[INFO] - thumbnail image data: \(data)")
+        }
+        if let thumbnailData = data {
+            print("[INFO] - write thumbnail data")
+            let createFileIsSuccess = FileManager.default.createFile(atPath: thumbnailDestinationURL.path, contents: thumbnailData, attributes: nil)
+            if !createFileIsSuccess {
+                print("Error. The document has not been written to path : \(thumbnailDestinationURL.path)")
+            }
+        } else {
+            print("[ERROR] - No thumbnail data")
+        }
+    }
+    
+    static private func drawPDFfromURL (forUrl url: URL) -> Data? {
+        guard let document = CGPDFDocument(url as CFURL) else { print("error document")
+            return nil }
+        guard let page = document.page(at: 1) else { print("error page")
+            return nil }
+        
+        let pageRect = page.getBoxRect(.mediaBox)
+        let renderer = UIGraphicsImageRenderer(size: pageRect.size)
+        let img = renderer.image { ctx in
+            UIColor.white.set()
+            ctx.fill(pageRect)
+            
+            ctx.cgContext.translateBy(x: 0.0, y: pageRect.size.height)
+            ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
+            
+            ctx.cgContext.drawPDFPage(page)
+        }
+        
+        let imageData = img.jpegData(compressionQuality: 1.0)
+        
+        return imageData
+    }
+    
+    static private func getImageData(forUrl url: URL) -> Data? {
+        let imageData: Data?
+        if let data = NSData(contentsOf: url),
+            let image = UIImage(data: data as Data) {
+            imageData = image.jpegData(compressionQuality: 1.0)
+        }else {
+            imageData = nil
+        }
+        return imageData
+    }
+    
+    static private func getImageFromURL (url: URL) -> UIImage? {
+        let image: UIImage?
+        if let data = NSData(contentsOf: url) {
+            image = UIImage(data: data as Data)
+        }else {
+            image = nil
+        }
+        return image
+    }
+    
+    static private func getThumbnailData(forUrl url: URL, documentExtension: String) -> Data? {
+        if documentExtension == "PDF" {
+            return drawPDFfromURL(forUrl: url)
+        } else {
+            return getImageData(forUrl: url)
         }
     }
 }

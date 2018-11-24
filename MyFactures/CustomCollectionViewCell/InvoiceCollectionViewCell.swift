@@ -22,32 +22,19 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ui_invoiceDocumentThumbnail: UIButton!
     
     //MARK: - Global variables
-    var _ptManager: Manager?
     weak var delegate: InvoiceCollectionViewCellDelegate?
     
-    
     //MARK: - Functions
-    //TODO: Create a function to set values for the cell
+    //TODO: Set values for the cell
     func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
-        guard let _manager = _ptManager else {fatalError("passthrough _ptManager does not exists")}
-        var imageToShow = UIImage(named: "missing_document")
-        if let invoiceIdentifier = invoice.identifier,
-            let invoiceDocumentExtension = invoice.documentType,
-            let documentUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
-                switch invoiceDocumentExtension {
-                    case "PDF":
-                        imageToShow = _manager.drawPDFfromURL(url: documentUrl)
-                    case "JPG":
-                        imageToShow = _manager.getImageFromURL(url: documentUrl)
-                    default:
-                        imageToShow = UIImage(named: "missing_document")
-                }
+        if let invoiceIdentifier = invoice.identifier {
+            let thumbnailUrl = SaveManager.getUrl(forIdentifier: invoiceIdentifier, documentType: .thumbnail)
+            ui_invoiceDocumentThumbnail.loadImage(with: thumbnailUrl.absoluteString)
         }
-        ui_invoiceDocumentThumbnail.setImage(imageToShow, for: .normal)
         ui_amountLabel.text = String(describing: invoice.amount)
         ui_categoryLabel.text = invoice.categoryObject?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription
-        _manager.convertToCurrencyNumber(forLabel: ui_amountLabel)
+        ui_amountLabel.convertToCurrencyNumber()
         setFontSize(with: fontSize)
     }
     

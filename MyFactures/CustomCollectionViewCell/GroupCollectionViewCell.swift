@@ -23,14 +23,13 @@ class GroupCollectionViewCell: UICollectionViewCell {
     weak var delegate: GroupCollectionViewCellDelegate?
     
     //MARK: - public functions
-    func setValues (_ _manager: Manager, _ group: Group, fontSize: CGFloat) {
+    func setValues (_ group: Group, fontSize: CGFloat) {
         let totalAmount = String(describing: group.getTotalGroupAmount())
         let totalDocument = String(group.getTotalDocument())
         ui_titleLabel.text = group.title
         ui_totalPriceLabel.text = totalAmount
         ui_totalDocumentsLabel.text = totalDocument
-        
-        _manager.convertToCurrencyNumber(forLabel: ui_totalPriceLabel)
+        ui_totalPriceLabel.convertToCurrencyNumber()
         setFontSize(with: fontSize)
     }
     

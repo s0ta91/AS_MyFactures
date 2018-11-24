@@ -1,0 +1,15 @@
+/* Class = "UINavigationItem"; title = "Manage categories"; ObjectID = "aDC-3A-06C"; */
+"aDC-3A-06C.title" = "Gestion des catégories";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Atk-yg-hmA"; */
+"Atk-yg-hmA.text" = "Title";
+
+/* Class = "UITextField"; placeholder = "Category name"; ObjectID = "E97-Vo-UpH"; */
+"E97-Vo-UpH.placeholder" = "Nom de la catégorie ...";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "egP-Bm-Isw"; */
+"egP-Bm-Isw.normalTitle" = "Annuler";
+
+/* Class = "UIButton"; normalTitle = "Edit"; ObjectID = "leU-qq-Dx2"; */
+"leU-qq-Dx2.normalTitle" = "Modifier";
+
