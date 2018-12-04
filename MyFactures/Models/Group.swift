@@ -116,7 +116,7 @@ class Group: Object {
                            NSLocalizedString("September", comment: ""),
                            NSLocalizedString("October", comment: ""),
                            NSLocalizedString("November", comment: ""),
-                           NSLocalizedString("december", comment: "")]
+                           NSLocalizedString("December", comment: "")]
         guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
