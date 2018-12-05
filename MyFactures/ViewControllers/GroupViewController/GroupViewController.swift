@@ -9,6 +9,7 @@
 import UIKit
 import DZNEmptyDataSet
 import IQKeyboardManagerSwift
+import Buglife
 
 class GroupViewController: UIViewController {
     
@@ -34,6 +35,12 @@ class GroupViewController: UIViewController {
             fatalError("Database doesn't exists")
         }
     }
+    
+    lazy var _settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher._homeController = self
+        return launcher
+    }()
     
     private var _currentYear: Year!
     private var _groupToModify: Group?
@@ -99,6 +106,33 @@ class GroupViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //MARK: - Public functions
+    func showController(forSetting setting: Setting) {
+        
+        switch setting.name {
+        case .feedback:
+            let appearance = Buglife.shared().appearance
+            appearance.barTintColor = UIColor(named: "navBarTint")
+            appearance.tintColor = .white
+            Buglife.shared().presentReporter()
+        case .informations:
+            let storyboard = UIStoryboard(name: "UserInfosViewController", bundle: Bundle.main)
+            let UserInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
+            self.show(UserInfosVC, sender: nil)
+        case .resetPassword:
+            let storyboard = UIStoryboard(name: "ResetPasswordViewController", bundle: Bundle.main)
+            let ResetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
+            self.show(ResetPasswordVC, sender: nil)
+        case .about:
+            let storyboard = UIStoryboard(name: "AboutViewController", bundle: Bundle.main)
+            let AboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
+            self.show(AboutVC, sender: nil)
+        case .cancel:
+            break
+        }
+    }
+    
     
     //MARK: -  Private functions
     private func animateIn() {
@@ -191,6 +225,12 @@ class GroupViewController: UIViewController {
         }
     }
     
+    @IBAction func showSettings(_ sender: UIBarButtonItem) {
+        _settingsLauncher.showSettings()
+    }
+    
+    
+    
     //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showModaly_yearSelectionVC" {
@@ -223,7 +263,7 @@ extension GroupViewController: UICollectionViewDataSource {
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as!  HeaderGroupView
+           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as?  HeaderGroupView
            headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
         default:
             assert(false, "Unexpected element kind")

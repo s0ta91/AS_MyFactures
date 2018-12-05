@@ -71,6 +71,11 @@
 		1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E7203B0E5D00176EF3 /* CategoryPicker.swift */; };
 		1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14E9203B238E00176EF3 /* SaveManager.swift */; };
 		1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DFE14F1203DD92700176EF3 /* ManageCategoryTableViewController.swift */; };
+		BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6C521B7F54D00BCCDDD /* SettingsLauncher.swift */; };
+		BE29F6CA21B7F7B600BCCDDD /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6C921B7F7B600BCCDDD /* Setting.swift */; };
+		BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */; };
+		BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */; };
+		BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CF21B7FB9500BCCDDD /* UIView.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +169,11 @@
 		89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFacturesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFactures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyFactures.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures.release.xcconfig"; sourceTree = "<group>"; };
+		BE29F6C521B7F54D00BCCDDD /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
+		BE29F6C921B7F7B600BCCDDD /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE29F6CF21B7FB9500BCCDDD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +227,7 @@
 				1DB07FC9203200DA00BDDDFB /* Category.swift */,
 				1DB07FC72031FCAE00BDDDFB /* Invoice.swift */,
 				1D1052AA20ADE23E007C5CCF /* Settings.swift */,
+				BE29F6C921B7F7B600BCCDDD /* Setting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -227,6 +238,7 @@
 				1D4809D02024900A00068094 /* DbManager.swift */,
 				1D4809D22024924900068094 /* Manager.swift */,
 				1DFE14E9203B238E00176EF3 /* SaveManager.swift */,
+				BE29F6C521B7F54D00BCCDDD /* SettingsLauncher.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -244,6 +256,7 @@
 				1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */,
 				1D3FC04620EE281F00E9B5C5 /* UIButton.swift */,
 				1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */,
+				BE29F6CF21B7FB9500BCCDDD /* UIView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -444,11 +457,13 @@
 		1DD923582028C49900387FF8 /* CustomCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */,
 				1DD923592028C4C800387FF8 /* HeaderGroupView.swift */,
 				1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */,
 				1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */,
 				1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */,
 				1DB07FCD20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift */,
+				BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */,
 			);
 			path = CustomCollectionViewCell;
 			sourceTree = "<group>";
@@ -632,6 +647,7 @@
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
+				BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
 				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
 				1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */,
@@ -649,9 +665,12 @@
 				1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */,
 				1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */,
 				1DFE14F2203DD92700176EF3 /* ManageCategoryTableViewController.swift in Sources */,
+				BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */,
 				1DF4B0C820C6D600004376D9 /* DateExtension.swift in Sources */,
 				1D06376520A9D8880013E145 /* TextField.swift in Sources */,
+				BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
+				BE29F6CA21B7F7B600BCCDDD /* Setting.swift in Sources */,
 				1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */,
@@ -659,6 +678,7 @@
 				1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
+				BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,

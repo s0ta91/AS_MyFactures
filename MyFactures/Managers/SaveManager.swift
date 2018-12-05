@@ -156,11 +156,11 @@ class SaveManager {
         var data: Data?
         if let url = documentUrl {
             data = getThumbnailData(forUrl: url, documentExtension: documentExtension)
-            print("[INFO] - thumbnail data: \(data)")
+            print("[INFO] - thumbnail data: \(String(describing: data))")
         }
         if let selectedImage = image {
             data = selectedImage.jpegData(compressionQuality: 1.0)
-            print("[INFO] - thumbnail image data: \(data)")
+            print("[INFO] - thumbnail image data: \(String(describing: data))")
         }
         if let thumbnailData = data {
             print("[INFO] - write thumbnail data")
