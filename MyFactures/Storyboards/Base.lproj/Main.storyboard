@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
     </dependencies>
     <scenes>
         <!--LoginViewController-->
@@ -39,22 +40,6 @@
             </objects>
             <point key="canvasLocation" x="-2951" y="-347"/>
         </scene>
-        <!--SettingsViewController-->
-        <scene sceneID="RlV-cr-zJ7">
-            <objects>
-                <viewControllerPlaceholder storyboardName="SettingsViewController" id="Z20-Rn-zhP" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IiW-qR-jPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2337" y="-1156"/>
-        </scene>
-        <!--UIViewController-K4H-03-BN2-->
-        <scene sceneID="j2D-V0-xSp">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UIViewController-K4H-03-BN2" storyboardName="AboutViewController" referencedIdentifier="UIViewController-K4H-03-BN2" id="jzZ-Wo-yvC" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f2E-Qd-fah" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1813" y="-1163"/>
-        </scene>
         <!--PDFViewController-->
         <scene sceneID="Ann-Nt-s85">
             <objects>
@@ -62,14 +47,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X2N-xv-CbQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1247" y="-1216"/>
-        </scene>
-        <!--UIViewController-y7n-nc-NWs-->
-        <scene sceneID="hyU-ph-Klc">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UIViewController-y7n-nc-NWs" storyboardName="ResetPasswordViewController" referencedIdentifier="UIViewController-y7n-nc-NWs" id="MHh-2G-lcM" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="105-fQ-NkJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2018" y="-2957"/>
         </scene>
         <!--AddNewInvoiceViewController-->
         <scene sceneID="kWE-65-5pP">

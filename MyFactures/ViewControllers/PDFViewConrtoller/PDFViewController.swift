@@ -106,7 +106,7 @@ class PDFViewController: UIViewController {
                     
                     centerScrollViewContents()
                 }else {
-                    print("No image found at path :\(_documentURL)")
+                    print("No image found at path :\(String(describing: _documentURL))")
                 }
 
             default:

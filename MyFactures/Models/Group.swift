@@ -26,7 +26,7 @@ class Group: Object {
                        NSLocalizedString("September", comment: ""),
                        NSLocalizedString("October", comment: ""),
                        NSLocalizedString("November", comment: ""),
-                       NSLocalizedString("december", comment: "")]
+                       NSLocalizedString("December", comment: "")]
     
     var title: String {
         get {
@@ -93,6 +93,12 @@ class Group: Object {
     }
     func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
         return _monthArray.index(of: monthName)!
+    }
+    
+    func updateDecemberMonthName() {
+        if let month = getMonth(atIndex: getMonthIndexFromTable(forMonthName: "December")) {
+            month.month = NSLocalizedString("December", comment: "")
+        }
     }
     
     func removeMonth (atIndex index: Int) {

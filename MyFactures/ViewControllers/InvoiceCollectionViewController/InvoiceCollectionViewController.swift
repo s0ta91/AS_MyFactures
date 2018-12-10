@@ -291,7 +291,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         var invoiceHeaderView: HeaderInvoiceCollectionReusableView!
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as! HeaderInvoiceCollectionReusableView
+            invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as? HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex) {
                 headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
