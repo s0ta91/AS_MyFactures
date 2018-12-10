@@ -355,6 +355,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     @IBAction func addNewGroupButtonPressed(_ sender: UIButton) {
         _isNewGroup = true
+        ui_addNewGroupOrCategoryTextField.placeholder = "Folder name"
         ui_addNewGroupOrCategoryTextField.text = ""
         ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
         animateIn(forSubview: ui_createGroupOrCategoryView)
@@ -362,6 +363,7 @@ class AddNewInvoiceViewController: UIViewController {
     
     @IBAction func addNewCategoryButtonPressed(_ sender: UIButton) {
         _isNewGroup = false
+        ui_addNewGroupOrCategoryTextField.placeholder = "Category name"
         ui_addNewGroupOrCategoryTextField.text = ""
         ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
         animateIn(forSubview: ui_createGroupOrCategoryView)
