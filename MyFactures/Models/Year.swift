@@ -104,6 +104,7 @@ class Year: Object {
             groupResults = _groupList.filter("TRUEPREDICATE")
         }
         for group in groupResults {
+            group.updateDecemberMonthName()
             _groupListToShow.append(group)
         }
     }

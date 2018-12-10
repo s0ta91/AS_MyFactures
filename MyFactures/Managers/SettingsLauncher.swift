@@ -17,10 +17,10 @@ class SettingsLauncher: NSObject {
     var _homeController: GroupViewController?
     
     let _settings: [Setting] = {
-        let informations = Setting(name: .informations, imageName: "settings")
+        let informations = Setting(name: .informations, imageName: "settings_grey")
         let resetPassword = Setting(name: .resetPassword, imageName: "privacy")
-        let feedback = Setting(name: .feedback, imageName: "feedback")
-        let about = Setting(name: .about, imageName: "help")
+        let feedback = Setting(name: .feedback, imageName: "contact")
+        let about = Setting(name: .about, imageName: "about")
         let cancel = Setting(name: .cancel, imageName: "cancel")
 //        return [settings, terms, feedback, help, switchAccount, cancel]
         return [informations, resetPassword, feedback, about, cancel]
