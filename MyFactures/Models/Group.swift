@@ -96,7 +96,7 @@ class Group: Object {
     }
     
     func updateDecemberMonthName() {
-        if let month = getMonth(atIndex: getMonthIndexFromTable(forMonthName: "December")) {
+        if let month = getMonth(atIndex: getMonthIndexFromTable(forMonthName: NSLocalizedString("December", comment: ""))) {
             month.month = NSLocalizedString("December", comment: "")
         }
     }
