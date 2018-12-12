@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a55-X9-wAt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="C3w-BH-StQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -11,16 +11,63 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Side Year Selector-->
+        <scene sceneID="Udv-rl-2FN">
+            <objects>
+                <viewController id="C3w-BH-StQ" customClass="SideYearSelector" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vZy-CM-tcG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBi-db-0Zc">
+                                <rect key="frame" x="-226" y="20" width="226" height="647"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="226" id="mfs-TB-w9I"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Mor-nh-USR" kind="embed" id="FTJ-FQ-dJZ"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kN-X2-LSm">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="msu-ay-ybw"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="a55-X9-wAt" kind="embed" id="T5h-WM-Na6"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RBi-db-0Zc" firstAttribute="bottom" secondItem="dxp-2e-0FS" secondAttribute="bottom" id="3Rk-3v-YmH"/>
+                            <constraint firstItem="RBi-db-0Zc" firstAttribute="leading" secondItem="dxp-2e-0FS" secondAttribute="leading" constant="-226" id="3z7-NM-G7L"/>
+                            <constraint firstItem="RBi-db-0Zc" firstAttribute="top" secondItem="dxp-2e-0FS" secondAttribute="top" id="9EO-Da-p7e"/>
+                            <constraint firstItem="6kN-X2-LSm" firstAttribute="top" secondItem="dxp-2e-0FS" secondAttribute="top" id="AGm-HC-UbD"/>
+                            <constraint firstItem="6kN-X2-LSm" firstAttribute="bottom" secondItem="dxp-2e-0FS" secondAttribute="bottom" id="NLf-Yx-beP"/>
+                            <constraint firstItem="6kN-X2-LSm" firstAttribute="leading" secondItem="RBi-db-0Zc" secondAttribute="trailing" id="iqO-5s-JZT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dxp-2e-0FS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yH2-Qo-ESL"/>
+                    <connections>
+                        <outlet property="sideYearSelectorConstraint" destination="3z7-NM-G7L" id="Qt1-mx-ylf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jq7-a6-1Ex" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3670" y="-770"/>
+        </scene>
         <!--Folders-->
         <scene sceneID="5N2-H2-Vgp">
             <objects>
                 <viewController storyboardIdentifier="GroupViewController" id="D5B-Ih-OFp" customClass="GroupViewController" customModule="MyFactures" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dHV-vc-FxW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
-                                <rect key="frame" x="16" y="116" width="343" height="501"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
+                                <rect key="frame" x="16" y="64" width="343" height="533"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
                                     <size key="itemSize" width="343" height="115"/>
@@ -158,7 +205,7 @@
                                 </collectionReusableView>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLd-mf-zNG">
-                                <rect key="frame" x="0.0" y="116" width="375" height="0.0"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
                                 <subviews>
                                     <searchBar contentMode="redraw" searchBarStyle="minimal" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dGI-Rd-UgG">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -178,11 +225,11 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5eM-Ih-UfD">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="597" width="375" height="50"/>
                                 <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iv6-Xj-pPe">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="597" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQj-4B-h0L">
                                         <rect key="frame" x="125" y="0.0" width="125" height="33"/>
@@ -201,7 +248,7 @@
                                         </constraints>
                                         <state key="normal" image="filter(grey)"/>
                                         <connections>
-                                            <segue destination="Mor-nh-USR" kind="presentation" identifier="showModaly_yearSelectionVC" id="ZqW-x3-tG2"/>
+                                            <action selector="showYearSelector" destination="D5B-Ih-OFp" eventType="touchUpInside" id="GIO-qs-Uk8"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbX-l5-1eY">
@@ -320,15 +367,15 @@
                 </view>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Atx-u6-ncx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2949.5999999999999" y="-763.30049261083752"/>
+            <point key="canvasLocation" x="-1806" y="-761"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mab-3Q-qA1">
             <objects>
                 <navigationController storyboardIdentifier="NavGroupContoller" automaticallyAdjustsScrollViewInsets="NO" id="a55-X9-wAt" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="9jl-vg-yyV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9jl-vg-yyV">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" name="navBarTint"/>
@@ -342,12 +389,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="D5B-Ih-OFp" kind="relationship" relationship="rootViewController" id="cKa-1t-0If"/>
+                        <segue destination="D5B-Ih-OFp" kind="relationship" relationship="rootViewController" id="Zmd-Tq-2Ez"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVV-ME-YFD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3676" y="-760"/>
+            <point key="canvasLocation" x="-2834" y="-761"/>
         </scene>
         <!--SelectYearViewController-->
         <scene sceneID="bpi-jK-xJ0">
@@ -355,7 +402,7 @@
                 <viewControllerPlaceholder storyboardName="SelectYearViewController" id="Mor-nh-USR" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jGp-cD-PpM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2950" y="-330"/>
+            <point key="canvasLocation" x="-3670" y="-193"/>
         </scene>
         <!--SettingsViewController-->
         <scene sceneID="RlV-cr-zJ7">
@@ -363,7 +410,7 @@
                 <viewControllerPlaceholder storyboardName="SettingsViewController" id="Z20-Rn-zhP" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IiW-qR-jPs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2228" y="-1052"/>
+            <point key="canvasLocation" x="-958" y="-1109"/>
         </scene>
         <!--InvoiceCollectionViewController-->
         <scene sceneID="EOi-AI-1z0">
@@ -371,7 +418,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="InvoiceCollectionViewController" storyboardName="Main" referencedIdentifier="InvoiceCollectionViewController" id="eol-rq-wkH" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2TX-pg-yuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2229" y="-744"/>
+            <point key="canvasLocation" x="-958" y="-801"/>
         </scene>
     </scenes>
     <resources>

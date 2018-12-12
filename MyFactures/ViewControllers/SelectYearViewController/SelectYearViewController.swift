@@ -13,7 +13,15 @@ class SelectYearViewController: UIViewController {
     @IBOutlet weak var ui_selectYearTableView: UITableView!
     
     
-    var _manager: Manager!
+    var _manager2: Manager?
+    
+    private var _manager: Manager {
+        if let database =  DbManager().getDb() {
+            return database
+        }else {
+            fatalError("Database doesn't exists")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

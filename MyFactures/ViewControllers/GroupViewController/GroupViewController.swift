@@ -76,6 +76,11 @@ class GroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Create balckview when sideselector is shown (like showSettings)
+        // addGesture on blackview
+//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showYearSelector) ))
+        
+        
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
             Manager.setIsFirstLoad(false)
@@ -229,13 +234,16 @@ class GroupViewController: UIViewController {
         _settingsLauncher.showSettings()
     }
     
+    @IBAction func showYearSelector() {
+        NotificationCenter.default.post(name: NSNotification.Name("showSideYearSelector"), object: nil)
+    }
     
     
     //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showModaly_yearSelectionVC" {
             if let destinationVC = segue.destination as? SelectYearViewController {
-                destinationVC._manager = _manager
+                destinationVC._manager2 = _manager
             }
         }
         
