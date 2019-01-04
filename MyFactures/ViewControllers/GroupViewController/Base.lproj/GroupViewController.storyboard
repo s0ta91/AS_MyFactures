@@ -20,19 +20,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBi-db-0Zc">
-                                <rect key="frame" x="-226" y="20" width="226" height="647"/>
+                                <rect key="frame" x="-250" y="20" width="250" height="647"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="226" id="mfs-TB-w9I"/>
+                                    <constraint firstAttribute="width" constant="250" id="mfs-TB-w9I"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="Mor-nh-USR" kind="embed" id="FTJ-FQ-dJZ"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6kN-X2-LSm">
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6kN-X2-LSm">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="375" id="msu-ay-ybw"/>
-                                </constraints>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <segue destination="a55-X9-wAt" kind="embed" id="T5h-WM-Na6"/>
                                 </connections>
@@ -41,22 +39,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RBi-db-0Zc" firstAttribute="bottom" secondItem="dxp-2e-0FS" secondAttribute="bottom" id="3Rk-3v-YmH"/>
-                            <constraint firstItem="RBi-db-0Zc" firstAttribute="leading" secondItem="dxp-2e-0FS" secondAttribute="leading" constant="-226" id="3z7-NM-G7L"/>
+                            <constraint firstItem="RBi-db-0Zc" firstAttribute="leading" secondItem="dxp-2e-0FS" secondAttribute="leading" constant="-250" id="3z7-NM-G7L"/>
                             <constraint firstItem="RBi-db-0Zc" firstAttribute="top" secondItem="dxp-2e-0FS" secondAttribute="top" id="9EO-Da-p7e"/>
-                            <constraint firstItem="6kN-X2-LSm" firstAttribute="top" secondItem="dxp-2e-0FS" secondAttribute="top" id="AGm-HC-UbD"/>
-                            <constraint firstItem="6kN-X2-LSm" firstAttribute="bottom" secondItem="dxp-2e-0FS" secondAttribute="bottom" id="NLf-Yx-beP"/>
-                            <constraint firstItem="6kN-X2-LSm" firstAttribute="leading" secondItem="RBi-db-0Zc" secondAttribute="trailing" id="iqO-5s-JZT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dxp-2e-0FS"/>
                     </view>
                     <navigationItem key="navigationItem" id="yH2-Qo-ESL"/>
                     <connections>
+                        <outlet property="mainView" destination="6kN-X2-LSm" id="imx-eJ-IWJ"/>
+                        <outlet property="sideView" destination="RBi-db-0Zc" id="FOn-SX-ARB"/>
                         <outlet property="sideYearSelectorConstraint" destination="3z7-NM-G7L" id="Qt1-mx-ylf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jq7-a6-1Ex" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3670" y="-770"/>
+            <point key="canvasLocation" x="-3671.1999999999998" y="-770.46476761619192"/>
         </scene>
         <!--Folders-->
         <scene sceneID="5N2-H2-Vgp">

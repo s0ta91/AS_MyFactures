@@ -12,9 +12,7 @@ class SelectYearViewController: UIViewController {
 
     @IBOutlet weak var ui_selectYearTableView: UITableView!
     
-    
     var _manager2: Manager?
-    
     private var _manager: Manager {
         if let database =  DbManager().getDb() {
             return database
@@ -29,6 +27,8 @@ class SelectYearViewController: UIViewController {
         ui_selectYearTableView.dataSource = self
         ui_selectYearTableView.delegate = self
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshNumberOfFolders), name: NSNotification.Name(rawValue: "refreshNumberOfFolders"), object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,7 +40,9 @@ class SelectYearViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
+    @objc private func refreshNumberOfFolders() {
+        ui_selectYearTableView.reloadData()
+    }
 }
 
 extension SelectYearViewController: UITableViewDataSource {
@@ -81,7 +83,7 @@ extension SelectYearViewController: UITableViewDelegate {
         if let selectedYear = _manager.getYear(atIndex: indexPath.row) {
             _manager.setSelectedYear(forYear: selectedYear)
             ui_selectYearTableView.reloadData()
-            dismiss(animated: true, completion: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
         }
     }
 }

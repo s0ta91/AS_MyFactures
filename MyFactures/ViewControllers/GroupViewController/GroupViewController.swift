@@ -26,6 +26,12 @@ class GroupViewController: UIViewController {
     
     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
 
+    var blackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0
+        return view
+    }()
     
     //MARK: - Properties
     private var _manager: Manager {
@@ -79,13 +85,12 @@ class GroupViewController: UIViewController {
         // Create balckview when sideselector is shown (like showSettings)
         // addGesture on blackview
 //        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showYearSelector) ))
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
         
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
             Manager.setIsFirstLoad(false)
         }
-        
         ui_newGroupNameTextField.delegate = self
         IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self
@@ -97,8 +102,7 @@ class GroupViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        _currentYear = _manager.getSelectedYear()
-        _currentYear.setGroupList()
+        setupGroupList()
         setFontSize()
         ui_createGroupView.layer.cornerRadius = 10
         
@@ -140,23 +144,33 @@ class GroupViewController: UIViewController {
     
     
     //MARK: -  Private functions
+    private func setupBlackView() {
+        if let window = UIApplication.shared.keyWindow {
+            blackView.frame = window.frame
+            window.addSubview(blackView)
+        }
+    }
+    
+    private func setupGroupList() {
+        self._currentYear = self._manager.getSelectedYear()
+        self._currentYear.setGroupList()
+    }
+    
+    
     private func animateIn() {
-        self.navigationController!.view.addSubview(ui_createGroupView)
-
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(ui_createGroupView)
+            ui_createGroupView.centerYAnchor.constraint(equalTo: window.centerYAnchor).isActive = true
+            
+            ui_createGroupView.leadingAnchor.constraint(equalTo: window.leadingAnchor, constant: +10).isActive = true
+            ui_createGroupView.trailingAnchor.constraint(equalTo: window.trailingAnchor, constant: -10).isActive = true
+        }
         ui_createGroupView.translatesAutoresizingMaskIntoConstraints = false
-        ui_createGroupView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        ui_createGroupView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
-        ui_createGroupView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
-        
-        
         ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         ui_createGroupView.alpha = 0
         
-        
-        
         UIView.animate(withDuration: 0.4) {
-            self.view.alpha = 0.4
+            self.blackView.alpha = 0.5
             self.ui_createGroupView.alpha = 1
             self.ui_createGroupView.transform = CGAffineTransform.identity
         }
@@ -164,14 +178,16 @@ class GroupViewController: UIViewController {
     private func animateOut () {
         UIView.animate(withDuration: 0.3, animations: {
             self.ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
-            self.view.alpha = 1
+            self.blackView.alpha = 0
             self.ui_createGroupView.alpha = 0
         }) { (success: Bool) in
             self.ui_createGroupView.removeFromSuperview()
+            self.blackView.removeFromSuperview()
         }
         searchBarSearchButtonClicked(self.ui_searchBar)
     }
     private func setFontSize (){
+        print("gcv size [\(groupCV.frame.size.width)]")
         let collectionViewWidth = groupCV.frame.size.width
         if collectionViewWidth == 288 {
             collectionViewFontSize = 15
@@ -179,11 +195,23 @@ class GroupViewController: UIViewController {
             collectionViewFontSize = 17
         }
     }
+
+    @objc func handleDissmiss() {
+        setupGroupList()
+        NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
+        UIView.animate(withDuration: 0.3, animations: {
+            self.blackView.alpha = 0
+        }) { (success) in
+            self.blackView.removeFromSuperview()
+            self.groupCV.reloadData()
+        }
+    }
     
     //MARK: - Actions
     @IBAction func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
         ui_newGroupNameTextField.becomeFirstResponder()
+        setupBlackView()
         animateIn()
     }
     
@@ -219,6 +247,7 @@ class GroupViewController: UIViewController {
                 present(alertController, animated: true, completion: nil)
             }
         }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "refreshNumberOfFolders"), object: nil)
     }
 
     @IBAction func searchButtonPressed(_ sender: UIBarButtonItem) {
@@ -235,7 +264,13 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func showYearSelector() {
-        NotificationCenter.default.post(name: NSNotification.Name("showSideYearSelector"), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
+        blackView.frame = view.frame
+        blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDissmiss)))
+        view.addSubview(blackView)
+        UIView.animate(withDuration: 0.3) {
+            self.blackView.alpha = 0.5
+        }
     }
     
     
