@@ -26,6 +26,10 @@ class SideYearSelector: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showSideYearSelector), name: NSNotification.Name("showHideSideYearSelector"), object: nil)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     @objc func showSideYearSelector() {
         if isSideYearSelectorOpen {
             self.sideYearSelectorConstraint.constant = -250

@@ -12,13 +12,13 @@ import IQKeyboardManagerSwift
 import Buglife
 
 class GroupViewController: UIViewController {
-    
     //MARK: - GroupViewController
     @IBOutlet weak var groupCV: UICollectionView!
     @IBOutlet weak var ui_searchBarView: UIView!
     
     @IBOutlet weak var ui_searchBar: UISearchBar!
     @IBOutlet weak var ui_tabBarView: UIView!
+    @IBOutlet weak var openYearsSideMenuButton: UIBarButtonItem!
     
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet var ui_createGroupView: UIView!
@@ -26,12 +26,21 @@ class GroupViewController: UIViewController {
     
     @IBOutlet weak var searchBarViewHeight: NSLayoutConstraint!
 
+    var yearButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrow_24"), for: .normal)
+        button.setTitle("2019", for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: button.imageEdgeInsets.top, left: 0, bottom: button.imageEdgeInsets.bottom, right: button.imageEdgeInsets.right)
+        button.titleEdgeInsets = UIEdgeInsets(top: button.titleEdgeInsets.top, left: button.imageEdgeInsets.right, bottom: button.titleEdgeInsets.bottom, right: 0)
+        return button
+    }()
     var blackView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
         view.alpha = 0
         return view
     }()
+    var sideYearIsShown = false
     
     //MARK: - Properties
     private var _manager: Manager {
@@ -95,8 +104,11 @@ class GroupViewController: UIViewController {
         IQKeyboardManager.shared.enableAutoToolbar = false
         groupCV.dataSource = self
         groupCV.delegate = self
-        
         groupCV.emptyDataSetSource = self
+        
+//        openYearsSideMenuButton = UIBarButtonItem(customView: yearButton)
+        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
+        openYearsSideMenuButton.title = "< \(selectedYear.year)"
         
     }
     
@@ -204,6 +216,7 @@ class GroupViewController: UIViewController {
         }) { (success) in
             self.blackView.removeFromSuperview()
             self.groupCV.reloadData()
+            self.sideYearIsShown = false
         }
     }
     
@@ -264,12 +277,17 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func showYearSelector() {
-        NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
-        blackView.frame = view.frame
-        blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDissmiss)))
-        view.addSubview(blackView)
-        UIView.animate(withDuration: 0.3) {
-            self.blackView.alpha = 0.5
+        if !sideYearIsShown {
+            NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
+            blackView.frame = view.frame
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDissmiss)))
+            view.addSubview(blackView)
+            UIView.animate(withDuration: 0.3) {
+                self.blackView.alpha = 0.5
+                self.sideYearIsShown = true
+            }
+        } else {
+            handleDissmiss()
         }
     }
     
