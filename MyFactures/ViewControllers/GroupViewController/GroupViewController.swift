@@ -40,6 +40,17 @@ class GroupViewController: UIViewController {
         view.alpha = 0
         return view
     }()
+    let addFloatingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let plusImage = UIImage(named: "plus_button_white2")
+        button.setImage(plusImage, for: .normal)
+        button.backgroundColor = UIColor(named: "navBarTint")
+        button.setFloatingButton()
+        button.addTarget(self, action: #selector(addNewGroupButtonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    let BUTTON_SIZE: CGFloat = 56
     var sideYearIsShown = false
     
     //MARK: - Properties
@@ -110,6 +121,8 @@ class GroupViewController: UIViewController {
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         openYearsSideMenuButton.title = "< \(selectedYear.year)"
         
+        setupFloatingButton()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,6 +169,15 @@ class GroupViewController: UIViewController {
     
     
     //MARK: -  Private functions
+    private func setupFloatingButton() {
+        view.addSubview(addFloatingButton)
+        addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
+        addFloatingButton.widthAnchor.constraint(equalToConstant: BUTTON_SIZE).isActive = true
+        addFloatingButton.layer.cornerRadius = BUTTON_SIZE / 2
+    }
+    
     private func setupBlackView() {
         if let window = UIApplication.shared.keyWindow {
             blackView.frame = window.frame
@@ -221,12 +243,19 @@ class GroupViewController: UIViewController {
     }
     
     //MARK: - Actions
-    @IBAction func addNewGroupButtonPressed(_ sender: Any) {
+    @objc private func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
         ui_newGroupNameTextField.becomeFirstResponder()
         setupBlackView()
         animateIn()
     }
+    
+//    @IBAction func addNewGroupButtonPressed(_ sender: Any) {
+//        ui_newGroupNameTextField.text = ""
+//        ui_newGroupNameTextField.becomeFirstResponder()
+//        setupBlackView()
+//        animateIn()
+//    }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         animateOut()

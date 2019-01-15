@@ -12,6 +12,12 @@ let imageCache = NSCache<NSString, AnyObject>()
 
 extension UIButton {
     
+    func setFloatingButton() {
+        layer.shadowOpacity = 0.25
+        layer.shadowRadius = 5
+        layer.shadowOffset = CGSize(width: 0, height: 10)
+    }
+    
     func loadImage(with urlString: String) {
         if let url = URL(string: urlString) {
             if let imageFromCache = imageCache.object(forKey: urlString as NSString) as? UIImage {
