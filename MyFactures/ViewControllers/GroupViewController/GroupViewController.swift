@@ -18,7 +18,7 @@ class GroupViewController: UIViewController {
     
     @IBOutlet weak var ui_searchBar: UISearchBar!
     @IBOutlet weak var ui_tabBarView: UIView!
-    @IBOutlet weak var openYearsSideMenuButton: UIBarButtonItem!
+//    @IBOutlet weak var openYearsSideMenuButton: UIBarButtonItem!
     
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet var ui_createGroupView: UIView!
@@ -43,11 +43,21 @@ class GroupViewController: UIViewController {
     let addFloatingButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plusImage = UIImage(named: "plus_button_white2")
+        let plusImage = UIImage(named: "plus_button_white")
         button.setImage(plusImage, for: .normal)
         button.backgroundColor = UIColor(named: "navBarTint")
         button.setFloatingButton()
         button.addTarget(self, action: #selector(addNewGroupButtonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    let yearBarButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Helvetica Bold", size: 16)
+        button.setImage(UIImage(named: "left_arrow_black"), for: .normal)
+        button.contentMode = .scaleAspectFit
+        button.contentHorizontalAlignment = .left
+        button.contentVerticalAlignment = .center
         return button
     }()
     let BUTTON_SIZE: CGFloat = 56
@@ -117,12 +127,20 @@ class GroupViewController: UIViewController {
         groupCV.delegate = self
         groupCV.emptyDataSetSource = self
         
-//        openYearsSideMenuButton = UIBarButtonItem(customView: yearButton)
-        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
-        openYearsSideMenuButton.title = "< \(selectedYear.year)"
-        
+        setupYearBarItemButton()
         setupFloatingButton()
         
+    }
+    
+    private func setupYearBarItemButton() {
+       upadateYearBarItemButtonTitle()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: yearBarButton)
+        yearBarButton.addTarget(self, action: #selector(showYearSelector), for: .touchUpInside)
+    }
+    
+    private func upadateYearBarItemButtonTitle() {
+        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
+        yearBarButton.setTitle("\(selectedYear.year)", for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -232,6 +250,7 @@ class GroupViewController: UIViewController {
 
     @objc func handleDissmiss() {
         setupGroupList()
+        self.upadateYearBarItemButtonTitle()
         NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
         UIView.animate(withDuration: 0.3, animations: {
             self.blackView.alpha = 0
@@ -249,13 +268,6 @@ class GroupViewController: UIViewController {
         setupBlackView()
         animateIn()
     }
-    
-//    @IBAction func addNewGroupButtonPressed(_ sender: Any) {
-//        ui_newGroupNameTextField.text = ""
-//        ui_newGroupNameTextField.becomeFirstResponder()
-//        setupBlackView()
-//        animateIn()
-//    }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
         animateOut()
@@ -305,7 +317,8 @@ class GroupViewController: UIViewController {
         _settingsLauncher.showSettings()
     }
     
-    @IBAction func showYearSelector() {
+    @objc private func showYearSelector() {
+        print("click")
         if !sideYearIsShown {
             NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
             blackView.frame = view.frame
@@ -348,18 +361,18 @@ class GroupViewController: UIViewController {
 
 extension GroupViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var headerView: HeaderGroupView!
-        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
-        switch kind {
-        case UICollectionView.elementKindSectionHeader:
-           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as?  HeaderGroupView
-           headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
-        default:
-            assert(false, "Unexpected element kind")
-        }
-        return headerView
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        var headerView: HeaderGroupView!
+//        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
+//        switch kind {
+//        case UICollectionView.elementKindSectionHeader:
+//           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as?  HeaderGroupView
+//           headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
+//        default:
+//            assert(false, "Unexpected element kind")
+//        }
+//        return headerView
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return _currentYear.getGroupCount()
