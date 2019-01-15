@@ -91,7 +91,7 @@ class GroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create balckview when sideselector is shown (like showSettings)
+        // Create blackview when sideselector is shown (like showSettings)
         // addGesture on blackview
 //        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showYearSelector) ))
         NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
