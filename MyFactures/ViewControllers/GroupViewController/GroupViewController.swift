@@ -18,7 +18,6 @@ class GroupViewController: UIViewController {
     
     @IBOutlet weak var ui_searchBar: UISearchBar!
     @IBOutlet weak var ui_tabBarView: UIView!
-//    @IBOutlet weak var openYearsSideMenuButton: UIBarButtonItem!
     
     @IBOutlet weak var ui_newGroupButton: UIButton!
     @IBOutlet var ui_createGroupView: UIView!
@@ -62,6 +61,7 @@ class GroupViewController: UIViewController {
     }()
     let BUTTON_SIZE: CGFloat = 56
     var sideYearIsShown = false
+    var blackViewAlphaValue: CGFloat = 0
     
     //MARK: - Properties
     private var _manager: Manager {
@@ -95,6 +95,7 @@ class GroupViewController: UIViewController {
                       NSLocalizedString("December", comment: "")]
     var isListFiltered = false
     var collectionViewFontSize: CGFloat!
+    var newSideAnchorConstant: CGFloat?
     
     //TODO: Localized text
     let createNewFolderWarningTitle = NSLocalizedString("Warning", comment: "")
@@ -116,6 +117,9 @@ class GroupViewController: UIViewController {
         // addGesture on blackview
 //        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showYearSelector) ))
         NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeEnded(_:)), name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
         
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
@@ -258,6 +262,7 @@ class GroupViewController: UIViewController {
             self.blackView.removeFromSuperview()
             self.groupCV.reloadData()
             self.sideYearIsShown = false
+            self.blackViewAlphaValue = 0
         }
     }
     
@@ -318,7 +323,6 @@ class GroupViewController: UIViewController {
     }
     
     @objc private func showYearSelector() {
-        print("click")
         if !sideYearIsShown {
             NotificationCenter.default.post(name: NSNotification.Name("showHideSideYearSelector"), object: nil)
             blackView.frame = view.frame
@@ -333,6 +337,40 @@ class GroupViewController: UIViewController {
         }
     }
     
+    @objc private func sideYearAnchorChangeHasBegan() {
+        blackView.frame = view.frame
+        view.addSubview(blackView)
+    }
+    
+    @objc private func sideYearAnchorIsChanging(_ notification: NSNotification) {
+        if  let notificationData = notification.userInfo,
+            let sideAnchorConstant = notificationData["sideAnchorValue"] as? CGFloat {
+            blackViewAlphaValue = 0.5 - ( (sideAnchorConstant*0.5) / -250 )
+            UIView.animate(withDuration: 0) {
+                self.blackView.alpha = self.blackViewAlphaValue
+            }
+        }
+    }
+    
+    @objc private func sideYearAnchorChangeEnded(_ notification: NSNotification) {
+        if  let notificationData = notification.userInfo,
+            let isSideYearSelectorOpen = notificationData["isSideYearSelectorOpen"] as? Bool {
+                self.sideYearIsShown = isSideYearSelectorOpen
+            if isSideYearSelectorOpen {
+                UIView.animate(withDuration: 0.2) {
+                    self.blackView.alpha = 0.5
+                }
+                blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDissmiss)))
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.blackView.alpha = 0
+                }) { (_) in
+                    self.blackView.removeFromSuperview()
+                    self.blackViewAlphaValue = 0
+                }
+            }
+        }
+    }
     
     //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -360,19 +398,6 @@ class GroupViewController: UIViewController {
 }
 
 extension GroupViewController: UICollectionViewDataSource {
-    
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        var headerView: HeaderGroupView!
-//        guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
-//        switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-//           headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "group_header", for: indexPath) as?  HeaderGroupView
-//           headerView.setYear(withYear: "\(selectedYear.year)", fontSize: collectionViewFontSize)
-//        default:
-//            assert(false, "Unexpected element kind")
-//        }
-//        return headerView
-//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return _currentYear.getGroupCount()
@@ -502,4 +527,3 @@ extension GroupViewController: UITextFieldDelegate {
         return true
     }
 }
-

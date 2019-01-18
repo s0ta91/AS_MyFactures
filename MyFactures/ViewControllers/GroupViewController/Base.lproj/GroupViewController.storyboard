@@ -64,7 +64,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
                                 <rect key="frame" x="16" y="64" width="343" height="583"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
                                     <size key="itemSize" width="343" height="115"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -201,7 +201,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="bottom" secondItem="qWy-3l-pJt" secondAttribute="bottom" id="8xu-Mi-vvT"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>

@@ -9,8 +9,11 @@
 import UIKit
 
 class AboutViewController: UIViewController {
-
+    
+    @IBOutlet weak var ui_appVersionNumberLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        ui_appVersionNumberLabel.text = "MyFactures \(Settings().APP_VERSION_NUMBER)"
     }
 }
