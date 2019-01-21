@@ -113,9 +113,6 @@ class GroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Create blackview when sideselector is shown (like showSettings)
-        // addGesture on blackview
-//        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showYearSelector) ))
         NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
@@ -157,7 +154,7 @@ class GroupViewController: UIViewController {
         
         groupCV.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -374,11 +371,6 @@ class GroupViewController: UIViewController {
     
     //MARK: - Prepare for Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showModaly_yearSelectionVC" {
-            if let destinationVC = segue.destination as? SelectYearViewController {
-                destinationVC._manager2 = _manager
-            }
-        }
         
         // FIXME: Bug here when swipe on groupCell to the right in the cell. selectedGroup is nil so the App crash
         if segue.identifier == "show_invoiceCollectionVC" {

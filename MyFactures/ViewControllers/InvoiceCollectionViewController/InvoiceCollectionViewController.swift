@@ -82,6 +82,13 @@ class InvoiceCollectionViewController: UIViewController {
         invoiceCollectionView.reloadData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
