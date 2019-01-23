@@ -80,7 +80,6 @@ class GroupViewController: UIViewController {
     
     private var _currentYear: Year!
     private var _groupToModify: Group?
-    var effect: UIVisualEffect!
     let monthArray = [NSLocalizedString("January", comment: ""),
                       NSLocalizedString("February", comment: ""),
                       NSLocalizedString("March", comment: ""),
@@ -403,14 +402,14 @@ extension GroupViewController: UICollectionViewDataSource {
             cell_group.setValues(group, fontSize: collectionViewFontSize)
         }
 
-        cell_group.layer.borderWidth = 1.0
-        cell_group.layer.borderColor = UIColor.clear.cgColor
-        cell_group.layer.shadowColor = UIColor.lightGray.cgColor
-        cell_group.layer.shadowOffset = CGSize(width:2,height: 2)
-        cell_group.layer.shadowRadius = 2.0
-        cell_group.layer.shadowOpacity = 1.0
-        cell_group.layer.masksToBounds = false;
-        cell_group.layer.shadowPath = UIBezierPath(rect:cell_group.bounds).cgPath
+        cell_group.layer.cornerRadius = 8
+        cell_group.layer.shadowColor = UIColor.gray.cgColor
+        cell_group.layer.shadowOpacity = 0.5
+        cell_group.layer.shadowRadius = 5
+        cell_group.layer.shadowOffset = .zero
+        cell_group.layer.shadowPath = UIBezierPath(rect: cell_group.bounds).cgPath
+        cell_group.layer.shouldRasterize = true
+        cell_group.layer.masksToBounds = false
         
         cell_group.delegate = self
         return cell_group
@@ -419,7 +418,7 @@ extension GroupViewController: UICollectionViewDataSource {
 
 extension GroupViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = groupCV.frame.size.width
+        let width = groupCV.frame.size.width - 32
         return CGSize(width: width, height: 115)
     }
 }

@@ -63,20 +63,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4ky-NB-Zlg">
-                                <rect key="frame" x="16" y="64" width="343" height="583"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="pc8-9i-heD">
-                                    <size key="itemSize" width="343" height="115"/>
+                                    <size key="itemSize" width="319" height="115"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="8" maxX="16" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell_group" id="8p1-xM-Udn" customClass="GroupCollectionViewCell" customModule="MyFactures" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="8" width="343" height="115"/>
+                                        <rect key="frame" x="28" y="8" width="319" height="115"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="115"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="319" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Achats en ligne njiznjcdbjinvo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LwW-La-Xw3">
@@ -203,11 +203,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" id="8on-iW-se4"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="bottom" secondItem="qWy-3l-pJt" secondAttribute="bottom" id="8xu-Mi-vvT"/>
-                            <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="4ky-NB-Zlg" secondAttribute="trailing" constant="16" id="RA0-xk-97P"/>
                             <constraint firstItem="4ky-NB-Zlg" firstAttribute="top" secondItem="jLd-mf-zNG" secondAttribute="bottom" id="ZmL-WA-6bK"/>
                             <constraint firstItem="jLd-mf-zNG" firstAttribute="top" secondItem="qWy-3l-pJt" secondAttribute="top" id="dPY-8y-LBV"/>
-                            <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" constant="16" id="fuO-tA-gb9"/>
+                            <constraint firstItem="4ky-NB-Zlg" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="fuO-tA-gb9"/>
                             <constraint firstItem="jLd-mf-zNG" firstAttribute="leading" secondItem="qWy-3l-pJt" secondAttribute="leading" id="nzX-BC-fzQ"/>
                             <constraint firstItem="qWy-3l-pJt" firstAttribute="trailing" secondItem="jLd-mf-zNG" secondAttribute="trailing" id="osP-OR-aPL"/>
                         </constraints>

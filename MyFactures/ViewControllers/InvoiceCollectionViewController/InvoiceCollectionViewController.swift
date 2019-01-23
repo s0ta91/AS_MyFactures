@@ -20,6 +20,20 @@ class InvoiceCollectionViewController: UIViewController {
     @IBOutlet weak var ui_searchBar: UISearchBar!
     
     @IBOutlet weak var ui_searchBarHeightConstraint: NSLayoutConstraint!
+    
+    let addFloatingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let plusImage = UIImage(named: "plus_button_white")
+        button.setImage(plusImage, for: .normal)
+        button.backgroundColor = UIColor(named: "navBarTint")
+        button.setFloatingButton()
+        button.addTarget(self, action: #selector(addNewInvoiceButtonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let BUTTON_SIZE: CGFloat = 56
+    
     private var ui_searchButton: UIBarButtonItem!
     
     let addNewInvoiceStoryboard = UIStoryboard(name: "AddNewInvoiceViewController", bundle: .main)
@@ -68,6 +82,7 @@ class InvoiceCollectionViewController: UIViewController {
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
         invoiceCollectionView.emptyDataSetSource = self
+        setupFloatingButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +110,16 @@ class InvoiceCollectionViewController: UIViewController {
     }
     
     //MARK: - Private functions
+    /** add floating button */
+    private func setupFloatingButton() {
+        view.addSubview(addFloatingButton)
+        addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
+        addFloatingButton.widthAnchor.constraint(equalToConstant: BUTTON_SIZE).isActive = true
+        addFloatingButton.layer.cornerRadius = BUTTON_SIZE / 2
+    }
+    
     /** Show the review window to note the app */
     private func setupReviewController() {
         SKStoreReviewController.requestReview()
@@ -269,7 +294,7 @@ class InvoiceCollectionViewController: UIViewController {
     }
     
     
-    @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
+    @objc private func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear

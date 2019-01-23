@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,7 +39,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xQN-Id-J85">
-                                <rect key="frame" x="16" y="20" width="343" height="597"/>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="d1o-bD-UgL">
                                     <size key="itemSize" width="736" height="113"/>
@@ -266,80 +266,17 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vl9-kp-8Ma">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BJz-Fp-jCx">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqA-Q6-fgF">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="33.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="0Im-sF-Omd"/>
-                                        </constraints>
-                                        <state key="normal" image="edit(grey)"/>
-                                        <connections>
-                                            <segue destination="qtL-9v-0U5" kind="presentation" identifier="manageCategoryVC" id="QTv-7c-avP"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rmd-j5-vtM">
-                                        <rect key="frame" x="32.5" y="33.5" width="60" height="16.5"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beG-Pj-Usu">
-                                        <rect key="frame" x="125" y="0.0" width="125" height="33"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="125" id="jcp-Hh-Twr"/>
-                                        </constraints>
-                                        <state key="normal" image="add(grey)"/>
-                                        <connections>
-                                            <action selector="addNewInvoiceButtonPressed:" destination="t7y-qo-KY2" eventType="touchUpInside" id="t75-u1-bJY"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New document" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-DV-mzG">
-                                        <rect key="frame" x="145.5" y="33" width="84" height="17"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
-                                        <color key="textColor" red="0.47560524939999999" green="0.4756616354" blue="0.47557282449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="Rmd-j5-vtM" firstAttribute="top" secondItem="LqA-Q6-fgF" secondAttribute="bottom" id="5LJ-2Q-tun"/>
-                                    <constraint firstAttribute="bottom" secondItem="wuU-DV-mzG" secondAttribute="bottom" id="E9u-VQ-SFI"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="IwL-81-HNW"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="wuU-DV-mzG" secondAttribute="centerX" id="Opi-lF-cgb"/>
-                                    <constraint firstItem="wuU-DV-mzG" firstAttribute="top" secondItem="beG-Pj-Usu" secondAttribute="bottom" id="PVr-FZ-uMh"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="PXK-pm-xcX"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="centerX" secondItem="Rmd-j5-vtM" secondAttribute="centerX" id="QO2-c6-XeU"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="VKt-Ew-I0O"/>
-                                    <constraint firstItem="beG-Pj-Usu" firstAttribute="centerX" secondItem="BJz-Fp-jCx" secondAttribute="centerX" id="W3C-5S-Jcm"/>
-                                    <constraint firstAttribute="height" constant="50" id="jDu-V1-iBf"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rmd-j5-vtM" secondAttribute="bottom" id="q2p-OK-QfQ"/>
-                                    <constraint firstItem="LqA-Q6-fgF" firstAttribute="leading" secondItem="BJz-Fp-jCx" secondAttribute="leading" id="qVt-8r-aYo"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.97999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="top" secondItem="JM3-IU-4oa" secondAttribute="bottom" id="1Ph-od-wyp"/>
-                            <constraint firstItem="BJz-Fp-jCx" firstAttribute="bottom" secondItem="OMx-QP-Nft" secondAttribute="bottom" id="5ku-Wm-wwL"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" constant="16" id="AIu-Ja-4GN"/>
-                            <constraint firstItem="vl9-kp-8Ma" firstAttribute="leading" secondItem="xq9-AB-Cw1" secondAttribute="leading" id="Gsz-HO-KoW"/>
                             <constraint firstItem="xQN-Id-J85" firstAttribute="centerX" secondItem="xq9-AB-Cw1" secondAttribute="centerX" id="Ii0-BK-mYC"/>
                             <constraint firstItem="JM3-IU-4oa" firstAttribute="trailing" secondItem="OMx-QP-Nft" secondAttribute="trailing" id="JRg-0n-Fji"/>
-                            <constraint firstItem="vl9-kp-8Ma" firstAttribute="top" secondItem="BJz-Fp-jCx" secondAttribute="top" id="LSh-MV-J2R"/>
-                            <constraint firstItem="BJz-Fp-jCx" firstAttribute="trailing" secondItem="OMx-QP-Nft" secondAttribute="trailing" id="OOE-Wt-sQl"/>
-                            <constraint firstItem="BJz-Fp-jCx" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" id="RLg-bJ-Nz7"/>
-                            <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="vl9-kp-8Ma" secondAttribute="trailing" id="TfB-TK-Lh2"/>
                             <constraint firstItem="JM3-IU-4oa" firstAttribute="top" secondItem="OMx-QP-Nft" secondAttribute="top" id="YS0-bz-4Dy"/>
                             <constraint firstItem="OMx-QP-Nft" firstAttribute="trailing" secondItem="xQN-Id-J85" secondAttribute="trailing" constant="16" id="Z54-jM-Cfy"/>
                             <constraint firstItem="JM3-IU-4oa" firstAttribute="leading" secondItem="OMx-QP-Nft" secondAttribute="leading" id="dWa-ua-Jp9"/>
-                            <constraint firstItem="BJz-Fp-jCx" firstAttribute="top" secondItem="xQN-Id-J85" secondAttribute="bottom" id="n4v-Fx-cFV"/>
-                            <constraint firstAttribute="bottom" secondItem="vl9-kp-8Ma" secondAttribute="bottom" id="va1-Sq-iaa"/>
+                            <constraint firstItem="xQN-Id-J85" firstAttribute="bottom" secondItem="OMx-QP-Nft" secondAttribute="bottom" id="lps-NW-6p7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OMx-QP-Nft"/>
                     </view>
@@ -352,7 +289,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2017.1875" y="-763.4765625"/>
+            <point key="canvasLocation" x="-2018.4000000000001" y="-764.16791604197908"/>
         </scene>
         <!--manageCategoryNC-->
         <scene sceneID="f1h-oA-P52">
@@ -364,8 +301,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add(grey)" width="20" height="20"/>
-        <image name="edit(grey)" width="24" height="24"/>
-        <image name="missing_document" width="128" height="128"/>
+        <image name="missing_document" width="256" height="256"/>
     </resources>
 </document>
