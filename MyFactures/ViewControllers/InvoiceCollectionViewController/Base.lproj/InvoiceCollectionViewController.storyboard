@@ -280,6 +280,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OMx-QP-Nft"/>
                     </view>
+                    <navigationItem key="navigationItem" id="chn-ie-nZT"/>
                     <connections>
                         <outlet property="invoiceCollectionView" destination="xQN-Id-J85" id="ED9-ZO-BJN"/>
                         <outlet property="ui_searchBar" destination="tT3-pP-fqR" id="RMC-d1-h0K"/>
@@ -289,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qeg-Lj-Tdh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2018.4000000000001" y="-764.16791604197908"/>
+            <point key="canvasLocation" x="-1079.2" y="-764.16791604197908"/>
         </scene>
         <!--manageCategoryNC-->
         <scene sceneID="f1h-oA-P52">

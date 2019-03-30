@@ -17,7 +17,17 @@ class ManageCategoryTableViewController: UIViewController {
     @IBOutlet weak var ui_modifyCategoryTextField: UITextField!
     @IBOutlet weak var ui_addNewCategoryButton: UIButton!
     
-    
+    let blackView = UIView()
+    let addFloatingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let plusImage = UIImage(named: "plus_button_white")
+        button.setImage(plusImage, for: .normal)
+        button.backgroundColor = UIColor(named: "navBarTint")
+        button.setFloatingButton()
+        button.addTarget(self, action: #selector(addNewCategoryButtonPressed), for: .touchUpInside)
+        return button
+    }()
     
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
@@ -26,6 +36,7 @@ class ManageCategoryTableViewController: UIViewController {
     private var _manager: Manager!
     private var _selectedCategoryToModify: Category!
     private var _visualEffect: UIVisualEffect!
+    let BUTTON_SIZE: CGFloat = 56
     
     //TODO: Localized text
     let addNewCategoryButtonAddText = NSLocalizedString("Add", comment: "")
@@ -44,6 +55,7 @@ class ManageCategoryTableViewController: UIViewController {
         ui_modifyCategoryTextField.delegate = self
         ui_manageCategoryTableView.dataSource = self
         ui_manageCategoryTableView.delegate = self
+        setupFloatingButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,8 +76,23 @@ class ManageCategoryTableViewController: UIViewController {
         }
     }
     
+    /** add floating button */
+    private func setupFloatingButton() {
+        view.addSubview(addFloatingButton)
+        addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
+        addFloatingButton.widthAnchor.constraint(equalToConstant: BUTTON_SIZE).isActive = true
+        addFloatingButton.layer.cornerRadius = BUTTON_SIZE / 2
+    }
+    
     private func animateIn(forSubview subview: UIView) {
-        self.navigationController!.view.addSubview(subview)
+        view.addSubview(blackView)
+        view.addSubview(subview)
+        
+        blackView.backgroundColor = .black
+        blackView.frame = view.frame
+        blackView.alpha = 0
         
         subview.translatesAutoresizingMaskIntoConstraints = false
         subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -79,7 +106,7 @@ class ManageCategoryTableViewController: UIViewController {
         
         
         UIView.animate(withDuration: 0.4) {
-            self.view.alpha = 0.4
+            self.blackView.alpha = 0.4
             subview.alpha = 1
             subview.transform = CGAffineTransform.identity
         }
@@ -88,20 +115,21 @@ class ManageCategoryTableViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             subview.alpha = 0
-            self.view.alpha = 1
+            self.blackView.alpha = 0
             
         }) { (success: Bool) in
+            self.blackView.removeFromSuperview()
             subview.removeFromSuperview()
         }
     }
     
     
     //MARK: - Actions
-    @IBAction func cancelManageCategoryVC(_ sender: UIBarButtonItem) {
+    @IBAction func cancelManageCategoryVC(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func addNewCategoryButtonPressed(_ sender: UIBarButtonItem) {
+    @objc private func addNewCategoryButtonPressed() {
         animateIn(forSubview: ui_modifyCategoryView)
         ui_modifyCategoryTextField.text = ""
         ui_modifyCategoryTextField.becomeFirstResponder()

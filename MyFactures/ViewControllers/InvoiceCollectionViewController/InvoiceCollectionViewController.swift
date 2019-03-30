@@ -153,7 +153,9 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Set the navigationBar title with the name of the current group
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+        let selectCategoryButon = UIBarButtonItem(title: "All categories", style: .plain, target: self, action: #selector(showCategorySelector))
+        navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
 
     //TODO: Retrieve the month for the section index
@@ -291,6 +293,15 @@ class InvoiceCollectionViewController: UIViewController {
         UIView.animate(withDuration: 0.25) {
             self.ui_searchBarView.layoutIfNeeded()
         }
+    }
+    
+    @objc private func showCategorySelector() {
+        let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
+        if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
+            manageCategoryVC._ptManager = self._ptManager
+            manageCategoryVC.modalTransitionStyle = .coverVertical
+            present(manageCategoryVC, animated: true, completion: nil)
+        }        
     }
     
     
