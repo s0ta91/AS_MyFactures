@@ -104,6 +104,7 @@ class InvoiceCollectionViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -154,7 +155,8 @@ class InvoiceCollectionViewController: UIViewController {
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
         let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
-        let selectCategoryButon = UIBarButtonItem(title: "All categories", style: .plain, target: self, action: #selector(showCategorySelector))
+        let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory().title
+        let selectCategoryButon = UIBarButtonItem(title: selectedCategoryName, style: .plain, target: self, action: #selector(showCategorySelector))
         navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
 
@@ -303,7 +305,6 @@ class InvoiceCollectionViewController: UIViewController {
             present(manageCategoryVC, animated: true, completion: nil)
         }        
     }
-    
     
     @objc private func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
@@ -483,6 +484,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "documentCollectionViewBackground_128")
     }
+    
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let str = descriptionStr
         let attr = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]
