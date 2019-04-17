@@ -371,8 +371,9 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
         cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
         cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
-        cell_invoice.layer.shadowRadius = 2.0
+        cell_invoice.layer.shadowRadius = 4.0
         cell_invoice.layer.shadowOpacity = 1.0
+//        cell_invoice.layer.cornerRadius = 4
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         return cell_invoice
@@ -386,7 +387,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
 
 extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = invoiceCollectionView.frame.size.width
+        let width = invoiceCollectionView.frame.size.width - 32
         return CGSize(width: width, height: 115)
     }
 }
