@@ -35,10 +35,6 @@ class SideYearSelector: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-    
     @objc func toggleGroupVC() {
         groupViewController.toggle()
     }

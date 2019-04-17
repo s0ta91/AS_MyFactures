@@ -70,9 +70,6 @@ class InvoiceCollectionViewController: UIViewController {
     let descriptionStr = NSLocalizedString("Tap the 'New document' icon to create a new document", comment: "")
     
     //MARK: - Controller functions
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
