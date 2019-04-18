@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -306,17 +306,6 @@
                                     <constraint firstItem="58y-Cc-TxO" firstAttribute="centerY" secondItem="8tN-Mm-8BR" secondAttribute="centerY" id="cji-43-sre"/>
                                 </constraints>
                             </view>
-                            <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dj2-0d-An5">
-                                <rect key="frame" x="0.0" y="62" width="375" height="605"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.40000000000000002" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="DnE-1u-eub">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="605"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </view>
-                                <color key="backgroundColor" white="0.45000000000000001" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <vibrancyEffect>
-                                    <blurEffect style="light"/>
-                                </vibrancyEffect>
-                            </visualEffectView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -325,14 +314,11 @@
                             <constraint firstItem="OIm-nc-13H" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" constant="37" id="6eV-Dc-d64"/>
                             <constraint firstItem="WxJ-E0-RJ2" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" constant="16" id="6hP-0U-3nM"/>
                             <constraint firstItem="Cwp-ht-Ewx" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" constant="16" id="8tK-8k-eIN"/>
-                            <constraint firstItem="dj2-0d-An5" firstAttribute="top" secondItem="8tN-Mm-8BR" secondAttribute="bottom" constant="-2" id="Aey-iz-ok6"/>
                             <constraint firstItem="GmY-Z6-z9w" firstAttribute="top" secondItem="a6X-EZ-nrs" secondAttribute="bottom" constant="10" id="CZP-7W-c9A"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="GmY-Z6-z9w" secondAttribute="trailing" constant="16" id="CoV-0k-hWG"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="8tN-Mm-8BR" secondAttribute="trailing" id="Dx8-EL-9Ew"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="V98-qZ-raZ" secondAttribute="trailing" id="Hg3-2b-gYL"/>
                             <constraint firstItem="a6X-EZ-nrs" firstAttribute="leading" secondItem="OIm-nc-13H" secondAttribute="trailing" constant="25" id="JUZ-ed-8mY"/>
-                            <constraint firstItem="dj2-0d-An5" firstAttribute="trailing" secondItem="BkJ-3R-cfm" secondAttribute="trailing" id="Jun-xE-54f"/>
-                            <constraint firstItem="dj2-0d-An5" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" id="M34-bK-zDA"/>
                             <constraint firstItem="8tN-Mm-8BR" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" id="MPV-6q-o8B"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="WxJ-E0-RJ2" secondAttribute="trailing" id="Mco-Hf-wOe"/>
                             <constraint firstItem="5En-M0-FIS" firstAttribute="top" secondItem="xI6-N2-WZq" secondAttribute="bottom" constant="10" id="Ml4-YU-bfB"/>
@@ -349,7 +335,6 @@
                             <constraint firstItem="5En-M0-FIS" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" constant="16" id="jZc-G1-lDE"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="Cwp-ht-Ewx" secondAttribute="trailing" constant="16" id="jvm-so-2Dy"/>
                             <constraint firstItem="xI6-N2-WZq" firstAttribute="leading" secondItem="BkJ-3R-cfm" secondAttribute="leading" constant="16" id="oRe-c1-DmL"/>
-                            <constraint firstAttribute="bottom" secondItem="dj2-0d-An5" secondAttribute="bottom" id="ohc-eL-4ts"/>
                             <constraint firstItem="V98-qZ-raZ" firstAttribute="top" secondItem="5En-M0-FIS" secondAttribute="bottom" constant="10" id="q2y-6H-gZn"/>
                             <constraint firstItem="8tN-Mm-8BR" firstAttribute="top" secondItem="BkJ-3R-cfm" secondAttribute="top" id="qgb-MR-iyK"/>
                             <constraint firstItem="BkJ-3R-cfm" firstAttribute="trailing" secondItem="xI6-N2-WZq" secondAttribute="trailing" id="r48-NI-jeN"/>
@@ -384,7 +369,6 @@
                         <outlet property="ui_groupSelectionTextField" destination="zwU-4J-61V" id="Uk6-cR-Gmp"/>
                         <outlet property="ui_keyboardToolbarView" destination="gJL-4m-gCj" id="OBY-AJ-qQa"/>
                         <outlet property="ui_monthSelectionTextField" destination="Wpk-PH-d0v" id="NdQ-Zb-Yao"/>
-                        <outlet property="ui_visualEffect" destination="dj2-0d-An5" id="gtF-Ay-7ip"/>
                         <outlet property="ui_yearSelectionTextField" destination="iGe-sH-SiZ" id="b5T-01-Aaf"/>
                     </connections>
                 </viewController>

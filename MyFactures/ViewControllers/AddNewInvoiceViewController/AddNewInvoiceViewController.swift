@@ -26,7 +26,13 @@ class AddNewInvoiceViewController: UIViewController {
     @IBOutlet weak var ui_deleteAddedDocumentButton: UIButton!
     @IBOutlet weak var ui_addOrModifyButton: UIButton!
     @IBOutlet weak var ui_addNewDocumentButton: UIButton!
-    @IBOutlet weak var ui_visualEffect: UIVisualEffectView!
+    
+    var blackView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0
+        return view
+    }()
     
     
     //MARK: - paththrough Managers/Objects
@@ -105,7 +111,6 @@ class AddNewInvoiceViewController: UIViewController {
         setAccessoryViewForPickersView()
         setDefaultValues()
         updateDocumentInfo()
-        ui_visualEffect.isHidden = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -233,18 +238,18 @@ class AddNewInvoiceViewController: UIViewController {
     }
     
     private func animateIn(forSubview subview: UIView) {
-        ui_visualEffect.isHidden = false
-        self.view.addSubview(subview)
-
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(subview)
+            subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
+            subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
+        }
         subview.translatesAutoresizingMaskIntoConstraints = false
-        subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        subview.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: +10).isActive = true
-        subview.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -10).isActive = true
         subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
         subview.alpha = 0
         
         UIView.animate(withDuration: 0.4) {
-            self.ui_visualEffect.effect = self._visualEffect
+            self.blackView.alpha = 0.5
             subview.alpha = 1
             subview.transform = CGAffineTransform.identity
         }
@@ -254,12 +259,11 @@ class AddNewInvoiceViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             subview.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
             subview.alpha = 0
-            
-            self.ui_visualEffect.effect = nil
+            self.blackView.alpha = 0
         }) { (success: Bool) in
             subview.removeFromSuperview()
+            self.blackView.removeFromSuperview()
         }
-        ui_visualEffect.isHidden = true
     }
 
     private func isGroup(forYear year: Year) -> Bool {
@@ -267,6 +271,13 @@ class AddNewInvoiceViewController: UIViewController {
             return true
         } else {
             return false
+        }
+    }
+    
+    private func setupBlackView() {
+        if let window = UIApplication.shared.keyWindow {
+            blackView.frame = window.frame
+            window.addSubview(blackView)
         }
     }
     
@@ -358,6 +369,7 @@ class AddNewInvoiceViewController: UIViewController {
         ui_addNewGroupOrCategoryTextField.placeholder = "Folder name"
         ui_addNewGroupOrCategoryTextField.text = ""
         ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
+        setupBlackView()
         animateIn(forSubview: ui_createGroupOrCategoryView)
     }
     
@@ -366,6 +378,7 @@ class AddNewInvoiceViewController: UIViewController {
         ui_addNewGroupOrCategoryTextField.placeholder = "Category name"
         ui_addNewGroupOrCategoryTextField.text = ""
         ui_addNewGroupOrCategoryTextField.becomeFirstResponder()
+        setupBlackView()
         animateIn(forSubview: ui_createGroupOrCategoryView)
     }
     

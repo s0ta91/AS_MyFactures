@@ -26,7 +26,8 @@ class InvoiceCollectionViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         let plusImage = UIImage(named: "plus_button_white")
         button.setImage(plusImage, for: .normal)
-        button.backgroundColor = UIColor(named: "navBarTint")
+//        button.backgroundColor = UIColor(named: "navBarTint")
+        button.backgroundColor = .black
         button.setFloatingButton()
         button.addTarget(self, action: #selector(addNewInvoiceButtonPressed(_:)), for: .touchUpInside)
         return button

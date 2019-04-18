@@ -44,7 +44,8 @@ class GroupViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         let plusImage = UIImage(named: "plus_button_white")
         button.setImage(plusImage, for: .normal)
-        button.backgroundColor = UIColor(named: "navBarTint")
+//        button.backgroundColor = UIColor(named: "navBarTint")
+        button.backgroundColor = .black
         button.setFloatingButton()
         button.addTarget(self, action: #selector(addNewGroupButtonPressed(_:)), for: .touchUpInside)
         return button
@@ -408,7 +409,7 @@ extension GroupViewController: UICollectionViewDataSource {
         cell_group.layer.shadowRadius = 5
         cell_group.layer.shadowOffset = .zero
         cell_group.layer.shadowPath = UIBezierPath(rect: cell_group.bounds).cgPath
-        cell_group.layer.shouldRasterize = true
+//        cell_group.layer.shouldRasterize = true
         cell_group.layer.masksToBounds = false
         
         cell_group.delegate = self
