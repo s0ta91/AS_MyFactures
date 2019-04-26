@@ -43,14 +43,19 @@ class Year: Object {
         let newGroupIndex = getNewGroupIndex(withTitle: title, isListFiltered)
         let newGroup = Group()
         newGroup.title = title
-        realm?.beginWrite()
-        _groupList.insert(newGroup, at: newGroupIndex)
-        try? realm?.commitWrite()
+        do {
+            try realm?.write {
+                _groupList.insert(newGroup, at: newGroupIndex)
+            }
+        } catch (let error) {
+            print("can't add/insert this new group: \(error)")
+        }
         newGroup.initMonthList()
         setGroupList()
         return newGroup
     }
-    //TODO: - Create function to know at which index the new group has to be inserted in order to the list to be sorted
+    
+    //TODO: - Create function to know at which index the new group has to be inserted in order to sorted the list
     private func getNewGroupIndex (withTitle title: String, _ isListFileterd: Bool) -> Int {
         var groupIndex: Int?
         for index in 0..<_groupList.count {
@@ -132,10 +137,10 @@ class Year: Object {
     
     func removeGroup (atIndex index:Int) {
         if let groupToDelete = getGroup(atIndex: index) {
-            realm?.beginWrite()
-            realm?.delete(groupToDelete)
             do {
-                try realm?.commitWrite()
+                try realm?.write {
+                    realm?.delete(groupToDelete)
+                }
             }catch{
                 print("can't delete group at index :\(index)")
             }

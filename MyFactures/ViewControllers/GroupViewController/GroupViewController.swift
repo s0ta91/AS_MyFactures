@@ -434,6 +434,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
                     self.ui_newGroupNameTextField.text = group.title
                     self.ui_newGroupNameTextField.becomeFirstResponder()
                     self._groupToModify = group
+                    self.setupBlackView()
                     self.animateIn()
             }
         }

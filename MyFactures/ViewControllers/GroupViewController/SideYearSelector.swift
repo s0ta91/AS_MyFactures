@@ -63,6 +63,7 @@ extension SideYearSelector: UIGestureRecognizerDelegate {
         if groupViewController {
             let gestureIsDraggingFromLeftToRight = (recognizer.velocity(in: view).x > 0)
             let gestureIsDraggingFromRightToLeft = (recognizer.velocity(in: view).x < 0)
+            
             switch recognizer.state {
                 
             case .began:

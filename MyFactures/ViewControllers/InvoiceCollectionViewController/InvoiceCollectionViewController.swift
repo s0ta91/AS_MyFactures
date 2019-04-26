@@ -90,8 +90,8 @@ class InvoiceCollectionViewController: UIViewController {
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-        
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
+        
         invoiceCollectionView.reloadData()
     }
 

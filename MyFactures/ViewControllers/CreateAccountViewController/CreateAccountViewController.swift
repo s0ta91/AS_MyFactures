@@ -77,9 +77,9 @@ class CreateAccountViewController: UIViewController {
             _manager.createUser(with: password, andEmail: emailAddress)
             Manager.setIsFirstLoad(false)
             let storyboard = UIStoryboard(name: "GroupViewController", bundle: .main)
-            let GroupTableVC = storyboard.instantiateViewController(withIdentifier: "NavGroupContoller")
-            GroupTableVC.modalTransitionStyle = .crossDissolve
-            present(GroupTableVC, animated: true, completion: nil)
+            let sideYearSelectorVC = storyboard.instantiateViewController(withIdentifier: "SideYearSelector")
+            sideYearSelectorVC.modalTransitionStyle = .crossDissolve
+            present(sideYearSelectorVC, animated: true, completion: nil)
             
             
             //            guard let verifyEmailVC = storyboard?.instantiateViewController(withIdentifier: "verifyEmailVC") as? VerifyPasswordViewController else { return }
