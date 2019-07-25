@@ -28,15 +28,18 @@ class Manager {
     }
     
     func initYear () {
+        print("init years")
         let _currentDate = Date()
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: _currentDate)
         if getApplicationDataCount() == 0 {
             let yearsStartAt = 1900
+            print("create years")
             for calculatedYears in yearsStartAt...currentYear {
                 addYear(calculatedYears)
             }
         _yearsList.first?.selected = true
+        print("yearslistCount \(_yearsList.count)")
         }else {
             if let yearsListLast = _yearsList.first,
                 yearsListLast.year != currentYear {

@@ -31,6 +31,8 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
             let thumbnailUrl = SaveManager.getUrl(forIdentifier: invoiceIdentifier, documentType: .thumbnail)
             ui_invoiceDocumentThumbnail.loadImage(with: thumbnailUrl.absoluteString)
         }
+        ui_invoiceDocumentThumbnail.layer.cornerRadius = 4
+        
         ui_amountLabel.text = String(describing: invoice.amount)
         ui_categoryLabel.text = invoice.categoryObject?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription

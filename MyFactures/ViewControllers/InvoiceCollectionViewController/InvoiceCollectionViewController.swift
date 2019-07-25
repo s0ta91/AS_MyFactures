@@ -20,6 +20,21 @@ class InvoiceCollectionViewController: UIViewController {
     @IBOutlet weak var ui_searchBar: UISearchBar!
     
     @IBOutlet weak var ui_searchBarHeightConstraint: NSLayoutConstraint!
+    
+    let addFloatingButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let plusImage = UIImage(named: "plus_button_white")
+        button.setImage(plusImage, for: .normal)
+//        button.backgroundColor = UIColor(named: "navBarTint")
+        button.backgroundColor = .black
+        button.setFloatingButton()
+        button.addTarget(self, action: #selector(addNewInvoiceButtonPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let BUTTON_SIZE: CGFloat = 56
+    
     private var ui_searchButton: UIBarButtonItem!
     
     let addNewInvoiceStoryboard = UIStoryboard(name: "AddNewInvoiceViewController", bundle: .main)
@@ -56,13 +71,16 @@ class InvoiceCollectionViewController: UIViewController {
     let descriptionStr = NSLocalizedString("Tap the 'New document' icon to create a new document", comment: "")
     
     //MARK: - Controller functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationController?.navigationBar.prefersLargeTitles = false
         setupReviewController()
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
         invoiceCollectionView.emptyDataSetSource = self
+        setupFloatingButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,17 +90,35 @@ class InvoiceCollectionViewController: UIViewController {
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-        
         _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
+        
         invoiceCollectionView.reloadData()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     //MARK: - Private functions
+    /** add floating button */
+    private func setupFloatingButton() {
+        view.addSubview(addFloatingButton)
+        addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
+        addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
+        addFloatingButton.widthAnchor.constraint(equalToConstant: BUTTON_SIZE).isActive = true
+        addFloatingButton.layer.cornerRadius = BUTTON_SIZE / 2
+    }
+    
     /** Show the review window to note the app */
     private func setupReviewController() {
         SKStoreReviewController.requestReview()
@@ -116,7 +152,10 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Set the navigationBar title with the name of the current group
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+        let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory().title
+        let selectCategoryButon = UIBarButtonItem(title: selectedCategoryName, style: .plain, target: self, action: #selector(showCategorySelector))
+        navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
 
     //TODO: Retrieve the month for the section index
@@ -256,8 +295,16 @@ class InvoiceCollectionViewController: UIViewController {
         }
     }
     
+    @objc private func showCategorySelector() {
+        let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
+        if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
+            manageCategoryVC._ptManager = self._ptManager
+            manageCategoryVC.modalTransitionStyle = .coverVertical
+            present(manageCategoryVC, animated: true, completion: nil)
+        }        
+    }
     
-    @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
+    @objc private func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
@@ -322,8 +369,9 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.borderColor = UIColor.clear.cgColor
         cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
         cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
-        cell_invoice.layer.shadowRadius = 2.0
+        cell_invoice.layer.shadowRadius = 4.0
         cell_invoice.layer.shadowOpacity = 1.0
+//        cell_invoice.layer.cornerRadius = 4
         cell_invoice.layer.masksToBounds = false;
         cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         return cell_invoice
@@ -337,7 +385,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
 
 extension InvoiceCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = invoiceCollectionView.frame.size.width
+        let width = invoiceCollectionView.frame.size.width - 32
         return CGSize(width: width, height: 115)
     }
 }
@@ -435,6 +483,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
     func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         return UIImage(named: "documentCollectionViewBackground_128")
     }
+    
     func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
         let str = descriptionStr
         let attr = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]

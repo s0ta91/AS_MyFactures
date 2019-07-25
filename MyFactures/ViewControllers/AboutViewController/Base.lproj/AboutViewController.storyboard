@@ -36,20 +36,31 @@
                                     <constraint firstAttribute="width" constant="60" id="o3F-ad-KnM"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyFactures 1.1.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVl-cB-FUS">
+                                <rect key="frame" x="122" y="623" width="131" height="24"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="17"/>
+                                <color key="textColor" white="0.29999999999999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="o30-7s-hxA" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="8" id="5ps-Gl-Thb"/>
+                            <constraint firstItem="EVl-cB-FUS" firstAttribute="centerX" secondItem="k9H-T6-iZZ" secondAttribute="centerX" id="Exd-b5-FpX"/>
                             <constraint firstItem="IsE-u6-WmP" firstAttribute="leading" secondItem="sfd-WS-hJc" secondAttribute="trailing" constant="8" id="Hrr-fX-5Uk"/>
                             <constraint firstItem="IsE-u6-WmP" firstAttribute="leading" secondItem="sfd-WS-hJc" secondAttribute="trailing" constant="8" id="PmV-Ev-WiO"/>
                             <constraint firstItem="sfd-WS-hJc" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="61" id="W8w-H4-f0M"/>
                             <constraint firstItem="IsE-u6-WmP" firstAttribute="top" secondItem="j1q-e7-fTq" secondAttribute="top" constant="70" id="axV-cy-hfd"/>
                             <constraint firstItem="o30-7s-hxA" firstAttribute="centerX" secondItem="k9H-T6-iZZ" secondAttribute="centerX" id="eax-H7-rFQ"/>
+                            <constraint firstItem="j1q-e7-fTq" firstAttribute="bottom" secondItem="EVl-cB-FUS" secondAttribute="bottom" constant="20" id="nBL-82-nCN"/>
                             <constraint firstItem="sfd-WS-hJc" firstAttribute="leading" secondItem="j1q-e7-fTq" secondAttribute="leading" constant="16" id="x1d-VD-BzT"/>
                             <constraint firstAttribute="trailing" secondItem="IsE-u6-WmP" secondAttribute="trailing" constant="16" id="yQl-xI-jyQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j1q-e7-fTq"/>
                     </view>
+                    <connections>
+                        <outlet property="ui_appVersionNumberLabel" destination="EVl-cB-FUS" id="bbd-ek-kwP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k4N-Tp-b4A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

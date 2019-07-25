@@ -28,7 +28,9 @@ class LoginViewController: UIViewController {
     let localizedReasonText = NSLocalizedString("Unlock MyFactures", comment: "")
     let alertErrorText = NSLocalizedString("An error occured", comment: "")
     
-    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

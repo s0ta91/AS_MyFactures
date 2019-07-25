@@ -51,7 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = false
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
-        
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         

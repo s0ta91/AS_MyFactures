@@ -76,6 +76,7 @@
 		BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */; };
 		BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */; };
 		BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CF21B7FB9500BCCDDD /* UIView.swift */; };
+		BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -174,6 +175,7 @@
 		BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CF21B7FB9500BCCDDD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideYearSelector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +328,7 @@
 			children = (
 				1D95B6242125B6FB008BBA52 /* GroupViewController.storyboard */,
 				1DD923562028B4F200387FF8 /* GroupViewController.swift */,
+				BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */,
 			);
 			path = GroupViewController;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
 				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
+				BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */,
 				1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */,
 				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
 				1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */,
