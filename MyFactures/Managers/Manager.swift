@@ -131,7 +131,7 @@ class Manager {
         }
         
         let builder = MCOMessageBuilder()
-        builder.header.to = [MCOAddress(displayName: email, mailbox: email)]
+        builder.header.to = [MCOAddress(displayName: email, mailbox: email) as Any]
         builder.header.from = MCOAddress(displayName: "MyFacturesApp", mailbox: Settings().emailAdress)
         
         if let codeForUser = code {

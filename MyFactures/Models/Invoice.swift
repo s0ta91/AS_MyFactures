@@ -22,7 +22,7 @@ class Invoice: Object {
         }set {
             realm?.beginWrite()
             _identifier = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -32,7 +32,7 @@ class Invoice: Object {
         }set {
             realm?.beginWrite()
             _documentType = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
 
@@ -42,7 +42,7 @@ class Invoice: Object {
         }set {
             realm?.beginWrite()
             _detailedDescription = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -52,7 +52,7 @@ class Invoice: Object {
         }set {
             realm?.beginWrite()
             _categoryobject = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -62,7 +62,7 @@ class Invoice: Object {
         }set {
             realm?.beginWrite()
             _amount = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
 }

@@ -23,7 +23,7 @@ class Year: Object {
         }set {
             realm?.beginWrite()
             _year = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -33,7 +33,7 @@ class Year: Object {
         }set {
             realm?.beginWrite()
             _selected = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -66,7 +66,7 @@ class Year: Object {
         }
         _groupArray.append(title.lowercased())
         _groupArray.sort()
-        groupIndex = _groupArray.index(of: title.lowercased())!
+        groupIndex = _groupArray.firstIndex(of: title.lowercased())!
         _groupArray.removeAll()
         return groupIndex!
     }

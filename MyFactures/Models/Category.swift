@@ -19,7 +19,7 @@ class Category: Object {
         }set {
             realm?.beginWrite()
             _title = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -29,7 +29,7 @@ class Category: Object {
         }set {
             realm?.beginWrite()
             _selected = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
 
