@@ -18,7 +18,7 @@ class GroupIdea: Object {
         }set {
             realm?.beginWrite()
             _title = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
 }

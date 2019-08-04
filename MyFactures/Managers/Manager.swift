@@ -131,7 +131,7 @@ class Manager {
         }
         
         let builder = MCOMessageBuilder()
-        builder.header.to = [MCOAddress(displayName: email, mailbox: email)]
+        builder.header.to = [MCOAddress(displayName: email, mailbox: email) as Any]
         builder.header.from = MCOAddress(displayName: "MyFacturesApp", mailbox: Settings().emailAdress)
         
         if let codeForUser = code {
@@ -409,6 +409,7 @@ class Manager {
     static func presentLoginScreen(fromViewController vc: UIViewController){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { fatalError("Could not load LoginVC") }
+        loginVC.modalPresentationStyle = .fullScreen
         vc.present(loginVC, animated: false, completion: nil)
     }
     

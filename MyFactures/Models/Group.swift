@@ -35,7 +35,7 @@ class Group: Object {
         set {
             realm?.beginWrite()
             _title = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -45,7 +45,7 @@ class Group: Object {
         }set {
             realm?.beginWrite()
             _totalPrice = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -55,7 +55,7 @@ class Group: Object {
         }set {
             realm?.beginWrite()
             _totalDocuments = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -75,7 +75,7 @@ class Group: Object {
         newMonth.month = monthName
         realm?.beginWrite()
         _monthList.append(newMonth)
-        try? realm?.commitWrite()
+        ((try? realm?.commitWrite()) as ()??)
     }
     
     func getMonth (atIndex index: Int) -> Month? {
@@ -92,7 +92,7 @@ class Group: Object {
         return _monthList.index(of: month)
     }
     func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
-        return _monthArray.index(of: monthName)!
+        return _monthArray.firstIndex(of: monthName)!
     }
     
     func updateDecemberMonthName() {
@@ -105,7 +105,7 @@ class Group: Object {
         if let monthToDelete = getMonth(atIndex: index) {
             realm?.beginWrite()
             realm?.delete(monthToDelete)
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -123,7 +123,7 @@ class Group: Object {
                            NSLocalizedString("October", comment: ""),
                            NSLocalizedString("November", comment: ""),
                            NSLocalizedString("December", comment: "")]
-        guard let monthIndex = monthArray.index(of: monthName) else { fatalError("This month name is unknown") }
+        guard let monthIndex = monthArray.firstIndex(of: monthName) else { fatalError("This month name is unknown") }
         if let monthObject = getMonth(atIndex: monthIndex) {
             monthToReturn = monthObject
         }else {

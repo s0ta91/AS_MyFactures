@@ -528,7 +528,7 @@
 				TargetAttributes = {
 					1D4B078820233FF4002F745C = {
 						CreatedOnToolsVersion = 9.2;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -619,7 +619,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
@@ -638,7 +638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -982,7 +982,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1006,7 +1006,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/MyFactures/MailCore2_Extensions/sendEmail_Bridge.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

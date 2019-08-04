@@ -79,6 +79,7 @@ class CreateAccountViewController: UIViewController {
             let storyboard = UIStoryboard(name: "GroupViewController", bundle: .main)
             let sideYearSelectorVC = storyboard.instantiateViewController(withIdentifier: "SideYearSelector")
             sideYearSelectorVC.modalTransitionStyle = .crossDissolve
+            sideYearSelectorVC.modalPresentationStyle = .fullScreen
             present(sideYearSelectorVC, animated: true, completion: nil)
             
             

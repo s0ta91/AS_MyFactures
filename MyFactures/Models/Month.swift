@@ -24,7 +24,7 @@ class Month: Object {
         }set {
             realm?.beginWrite()
             _month = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -34,7 +34,7 @@ class Month: Object {
         }set {
             realm?.beginWrite()
             _totalAmount = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -44,7 +44,7 @@ class Month: Object {
         }set {
             realm?.beginWrite()
             _totalDocument = newValue
-            try? realm?.commitWrite()
+            ((try? realm?.commitWrite()) as ()??)
         }
     }
     
@@ -103,7 +103,7 @@ class Month: Object {
         
         realm?.beginWrite()
         _invoiceList.append(newInvoice)
-        try? realm?.commitWrite()
+        ((try? realm?.commitWrite()) as ()??)
         
         setTotalAmount(amount, .add)
         setTotalDocument(.add)
@@ -119,7 +119,7 @@ class Month: Object {
         
         realm?.beginWrite()
         _invoiceList.insert(updatedInvoice, at: index)
-        try? realm?.commitWrite()
+        ((try? realm?.commitWrite()) as ()??)
         
         setTotalAmount(amount, .add)
         setTotalDocument(.add)
