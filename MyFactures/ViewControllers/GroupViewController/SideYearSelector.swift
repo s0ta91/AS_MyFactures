@@ -28,6 +28,7 @@ class SideYearSelector: UIViewController {
         mainView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         mainView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         view.addConstraint(withFormat: "H:[v0(\(view.frame.width))]", views: mainView)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(showSideYearSelector), name: NSNotification.Name("showHideSideYearSelector"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(toggleGroupVC), name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
         
