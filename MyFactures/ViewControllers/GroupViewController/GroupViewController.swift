@@ -146,7 +146,8 @@ class GroupViewController: UIViewController {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOS 13, *) {
             if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-                
+                groupCV.reloadData()
+                upadateYearBarItemButtonTitle()
             }
         }
     }
