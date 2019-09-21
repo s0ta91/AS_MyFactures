@@ -59,6 +59,7 @@ class LoginViewController: UIViewController {
     
         ui_passwordTextField.font = UIFontMetrics.default.scaledFont(for: customFont)
         ui_passwordTextField.adjustsFontForContentSizeCategory = true
+        
         ui_lostPasswordButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
         ui_lostPasswordButton.titleLabel?.adjustsFontForContentSizeCategory = true
         ui_connexionButton.titleLabel?.font = UIFontMetrics.default.scaledFont(for: customFont)
@@ -108,7 +109,10 @@ class LoginViewController: UIViewController {
             
             // Set padding for password textField
             ui_passwordTextField.setPadding()
-            ui_passwordTextField.setRadius()
+            ui_passwordTextField.layer.cornerRadius = 8
+            ui_passwordTextField.layer.masksToBounds = false
+            ui_passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+            
             
             // Set radius for connexion button
             ui_connexionButton.layer.cornerRadius = 5

@@ -10,6 +10,10 @@ import UIKit
 import MobileCoreServices
 import IQKeyboardManagerSwift
 
+protocol AddNewInvoiceDelegate {
+    func refreshdata()
+}
+
 class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
@@ -53,6 +57,8 @@ class AddNewInvoiceViewController: UIViewController {
     private var _month: Month!
     private var _invoice: Invoice!
     private var _loginVC: UIViewController!
+    
+    var delegate: AddNewInvoiceDelegate?
     
     //MARK: - Others
     //TODO: PickerView Initializer
@@ -111,11 +117,11 @@ class AddNewInvoiceViewController: UIViewController {
         setAccessoryViewForPickersView()
         setDefaultValues()
         updateDocumentInfo()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        if #available(iOS 13, *) {
+            isModalInPresentation = true
+        }
+        
     }
     
     //MARK: - Private functions
@@ -279,6 +285,31 @@ class AddNewInvoiceViewController: UIViewController {
             blackView.frame = window.frame
             window.addSubview(blackView)
         }
+    }
+    
+    func confirmCancel(showingSave: Bool) {
+        
+        // Present an action sheet, which in a regular width environment appears as a popover
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Only ask if the user intended to save if they attempted to pull to dismiss, not if they tap Cancel
+        if showingSave {
+            alert.addAction(UIAlertAction(title: "Save", style: .default) { _ in
+//                self.delegate?.editViewControllerDidFinish(self)
+            })
+        }
+        
+        alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { _ in
+//            self.delegate?.editViewControllerDidCancel(self)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // The popover should point at the Cancel button
+//        alert.popoverPresentationController?.barButtonItem = cancelButton
+        
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: - IBAction functions
@@ -459,11 +490,21 @@ class AddNewInvoiceViewController: UIViewController {
             
                 if self._fromOtherApp {
                     self.modalTransitionStyle = .coverVertical
+                    if #available(iOS 13, *) {
+                        if let presentationController = presentationController {
+                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                        }
+                    }
                     self.dismiss(animated: true) {
                         self._loginVC.modalTransitionStyle = .crossDissolve
                         self._loginVC.dismiss(animated: true, completion: nil)
                     }
                 } else {
+                    if #available(iOS 13, *) {
+                        if let presentationController = presentationController {
+                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                        }
+                    }
                     dismiss(animated: true, completion: nil)
             }
             
@@ -585,6 +626,17 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
         _documentHasBeenAdded = true
         updateDocumentInfo()
+    }
+}
+
+extension AddNewInvoiceViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("controller has been dismissed")
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        print("didAttemptToDismiss in VC")
+        confirmCancel(showingSave: true)
     }
 }
 

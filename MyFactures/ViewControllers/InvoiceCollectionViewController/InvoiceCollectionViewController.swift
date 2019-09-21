@@ -24,9 +24,8 @@ class InvoiceCollectionViewController: UIViewController {
     let addFloatingButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plusImage = UIImage(named: "plus_button_white")
-        button.setImage(plusImage, for: .normal)
-//        button.backgroundColor = UIColor(named: "navBarTint")
+//        let plusImage = UIImage(named: "plus_button_white")
+//        button.setImage(plusImage, for: .normal)
         button.backgroundColor = .black
         button.setFloatingButton()
         button.addTarget(self, action: #selector(addNewInvoiceButtonPressed(_:)), for: .touchUpInside)
@@ -85,6 +84,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("invoiceVC viewWillAppear")
         invoiceCollectionView.clipsToBounds = false
         
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
@@ -96,27 +96,49 @@ class InvoiceCollectionViewController: UIViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("invoiceVC viewDidAppear")
         NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("invoiceVC viewDidDisappear")
         NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                invoiceCollectionView.reloadData()
+            }
+        }
     }
     
     //MARK: - Private functions
     /** add floating button */
     private func setupFloatingButton() {
+        var plusImage = UIImage(named: "plus_button_white")
+        if #available(iOS 13, *) {
+            plusImage = isDarkModeNeeded() ? UIImage(named: "plus_button_black") : UIImage(named: "plus_button_white")
+        }
+        addFloatingButton.setImage(plusImage, for: .normal)
+        addFloatingButton.backgroundColor = isDarkModeNeeded() ? .white : .black
+        
         view.addSubview(addFloatingButton)
         addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
         addFloatingButton.widthAnchor.constraint(equalToConstant: BUTTON_SIZE).isActive = true
         addFloatingButton.layer.cornerRadius = BUTTON_SIZE / 2
+    }
+    
+    /** Check if dearkMode is needed */
+    private func isDarkModeNeeded() -> Bool {
+        if #available(iOS 13, *) {
+            return traitCollection.userInterfaceStyle == .dark
+        }
+        return false
     }
     
     /** Show the review window to note the app */
@@ -152,9 +174,16 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Set the navigationBar title with the name of the current group
     private func setNavigationBarInfo () {
         self.title = _invoiceCollectionCurrentGroup.title
-        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+//        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(search))
         let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory().title
         let selectCategoryButon = UIBarButtonItem(title: selectedCategoryName, style: .plain, target: self, action: #selector(showCategorySelector))
+        
+        if #available(iOS 13, *) {
+            searchButton.tintColor = UIColor.label
+            searchButton.style = .done
+            selectCategoryButon.tintColor = UIColor.label
+       }
         navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
 
@@ -299,7 +328,9 @@ class InvoiceCollectionViewController: UIViewController {
         let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
         if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
             manageCategoryVC._ptManager = self._ptManager
+            manageCategoryVC.presentationController?.delegate = self
             manageCategoryVC.modalTransitionStyle = .coverVertical
+//            manageCategoryVC.modalPresentationStyle = .fullScreen
             present(manageCategoryVC, animated: true, completion: nil)
         }        
     }
@@ -309,19 +340,22 @@ class InvoiceCollectionViewController: UIViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
+            destinationVC.delegate = self
+            destinationVC.presentationController?.delegate = destinationVC
+//            destinationVC.modalPresentationStyle = .fullScreen
             self.present(destinationVC, animated: true, completion: nil)
         }
     }
 
     // MARK: - Navigation to manageCategoyVC
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "manageCategoryVC"{
-            if let navigationVC = segue.destination as? UINavigationController,
-                let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
-                    destinationVC._ptManager = _invoiceCollectionManager
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "manageCategoryVC" {
+//            if let navigationVC = segue.destination as? UINavigationController,
+//                let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
+//                    destinationVC._ptManager = _invoiceCollectionManager
+//            }
+//        }
+//    }
 }
 
 //MARK: - Extensions
@@ -365,15 +399,32 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         }
         
         cell_invoice.delegate = self
-        cell_invoice.layer.borderWidth = 1.0
-        cell_invoice.layer.borderColor = UIColor.clear.cgColor
-        cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
-        cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
-        cell_invoice.layer.shadowRadius = 4.0
-        cell_invoice.layer.shadowOpacity = 1.0
-//        cell_invoice.layer.cornerRadius = 4
-        cell_invoice.layer.masksToBounds = false;
-        cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
+//        cell_invoice.layer.borderWidth = 1.0
+//        cell_invoice.layer.borderColor = UIColor.clear.cgColor
+////        cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
+//        cell_invoice.layer.shadowColor = UIColor.gray.cgColor
+//        if #available(iOS 13, *) {
+//            cell_invoice.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
+//        }
+//        cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
+//        cell_invoice.layer.shadowRadius = 4.0
+//        cell_invoice.layer.shadowOpacity = 1.0
+////        cell_invoice.layer.cornerRadius = 4
+//        cell_invoice.layer.masksToBounds = false;
+//        cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
+        
+        cell_invoice.layer.cornerRadius = 8
+        cell_invoice.layer.shadowColor = UIColor.gray.cgColor
+        if #available(iOS 13, *) {
+        cell_invoice.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
+        }
+        cell_invoice.layer.shadowOpacity = 0.5
+        cell_invoice.layer.shadowRadius = 5
+        cell_invoice.layer.shadowOffset = .zero
+        cell_invoice.layer.shadowPath = UIBezierPath(rect: cell_invoice.bounds).cgPath
+//        cell_group.layer.shouldRasterize = true
+        cell_invoice.layer.masksToBounds = false
+        
         return cell_invoice
     }
 
@@ -488,5 +539,18 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
         let str = descriptionStr
         let attr = [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)]
         return NSAttributedString(string: str, attributes: attr)
+    }
+}
+
+extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
+    func refreshdata() {
+        viewWillAppear(true)
+    }
+}
+
+extension InvoiceCollectionViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("controller has been dismissed")
+        viewWillAppear(true)
     }
 }
