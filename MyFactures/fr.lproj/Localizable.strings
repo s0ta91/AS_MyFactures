@@ -11,6 +11,9 @@
 "Add your email address *" = "Entrez votre adresse mail *";
 
 /* No comment provided by engineer. */
+"All categories" = "Toutes les catégories";
+
+/* No comment provided by engineer. */
 "An email containing your password as been sent" = "Un email contenant votre mot de passe vous a été envoyé";
 
 /* No comment provided by engineer. */
@@ -35,6 +38,9 @@
 "Cancel" = "Annuler";
 
 /* No comment provided by engineer. */
+"Changes has been saved" = "Modification sauvegardée";
+
+/* No comment provided by engineer. */
 "Confirm" = "Valider";
 
 /* No comment provided by engineer. */
@@ -57,6 +63,9 @@
 
 /* No comment provided by engineer. */
 "Deletion of this folder will errase all associated documents definitively." = "La suppression de ce dossier entrainera la suppression de toutes les factures associées sans possibilité de les récupérer. Souhaitez-vous continuer ?";
+
+/* No comment provided by engineer. */
+"Discard changes" = "Annuler les changements";
 
 /* No comment provided by engineer. */
 "Document" = "Choisir un document";
@@ -140,6 +149,9 @@
 "Please create a folder" = "Veuillez créer un dossier";
 
 /* No comment provided by engineer. */
+"Save" = "Sauvegarder";
+
+/* No comment provided by engineer. */
 "September" = "Septembre";
 
 /* No comment provided by engineer. */
@@ -155,6 +167,9 @@
 "Thank you !" = "Merci !";
 
 /* No comment provided by engineer. */
+"The email address is not valid" = "L'adresse email n'est pas valide";
+
+/* No comment provided by engineer. */
 "There is an issue with one of the fields" = "Il y a un problème avec l'un des champs";
 
 /* No comment provided by engineer. */
@@ -162,6 +177,9 @@
 
 /* No comment provided by engineer. */
 "This folder already exists" = "Ce dossier existe déjà";
+
+/* No comment provided by engineer. */
+"Unclassified" = "Non-classée";
 
 /* No comment provided by engineer. */
 "Unlock MyFactures" = "Déverrouiller MyFactures";
@@ -174,15 +192,3 @@
 
 /* No comment provided by engineer. */
 "Your password has been changed" = "Votre mot de passe a été changé";
-
-/* No comment provided by engineer. */
-"The email address is not valid" = "L'adresse email n'est pas valide";
-
-/* No comment provided by engineer. */
-"Changes has been saved" = "Modification sauvegardée";
-
-/* No comment provided by engineer. */
-"All categories" = "Toutes les catégories";
-
-/* No comment provided by engineer. */
-"Unclassified" = "Non-classée";

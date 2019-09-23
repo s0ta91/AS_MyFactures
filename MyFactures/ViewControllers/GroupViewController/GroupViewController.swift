@@ -109,11 +109,6 @@ class GroupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeEnded(_:)), name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
-        
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
             Manager.setIsFirstLoad(false)
@@ -127,6 +122,7 @@ class GroupViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        startObservers(true)
         setupYearBarItemButton()
         setupFloatingButton()
         setupGroupList()
@@ -136,6 +132,11 @@ class GroupViewController: UIViewController {
         _manager.setHeaderClippedToBound(groupCV)
         
         groupCV.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        startObservers(false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -163,49 +164,41 @@ class GroupViewController: UIViewController {
             Buglife.shared().presentReporter()
         case .informations:
             let storyboard = UIStoryboard(name: "UserInfosViewController", bundle: Bundle.main)
-            let UserInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
-            self.show(UserInfosVC, sender: nil)
+            let userInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
+            userInfosVC.presentationController?.delegate = userInfosVC
+            userInfosVC.modalTransitionStyle = .coverVertical
+            present(userInfosVC, animated: true)
         case .resetPassword:
             let storyboard = UIStoryboard(name: "ResetPasswordViewController", bundle: Bundle.main)
-            let ResetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
-            self.show(ResetPasswordVC, sender: nil)
+            let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
+            resetPasswordVC.presentationController?.delegate = resetPasswordVC
+            resetPasswordVC.modalTransitionStyle = .coverVertical
+            present(resetPasswordVC, animated: true)
         case .about:
             let storyboard = UIStoryboard(name: "AboutViewController", bundle: Bundle.main)
-            let AboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
-            self.show(AboutVC, sender: nil)
+            let aboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
+            aboutVC.modalTransitionStyle = .coverVertical
+            present(aboutVC, animated: true)
         case .cancel:
             break
         }
     }
-    
-    // unused. To delete if we can't add image to an sheet alertController
-    func showController(forSetting setting: Setting) {
-
-        switch setting.name {
-        case .feedback:
-            let appearance = Buglife.shared().appearance
-            appearance.barTintColor = UIColor(named: "navBarTint")
-            appearance.tintColor = .white
-            Buglife.shared().presentReporter()
-        case .informations:
-            let storyboard = UIStoryboard(name: "UserInfosViewController", bundle: Bundle.main)
-            let UserInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
-            self.show(UserInfosVC, sender: nil)
-        case .resetPassword:
-            let storyboard = UIStoryboard(name: "ResetPasswordViewController", bundle: Bundle.main)
-            let ResetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
-            self.show(ResetPasswordVC, sender: nil)
-        case .about:
-            let storyboard = UIStoryboard(name: "AboutViewController", bundle: Bundle.main)
-            let AboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
-            self.show(AboutVC, sender: nil)
-        case .cancel:
-            break
-        }
-    }
-    
     
     //MARK: -  Private functions
+    private func startObservers(_ start: Bool) {
+        if start {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeEnded(_:)), name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
+        } else {
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
+        }
+    }
+    
     private func setupYearBarItemButton() {
        upadateYearBarItemButtonTitle()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: yearBarButton)
@@ -550,6 +543,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
     
     func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
         let modify = UIAlertAction(title: editFolderActionTitle, style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
@@ -581,6 +575,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         }
         
         let cancel = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
+        
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)

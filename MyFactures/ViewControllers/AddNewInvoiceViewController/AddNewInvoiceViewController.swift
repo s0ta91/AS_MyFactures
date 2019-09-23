@@ -11,7 +11,7 @@ import MobileCoreServices
 import IQKeyboardManagerSwift
 
 protocol AddNewInvoiceDelegate {
-    func refreshdata()
+    func refreshData()
 }
 
 class AddNewInvoiceViewController: UIViewController {
@@ -58,7 +58,6 @@ class AddNewInvoiceViewController: UIViewController {
     private var _invoice: Invoice!
     private var _loginVC: UIViewController!
     
-    var delegate: AddNewInvoiceDelegate?
     
     //MARK: - Others
     //TODO: PickerView Initializer
@@ -81,6 +80,8 @@ class AddNewInvoiceViewController: UIViewController {
     private var _deletePreviousDocument: Bool = false
     private var _firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
+    
+    var delegate: AddNewInvoiceDelegate?
     
     //TODO: Localized text
     let noFolderAvailable = NSLocalizedString("No folder available", comment: "")
@@ -287,27 +288,30 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
     
-    func confirmCancel(showingSave: Bool) {
+    private func checkModifications() {
+        
+    }
+    
+    private func closeVC() {
+        dismiss(animated: true, completion: {
+            if self._fromOtherApp {
+                self._loginVC.modalTransitionStyle = .crossDissolve
+                self._loginVC.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func confirmCancel() {
         
         // Present an action sheet, which in a regular width environment appears as a popover
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        // Only ask if the user intended to save if they attempted to pull to dismiss, not if they tap Cancel
-        if showingSave {
-            alert.addAction(UIAlertAction(title: "Save", style: .default) { _ in
-//                self.delegate?.editViewControllerDidFinish(self)
-            })
-        }
-        
         alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { _ in
-//            self.delegate?.editViewControllerDidCancel(self)
+            self.closeVC()
         })
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        // The popover should point at the Cancel button
-//        alert.popoverPresentationController?.barButtonItem = cancelButton
         
         present(alert, animated: true, completion: nil)
     }
@@ -521,12 +525,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
         ui_descriptionTextField.resignFirstResponder()
-        dismiss(animated: true, completion: {
-            if self._fromOtherApp {
-                self._loginVC.modalTransitionStyle = .crossDissolve
-                self._loginVC.dismiss(animated: true, completion: nil)
-            }
-        })
+        confirmCancel()
     }
     
 }
@@ -632,11 +631,12 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
 extension AddNewInvoiceViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         print("controller has been dismissed")
+        delegate?.refreshData()
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
         print("didAttemptToDismiss in VC")
-        confirmCancel(showingSave: true)
+        confirmCancel()
     }
 }
 

@@ -309,6 +309,8 @@ class InvoiceCollectionViewController: UIViewController {
                     destinationVC._ptGroup = _invoiceCollectionCurrentGroup
                     destinationVC._ptMonth = month
                     destinationVC._ptInvoice = selectedInvoice
+                    destinationVC.presentationController?.delegate = destinationVC
+                    destinationVC.delegate = self
                 }
                 destinationVC.modalTransitionStyle = .coverVertical
                 present(destinationVC, animated: true, completion: nil)
@@ -340,22 +342,11 @@ class InvoiceCollectionViewController: UIViewController {
             destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
-            destinationVC.delegate = self
             destinationVC.presentationController?.delegate = destinationVC
-//            destinationVC.modalPresentationStyle = .fullScreen
+            destinationVC.delegate = self
             self.present(destinationVC, animated: true, completion: nil)
         }
     }
-
-    // MARK: - Navigation to manageCategoyVC
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "manageCategoryVC" {
-//            if let navigationVC = segue.destination as? UINavigationController,
-//                let destinationVC = navigationVC.viewControllers.first as? ManageCategoryTableViewController {
-//                    destinationVC._ptManager = _invoiceCollectionManager
-//            }
-//        }
-//    }
 }
 
 //MARK: - Extensions
@@ -543,7 +534,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
 }
 
 extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
-    func refreshdata() {
+    func refreshData() {
         viewWillAppear(true)
     }
 }

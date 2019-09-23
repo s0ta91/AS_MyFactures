@@ -116,3 +116,7 @@ extension ResetPasswordViewController: UITextFieldDelegate {
         return true
     }
 }
+
+extension ResetPasswordViewController: UIAdaptivePresentationControllerDelegate {
+    
+}

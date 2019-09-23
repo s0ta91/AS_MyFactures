@@ -80,7 +80,7 @@ class PDFViewController: UIViewController {
             
             case "JPG":
                 let scrollViewWidth = view.frame.size.width
-                let scrollViewHeight = view.frame.size.height - ui_navBarImageView.frame.size.height
+                let scrollViewHeight = view.frame.size.height - ui_navBarView.frame.size.height
                 
                 //TODO: Create and configure the imageView
                 if let imageToShow = _manager.getImageFromURL(url: _documentURL) {
