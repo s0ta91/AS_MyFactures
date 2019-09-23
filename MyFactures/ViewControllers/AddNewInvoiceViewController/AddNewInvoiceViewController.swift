@@ -206,7 +206,11 @@ class AddNewInvoiceViewController: UIViewController {
             ui_amountTextField.convertToCurrencyNumber()
             
             // Set the background color of evry uiPickerVIew to white
-            _pickerView.backgroundColor = .white
+            if #available(iOS 13, *) {
+                _pickerView.backgroundColor = .systemBackground
+            } else {
+                _pickerView.backgroundColor = .white
+            }
         }
     }
     
