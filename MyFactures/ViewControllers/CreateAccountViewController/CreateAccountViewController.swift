@@ -44,7 +44,7 @@ class CreateAccountViewController: UIViewController {
         
         ui_emailTextField.setPadding()
         ui_emailTextField.layer.cornerRadius = 8
-        ui_emailTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        ui_emailTextField.attributedPlaceholder = NSAttributedString(string: "Your email address *", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         ui_passwordTextField.setPadding()
         ui_passwordTextField.layer.cornerRadius = 8
         ui_passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])

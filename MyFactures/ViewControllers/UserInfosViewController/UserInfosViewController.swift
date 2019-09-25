@@ -17,7 +17,7 @@ class UserInfosViewController: UIViewController {
     let errorTitle = NSLocalizedString("Error", comment: "")
     let errorMessage = NSLocalizedString("The email address is not valid", comment: "")
     let confirmTitle = NSLocalizedString("Changes has been saved", comment: "")
-    let discardChanges = NSLocalizedString("Discard Changes", comment: "")
+    let discardChangesActionTitle = NSLocalizedString("Discard Changes", comment: "")
     let save = NSLocalizedString("Save", comment: "")
     let cancel = NSLocalizedString("Cancel", comment: "")
     
@@ -68,7 +68,7 @@ class UserInfosViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: discardChanges, style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: discardChangesActionTitle, style: .destructive) { _ in
             self.dismiss(animated: true)
         })
         

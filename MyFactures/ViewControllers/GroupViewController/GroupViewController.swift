@@ -103,6 +103,7 @@ class GroupViewController: UIViewController {
     let editFolderActionTitle = NSLocalizedString("Edit folder name", comment: "")
     let deleteFolderActionTitle = NSLocalizedString("Delete folder", comment: "")
     let deleteFolderActionMessage = NSLocalizedString("Deletion of this folder will errase all associated documents definitively.", comment: "")
+    let discardChangesActionTitle = NSLocalizedString("Discard Changes", comment: "")
     
     
     //MARK: -  ViewController functions

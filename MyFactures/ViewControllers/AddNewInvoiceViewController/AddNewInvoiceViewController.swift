@@ -97,6 +97,7 @@ class AddNewInvoiceViewController: UIViewController {
     let errorActionTitle = NSLocalizedString("Error", comment: "")
     let createFolderActionMessage = NSLocalizedString("Please create a folder", comment: "")
     let someFieldError = NSLocalizedString("There is an issue with one of the fields", comment: "")
+    let discardChangesActionTitle = NSLocalizedString("Discard Changes", comment: "")
     
     //MARK: - Controller functions
     override func viewDidLoad() {
@@ -205,7 +206,7 @@ class AddNewInvoiceViewController: UIViewController {
             }
             ui_amountTextField.convertToCurrencyNumber()
             
-            // Set the background color of evry uiPickerVIew to white
+            // Set the background color of evry uiPickerVIew to systemColor if ios13 otherwise set to white
             if #available(iOS 13, *) {
                 _pickerView.backgroundColor = .systemBackground
             } else {
@@ -311,7 +312,7 @@ class AddNewInvoiceViewController: UIViewController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { _ in
+        alert.addAction(UIAlertAction(title: discardChangesActionTitle, style: .destructive) { _ in
             self.closeVC()
         })
         
