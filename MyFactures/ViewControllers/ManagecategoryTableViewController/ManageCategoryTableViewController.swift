@@ -64,6 +64,14 @@ class ManageCategoryTableViewController: UIViewController {
         checkRecievedData()
         ui_modifyCategoryView.layer.cornerRadius = 10
     }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                setupFloatingButton()
+            }
+        }
+    }
 
     //MARK: - Private functions
     private func checkRecievedData() {

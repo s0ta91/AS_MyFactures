@@ -27,7 +27,7 @@
                                         </connections>
                                     </searchBar>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="tT3-pP-fqR" secondAttribute="trailing" id="FQp-cr-oh5"/>
                                     <constraint firstAttribute="height" id="dqB-PQ-1kS"/>
@@ -266,6 +266,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="8Qz-Br-IMQ" firstAttribute="centerY" secondItem="NIf-vb-dbb" secondAttribute="centerY" id="3zg-XG-dAo"/>
                                                     <constraint firstItem="BTK-14-40r" firstAttribute="centerY" secondItem="NIf-vb-dbb" secondAttribute="centerY" id="CdV-eQ-VVl"/>

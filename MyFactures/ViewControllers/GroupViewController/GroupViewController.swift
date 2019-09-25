@@ -140,16 +140,12 @@ class GroupViewController: UIViewController {
         startObservers(false)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if #available(iOS 13, *) {
             if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
                 groupCV.reloadData()
                 upadateYearBarItemButtonTitle()
+                setupFloatingButton()
             }
         }
     }

@@ -111,6 +111,7 @@ class InvoiceCollectionViewController: UIViewController {
         if #available(iOS 13, *) {
             if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
                 invoiceCollectionView.reloadData()
+                setupFloatingButton()
             }
         }
     }
