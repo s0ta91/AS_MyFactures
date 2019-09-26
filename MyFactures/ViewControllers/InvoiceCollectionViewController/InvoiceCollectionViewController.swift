@@ -475,7 +475,8 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
                 destinationVC._ptManager = _invoiceCollectionManager
                 destinationVC._ptDocumentURL = documentURL
                 destinationVC._ptDocumentType = invoiceDocumentExtension
-                destinationVC.modalTransitionStyle = .crossDissolve
+            destinationVC.modalTransitionStyle = .coverVertical
+                destinationVC.modalPresentationStyle = .fullScreen
                 self.present(destinationVC, animated: true, completion: nil)
         }else {
             let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
