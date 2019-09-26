@@ -65,7 +65,8 @@ class SettingsLauncher: NSObject {
             }
         }) { (completed: Bool) in
             if setting.name != .cancel  {
-                self._homeController?.showController(forSetting: setting)
+//                self._homeController?.showController(forSetting: setting)
+                self._homeController?.showController(for: setting.name)
             }
         }
     }

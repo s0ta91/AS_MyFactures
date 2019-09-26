@@ -14,7 +14,10 @@ enum SettingName: String {
     case resetPassword = "Reset your password"
     case feedback = "Contact / report a bug"
     case about = "About"
-//    case switchAccount = "Switch account"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 class Setting: NSObject {

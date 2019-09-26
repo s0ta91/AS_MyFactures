@@ -64,10 +64,13 @@ class ManageCategoryTableViewController: UIViewController {
         checkRecievedData()
         ui_modifyCategoryView.layer.cornerRadius = 10
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                setupFloatingButton()
+            }
+        }
     }
 
     //MARK: - Private functions
@@ -77,8 +80,22 @@ class ManageCategoryTableViewController: UIViewController {
         }
     }
     
+    private func isDarkModeNeeded() -> Bool {
+       if #available(iOS 13, *) {
+           return traitCollection.userInterfaceStyle == .dark
+       }
+       return false
+   }
+    
     /** add floating button */
     private func setupFloatingButton() {
+        var plusImage = UIImage(named: "plus_button_white")
+        if #available(iOS 13, *) {
+            plusImage = isDarkModeNeeded() ? UIImage(named: "plus_button_black") : UIImage(named: "plus_button_white")
+        }
+        addFloatingButton.setImage(plusImage, for: .normal)
+        addFloatingButton.backgroundColor = isDarkModeNeeded() ? .white : .black
+        
         view.addSubview(addFloatingButton)
         addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
@@ -225,6 +242,11 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         if let selectedCategory = _manager.getCategory(atIndex: indexPath.row) {
             _manager.setSelectedCategory(forCategory: selectedCategory)
             tableView.reloadData()
+            if #available(iOS 13, *) {
+                if let presentationController = presentationController {
+                    presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                }
+            }
             dismiss(animated: true, completion: nil)
         }
     }
@@ -237,4 +259,5 @@ extension ManageCategoryTableViewController: UITextFieldDelegate {
         return true
     }
 }
+
 

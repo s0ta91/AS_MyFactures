@@ -77,6 +77,7 @@
 		BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */; };
 		BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CF21B7FB9500BCCDDD /* UIView.swift */; };
 		BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */; };
+		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +177,7 @@
 		BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CF21B7FB9500BCCDDD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideYearSelector.swift; sourceTree = "<group>"; };
+		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				1D3FC04620EE281F00E9B5C5 /* UIButton.swift */,
 				1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */,
 				BE29F6CF21B7FB9500BCCDDD /* UIView.swift */,
+				BEC77B0A23267CC700199319 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */,
+				BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
@@ -901,7 +905,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -955,7 +959,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -977,7 +981,7 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
 				INFOPLIST_FILE = MyFactures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1001,7 +1005,7 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
 				INFOPLIST_FILE = MyFactures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
 				PRODUCT_NAME = "$(TARGET_NAME)";

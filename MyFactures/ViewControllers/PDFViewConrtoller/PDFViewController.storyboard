@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,12 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-6L-N8C">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <color key="backgroundColor" name="navBarTint"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-Nb-rUC">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8a7-TH-io8">
                                         <rect key="frame" x="19" y="10" width="24" height="24"/>
@@ -34,37 +28,32 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="zTu-Fb-tlh"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8q-Ct-7kK">
-                                <rect key="frame" x="0.0" y="61" width="375" height="606"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="41" width="375" height="626"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="delegate" destination="R3r-wA-Nui" id="p45-Kc-Uq4"/>
                                 </connections>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="sbB-6L-N8C" firstAttribute="top" secondItem="QhP-iH-Erm" secondAttribute="top" id="1mE-BZ-GtX"/>
-                            <constraint firstItem="sbB-6L-N8C" firstAttribute="bottom" secondItem="kdA-Nb-rUC" secondAttribute="bottom" id="4w5-Ss-atM"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="top" secondItem="zU2-1J-YUb" secondAttribute="top" id="Avw-Zv-jve"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="Fso-un-Xns"/>
                             <constraint firstAttribute="bottom" secondItem="F8q-Ct-7kK" secondAttribute="bottom" id="IY0-OI-zcI"/>
-                            <constraint firstItem="sbB-6L-N8C" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="aJi-4y-2xR"/>
                             <constraint firstItem="F8q-Ct-7kK" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="cdx-db-qxn"/>
                             <constraint firstItem="F8q-Ct-7kK" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="ceB-36-gJj"/>
                             <constraint firstItem="kdA-Nb-rUC" firstAttribute="leading" secondItem="zU2-1J-YUb" secondAttribute="leading" id="e6s-ZV-JAO"/>
-                            <constraint firstItem="sbB-6L-N8C" firstAttribute="trailing" secondItem="zU2-1J-YUb" secondAttribute="trailing" id="h9C-Gn-eoK"/>
                             <constraint firstItem="F8q-Ct-7kK" firstAttribute="top" secondItem="kdA-Nb-rUC" secondAttribute="bottom" constant="-3" id="z7p-kU-9q4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zU2-1J-YUb"/>
                     </view>
                     <connections>
-                        <outlet property="ui_navBarImageView" destination="sbB-6L-N8C" id="3iD-Zx-QH1"/>
                         <outlet property="ui_navBarView" destination="kdA-Nb-rUC" id="MCo-yM-zHk"/>
                         <outlet property="ui_scrollView" destination="F8q-Ct-7kK" id="Eza-Ab-Aed"/>
                     </connections>
@@ -76,8 +65,5 @@
     </scenes>
     <resources>
         <image name="close" width="24" height="24"/>
-        <namedColor name="navBarTint">
-            <color red="0.51800000667572021" green="0.62000000476837158" blue="0.70200002193450928" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

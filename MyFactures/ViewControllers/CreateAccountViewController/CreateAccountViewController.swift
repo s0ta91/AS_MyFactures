@@ -43,9 +43,11 @@ class CreateAccountViewController: UIViewController {
         ui_passwordTextField.delegate = self
         
         ui_emailTextField.setPadding()
-        ui_emailTextField.setRadius()
+        ui_emailTextField.layer.cornerRadius = 8
+        ui_emailTextField.attributedPlaceholder = NSAttributedString(string: "Your email address *", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         ui_passwordTextField.setPadding()
-        ui_passwordTextField.setRadius()
+        ui_passwordTextField.layer.cornerRadius = 8
+        ui_passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         ui_createPasswordButton.layer.cornerRadius = 5
         
         if isPasswordSet {
@@ -63,7 +65,6 @@ class CreateAccountViewController: UIViewController {
         ui_emailTextField.placeholder = emailPlaceholderText
         ui_passwordTextField.text = DbManager().getMasterPassword()
         ui_passwordTextField.isEnabled = false
-        ui_passwordTextField.backgroundColor = UIColor.darkGray
         ui_createPasswordButton.setTitle(ui_createPasswordButtonText, for: .normal)
     }
     

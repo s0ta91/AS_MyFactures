@@ -10,6 +10,10 @@ import UIKit
 import MobileCoreServices
 import IQKeyboardManagerSwift
 
+protocol AddNewInvoiceDelegate {
+    func refreshData()
+}
+
 class AddNewInvoiceViewController: UIViewController {
 
     //MARK: - IBOutlets
@@ -54,6 +58,7 @@ class AddNewInvoiceViewController: UIViewController {
     private var _invoice: Invoice!
     private var _loginVC: UIViewController!
     
+    
     //MARK: - Others
     //TODO: PickerView Initializer
     private var yearsPickerView: YearsPicker!
@@ -76,6 +81,8 @@ class AddNewInvoiceViewController: UIViewController {
     private var _firstLoad: Bool = true
     private var _visualEffect: UIVisualEffect!
     
+    var delegate: AddNewInvoiceDelegate?
+    
     //TODO: Localized text
     let noFolderAvailable = NSLocalizedString("No folder available", comment: "")
     let unknownCategory = NSLocalizedString("unknown", comment: "")
@@ -90,6 +97,7 @@ class AddNewInvoiceViewController: UIViewController {
     let errorActionTitle = NSLocalizedString("Error", comment: "")
     let createFolderActionMessage = NSLocalizedString("Please create a folder", comment: "")
     let someFieldError = NSLocalizedString("There is an issue with one of the fields", comment: "")
+    let discardChangesActionTitle = NSLocalizedString("Discard Changes", comment: "")
     
     //MARK: - Controller functions
     override func viewDidLoad() {
@@ -111,11 +119,11 @@ class AddNewInvoiceViewController: UIViewController {
         setAccessoryViewForPickersView()
         setDefaultValues()
         updateDocumentInfo()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        if #available(iOS 13, *) {
+            isModalInPresentation = true
+        }
+        
     }
     
     //MARK: - Private functions
@@ -198,8 +206,12 @@ class AddNewInvoiceViewController: UIViewController {
             }
             ui_amountTextField.convertToCurrencyNumber()
             
-            // Set the background color of evry uiPickerVIew to white
-            _pickerView.backgroundColor = .white
+            // Set the background color of evry uiPickerVIew to systemColor if ios13 otherwise set to white
+            if #available(iOS 13, *) {
+                _pickerView.backgroundColor = .systemBackground
+            } else {
+                _pickerView.backgroundColor = .white
+            }
         }
     }
     
@@ -279,6 +291,34 @@ class AddNewInvoiceViewController: UIViewController {
             blackView.frame = window.frame
             window.addSubview(blackView)
         }
+    }
+    
+    private func checkModifications() {
+        
+    }
+    
+    private func closeVC() {
+        dismiss(animated: true, completion: {
+            if self._fromOtherApp {
+                self._loginVC.modalTransitionStyle = .crossDissolve
+                self._loginVC.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func confirmCancel() {
+        
+        // Present an action sheet, which in a regular width environment appears as a popover
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: discardChangesActionTitle, style: .destructive) { _ in
+            self.closeVC()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(alert, animated: true, completion: nil)
     }
     
     //MARK: - IBAction functions
@@ -459,11 +499,21 @@ class AddNewInvoiceViewController: UIViewController {
             
                 if self._fromOtherApp {
                     self.modalTransitionStyle = .coverVertical
+                    if #available(iOS 13, *) {
+                        if let presentationController = presentationController {
+                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                        }
+                    }
                     self.dismiss(animated: true) {
                         self._loginVC.modalTransitionStyle = .crossDissolve
                         self._loginVC.dismiss(animated: true, completion: nil)
                     }
                 } else {
+                    if #available(iOS 13, *) {
+                        if let presentationController = presentationController {
+                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                        }
+                    }
                     dismiss(animated: true, completion: nil)
             }
             
@@ -480,12 +530,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Dismiss view controller
     @IBAction func cancelVCButtonPressed(_ sender: Any) {
         ui_descriptionTextField.resignFirstResponder()
-        dismiss(animated: true, completion: {
-            if self._fromOtherApp {
-                self._loginVC.modalTransitionStyle = .crossDissolve
-                self._loginVC.dismiss(animated: true, completion: nil)
-            }
-        })
+        confirmCancel()
     }
     
 }
@@ -585,6 +630,18 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
         picker.dismiss(animated: true, completion: nil)
         _documentHasBeenAdded = true
         updateDocumentInfo()
+    }
+}
+
+extension AddNewInvoiceViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("controller has been dismissed")
+        delegate?.refreshData()
+    }
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        print("didAttemptToDismiss in VC")
+        confirmCancel()
     }
 }
 

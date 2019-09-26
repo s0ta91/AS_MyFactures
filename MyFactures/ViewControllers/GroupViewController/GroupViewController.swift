@@ -42,19 +42,14 @@ class GroupViewController: UIViewController {
     let addFloatingButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        let plusImage = UIImage(named: "plus_button_white")
-        button.setImage(plusImage, for: .normal)
-//        button.backgroundColor = UIColor(named: "navBarTint")
-        button.backgroundColor = .black
         button.setFloatingButton()
         button.addTarget(self, action: #selector(addNewGroupButtonPressed(_:)), for: .touchUpInside)
         return button
     }()
     let yearBarButton: UIButton = {
         let button = UIButton()
-        button.setTitleColor(UIColor.black, for: .normal)
+        
         button.titleLabel?.font = UIFont(name: "Helvetica Bold", size: 16)
-        button.setImage(UIImage(named: "left_arrow_black"), for: .normal)
         button.contentMode = .scaleAspectFit
         button.contentHorizontalAlignment = .left
         button.contentVerticalAlignment = .center
@@ -98,6 +93,7 @@ class GroupViewController: UIViewController {
     var newSideAnchorConstant: CGFloat?
     
     //TODO: Localized text
+    //FIXME: Create an enum in a separated file
     let createNewFolderWarningTitle = NSLocalizedString("Warning", comment: "")
     let createNewFolderWarningMessage = NSLocalizedString("This folder already exists", comment: "")
     let createAddActionTitle = NSLocalizedString("Add", comment: "")
@@ -107,16 +103,12 @@ class GroupViewController: UIViewController {
     let editFolderActionTitle = NSLocalizedString("Edit folder name", comment: "")
     let deleteFolderActionTitle = NSLocalizedString("Delete folder", comment: "")
     let deleteFolderActionMessage = NSLocalizedString("Deletion of this folder will errase all associated documents definitively.", comment: "")
+    let discardChangesActionTitle = NSLocalizedString("Discard Changes", comment: "")
     
     
     //MARK: -  ViewController functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeEnded(_:)), name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
         
         if Manager.isFirstLoad() {
             Manager.presentLoginScreen(fromViewController: self)
@@ -127,10 +119,81 @@ class GroupViewController: UIViewController {
         groupCV.dataSource = self
         groupCV.delegate = self
         groupCV.emptyDataSetSource = self
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startObservers(true)
         setupYearBarItemButton()
         setupFloatingButton()
+        setupGroupList()
+        setFontSize()
+        ui_createGroupView.layer.cornerRadius = 10
         
+        _manager.setHeaderClippedToBound(groupCV)
+        
+        groupCV.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        startObservers(false)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if #available(iOS 13, *) {
+            if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+                groupCV.reloadData()
+                upadateYearBarItemButtonTitle()
+                setupFloatingButton()
+            }
+        }
+    }
+    
+    //MARK: - Public functions
+    func showController(for settingName: SettingName) {
+        
+        switch settingName {
+        case .feedback:
+            let appearance = Buglife.shared().appearance
+            appearance.barTintColor = UIColor(named: "navBarTint")
+            appearance.tintColor = .white
+            Buglife.shared().presentReporter()
+        case .informations:
+            let storyboard = UIStoryboard(name: "UserInfosViewController", bundle: Bundle.main)
+            let userInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
+            userInfosVC.presentationController?.delegate = userInfosVC
+            userInfosVC.modalTransitionStyle = .coverVertical
+            present(userInfosVC, animated: true)
+        case .resetPassword:
+            let storyboard = UIStoryboard(name: "ResetPasswordViewController", bundle: Bundle.main)
+            let resetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
+            resetPasswordVC.presentationController?.delegate = resetPasswordVC
+            resetPasswordVC.modalTransitionStyle = .coverVertical
+            present(resetPasswordVC, animated: true)
+        case .about:
+            let storyboard = UIStoryboard(name: "AboutViewController", bundle: Bundle.main)
+            let aboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
+            aboutVC.modalTransitionStyle = .coverVertical
+            present(aboutVC, animated: true)
+        case .cancel:
+            break
+        }
+    }
+    
+    //MARK: -  Private functions
+    private func startObservers(_ start: Bool) {
+        if start {
+            NotificationCenter.default.addObserver(self, selector: #selector(handleDissmiss), name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorIsChanging(_:)), name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeHasBegan), name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sideYearAnchorChangeEnded(_:)), name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
+        } else {
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("refreshCollectionViewWithSelectedYear"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorIsChanging"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorChangeHasBegan"), object: nil)
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name("sideAnchorChangeEnded"), object: nil)
+        }
     }
     
     private func setupYearBarItemButton() {
@@ -142,54 +205,33 @@ class GroupViewController: UIViewController {
     private func upadateYearBarItemButtonTitle() {
         guard let selectedYear = _manager.getSelectedYear() else {fatalError("Couldn't find any selected year")}
         yearBarButton.setTitle("\(selectedYear.year)", for: .normal)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupGroupList()
-        setFontSize()
-        ui_createGroupView.layer.cornerRadius = 10
-        
-        _manager.setHeaderClippedToBound(groupCV)
-        
-        groupCV.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: - Public functions
-    func showController(forSetting setting: Setting) {
-        
-        switch setting.name {
-        case .feedback:
-            let appearance = Buglife.shared().appearance
-            appearance.barTintColor = UIColor(named: "navBarTint")
-            appearance.tintColor = .white
-            Buglife.shared().presentReporter()
-        case .informations:
-            let storyboard = UIStoryboard(name: "UserInfosViewController", bundle: Bundle.main)
-            let UserInfosVC = storyboard.instantiateViewController(withIdentifier: "UserInfosVC") as! UserInfosViewController
-            self.show(UserInfosVC, sender: nil)
-        case .resetPassword:
-            let storyboard = UIStoryboard(name: "ResetPasswordViewController", bundle: Bundle.main)
-            let ResetPasswordVC = storyboard.instantiateViewController(withIdentifier: "ResetPasswordVC") as! ResetPasswordViewController
-            self.show(ResetPasswordVC, sender: nil)
-        case .about:
-            let storyboard = UIStoryboard(name: "AboutViewController", bundle: Bundle.main)
-            let AboutVC = storyboard.instantiateViewController(withIdentifier: "AboutVC") as! AboutViewController
-            self.show(AboutVC, sender: nil)
-        case .cancel:
-            break
+        if #available(iOS 13, *) {
+            yearBarButton.setTitleColor(UIColor.label, for: .normal)
+            let chevron = isDarkModeNeeded() ? UIImage(named: "left_arrow_white") : UIImage(named: "left_arrow_black")
+            yearBarButton.setImage(chevron, for: .normal)
+        } else {
+            yearBarButton.setTitleColor(UIColor.black, for: .normal)
+            yearBarButton.setImage(UIImage(named: "left_arrow_black"), for: .normal)
         }
     }
     
+    private func isDarkModeNeeded() -> Bool {
+        if #available(iOS 13, *) {
+            return traitCollection.userInterfaceStyle == .dark
+        }
+        return false
+    }
     
-    //MARK: -  Private functions
     private func setupFloatingButton() {
         view.addSubview(addFloatingButton)
+        
+        var plusImage = UIImage(named: "plus_button_white")
+        if #available(iOS 13, *) {
+            plusImage = isDarkModeNeeded() ? UIImage(named: "plus_button_black") : UIImage(named: "plus_button_white") 
+        }
+        addFloatingButton.setImage(plusImage, for: .normal)
+        addFloatingButton.backgroundColor = isDarkModeNeeded() ? .white : .black
+//        addFloatingButton.tintColor = isDarkModeNeeded() ? .black : .white
         addFloatingButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         addFloatingButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         addFloatingButton.heightAnchor.constraint(equalToConstant: BUTTON_SIZE ).isActive = true
@@ -209,7 +251,6 @@ class GroupViewController: UIViewController {
         self._currentYear.setGroupList()
     }
     
-    
     private func animateIn() {
         if let window = UIApplication.shared.keyWindow {
             window.addSubview(ui_createGroupView)
@@ -228,6 +269,7 @@ class GroupViewController: UIViewController {
             self.ui_createGroupView.transform = CGAffineTransform.identity
         }
     }
+    
     private func animateOut () {
         UIView.animate(withDuration: 0.3, animations: {
             self.ui_createGroupView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
@@ -239,6 +281,7 @@ class GroupViewController: UIViewController {
         }
         searchBarSearchButtonClicked(self.ui_searchBar)
     }
+    
     private func setFontSize (){
         print("gcv size [\(groupCV.frame.size.width)]")
         let collectionViewWidth = groupCV.frame.size.width
@@ -249,6 +292,8 @@ class GroupViewController: UIViewController {
         }
     }
 
+    
+    //MARK: - Actions
     @objc func handleDissmiss() {
         setupGroupList()
         self.upadateYearBarItemButtonTitle()
@@ -263,7 +308,6 @@ class GroupViewController: UIViewController {
         }
     }
     
-    //MARK: - Actions
     @objc private func addNewGroupButtonPressed(_ sender: Any) {
         ui_newGroupNameTextField.text = ""
         ui_newGroupNameTextField.becomeFirstResponder()
@@ -316,7 +360,72 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func showSettings(_ sender: UIBarButtonItem) {
-        _settingsLauncher.showSettings()
+//        _settingsLauncher.showSettings()
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let informationsAction = UIAlertAction(title: SettingName.informations.localizedString(), style: .default) { (_) in
+            self.showController(for: .informations)
+        }
+        var informationsActionImage = UIImage(named: "settings_grey")?.withRenderingMode(.alwaysOriginal)
+        informationsActionImage = informationsActionImage?.imageWithSize(scaledToSize: CGSize(width: 32, height: 32))
+        informationsAction.setValue(informationsActionImage, forKey: "image")
+        if #available(iOS 13, *) {
+            informationsAction.setValue(UIColor.label, forKey: "titleTextColor")
+        } else {
+            informationsAction.setValue(UIColor.black, forKey: "titleTextColor")
+        }
+        actionSheet.addAction(informationsAction)
+        
+        let resetPasswordAction = UIAlertAction(title: SettingName.resetPassword.localizedString(), style: .default) { (_) in
+            self.showController(for: .resetPassword)
+        }
+        var resetPasswordActionImage = UIImage(named: "privacy")?.withRenderingMode(.alwaysOriginal)
+        resetPasswordActionImage = resetPasswordActionImage?.imageWithSize(scaledToSize: CGSize(width: 32, height: 32))
+        resetPasswordAction.setValue(resetPasswordActionImage, forKey: "image")
+        if #available(iOS 13, *) {
+            resetPasswordAction.setValue(UIColor.label, forKey: "titleTextColor")
+        } else {
+            resetPasswordAction.setValue(UIColor.black, forKey: "titleTextColor")
+        }
+        actionSheet.addAction(resetPasswordAction)
+        
+        let feedbackAction = UIAlertAction(title: SettingName.feedback.localizedString(), style: .default) { (_) in
+            self.showController(for: .feedback)
+        }
+        var feedbackActionImage = UIImage(named: "contact")?.withRenderingMode(.alwaysOriginal)
+        feedbackActionImage = feedbackActionImage?.imageWithSize(scaledToSize: CGSize(width: 32, height: 32))
+        feedbackAction.setValue(feedbackActionImage, forKey: "image")
+        if #available(iOS 13, *) {
+            feedbackAction.setValue(UIColor.label, forKey: "titleTextColor")
+        } else {
+            feedbackAction.setValue(UIColor.black, forKey: "titleTextColor")
+        }
+        actionSheet.addAction(feedbackAction)
+        
+        let aboutAction = UIAlertAction(title: SettingName.about.localizedString(), style: .default) { (_) in
+            self.showController(for: .about)
+        }
+        var aboutActionImage = UIImage(named: "about")?.withRenderingMode(.alwaysOriginal)
+        aboutActionImage = aboutActionImage?.imageWithSize(scaledToSize: CGSize(width: 32, height: 32))
+        aboutAction.setValue(aboutActionImage, forKey: "image")
+        if #available(iOS 13, *) {
+            aboutAction.setValue(UIColor.label, forKey: "titleTextColor")
+        } else {
+            aboutAction.setValue(UIColor.black, forKey: "titleTextColor")
+        }
+        actionSheet.addAction(aboutAction)
+        
+        let cancel = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
+        actionSheet.addAction(cancel)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender.customView
+            popoverController.sourceRect = CGRect(x: sender.customView?.frame.midX ?? 0 , y: sender.customView?.frame.maxY ?? 0, width: 0, height: 0)
+            popoverController.permittedArrowDirections = .down
+        }
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
     
     @objc private func showYearSelector() {
@@ -405,6 +514,9 @@ extension GroupViewController: UICollectionViewDataSource {
 
         cell_group.layer.cornerRadius = 8
         cell_group.layer.shadowColor = UIColor.gray.cgColor
+        if #available(iOS 13, *) {
+            cell_group.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
+        }
         cell_group.layer.shadowOpacity = 0.5
         cell_group.layer.shadowRadius = 5
         cell_group.layer.shadowOffset = .zero
@@ -428,6 +540,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
     
     func showGroupActions(groupCell: GroupCollectionViewCell, buttonPressed: UIButton) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
         let modify = UIAlertAction(title: editFolderActionTitle, style: .default) { (_) in
             if let indexPath = self.groupCV.indexPath(for: groupCell),
                 let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
@@ -459,6 +572,7 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         }
         
         let cancel = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
+        
         actionSheet.addAction(modify)
         actionSheet.addAction(delete)
         actionSheet.addAction(cancel)
@@ -483,7 +597,6 @@ extension GroupViewController: UISearchBarDelegate {
         groupCV.reloadData()
     }
 
-    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         isListFiltered = false
         

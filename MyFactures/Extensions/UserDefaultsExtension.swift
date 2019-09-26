@@ -14,5 +14,6 @@ extension UserDefaults {
         case fromOtherApp = "fromOtherApp"
         case fileFromOtherAppUrl = "fileFromOtherAppUrl"
         case userEmail = "USER_EMAIL"
+        case isDarkMode = "isDarkMode"
     }
 }
