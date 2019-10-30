@@ -76,6 +76,7 @@
 		BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */; };
 		BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */; };
 		BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CF21B7FB9500BCCDDD /* UIView.swift */; };
+		BE4C72222369C04900061DF9 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */; };
 		BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
@@ -176,6 +177,7 @@
 		BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CF21B7FB9500BCCDDD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideYearSelector.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
+				BE4C721F2369C02C00061DF9 /* CoreData */,
 				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
 				1D4809D92024B08900068094 /* Extensions */,
 				1D4809CD20248B4800068094 /* Models */,
@@ -485,6 +488,14 @@
 				031C11935EEE4B68C1D4E9F6 /* Pods_MyFacturesUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE4C721F2369C02C00061DF9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		F969AC461B7DF10C2695440A /* Pods */ = {
@@ -691,6 +702,7 @@
 				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
+				BE4C72222369C04900061DF9 /* CoreDataModel.xcdatamodeld in Sources */,
 				1D08F5172128250E00563B27 /* UserInfosViewController.swift in Sources */,
 				1DAEAC202029E093001C144E /* Year.swift in Sources */,
 				1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */,
@@ -1037,6 +1049,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1D4B078120233FF4002F745C /* Project object */;
 }
