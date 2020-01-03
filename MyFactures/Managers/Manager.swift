@@ -12,7 +12,21 @@ import KeychainAccess
 
 class Manager {
     
+    static let instance = Manager()
+    
     let context = AppDelegate.persistentContainer.viewContext
+    let _monthArray =   [NSLocalizedString("January", comment: ""),
+                        NSLocalizedString("February", comment: ""),
+                        NSLocalizedString("March", comment: ""),
+                        NSLocalizedString("April", comment: ""),
+                        NSLocalizedString("May", comment: ""),
+                        NSLocalizedString("June", comment: ""),
+                        NSLocalizedString("July", comment: ""),
+                        NSLocalizedString("August", comment: ""),
+                        NSLocalizedString("September", comment: ""),
+                        NSLocalizedString("October", comment: ""),
+                        NSLocalizedString("November", comment: ""),
+                        NSLocalizedString("December", comment: "")]
     
     private var _cdApplicationDataList: [ApplicationData]
     private var _cdYearsList: [Year]
@@ -21,7 +35,7 @@ class Manager {
     
     
     // MARK: -  INIT
-    init () {
+    init() {
         
 //        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
         
@@ -94,15 +108,6 @@ class Manager {
     
     
     // MARK: - PRIVATE functions
-    private func saveCoreDataContext() {
-        do {
-            try context.save()
-        } catch {
-            // A remplacer par une modale d'erreur à présenter à l'utilisateur
-            print("Error saving context: \(error)")
-        }
-    }
-    
     private func getApplicationDataCount () -> Int {
         return _cdApplicationDataList.count
     }
@@ -115,6 +120,15 @@ class Manager {
     
     
     // MARK: - PUBLIC
+    
+    func saveCoreDataContext() {
+        do {
+            try context.save()
+        } catch {
+            // A remplacer par une modale d'erreur à présenter à l'utilisateur
+            print("Error saving context: \(error)")
+        }
+    }
     
     // TODO: Save in user Defaults
     func saveInUserDefault(forKey key: String, andValue value: String) {
@@ -327,7 +341,7 @@ class Manager {
     }
     
     func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> Category {
-        let newCategory = Category()
+        let newCategory = Category(context: context)
         newCategory.title = categoryTitle
         newCategory.selected = isSelected!
         saveCoreDataContext()
