@@ -177,7 +177,7 @@ class InvoiceCollectionViewController: UIViewController {
         self.title = _invoiceCollectionCurrentGroup.title
 //        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(search))
-        let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory().title
+        let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory()?.title
         let selectCategoryButon = UIBarButtonItem(title: selectedCategoryName, style: .plain, target: self, action: #selector(showCategorySelector))
         
         if #available(iOS 13, *) {
@@ -190,11 +190,11 @@ class InvoiceCollectionViewController: UIViewController {
 
     //TODO: Retrieve the month for the section index
     private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
-        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
-        let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
-        if month != nil {
-            month?.setInvoiceList(for: selectedCategory, searchText: searchText)
+        guard let selectedCategory = _invoiceCollectionManager.getSelectedCategory(),
+            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) else {
+                return nil
         }
+        month.setInvoiceList(for: selectedCategory, searchText: searchText)
         return month
     }
     

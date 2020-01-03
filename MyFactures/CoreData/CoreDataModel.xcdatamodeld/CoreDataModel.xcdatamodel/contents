@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ApplicationData" representedClassName=".ApplicationData" syncable="YES" codeGenerationType="category">
+        <attribute name="currentDate" attributeType="Date" defaultDateTimeInterval="599740920" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
+        <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Year" representedClassName=".Year" syncable="YES" codeGenerationType="category">
+        <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="year" attributeType="Integer 64" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="ApplicationData" positionX="-63" positionY="-18" width="128" height="28"/>
+        <element name="Year" positionX="-63" positionY="-9" width="128" height="28"/>
+        <element name="Category" positionX="-63" positionY="-18" width="128" height="73"/>
+    </elements>
 </model>

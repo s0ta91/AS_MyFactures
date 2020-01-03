@@ -1,18 +1,14 @@
 //
 //  ApplicationData.swift
-//  MesFactures
+//  MyFactures
 //
-//  Created by Sébastien on 10/01/2018.
-//  Copyright © 2018 Sébastien Constant. All rights reserved.
+//  Created by Sébastien Constant on 03/01/2020.
+//  Copyright © 2020 Sébastien Constant. All rights reserved.
 //
 
 import Foundation
-import RealmSwift
+import CoreData
 
-class ApplicationData: Object {
-    @objc private dynamic var _currentDate: Date = Date()
+public class ApplicationData: NSManagedObject {
     
-    var currentDate: Date {
-        return _currentDate
-    }
 }

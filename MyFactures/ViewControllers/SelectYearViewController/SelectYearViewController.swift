@@ -59,7 +59,8 @@ extension SelectYearViewController: UITableViewDataSource {
         let cell_yearSelection = tableView.dequeueReusableCell(withIdentifier: "cell_yearSelection", for: indexPath) as! SelectYearTableViewCell
         if let year = _manager.getYear(atIndex: indexPath.row) {
             let yearString = String(describing: year.year)
-            let nbGroupForYear = year.getGlobalGroupCount()
+//            let nbGroupForYear = year.getGlobalGroupCount()
+            let nbGroupForYear = 0
             var numberOfGroup: String {
                 if nbGroupForYear > 1 {
                     return "\(nbGroupForYear) \(NSLocalizedString("folders", comment: ""))"
@@ -68,6 +69,7 @@ extension SelectYearViewController: UITableViewDataSource {
                 }
             }
             cell_yearSelection.setValues(yearString, numberOfGroup)
+            print("yearString: \(yearString) - yearSelected: \(year.selected)")
             if year.selected == true {
                 cell_yearSelection.accessoryType = .checkmark
             }else {
