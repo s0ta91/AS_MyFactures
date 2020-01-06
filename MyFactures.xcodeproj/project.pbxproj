@@ -77,6 +77,11 @@
 		BE5FB8C623BF8B140036A3B3 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8C523BF8B140036A3B3 /* Group.swift */; };
 		BE5FB8C823C34B710036A3B3 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8C723C34B710036A3B3 /* Month.swift */; };
 		BE7A57DD23C3577100D90462 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57DC23C3577100D90462 /* Invoice.swift */; };
+		BE7A57E023C37EB300D90462 /* RealmYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57DF23C37EB300D90462 /* RealmYear.swift */; };
+		BE7A57E223C37EF400D90462 /* RealmGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E123C37EF400D90462 /* RealmGroup.swift */; };
+		BE7A57E423C37FE800D90462 /* RealmMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E323C37FE800D90462 /* RealmMonth.swift */; };
+		BE7A57E623C3804700D90462 /* RealmInvoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E523C3804700D90462 /* RealmInvoice.swift */; };
+		BE7A57E823C3809100D90462 /* RealmCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E723C3809100D90462 /* RealmCategory.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
@@ -177,6 +182,11 @@
 		BE5FB8C523BF8B140036A3B3 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		BE5FB8C723C34B710036A3B3 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		BE7A57DC23C3577100D90462 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		BE7A57DF23C37EB300D90462 /* RealmYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmYear.swift; sourceTree = "<group>"; };
+		BE7A57E123C37EF400D90462 /* RealmGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGroup.swift; sourceTree = "<group>"; };
+		BE7A57E323C37FE800D90462 /* RealmMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmMonth.swift; sourceTree = "<group>"; };
+		BE7A57E523C3804700D90462 /* RealmInvoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmInvoice.swift; sourceTree = "<group>"; };
+		BE7A57E723C3809100D90462 /* RealmCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCategory.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,6 +233,7 @@
 		1D4809CD20248B4800068094 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE7A57DE23C37E9E00D90462 /* Realm */,
 				BE5FB8C323BF56030036A3B3 /* ApplicationData.swift */,
 				BE5FB8BF23BF4D2D0036A3B3 /* Year.swift */,
 				BE5FB8C523BF8B140036A3B3 /* Group.swift */,
@@ -495,6 +506,18 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		BE7A57DE23C37E9E00D90462 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				BE7A57DF23C37EB300D90462 /* RealmYear.swift */,
+				BE7A57E123C37EF400D90462 /* RealmGroup.swift */,
+				BE7A57E323C37FE800D90462 /* RealmMonth.swift */,
+				BE7A57E523C3804700D90462 /* RealmInvoice.swift */,
+				BE7A57E723C3809100D90462 /* RealmCategory.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		F969AC461B7DF10C2695440A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,7 +685,9 @@
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
+				BE7A57E223C37EF400D90462 /* RealmGroup.swift in Sources */,
 				BE5FB8C823C34B710036A3B3 /* Month.swift in Sources */,
+				BE7A57E423C37FE800D90462 /* RealmMonth.swift in Sources */,
 				BE5FB8C023BF4D2D0036A3B3 /* Year.swift in Sources */,
 				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
 				BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */,
@@ -688,6 +713,7 @@
 				BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				BE29F6CA21B7F7B600BCCDDD /* Setting.swift in Sources */,
+				BE7A57E023C37EB300D90462 /* RealmYear.swift in Sources */,
 				1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */,
@@ -699,6 +725,7 @@
 				BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
+				BE7A57E623C3804700D90462 /* RealmInvoice.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
 				BE4C72222369C04900061DF9 /* CoreDataModel.xcdatamodeld in Sources */,
 				1D08F5172128250E00563B27 /* UserInfosViewController.swift in Sources */,
@@ -708,6 +735,7 @@
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				BE7A57DD23C3577100D90462 /* Invoice.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
+				BE7A57E823C3809100D90462 /* RealmCategory.swift in Sources */,
 				1D3FC04720EE281F00E9B5C5 /* UIButton.swift in Sources */,
 				1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */,
 				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,

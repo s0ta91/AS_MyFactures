@@ -38,8 +38,12 @@ class Manager {
     
     
     // MARK: REALM
-    var _realm: Realm
-    private var _realmCategoryList: Results<RealmCategory>
+    var _realm: Realm?
+    private var _realmYears: Results<RealmYear>?
+    private var _realmCategoryList: Results<RealmCategory>?
+    private var _realmGroups: Results<RealmGroup>?
+    private var _realmMonths: Results<RealmMonth>?
+    private var _realmInvoices: Results<RealmInvoice>?
     
     // MARK: - COREDATA
     private var _cdApplicationDataList: [ApplicationData]
@@ -52,6 +56,7 @@ class Manager {
     init() {
         
 //        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
+        
         
         // Load CoreData ApplicationData
         let applicationDataRequest: NSFetchRequest<ApplicationData> = ApplicationData.fetchRequest()
@@ -88,6 +93,17 @@ class Manager {
 //           print("Error fetching categories: \(error)")
 //       }
     }
+    
+    func initRealmData() {
+        if let realm = _realm {
+            _realmYears = realm.objects(RealmYear.self)
+            _realmGroups = realm.objects(RealmGroup.self)
+            _realmMonths = realm.objects(RealmMonth.self)
+            _realmInvoices = realm.objects(RealmInvoice.self)
+            _realmCategoryList = realm.objects(RealmCategory.self)
+        }
+    }
+
     
     func initYear () {
         print("init years")

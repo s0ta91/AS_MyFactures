@@ -58,14 +58,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
-        if let realmDb = DbManager().getRealmDb() {
-            database._realm = realmDb
-        }
         
-        // TODO: Initialize all default data in database
+        // TODO: Initialize all default data in coreData database
         database.initYear()
         database.initCategory()
         database.updateApplicationData()
+        
+        if let realmDb = DbManager().getRealmDb() {
+            database._realm = realmDb
+            
+            // TODO: Initialize all data from Realm
+            database.initRealmData()
+            
+            // TODO: Migrate data from Realm to CoreData
+            database.migrateToCoreData()
+        }
+        
         
         // TODO: Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
