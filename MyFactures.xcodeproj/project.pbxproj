@@ -51,7 +51,6 @@
 		1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */; };
 		1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */; };
 		1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */; };
-		1DB07FCC2032094800BDDDFB /* NewMonth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FCB2032094800BDDDFB /* NewMonth.swift */; };
 		1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FCD20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift */; };
 		1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */; };
 		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
@@ -147,7 +146,6 @@
 		1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewController.swift; sourceTree = "<group>"; };
 		1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewCell.swift; sourceTree = "<group>"; };
-		1DB07FCB2032094800BDDDFB /* NewMonth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMonth.swift; sourceTree = "<group>"; };
 		1DB07FCD20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInvoiceCollectionReusableView.swift; sourceTree = "<group>"; };
 		1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdeasCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
@@ -231,7 +229,6 @@
 				1DD2402A202C5D4300917B08 /* GroupIdea.swift */,
 				BE5FB8C723C34B710036A3B3 /* Month.swift */,
 				BE7A57DC23C3577100D90462 /* Invoice.swift */,
-				1DB07FCB2032094800BDDDFB /* NewMonth.swift */,
 				1D1052AA20ADE23E007C5CCF /* Settings.swift */,
 				BE29F6C921B7F7B600BCCDDD /* Setting.swift */,
 			);
@@ -708,7 +705,6 @@
 				1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */,
 				1D370E18206A81E1005583BB /* SettingsViewController.swift in Sources */,
 				1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */,
-				1DB07FCC2032094800BDDDFB /* NewMonth.swift in Sources */,
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
 				BE7A57DD23C3577100D90462 /* Invoice.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,

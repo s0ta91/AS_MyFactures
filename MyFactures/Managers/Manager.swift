@@ -10,6 +10,9 @@ import Foundation
 import CoreData
 import KeychainAccess
 
+import RealmSwift
+
+
 enum action {
     case add
     case remove
@@ -33,6 +36,12 @@ class Manager {
                         NSLocalizedString("November", comment: ""),
                         NSLocalizedString("December", comment: "")]
     
+    
+    // MARK: REALM
+    var _realm: Realm
+    private var _realmCategoryList: Results<RealmCategory>
+    
+    // MARK: - COREDATA
     private var _cdApplicationDataList: [ApplicationData]
     private var _cdYearsList: [Year]
     private var _cdCategoryList: [Category]

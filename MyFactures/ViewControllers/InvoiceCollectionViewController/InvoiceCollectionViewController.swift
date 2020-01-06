@@ -239,7 +239,6 @@ class InvoiceCollectionViewController: UIViewController {
                     
                     // Delete invoice object from DB
                     _ = month.removeInvoice(invoice: invoiceToDelete)
-                    month.removeFromInvoiceToShow (atIndex: indexPath.row)
                     
                     // If there isn't any invoice left we need to delete the section from the collectionView
                     if self.getNumberOfInvoice(atMonthIndex: monthIndex) == 0 {
@@ -367,7 +366,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
             invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as? HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
             if let month = getCurrentMonth(atIndex: monthIndex) {
-                headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
+                headerDate = "\(String(describing: month.name)) \(_invoiceCollectionCurrentYear.year)"
                 monthAmount = String(describing: month.getTotalAmount())
             }
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)

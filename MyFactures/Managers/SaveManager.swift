@@ -74,14 +74,17 @@ class SaveManager {
                 if invoiceToModify.identifier != nil && documentAdded == true {
                     identifier = invoiceToModify.identifier
                 }
-                if let previousMonth = currentMonth,
-                    let invoiceIndex = previousMonth.removeInvoice(invoice: invoiceToModify) {
-                    if newMonth.month == previousMonth.month {
-                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier, documentExtension)
-                    }else {
-                        newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
-                    }
+                if let previousMonth = currentMonth {
+                    previousMonth.removeInvoice(invoice: invoiceToModify)
+                    newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
                 }
+//                    let invoiceIndex = previousMonth.removeInvoice(invoice: invoiceToModify) {
+//                    if newMonth.month == previousMonth.month {
+//                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier, documentExtension)
+//                    }else {
+//                        newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
+//                    }
+//                }
             }
         }
     }

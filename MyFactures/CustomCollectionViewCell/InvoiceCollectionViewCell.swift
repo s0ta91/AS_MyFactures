@@ -34,7 +34,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         ui_invoiceDocumentThumbnail.layer.cornerRadius = 4
         
         ui_amountLabel.text = String(describing: invoice.amount)
-        ui_categoryLabel.text = invoice.categoryObject?.title
+        ui_categoryLabel.text = invoice.category?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription
         ui_amountLabel.convertToCurrencyNumber()
         setFontSize(with: fontSize)

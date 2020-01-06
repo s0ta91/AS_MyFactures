@@ -58,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
+        if let realmDb = DbManager().getRealmDb() {
+            database._realm = realmDb
+        }
         
         // TODO: Initialize all default data in database
         database.initYear()

@@ -195,8 +195,8 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
                 ui_groupSelectionTextField.text = groupTitle
-                ui_monthSelectionTextField.text = _month.month
-                ui_categorySelectionTextField.text = _invoice.categoryObject?.title
+                ui_monthSelectionTextField.text = _month.name
+                ui_categorySelectionTextField.text = _invoice.category?.title
                 ui_amountTextField.text = String(describing: _invoice.amount)
                 
                 if _invoice.identifier != nil {

@@ -6,6 +6,7 @@
     <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="invoice" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="category" inverseEntity="Invoice"/>
     </entity>
     <entity name="Group" representedClassName=".Group" syncable="YES" codeGenerationType="category">
         <attribute name="title" attributeType="String"/>
@@ -17,7 +18,7 @@
         <attribute name="detailedDescription" optional="YES" attributeType="String"/>
         <attribute name="documentType" optional="YES" attributeType="String"/>
         <attribute name="identifier" optional="YES" attributeType="String"/>
-        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="invoice" inverseEntity="Category"/>
     </entity>
     <entity name="Month" representedClassName=".Month" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
@@ -30,7 +31,7 @@
     </entity>
     <elements>
         <element name="ApplicationData" positionX="-80.3046875" positionY="-316.0078125" width="128" height="28"/>
-        <element name="Category" positionX="-72.421875" positionY="-91.6796875" width="128" height="73"/>
+        <element name="Category" positionX="-72.421875" positionY="-91.6796875" width="128" height="88"/>
         <element name="Group" positionX="-75.8125" positionY="-190.26953125" width="128" height="88"/>
         <element name="Month" positionX="-73.86328125" positionY="51.3359375" width="128" height="88"/>
         <element name="Year" positionX="-75.97265625" positionY="-276.76171875" width="128" height="73"/>

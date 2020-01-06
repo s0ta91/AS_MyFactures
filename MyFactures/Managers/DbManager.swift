@@ -31,37 +31,28 @@ class DbManager {
         return _keychain[data: DbManager.REALM_ENCRYPTION_KEY]
     }
     
-    private func generateRealmEncryptionKey () -> Data? {
-        guard let generatedData = Data(countOfRandomData: 64) else { return nil }
-        try! _keychain.set(generatedData, key: DbManager.REALM_ENCRYPTION_KEY)
-        return generatedData
-    }
+//    private func generateRealmEncryptionKey () -> Data? {
+//        guard let generatedData = Data(countOfRandomData: 64) else { return nil }
+//        try! _keychain.set(generatedData, key: DbManager.REALM_ENCRYPTION_KEY)
+//        return generatedData
+//    }
     
     
     /** PUBLIC functions **/
-//    func getDb () -> Manager? {
-//        if DbManager.ENCRYPT_FILE == true {
-//            // try to load the key
-//            var possibleKey: Data?
-//            possibleKey = loadRealmEncryptionKey()
-//
-//            //If no key, create a new key
-//            if possibleKey == nil {
-//                possibleKey = generateRealmEncryptionKey()
-//            }
-//
-//            //realm config with the key
-//            if let realmEncryptionKey = possibleKey {
-//                let realmConf = Realm.Configuration(encryptionKey: realmEncryptionKey)
-//                let _realm = try! Realm(configuration: realmConf)
-//                _database = Manager(withRealm: _realm)
-//            }
-//        }else {
-//            let _realm = try! Realm()
-//            _database = Manager(withRealm: _realm)
-//        }
-//        return _database
-//    }
+    func getRealmDb () -> Realm? {
+        if DbManager.ENCRYPT_FILE == true {
+            var realm: Realm?
+
+            //realm config with the key
+            if let realmEncryptionKey = loadRealmEncryptionKey() {
+                let realmConf = Realm.Configuration(encryptionKey: realmEncryptionKey)
+                realm = try! Realm(configuration: realmConf)
+            }
+            return realm
+        } else {
+            return nil
+        }
+    }
     
     func getDb() -> Manager? {
         Manager()

@@ -9,13 +9,14 @@
 import Foundation
 
 extension Data {
-    init?(countOfRandomData: Int) {
-        self.init(count: countOfRandomData)
-        let result = self.withUnsafeMutableBytes {
-            SecRandomCopyBytes(kSecRandomDefault, countOfRandomData, $0)
-        }
-        if result != errSecSuccess {
-            return nil
-        }
-    }
+    
+//    init?(countOfRandomData: Int) {
+//        self.init(count: countOfRandomData)
+//        let result = self.withUnsafeMutableBytes {
+//            SecRandomCopyBytes(kSecRandomDefault, countOfRandomData, $0)
+//        }
+//        if result != errSecSuccess {
+//            return nil
+//        }
+//    }
 }
