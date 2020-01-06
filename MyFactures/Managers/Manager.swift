@@ -10,6 +10,11 @@ import Foundation
 import CoreData
 import KeychainAccess
 
+enum action {
+    case add
+    case remove
+}
+
 class Manager {
     
     static let instance = Manager()

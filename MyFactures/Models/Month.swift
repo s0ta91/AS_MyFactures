@@ -1,157 +1,59 @@
 //
 //  Month.swift
-//  MesFactures
+//  MyFactures
 //
-//  Created by Sébastien on 12/02/2018.
-//  Copyright © 2018 Sébastien Constant. All rights reserved.
+//  Created by Sébastien Constant on 06/01/2020.
+//  Copyright © 2020 Sébastien Constant. All rights reserved.
 //
 
 import Foundation
-import RealmSwift
+import CoreData
 
-class Month: Object {
-    @objc private dynamic var _month: String = ""
-    @objc private dynamic var _totalAmount: Double = 0
-    @objc private dynamic var _totalDocument: Int = 0
-    private var _invoiceList = List<Invoice>()
-    private var filteredInvoiceList: Results<Invoice>?
+public class Month: NSManagedObject {
+    let manager = Manager.instance
+    private var _cdInvoiceList: [Invoice] {
+        let groupRequest: NSFetchRequest<Invoice> = Invoice.fetchRequest()
+        do {
+            return try Manager.instance.context.fetch(groupRequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [Invoice]()
+        }
+    }
+    private var filteredInvoiceList = [Invoice]()
     var _invoiceListToShow : [Invoice] = []
     let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
-    
-    var month: String {
-        get {
-            return _month
-        }set {
-            realm?.beginWrite()
-            _month = newValue
-            ((try? realm?.commitWrite()) as ()??)
+ 
+    // MARK: - PUBLIC
+    func getTotalAmount () -> Double {
+        var totalAmount: Double = 0
+        _invoiceListToShow.forEach { (invoice) in
+            totalAmount += invoice.amount
         }
+        return totalAmount
     }
     
-    var totalAmount: Double {
-        get {
-            return _totalAmount
-        }set {
-            realm?.beginWrite()
-            _totalAmount = newValue
-            ((try? realm?.commitWrite()) as ()??)
-        }
-    }
-    
-    var totalDocument : Int {
-        get {
-            return _totalDocument
-        }set {
-            realm?.beginWrite()
-            _totalDocument = newValue
-            ((try? realm?.commitWrite()) as ()??)
-        }
-    }
-    
-    enum action {
-        case add
-        case remove
-    }
-
-    func setInvoiceList (for category: Category, searchText: String = "") {
-        _invoiceListToShow.removeAll(keepingCapacity: false)
-        var invoiceResults: Results<Invoice>
-        if category.title == ALL_CATEGORY_TEXT && searchText != "" {
-            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", searchText)
-            invoiceResults = _invoiceList.filter(invoiceIndexPredicate)
-        }else if category.title != ALL_CATEGORY_TEXT && searchText != "" {
-            let categoryPredicate = NSPredicate(format: "_categoryobject == %@", category)
-            let invoiceIndexPredicate = NSPredicate(format: "_detailedDescription CONTAINS[cd] %@", searchText)
-            invoiceResults = _invoiceList.filter(categoryPredicate).filter(invoiceIndexPredicate)
-        }else if category.title != ALL_CATEGORY_TEXT && searchText == "" {
-            let categoryPredicate = NSPredicate(format: "_categoryobject == %@", category)
-            invoiceResults = _invoiceList.filter(categoryPredicate)
-        }else {
-            invoiceResults = _invoiceList.filter("TRUEPREDICATE")
-        }
-        
-        for invoice in invoiceResults {
-            _invoiceListToShow.append(invoice)
-        }
-    }
-    
-    func getInvoiceCount () -> Int {
-        return _invoiceListToShow.count
-    }
-    
-    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
-        let invoice: Invoice?
-        if index >= 0 && index < getInvoiceCount() {
-            invoice = _invoiceListToShow[index]
-        }else {
-            invoice = nil
-        }
-        return invoice
-    }
-    
-    func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
-        return _invoiceList.index(of: invoice)
-    }
-    
-    func addInvoice (_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
-        let newInvoice = Invoice()
+    func addInvoice(_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
+        let newInvoice = Invoice(context: manager.context)
         newInvoice.identifier = identifier
         newInvoice.documentType = documentType
         newInvoice.detailedDescription = description
-        newInvoice.categoryObject = categoryObject
+        newInvoice.category = categoryObject
         newInvoice.amount = amount
         
-        realm?.beginWrite()
-        _invoiceList.append(newInvoice)
-        ((try? realm?.commitWrite()) as ()??)
-        
+        manager.saveCoreDataContext()
         setTotalAmount(amount, .add)
         setTotalDocument(.add)
     }
     
-    func modifyInvoice (atIndex index: Int, _ description: String, _ amount: Double, _ categoryObject: Category? = nil, _ identifier: String?, _ documentType: String?) {
-        let updatedInvoice = Invoice()
-        updatedInvoice.identifier = identifier
-        updatedInvoice.documentType = documentType
-        updatedInvoice.detailedDescription = description
-        updatedInvoice.categoryObject = categoryObject
-        updatedInvoice.amount = amount
-        
-        realm?.beginWrite()
-        _invoiceList.insert(updatedInvoice, at: index)
-        ((try? realm?.commitWrite()) as ()??)
-        
-        setTotalAmount(amount, .add)
-        setTotalDocument(.add)
-    }
     
-    func removeInvoice (invoice: Invoice) -> Int? {
-        let invoiceIndex = getInvoiceIndex(forInvoice: invoice)
-        setTotalAmount(invoice.amount, .remove)
-        setTotalDocument(.remove)
-        realm?.beginWrite()
-        realm?.delete(invoice)
-        do {
-            try realm?.commitWrite()
-        }catch {
-//            print("Invoice has not been deleted.")
-//            print("Restoring it's totalAmount and TotalDocument values")
-            setTotalAmount(invoice.amount, .add)
-            setTotalDocument(.add)
-        }
-        return invoiceIndex
-    }
     
-    func removeFromInvoiceToShow (atIndex index: Int) {
-        _invoiceListToShow.remove(at: index)
-    }
-
-    
+    // MARK: - PRIVATE
     private func setTotalAmount (_ amount: Double, _ type: action) {
         if type == .add {
-            totalAmount = totalAmount + amount
+            totalAmount += amount
         }else {
-            totalAmount = totalAmount - amount
+            totalAmount -= amount
             if totalAmount < 0 {
                 totalAmount = 0
             }
@@ -160,19 +62,11 @@ class Month: Object {
     
     private func setTotalDocument (_ type: action) {
         if type == .add {
-            totalDocument = totalDocument + 1
+            totalDocument += 1
         }else {
-            totalDocument = totalDocument - 1
+            totalDocument -= 1
         }
     }
     
-    func getTotalAmount () -> Double {
-        var totalAmount: Double = 0
-        for invoiceIndex in 0...getInvoiceCount() {
-            if let invoice = getInvoice(atIndex: invoiceIndex) {
-                totalAmount = totalAmount + invoice.amount
-            }
-        }
-        return totalAmount
-    }
+    
 }

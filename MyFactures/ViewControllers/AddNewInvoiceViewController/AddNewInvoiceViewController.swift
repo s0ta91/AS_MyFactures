@@ -431,7 +431,7 @@ class AddNewInvoiceViewController: UIViewController {
         if let textFieldValue = ui_addNewGroupOrCategoryTextField.text {
             if _isNewGroup {
                 if !_year.groupExist(forGroupName: textFieldValue) {
-                    ui_groupSelectionTextField.text = _year.addGroup(withTitle: textFieldValue, false)?.title
+                    ui_groupSelectionTextField.text = _year.addGroup(withTitle: textFieldValue, isListFiltered: false)?.title
                     ui_groupSelectionTextField.isEnabled = true
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
@@ -482,19 +482,20 @@ class AddNewInvoiceViewController: UIViewController {
                 }
             
                 let amountDouble = Double(truncating: convertedAmount as NSNumber)
-                let newMonth = group.checkIfMonthExist(forMonthName: monthString)
-            
-                if _modifyInvoice == false {
-                    SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
-                }else {
-                    var _extension = _documentExtension
-                    if let documentId = _invoice.identifier,
-                        let invoiceDocumentExtension = _invoice.documentType {
-                        _extension = invoiceDocumentExtension
-                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+                
+                if let newMonth = group.checkIfMonthExist(forMonthName: monthString) {
+                    if _modifyInvoice == false {
+                        SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
+                    }else {
+                        var _extension = _documentExtension
+                        if let documentId = _invoice.identifier,
+                            let invoiceDocumentExtension = _invoice.documentType {
+                            _extension = invoiceDocumentExtension
+                            deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+                        }
+                        SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
+                        
                     }
-                    SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
-                    
                 }
             
                 if self._fromOtherApp {
