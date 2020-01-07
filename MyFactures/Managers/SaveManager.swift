@@ -17,18 +17,6 @@ enum DocumentType {
 
 class SaveManager {
     
-    static fileprivate func getDocumentDirectory () -> URL {
-        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            return url
-        }else {
-            fatalError("Unable to access document directory")
-        }
-    }
-    
-    static private func getNewIdentifier () -> UUID {
-        return UUID()
-    }
-    
     static func saveDocument (document: Any?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
@@ -136,7 +124,21 @@ class SaveManager {
             fatalError("Cannot remove file. It does not exists")
         }
     }
-
+    
+    
+    // MARK: - PRIVATE
+    static func getDocumentDirectory () -> URL {
+        if let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            return url
+        }else {
+            fatalError("Unable to access document directory")
+        }
+    }
+    
+    static private func getNewIdentifier () -> UUID {
+        return UUID()
+    }
+    
     static private func save(documentAtUrl url: URL, to destination: URL, completion: () -> Void) {
         do {
             try FileManager.default.copyItem(at: url, to: destination)

@@ -59,19 +59,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         
-        // TODO: Initialize all default data in coreData database
-        database.initYear()
-        database.initCategory()
-        database.updateApplicationData()
         
         if let realmDb = DbManager().getRealmDb() {
             database._realm = realmDb
             
+            print("---> RealmDB found. Init CoreDatafrom realm data")
             // TODO: Initialize all data from Realm
             database.initRealmData()
-            
-            // TODO: Migrate data from Realm to CoreData
-            database.migrateToCoreData()
+            database.updateApplicationData()
+        } else {
+
+            print("---> No RealmDB on device. Init CoreData manualy")
+            // TODO: Initialize all default data in coreData database
+            database.initYear()
+            database.initCategory()
+            database.updateApplicationData()
         }
         
         
@@ -79,9 +81,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if database.hasMasterPassword() == false {
             displayCreateAccountVC(withPassword: false)
         } else if UserDefaults.standard.string(forKey: UserDefaults.keys.userEmail.rawValue) == nil {
-            // FIXME: Obsolete. To Delete
-            //            database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
-            
             displayCreateAccountVC(withPassword: true)
         }
         

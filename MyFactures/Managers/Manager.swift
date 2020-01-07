@@ -101,9 +101,27 @@ class Manager {
             _realmMonths = realm.objects(RealmMonth.self)
             _realmInvoices = realm.objects(RealmInvoice.self)
             _realmCategoryList = realm.objects(RealmCategory.self)
+            
+            // TODO: Migrate data from Realm to CoreData
+            migrateFromRealmToCoreData()
         }
     }
-
+    
+    func migrateFromRealmToCoreData() {
+        guard let years = _realmYears?.toArray(ofType: Year.self) else {
+            print("ERROR: Cannot convert from RealmYears to Years array")
+            return }
+//        guard let groups = _realmGroups?.toArray(ofType: Group.self) else { return }
+//        guard let months = _realmMonths?.toArray(ofType: Month.self) else { return }
+//        guard let invoices = _realmInvoices?.toArray(ofType: Invoice.self) else { return }
+//        guard let categories = _realmCategoryList?.toArray(ofType: Category.self) else { return }
+        
+        years.forEach { (year) in
+            print("year: \(year.year)")
+            print("selected: \(year.selected)")
+            print("group: \(String(describing: year.group))")
+        }
+    }
     
     func initYear () {
         print("init years")
@@ -473,5 +491,12 @@ class Manager {
     
     static func isFirstLoad() -> Bool {
         return UserDefaults.standard.bool(forKey: "firstLoad")
+    }
+}
+
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        let array = Array(self) as! [T]
+        return array
     }
 }
