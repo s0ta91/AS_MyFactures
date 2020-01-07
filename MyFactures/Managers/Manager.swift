@@ -115,7 +115,7 @@ class Manager {
 //        guard let months = _realmMonths?.toArray(ofType: Month.self) else { return }
 //        guard let invoices = _realmInvoices?.toArray(ofType: Invoice.self) else { return }
 //        guard let categories = _realmCategoryList?.toArray(ofType: Category.self) else { return }
-        
+        print("years count \(years.count)")
         years.forEach { (year) in
             print("year: \(year.year)")
             print("selected: \(year.selected)")

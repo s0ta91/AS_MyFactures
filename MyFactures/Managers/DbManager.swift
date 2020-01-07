@@ -40,18 +40,20 @@ class DbManager {
     
     /** PUBLIC functions **/
     func getRealmDb () -> Realm? {
+        var realm: Realm?
         if DbManager.ENCRYPT_FILE == true {
-            var realm: Realm?
+            
 
             //realm config with the key
             if let realmEncryptionKey = loadRealmEncryptionKey() {
                 let realmConf = Realm.Configuration(encryptionKey: realmEncryptionKey)
                 realm = try! Realm(configuration: realmConf)
             }
-            return realm
         } else {
-            return nil
+            realm = try! Realm()
+//            return nil
         }
+        return realm
     }
     
     func getDb() -> Manager? {
