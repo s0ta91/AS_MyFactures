@@ -13,12 +13,17 @@ public class YearCD: NSManagedObject {
 
     
     private var _cdGroupList: [GroupCD] {
-        let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
-        do {
-            return try Manager.instance.context.fetch(groupRequest)
-        } catch (let error) {
-            print("Error fetching groups from DB: \(error)")
-            return [GroupCD]()
+        get {
+            let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
+            do {
+                return try Manager.instance.context.fetch(groupRequest)
+            } catch (let error) {
+                print("Error fetching groups from DB: \(error)")
+                return [GroupCD]()
+            }
+        }
+        set {
+            
         }
     }
     private var _groupListToShow : [GroupCD] = []
@@ -27,7 +32,12 @@ public class YearCD: NSManagedObject {
     func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) -> GroupCD? {
         let newGroup = GroupCD(context: Manager.instance.context)
         newGroup.title = title
-        
+        if let totalPrice = totalPrice,
+            let totalDocuments = totalDocuments {
+            newGroup.totalPrice = totalPrice
+            newGroup.totalDocuments = totalDocuments
+        }
+        _cdGroupList.append(newGroup)
         Manager.instance.saveCoreDataContext()
         
         newGroup.initMonthList()
