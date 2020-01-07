@@ -9,25 +9,25 @@
 import Foundation
 import CoreData
 
-public class Month: NSManagedObject {
+public class MonthCD: NSManagedObject {
     let manager = Manager.instance
-    private var _cdInvoiceList: [Invoice] {
-        let groupRequest: NSFetchRequest<Invoice> = Invoice.fetchRequest()
+    private var _cdInvoiceList: [InvoiceCD] {
+        let groupRequest: NSFetchRequest<InvoiceCD> = InvoiceCD.fetchRequest()
         do {
             return try Manager.instance.context.fetch(groupRequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
-            return [Invoice]()
+            return [InvoiceCD]()
         }
     }
-    private var filteredInvoiceList = [Invoice]()
-    var _invoiceListToShow : [Invoice] = []
+    private var filteredInvoiceList = [InvoiceCD]()
+    var _invoiceListToShow : [InvoiceCD] = []
     let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
  
     
     // MARK: - PUBLIC
-    func addInvoice(_ description: String, _ amount: Double, _ categoryObject: Category? = nil ,_ identifier: String?, _ documentType: String?) {
-        let newInvoice = Invoice(context: manager.context)
+    func addInvoice(_ description: String, _ amount: Double, _ categoryObject: CategoryCD? = nil ,_ identifier: String?, _ documentType: String?) {
+        let newInvoice = InvoiceCD(context: manager.context)
         newInvoice.identifier = identifier
         newInvoice.documentType = documentType
         newInvoice.detailedDescription = description
@@ -39,9 +39,9 @@ public class Month: NSManagedObject {
         setTotalDocument(.add)
     }
     
-    func setInvoiceList (for receivedCategory: Category, searchText: String = "") {
+    func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {
         _invoiceListToShow.removeAll(keepingCapacity: false)
-        var invoiceResults: [Invoice]
+        var invoiceResults: [InvoiceCD]
         
         if receivedCategory.title == ALL_CATEGORY_TEXT && searchText != "" {
             invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
@@ -74,7 +74,7 @@ public class Month: NSManagedObject {
         return _invoiceListToShow.count
     }
     
-    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
+    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> InvoiceCD? {
         if index >= 0 && index < getInvoiceCount() {
             return _invoiceListToShow[index]
         } else {
@@ -82,8 +82,8 @@ public class Month: NSManagedObject {
         }
     }
     
-    func modifyInvoice (atIndex index: Int, _ description: String, _ amount: Double, _ categoryObject: Category? = nil, _ identifier: String?, _ documentType: String?) {
-        let updatedInvoice = Invoice()
+    func modifyInvoice (atIndex index: Int, _ description: String, _ amount: Double, _ categoryObject: CategoryCD? = nil, _ identifier: String?, _ documentType: String?) {
+        let updatedInvoice = InvoiceCD(context: manager.context)
         updatedInvoice.identifier = identifier
         updatedInvoice.documentType = documentType
         updatedInvoice.detailedDescription = description
@@ -96,7 +96,7 @@ public class Month: NSManagedObject {
         setTotalDocument(.add)
     }
     
-    func removeInvoice (invoice: Invoice) {
+    func removeInvoice (invoice: InvoiceCD) {
         guard let invoiceIndex = _cdInvoiceList.firstIndex(of: invoice) else { return }
         _invoiceListToShow.remove(at: invoiceIndex)
         setTotalAmount(invoice.amount, .remove)

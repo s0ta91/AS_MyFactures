@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-class RealmGroup: Object {
+class Group: Object {
     
     @objc private dynamic var _title = ""
     @objc private dynamic var _totalPrice = 0.0
     @objc private dynamic var _totalDocuments = 0
-    private var _monthList = List<RealmMonth>()
+    private var _monthList = List<Month>()
     let _monthArray = [NSLocalizedString("January", comment: ""),
                        NSLocalizedString("February", comment: ""),
                        NSLocalizedString("March", comment: ""),
@@ -71,15 +71,15 @@ class RealmGroup: Object {
     }
     
     func addMonth (_ monthName: String) {
-        let newMonth = RealmMonth()
+        let newMonth = Month()
         newMonth.month = monthName
         realm?.beginWrite()
         _monthList.append(newMonth)
         ((try? realm?.commitWrite()) as ()??)
     }
     
-    func getMonth (atIndex index: Int) -> RealmMonth? {
-        let month: RealmMonth?
+    func getMonth (atIndex index: Int) -> Month? {
+        let month: Month?
         if index >= 0 && index < getMonthCount() {
             month = _monthList[index]
         }else {
@@ -88,7 +88,7 @@ class RealmGroup: Object {
         return month
         
     }
-    func getMonthIndex (forMonth month: RealmMonth) -> Int? {
+    func getMonthIndex (forMonth month: Month) -> Int? {
         return _monthList.index(of: month)
     }
     func getMonthIndexFromTable (forMonthName monthName: String) -> Int {
@@ -109,8 +109,8 @@ class RealmGroup: Object {
         }
     }
     
-    func checkIfMonthExist (forMonthName monthName: String) -> RealmMonth {
-        let monthToReturn: RealmMonth
+    func checkIfMonthExist (forMonthName monthName: String) -> Month {
+        let monthToReturn: Month
         let monthArray = [NSLocalizedString("January", comment: ""),
                            NSLocalizedString("February", comment: ""),
                            NSLocalizedString("March", comment: ""),

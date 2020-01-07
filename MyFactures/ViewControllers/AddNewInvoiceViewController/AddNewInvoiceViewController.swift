@@ -41,10 +41,10 @@ class AddNewInvoiceViewController: UIViewController {
     
     //MARK: - paththrough Managers/Objects
     var _ptManager: Manager?
-    var _ptYear: Year?
-    var _ptGroup: Group?
-    var _ptMonth: Month?
-    var _ptInvoice: Invoice?
+    var _ptYear: YearCD?
+    var _ptGroup: GroupCD?
+    var _ptMonth: MonthCD?
+    var _ptInvoice: InvoiceCD?
     var _modifyInvoice: Bool = false
     var _fromOtherApp: Bool = false
     var _ptLoginVC: UIViewController?
@@ -52,10 +52,10 @@ class AddNewInvoiceViewController: UIViewController {
     
     //MARK: - Global variable filled with passthrough Managers/objects
     private var _manager: Manager!
-    private var _year: Year!
-    private var _group: Group!
-    private var _month: Month!
-    private var _invoice: Invoice!
+    private var _year: YearCD!
+    private var _group: GroupCD!
+    private var _month: MonthCD!
+    private var _invoice: InvoiceCD!
     private var _loginVC: UIViewController!
     
     
@@ -278,7 +278,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
 
-    private func isGroup(forYear year: Year) -> Bool {
+    private func isGroup(forYear year: YearCD) -> Bool {
         if year.getGlobalGroupCount() != 0 {
             return true
         } else {
@@ -468,7 +468,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Add invoice to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         let categoryName = getCategoryName()
-        var categoryObject: Category? = nil
+        var categoryObject: CategoryCD? = nil
         
         
         if let description = ui_descriptionTextField.text,

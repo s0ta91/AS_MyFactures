@@ -9,25 +9,25 @@
 import Foundation
 import CoreData
 
-public class Group: NSManagedObject {
+public class GroupCD: NSManagedObject {
     
     let manager = Manager.instance
     
     //private var _monthList: [Month] = []
-    private var _monthList: [Month] {
-        let monthRequest: NSFetchRequest<Month> = Month.fetchRequest()
+    private var _monthList: [MonthCD] {
+        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
         do {
             return try Manager.instance.context.fetch(monthRequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
-            return [Month]()
+            return [MonthCD]()
         }
     }
     
     // MARK: - PUBLIC
     
     func addMonth(_ monthName: String) {
-        let newMonth = Month(context: manager.context)
+        let newMonth = MonthCD(context: manager.context)
         newMonth.name = monthName
         manager.saveCoreDataContext()
     }
@@ -42,8 +42,8 @@ public class Group: NSManagedObject {
         }
     }
     
-    func getMonth(atIndex index: Int) -> Month? {
-        let month: Month?
+    func getMonth(atIndex index: Int) -> MonthCD? {
+        let month: MonthCD?
         if index >= 0 && index < getMonthCount() {
             month = _monthList[index]
         }else {
@@ -57,7 +57,7 @@ public class Group: NSManagedObject {
         return Manager.instance._monthArray.firstIndex(of: monthName)!
     }
     
-    func checkIfMonthExist(forMonthName monthName: String) -> Month? {
+    func checkIfMonthExist(forMonthName monthName: String) -> MonthCD? {
         guard let monthIndex = manager._monthArray.firstIndex(of: monthName),
             let monthToReturn = getMonth(atIndex: monthIndex) else {
                 print("--> Error: This month name is unknown or does not exists in database")

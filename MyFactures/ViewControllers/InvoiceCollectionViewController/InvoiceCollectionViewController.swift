@@ -41,14 +41,14 @@ class InvoiceCollectionViewController: UIViewController {
     
     //TODO: Data reveived from previous VC
     var _ptManager: Manager?
-    var _ptCurrentGroup: Group?
-    var _ptYear: Year?
+    var _ptCurrentGroup: GroupCD?
+    var _ptYear: YearCD?
     var _ptFontSize: CGFloat?
     
     //TODO: Internal variables
     private var _invoiceCollectionManager: Manager!
-    private var _invoiceCollectionCurrentGroup: Group!
-    private var _invoiceCollectionCurrentYear: Year!
+    private var _invoiceCollectionCurrentGroup: GroupCD!
+    private var _invoiceCollectionCurrentYear: YearCD!
     
     // To store the months that need to be shown if they contains at least an invoice
     private var _monthToShow: [Int] = []
@@ -189,7 +189,7 @@ class InvoiceCollectionViewController: UIViewController {
     }
 
     //TODO: Retrieve the month for the section index
-    private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
+    private func getCurrentMonth (atIndex monthIndex: Int) -> MonthCD? {
         guard let selectedCategory = _invoiceCollectionManager.getSelectedCategory(),
             let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) else {
                 return nil
@@ -221,8 +221,8 @@ class InvoiceCollectionViewController: UIViewController {
         return numberOfInvoice
     }
     
-    private func getSelectedInvoice (for month: Month, atInvoiceIndex invoiceIndex: Int) -> Invoice? {
-        var invoice: Invoice? = nil
+    private func getSelectedInvoice (for month: MonthCD, atInvoiceIndex invoiceIndex: Int) -> InvoiceCD? {
+        var invoice: InvoiceCD? = nil
         invoice = month.getInvoice(atIndex: invoiceIndex, isListFiltered)
         return invoice
     }

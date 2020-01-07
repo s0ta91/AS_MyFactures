@@ -3,40 +3,40 @@
     <entity name="ApplicationData" representedClassName=".ApplicationData" syncable="YES" codeGenerationType="category">
         <attribute name="currentDate" attributeType="Date" defaultDateTimeInterval="599740920" usesScalarValueType="NO"/>
     </entity>
-    <entity name="Category" representedClassName=".Category" syncable="YES" codeGenerationType="class">
+    <entity name="Category" representedClassName=".CategoryCD" syncable="YES" codeGenerationType="class">
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="invoice" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="category" inverseEntity="Invoice"/>
     </entity>
-    <entity name="Group" representedClassName=".Group" syncable="YES" codeGenerationType="category">
+    <entity name="Group" representedClassName=".GroupCD" syncable="YES" codeGenerationType="category">
         <attribute name="title" attributeType="String"/>
         <attribute name="totalDocuments" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalPrice" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="year" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Year" inverseName="group" inverseEntity="Year"/>
     </entity>
-    <entity name="Invoice" representedClassName=".Invoice" syncable="YES" codeGenerationType="category">
+    <entity name="Invoice" representedClassName=".InvoiceCD" syncable="YES" codeGenerationType="category">
         <attribute name="amount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="detailedDescription" optional="YES" attributeType="String"/>
         <attribute name="documentType" optional="YES" attributeType="String"/>
         <attribute name="identifier" optional="YES" attributeType="String"/>
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="invoice" inverseEntity="Category"/>
     </entity>
-    <entity name="Month" representedClassName=".Month" syncable="YES" codeGenerationType="category">
+    <entity name="Month" representedClassName=".MonthCD" syncable="YES" codeGenerationType="category">
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="totalAmount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalDocument" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Year" representedClassName=".Year" syncable="YES" codeGenerationType="category">
+    <entity name="Year" representedClassName=".YearCD" syncable="YES" codeGenerationType="category">
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="year" attributeType="Integer 64" usesScalarValueType="YES"/>
         <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="year" inverseEntity="Group"/>
     </entity>
     <elements>
-        <element name="ApplicationData" positionX="-80.3046875" positionY="-316.0078125" width="128" height="28"/>
+        <element name="ApplicationData" positionX="-80.3046875" positionY="-316.0078125" width="128" height="58"/>
         <element name="Category" positionX="-72.421875" positionY="-91.6796875" width="128" height="88"/>
-        <element name="Group" positionX="119.4375" positionY="-273.6640625" width="128" height="28"/>
-        <element name="Month" positionX="-73.86328125" positionY="51.3359375" width="128" height="88"/>
-        <element name="Year" positionX="-76.62109375" positionY="-273.296875" width="128" height="28"/>
+        <element name="Group" positionX="119.4375" positionY="-273.6640625" width="128" height="58"/>
         <element name="Invoice" positionX="202.89453125" positionY="-139.953125" width="131.96875" height="118"/>
+        <element name="Month" positionX="-73.86328125" positionY="51.3359375" width="128" height="88"/>
+        <element name="Year" positionX="-76.62109375" positionY="-273.296875" width="128" height="88"/>
     </elements>
 </model>

@@ -17,7 +17,7 @@ enum DocumentType {
 
 class SaveManager {
     
-    static func saveDocument (document: Any?, description: String, categoryObject: Category?, amount: Double, currentMonth: Month? = nil, newMonth: Month, invoice: Invoice? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
+    static func saveDocument (document: Any?, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
         

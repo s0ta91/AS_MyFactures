@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class RealmCategory: Object {
+class Category: Object {
     @objc private dynamic var _title: String = ""
     @objc private dynamic var _selected = false
     

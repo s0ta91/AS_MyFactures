@@ -12,7 +12,7 @@ class MonthsPicker: UIPickerView {
 
     var _monthTextField: UITextField!
     
-    var _group: Group?
+    var _group: GroupCD?
     
     func selectDefaultRow (forMonthName monthName: String, forPickerView pickerView: UIPickerView) {
         guard let group = _group else { fatalError("Group cannot be found") }

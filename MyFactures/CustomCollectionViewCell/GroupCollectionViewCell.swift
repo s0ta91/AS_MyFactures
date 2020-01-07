@@ -23,7 +23,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
     weak var delegate: GroupCollectionViewCellDelegate?
     
     //MARK: - public functions
-    func setValues (_ group: Group, fontSize: CGFloat) {
+    func setValues (_ group: GroupCD, fontSize: CGFloat) {
         let totalAmount = String(describing: group.getTotalGroupAmount())
         let totalDocument = String(group.getTotalDocument())
         ui_titleLabel.text = group.title

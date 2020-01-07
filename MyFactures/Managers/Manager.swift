@@ -39,16 +39,16 @@ class Manager {
     
     // MARK: REALM
     var _realm: Realm?
-    private var _realmYears: Results<RealmYear>?
-    private var _realmCategoryList: Results<RealmCategory>?
-    private var _realmGroups: Results<RealmGroup>?
-    private var _realmMonths: Results<RealmMonth>?
-    private var _realmInvoices: Results<RealmInvoice>?
+    private var _realmYears: Results<Year>?
+    private var _realmCategoryList: Results<Category>?
+    private var _realmGroups: Results<Group>?
+    private var _realmMonths: Results<Month>?
+    private var _realmInvoices: Results<Invoice>?
     
     // MARK: - COREDATA
     private var _cdApplicationDataList: [ApplicationData]
-    private var _cdYearsList: [Year]
-    private var _cdCategoryList: [Category]
+    private var _cdYearsList: [YearCD]
+    private var _cdCategoryList: [CategoryCD]
 //    private var _cdGroupIdeaList: [GroupIdea]
     
     
@@ -68,20 +68,20 @@ class Manager {
         }
         
         // Load CoreData years
-        let request: NSFetchRequest<Year> = Year.fetchRequest()
+        let request: NSFetchRequest<YearCD> = YearCD.fetchRequest()
         do {
             _cdYearsList = try context.fetch(request).sorted(by: { $0.year > $1.year} )
         } catch (let error) {
-            _cdYearsList = [Year]()
+            _cdYearsList = [YearCD]()
             print("Error fetching Years: \(error)")
         }
         
         // Load CoreData Categories
-        let categoriesRequest: NSFetchRequest<Category> = Category.fetchRequest()
+        let categoriesRequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
         do {
             _cdCategoryList = try context.fetch(categoriesRequest)
         } catch (let error) {
-            _cdCategoryList = [Category]()
+            _cdCategoryList = [CategoryCD]()
             print("Error fetching categories: \(error)")
         }
         
@@ -96,11 +96,13 @@ class Manager {
     
     func initRealmData() {
         if let realm = _realm {
-            _realmYears = realm.objects(RealmYear.self)
-            _realmGroups = realm.objects(RealmGroup.self)
-            _realmMonths = realm.objects(RealmMonth.self)
-            _realmInvoices = realm.objects(RealmInvoice.self)
-            _realmCategoryList = realm.objects(RealmCategory.self)
+            print("realm exist, load Results")
+            print("realmYears count \(realm.objects(Year.self).count)")
+            _realmYears = realm.objects(Year.self)
+            _realmGroups = realm.objects(Group.self)
+            _realmMonths = realm.objects(Month.self)
+            _realmInvoices = realm.objects(Invoice.self)
+            _realmCategoryList = realm.objects(Category.self)
             
             // TODO: Migrate data from Realm to CoreData
             migrateFromRealmToCoreData()
@@ -108,13 +110,14 @@ class Manager {
     }
     
     func migrateFromRealmToCoreData() {
-        guard let years = _realmYears?.toArray(ofType: Year.self) else {
+        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
             print("ERROR: Cannot convert from RealmYears to Years array")
             return }
 //        guard let groups = _realmGroups?.toArray(ofType: Group.self) else { return }
 //        guard let months = _realmMonths?.toArray(ofType: Month.self) else { return }
 //        guard let invoices = _realmInvoices?.toArray(ofType: Invoice.self) else { return }
 //        guard let categories = _realmCategoryList?.toArray(ofType: Category.self) else { return }
+        
         print("years count \(years.count)")
         years.forEach { (year) in
             print("year: \(year.year)")
@@ -161,7 +164,7 @@ class Manager {
     }
     
     private func addYear(_ yearToAdd: Int) {
-        let ny = Year(context: context)
+        let ny = YearCD(context: context)
         ny.year = Int64(yearToAdd)
         ny.selected = false
     }
@@ -306,11 +309,11 @@ class Manager {
         return _cdYearsList.count
     }
     
-    func getYear (atIndex index: Int) -> Year? {
+    func getYear (atIndex index: Int) -> YearCD? {
         return _cdYearsList[index]
     }
     
-    func getYear (forValue value: Int) -> Year? {
+    func getYear (forValue value: Int) -> YearCD? {
         guard let yearIndex = _cdYearsList.firstIndex(where: { (year) -> Bool in
             year.year == value
         }) else { return nil }
@@ -322,13 +325,13 @@ class Manager {
         return _cdYearsList.firstIndex(of: year)
     }
     
-    func setSelectedYear (forYear newSelectedYear: Year) {
+    func setSelectedYear (forYear newSelectedYear: YearCD) {
         let oldSelectedYear = getSelectedYear()
         oldSelectedYear?.selected = false
         newSelectedYear.selected = true
     }
     
-    func getSelectedYear () -> Year? {
+    func getSelectedYear () -> YearCD? {
         guard let selectedYear = _cdYearsList.first(where: { (year) -> Bool in
             year.selected == true
         }) else { return nil }
@@ -372,15 +375,15 @@ class Manager {
         return _cdCategoryList.count
     }
     
-    func getCategory (atIndex index: Int) -> Category? {
+    func getCategory (atIndex index: Int) -> CategoryCD? {
         return _cdCategoryList[index]
     }
     
-    func getCategoryIndex (forCategory category: Category) -> Int!{
+    func getCategoryIndex (forCategory category: CategoryCD) -> Int!{
         return _cdCategoryList.firstIndex(of: category)
     }
     
-    func getCategory (forName categoryName: String) -> Category? {
+    func getCategory (forName categoryName: String) -> CategoryCD? {
         guard let categoryIndex = _cdCategoryList.firstIndex(where: { (category) -> Bool in
             category.title == categoryName
         }) else { return nil }
@@ -388,8 +391,8 @@ class Manager {
         return getCategory(atIndex: categoryIndex)
     }
     
-    func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> Category {
-        let newCategory = Category(context: context)
+    func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> CategoryCD {
+        let newCategory = CategoryCD(context: context)
         newCategory.title = categoryTitle
         newCategory.selected = isSelected!
         saveCoreDataContext()
@@ -408,14 +411,14 @@ class Manager {
         return categoryNameExists
     }
     
-    func getSelectedCategory () -> Category? {
+    func getSelectedCategory () -> CategoryCD? {
         guard let selectedCategory = _cdCategoryList.first(where: { (category) -> Bool in
             category.selected == true
         }) else { return nil }
         return selectedCategory
     }
     
-    func setSelectedCategory (forCategory newSelectedCategory: Category) {
+    func setSelectedCategory (forCategory newSelectedCategory: CategoryCD) {
         _cdCategoryList.forEach { (category) in
             category.selected = false
         }
@@ -423,7 +426,7 @@ class Manager {
         saveCoreDataContext()
     }
     
-    func modifyCategoryTitle (forCategory category: Category, withNewTitle newTitle: String) {
+    func modifyCategoryTitle (forCategory category: CategoryCD, withNewTitle newTitle: String) {
         category.title = newTitle
     }
     

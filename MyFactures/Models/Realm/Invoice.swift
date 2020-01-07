@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-class RealmInvoice: Object {
+class Invoice: Object {
     @objc private dynamic var _identifier: String?
     @objc private dynamic var _documentType: String?
     @objc private dynamic var _detailedDescription: String = ""
-    @objc private dynamic var _categoryobject: RealmCategory?
+    @objc private dynamic var _categoryobject: Category?
     @objc private dynamic var _amount: Double = 0
     
     var identifier: String? {
@@ -46,7 +46,7 @@ class RealmInvoice: Object {
         }
     }
     
-    var categoryObject: RealmCategory? {
+    var categoryObject: Category? {
         get {
             return _categoryobject
         }set {

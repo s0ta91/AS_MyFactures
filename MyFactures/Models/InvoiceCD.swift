@@ -9,6 +9,6 @@
 import Foundation
 import CoreData
 
-public class Invoice: NSManagedObject {
+public class InvoiceCD: NSManagedObject {
     
 }

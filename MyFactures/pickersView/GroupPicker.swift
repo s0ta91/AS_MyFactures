@@ -10,7 +10,7 @@ import UIKit
 
 class GroupPicker: UIPickerView {
 
-    var _year: Year?
+    var _year: YearCD?
     var _groupTextField: UITextField!
     
     func getGroupTitle(forRow row: Int) -> String? {

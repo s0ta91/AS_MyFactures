@@ -74,8 +74,8 @@ class GroupViewController: UIViewController {
         return launcher
     }()
     
-    private var _currentYear: Year!
-    private var _groupToModify: Group?
+    private var _currentYear: YearCD!
+    private var _groupToModify: GroupCD?
     let monthArray = [NSLocalizedString("January", comment: ""),
                       NSLocalizedString("February", comment: ""),
                       NSLocalizedString("March", comment: ""),

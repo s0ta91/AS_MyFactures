@@ -9,12 +9,12 @@
 import Foundation
 import RealmSwift
 
-class RealmYear: Object {
+class Year: Object {
     @objc private dynamic var _year: Int = 0
     @objc private dynamic var _selected: Bool = false
-    private var _groupList = List<RealmGroup>()
+    private var _groupList = List<Group>()
     private var _groupArray: [String] = []
-    private var _groupListToShow : [RealmGroup] = []
+    private var _groupListToShow : [Group] = []
 
     
     var year: Int {
@@ -39,9 +39,9 @@ class RealmYear: Object {
     
     
     // GROUP functions
-    func addGroup (withTitle title: String, _ isListFiltered: Bool) -> RealmGroup? {
+    func addGroup (withTitle title: String, _ isListFiltered: Bool) -> Group? {
         let newGroupIndex = getNewGroupIndex(withTitle: title, isListFiltered)
-        let newGroup = RealmGroup()
+        let newGroup = Group()
         newGroup.title = title
         do {
             try realm?.write {
@@ -91,7 +91,7 @@ class RealmYear: Object {
         return _groupListToShow.count
     }
     
-    func getGroup (atIndex index: Int, _ isListFiltered: Bool = false) -> RealmGroup? {
+    func getGroup (atIndex index: Int, _ isListFiltered: Bool = false) -> Group? {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
@@ -101,7 +101,7 @@ class RealmYear: Object {
     
     func setGroupList (containing nameParts: String = ""){
         _groupListToShow.removeAll(keepingCapacity: false)
-        var groupResults: Results<RealmGroup>
+        var groupResults: Results<Group>
         if nameParts != "" {
             let groupIndexPredicate = NSPredicate(format: "_title CONTAINS[cd] %@", nameParts)
             groupResults = _groupList.filter(groupIndexPredicate)
@@ -114,12 +114,12 @@ class RealmYear: Object {
         }
     }
     
-    func getGroupIndex (forGroup group: RealmGroup) -> Int? {
+    func getGroupIndex (forGroup group: Group) -> Int? {
         return _groupList.index(of: group)
     }
     
-    func getGroup (forName groupName: String, _ isListFiltered: Bool = false) -> RealmGroup? {
-        var group: RealmGroup? = nil
+    func getGroup (forName groupName: String, _ isListFiltered: Bool = false) -> Group? {
+        var group: Group? = nil
         let groupPredicate = NSPredicate(format: "_title == %@", groupName)
         if let groupIndex = _groupList.index(matching: groupPredicate) {
             group = getGroup(atIndex: groupIndex, isListFiltered)
@@ -127,7 +127,7 @@ class RealmYear: Object {
         return group
     }
     
-    func modifyGroupTitle (forGroup group: RealmGroup, withNewTitle newTitle: String) {
+    func modifyGroupTitle (forGroup group: GroupCD, withNewTitle newTitle: String) {
         group.title = newTitle
     }
     

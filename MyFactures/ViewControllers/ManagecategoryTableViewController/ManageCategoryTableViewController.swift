@@ -35,7 +35,7 @@ class ManageCategoryTableViewController: UIViewController {
     
     //TODO: Internal variables
     private var _manager: Manager!
-    private var _selectedCategoryToModify: Category!
+    private var _selectedCategoryToModify: CategoryCD!
     private var _visualEffect: UIVisualEffect!
     let BUTTON_SIZE: CGFloat = 56
     

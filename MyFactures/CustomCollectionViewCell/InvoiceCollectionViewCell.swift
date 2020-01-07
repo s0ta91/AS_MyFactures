@@ -26,7 +26,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     //TODO: Set values for the cell
-    func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
+    func setValues (forInvoice invoice: InvoiceCD, fontSize: CGFloat) {
         if let invoiceIdentifier = invoice.identifier {
             let thumbnailUrl = SaveManager.getUrl(forIdentifier: invoiceIdentifier, documentType: .thumbnail)
             ui_invoiceDocumentThumbnail.loadImage(with: thumbnailUrl.absoluteString)

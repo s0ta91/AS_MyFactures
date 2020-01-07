@@ -9,23 +9,23 @@
 import Foundation
 import CoreData
 
-public class Year: NSManagedObject {
+public class YearCD: NSManagedObject {
 
     let manager = Manager.instance
-    private var _cdGroupList: [Group] {
-        let groupRequest: NSFetchRequest<Group> = Group.fetchRequest()
+    private var _cdGroupList: [GroupCD] {
+        let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
         do {
             return try Manager.instance.context.fetch(groupRequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
-            return [Group]()
+            return [GroupCD]()
         }
     }
-    private var _groupListToShow : [Group] = []
+    private var _groupListToShow : [GroupCD] = []
     
     // MARK: - PUBLIC
-    func addGroup(withTitle title: String, isListFiltered: Bool) -> Group? {
-        let newGroup = Group(context: manager.context)
+    func addGroup(withTitle title: String, isListFiltered: Bool) -> GroupCD? {
+        let newGroup = GroupCD(context: manager.context)
         newGroup.title = title
         
         manager.saveCoreDataContext()
@@ -35,7 +35,7 @@ public class Year: NSManagedObject {
         return newGroup
     }
     
-    func getGroup(atIndex index: Int, isListFiltered: Bool = false) -> Group? {
+    func getGroup(atIndex index: Int, isListFiltered: Bool = false) -> GroupCD? {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
@@ -43,7 +43,7 @@ public class Year: NSManagedObject {
         }
     }
     
-    func getGroup(forName groupName: String, isListFiltered: Bool = false) -> Group? {
+    func getGroup(forName groupName: String, isListFiltered: Bool = false) -> GroupCD? {
         if isListFiltered {
             guard let group = _groupListToShow.first(where: { (group) -> Bool in
                 group.title?.lowercased() == groupName.lowercased()
@@ -57,11 +57,11 @@ public class Year: NSManagedObject {
         }
     }
     
-    func getGroupIndex(forGroup group: Group) -> Int? {
+    func getGroupIndex(forGroup group: GroupCD) -> Int? {
         return _cdGroupList.firstIndex(of: group)
     }
     
-    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
+    func modifyGroupTitle (forGroup group: GroupCD, withNewTitle newTitle: String) {
         group.title = newTitle
         manager.saveCoreDataContext()
         setGroupList()
@@ -74,7 +74,7 @@ public class Year: NSManagedObject {
 //        manager.saveCoreDataContext()
 //    }
     
-    func removeGroup(_ groupToDelete: Group) {
+    func removeGroup(_ groupToDelete: GroupCD) {
         if let groupIndex = _cdGroupList.firstIndex(of: groupToDelete) {
             _groupListToShow.remove(at: groupIndex)
         }
