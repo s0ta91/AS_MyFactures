@@ -110,20 +110,33 @@ class Manager {
     }
     
     func migrateFromRealmToCoreData() {
-        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
-            print("ERROR: Cannot convert from RealmYears to Years array")
-            return }
-//        guard let groups = _realmGroups?.toArray(ofType: Group.self) else { return }
-//        guard let months = _realmMonths?.toArray(ofType: Month.self) else { return }
-//        guard let invoices = _realmInvoices?.toArray(ofType: Invoice.self) else { return }
-//        guard let categories = _realmCategoryList?.toArray(ofType: Category.self) else { return }
+//        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
+//            print("ERROR: Cannot convert from RealmYears to Years array")
+//            return }
+
+        _realmYears?.forEach({ (year) in
+            let newYear = YearCD(context: context)
+            newYear.year = Int64(year.year)
+            newYear.selected = year.selected
+//            newYear.group = year._groupListToShow
+//            print("---> migrate year to newYear")
+//            print("---> newYear: \(newYear.year)")
+//            print("---> newYear is selected: \(newYear.selected)")
+            year._groupListToShow.forEach { (group) in
+                let _ = newYear.addGroup(withTitle: group.title, totalPrice: group.totalPrice, totalDocuments: Int64(group.totalDocuments), isListFiltered: false)
+            }
+        })
         
-        print("years count \(years.count)")
-        years.forEach { (year) in
-            print("year: \(year.year)")
-            print("selected: \(year.selected)")
-            print("group: \(String(describing: year.group))")
-        }
+//        _realmGroups?.forEach({ (group) in
+//            let newGroup = GroupCD(context: context)
+//            newGroup.title = group.title
+//            newGroup.totalPrice = group.totalPrice
+//            newGroup.totalDocuments = Int64(group.totalDocuments)
+//        })
+        
+        print("---> Save context")
+        saveCoreDataContext()
+        UserDefaults.standard.set(true, forKey: UserDefaults.keys.migrationDone.rawValue)
     }
     
     func initYear () {

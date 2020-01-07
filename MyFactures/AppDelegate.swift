@@ -60,7 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         
         
-        if let realmDb = DbManager().getRealmDb() {
+        if !UserDefaults.standard.bool(forKey: UserDefaults.keys.migrationDone.rawValue),
+            let realmDb = DbManager().getRealmDb() {
             database._realm = realmDb
             
             print("---> RealmDB found. Init CoreDatafrom realm data")
@@ -69,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             database.updateApplicationData()
         } else {
 
-            print("---> No RealmDB on device. Init CoreData manualy")
+            print("---> Migration Already done or No RealmDB on device. Init CoreData manualy")
             // TODO: Initialize all default data in coreData database
             database.initYear()
             database.initCategory()

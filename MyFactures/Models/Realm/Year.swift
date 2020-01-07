@@ -13,8 +13,9 @@ class Year: Object {
     @objc private dynamic var _year: Int = 0
     @objc private dynamic var _selected: Bool = false
     private var _groupList = List<Group>()
+    
     private var _groupArray: [String] = []
-    private var _groupListToShow : [Group] = []
+    var _groupListToShow : [Group] = []
 
     
     var year: Int {

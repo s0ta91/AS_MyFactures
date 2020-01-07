@@ -11,7 +11,7 @@ import CoreData
 
 public class YearCD: NSManagedObject {
 
-    let manager = Manager.instance
+    
     private var _cdGroupList: [GroupCD] {
         let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
         do {
@@ -24,11 +24,11 @@ public class YearCD: NSManagedObject {
     private var _groupListToShow : [GroupCD] = []
     
     // MARK: - PUBLIC
-    func addGroup(withTitle title: String, isListFiltered: Bool) -> GroupCD? {
-        let newGroup = GroupCD(context: manager.context)
+    func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) -> GroupCD? {
+        let newGroup = GroupCD(context: Manager.instance.context)
         newGroup.title = title
         
-        manager.saveCoreDataContext()
+        Manager.instance.saveCoreDataContext()
         
         newGroup.initMonthList()
         setGroupList()
@@ -63,7 +63,7 @@ public class YearCD: NSManagedObject {
     
     func modifyGroupTitle (forGroup group: GroupCD, withNewTitle newTitle: String) {
         group.title = newTitle
-        manager.saveCoreDataContext()
+        Manager.instance.saveCoreDataContext()
         setGroupList()
     }
     
@@ -79,8 +79,8 @@ public class YearCD: NSManagedObject {
             _groupListToShow.remove(at: groupIndex)
         }
         
-        manager.context.delete(groupToDelete)
-        manager.saveCoreDataContext()
+        Manager.instance.context.delete(groupToDelete)
+        Manager.instance.saveCoreDataContext()
     }
     
     func setGroupList(containing nameParts: String = "") {
