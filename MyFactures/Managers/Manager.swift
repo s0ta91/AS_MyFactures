@@ -119,10 +119,12 @@ class Manager {
             newYear.year = Int64(year.year)
             newYear.selected = year.selected
 //            newYear.group = year._groupListToShow
-//            print("---> migrate year to newYear")
-//            print("---> newYear: \(newYear.year)")
+            print("-> migrate year to newYear")
+            print("--> newYear: \(newYear.year)")
 //            print("---> newYear is selected: \(newYear.selected)")
-            year._groupListToShow.forEach { (group) in
+            print("---> nb of groups to migrate: \(year._groupList.count)")
+            year._groupList.forEach { (group) in
+                print("---> \(newYear.year) - Create new group: \(group.title)")
                 let _ = newYear.addGroup(withTitle: group.title, totalPrice: group.totalPrice, totalDocuments: Int64(group.totalDocuments), isListFiltered: false)
             }
         })

@@ -14,7 +14,9 @@ public class YearCD: NSManagedObject {
     
     private var _cdGroupList: [GroupCD] {
         get {
+            let yearPredicate = NSPredicate(format: "year == %@", self)
             let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
+            groupRequest.predicate = yearPredicate
             do {
                 return try Manager.instance.context.fetch(groupRequest)
             } catch (let error) {
@@ -22,9 +24,7 @@ public class YearCD: NSManagedObject {
                 return [GroupCD]()
             }
         }
-        set {
-            
-        }
+        set {}
     }
     private var _groupListToShow : [GroupCD] = []
     
@@ -36,8 +36,10 @@ public class YearCD: NSManagedObject {
             let totalDocuments = totalDocuments {
             newGroup.totalPrice = totalPrice
             newGroup.totalDocuments = totalDocuments
+            newGroup.year = self
         }
         _cdGroupList.append(newGroup)
+        print("groupList updated \(_cdGroupList.count)")
         Manager.instance.saveCoreDataContext()
         
         newGroup.initMonthList()
@@ -49,6 +51,7 @@ public class YearCD: NSManagedObject {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
+            print("\(year): return group \(_cdGroupList[index].title)")
             return _cdGroupList[index]
         }
     }
