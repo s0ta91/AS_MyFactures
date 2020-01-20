@@ -187,20 +187,11 @@ class InvoiceCollectionViewController: UIViewController {
        }
         navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
-
-    //TODO: Retrieve the month for the section index
-    private func getCurrentMonth (atIndex monthIndex: Int) -> MonthCD? {
-        guard let selectedCategory = _invoiceCollectionManager.getSelectedCategory(),
-            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) else {
-                return nil
-        }
-        month.setInvoiceList(for: selectedCategory, searchText: searchText)
-        return month
-    }
     
     //TODO: Get the number of sections for the current group
     private func getNumberOfSections () -> Int {
         _monthToShow.removeAll()
+        
         var numberOfSection = 0
         for monthId in 0...11 {
             let numberOfInvoiceInSection = getNumberOfInvoice(atMonthIndex: monthId)
@@ -209,22 +200,20 @@ class InvoiceCollectionViewController: UIViewController {
                 numberOfSection = numberOfSection + 1
             }
         }
+        
         return numberOfSection
     }
     
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
-        var numberOfInvoice = 0
-        if let month = getCurrentMonth(atIndex: monthIndex) {
-            numberOfInvoice = month.getInvoiceCount()
-        }
-        return numberOfInvoice
+        guard let month = Manager.instance.getMonth(atIndex: monthIndex),
+            let invoices = month.invoice else { return 0 }
+        
+        return invoices.count
     }
     
-    private func getSelectedInvoice (for month: MonthCD, atInvoiceIndex invoiceIndex: Int) -> InvoiceCD? {
-        var invoice: InvoiceCD? = nil
-        invoice = month.getInvoice(atIndex: invoiceIndex, isListFiltered)
-        return invoice
+    private func getSelectedInvoice (atInvoiceIndex invoiceIndex: Int) -> InvoiceCD? {
+        return _invoiceCollectionCurrentGroup.getInvoice(atIndex: invoiceIndex, isListFiltered)
     }
     
     //TODO: Create the function to delete a cell
@@ -232,22 +221,25 @@ class InvoiceCollectionViewController: UIViewController {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
             let monthIndex = _monthToShow[indexPath.section]
             let sectionIndexSet = IndexSet(integer: indexPath.section)
-            if let month = self.getCurrentMonth(atIndex: monthIndex),
-                let invoiceToDelete = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
+            if let month = Manager.instance.getMonth(atIndex: monthIndex),
+                let invoiceToDelete = getSelectedInvoice(atInvoiceIndex: indexPath.row) {
                 let alert = UIAlertController(title: deleteDocumentTitle, message: invoiceToDelete.detailedDescription, preferredStyle: .alert)
                 let deleteAction = UIAlertAction(title: deleteActionTitle, style: .destructive, handler: { (_) in
                     
-                    // Delete invoice object from DB
-                    _ = month.removeInvoice(invoice: invoiceToDelete)
+                    // Delete invoice object from group
+                    self._invoiceCollectionCurrentGroup.removeInvoice(invoice: invoiceToDelete)
+                    
+                    // update month data
+                    month.update()
                     
                     // If there isn't any invoice left we need to delete the section from the collectionView
                     if self.getNumberOfInvoice(atMonthIndex: monthIndex) == 0 {
                         self.invoiceCollectionView.deleteSections(sectionIndexSet)
-                        self.invoiceCollectionView.reloadData()
+//                        self.invoiceCollectionView.reloadData()
                     }else { // otherwise we can delete only the item
                         self.invoiceCollectionView.deleteItems(at: [indexPath])
                         self.invoiceCollectionView.reloadSections(sectionIndexSet)
-                        self.invoiceCollectionView.reloadData()
+//                        self.invoiceCollectionView.reloadData()
                     }
                 })
                 
@@ -264,10 +256,8 @@ class InvoiceCollectionViewController: UIViewController {
     //TODO: Create the function to share the invoice
     func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
-            
-            let monthIndex = _monthToShow[indexPath.section]
-            if let month = getCurrentMonth(atIndex: monthIndex),
-                let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
+
+            if let selectedInvoice = getSelectedInvoice(atInvoiceIndex: indexPath.row),
                 let invoiceIdentifier = selectedInvoice.identifier,
                 let invoiceDocumentExtension = selectedInvoice.documentType,
                 let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
@@ -281,7 +271,7 @@ class InvoiceCollectionViewController: UIViewController {
                 present(activityViewController, animated: true, completion: nil)
             }else {
                 /*** DEBUG ***/
-//                let month = getCurrentMonth(atIndex: monthIndex)
+//                let month = getMonth(atIndex: monthIndex)
 //                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
 //                print("invoice: \(selectedInvoice)")
                 /*******************/
@@ -301,8 +291,8 @@ class InvoiceCollectionViewController: UIViewController {
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
                 let monthIndex = _monthToShow[cell_indexPath.section]
-                if let month = getCurrentMonth(atIndex: monthIndex),
-                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) {
+                if let month = Manager.instance.getMonth(atIndex: monthIndex),
+                    let selectedInvoice = getSelectedInvoice(atInvoiceIndex: cell_indexPath.row) {
                     destinationVC._modifyInvoice = true
                     destinationVC._ptManager = _invoiceCollectionManager
                     destinationVC._ptYear = _invoiceCollectionCurrentYear
@@ -365,9 +355,9 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         case UICollectionView.elementKindSectionHeader:
             invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as? HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
-            if let month = getCurrentMonth(atIndex: monthIndex) {
+            if let month = Manager.instance.getMonth(atIndex: monthIndex) {
                 headerDate = "\(String(describing: month.name)) \(_invoiceCollectionCurrentYear.year)"
-                monthAmount = String(describing: month.getTotalAmount())
+                monthAmount = String(describing: month.totalAmount)
             }
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
             
@@ -384,8 +374,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
-        guard let month = getCurrentMonth(atIndex: _monthToShow[indexPath.section]) else {fatalError("no month found at index \(_monthToShow[indexPath.section])")}
-        if let invoiceToShow = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
+        if let invoiceToShow = getSelectedInvoice(atInvoiceIndex: indexPath.row) {
             cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
         
@@ -463,11 +452,9 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
     
     func showPdfDocument(invoiceCell: InvoiceCollectionViewCell) {
         guard let indexPath = invoiceCollectionView.indexPath(for: invoiceCell) else {return print("No cell found")}
-        let monthIndex = _monthToShow[indexPath.section]
         
         if let destinationVC = PDFStoryboard.instantiateViewController(withIdentifier: "PDFViewController") as? PDFViewController,
-            let month = getCurrentMonth(atIndex: monthIndex),
-            let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
+            let selectedInvoice = getSelectedInvoice(atInvoiceIndex: indexPath.row),
             let invoiceIdentifier = selectedInvoice.identifier,
             let invoiceDocumentExtension = selectedInvoice.documentType,
             let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {

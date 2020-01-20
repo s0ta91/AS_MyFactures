@@ -13,78 +13,128 @@ public class GroupCD: NSManagedObject {
     
     let manager = Manager.instance
     
-    //private var _monthList: [Month] = []
-    private var _monthList: [MonthCD] {
-        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
+    private var _cdInvoiceList: [InvoiceCD] {
+        let groupPredicate = NSPredicate(format: "group == %@", self)
+        let groupRequest: NSFetchRequest<InvoiceCD> = InvoiceCD.fetchRequest()
+        groupRequest.predicate = groupPredicate
         do {
-            return try Manager.instance.context.fetch(monthRequest)
+            return try Manager.instance.context.fetch(groupRequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
-            return [MonthCD]()
+            return [InvoiceCD]()
+        }
+    }
+    private var filteredInvoiceList = [InvoiceCD]()
+    var _invoiceListToShow : [InvoiceCD] = []
+    let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
+    
+    // MARK: - PUBLIC
+    func addInvoice(with month: MonthCD, _ description: String, _ amount: Double, _ categoryObject: CategoryCD? = nil ,_ identifier: String?, _ documentType: String?) {
+        let newInvoice = InvoiceCD(context: manager.context)
+        newInvoice.identifier = identifier
+        newInvoice.month = month
+        newInvoice.documentType = documentType
+        newInvoice.detailedDescription = description
+        newInvoice.category = categoryObject
+        newInvoice.amount = amount
+        
+        manager.saveCoreDataContext()
+        updateTotalPrice()
+        updateTotalDocuments()
+    }
+    
+    func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {
+        _invoiceListToShow.removeAll(keepingCapacity: false)
+        var invoiceResults: [InvoiceCD]
+        
+        if receivedCategory.title == ALL_CATEGORY_TEXT && searchText != "" {
+            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+                guard let detailDescription = invoice.detailedDescription else { return false }
+                return detailDescription.contains(searchText)
+            }
+        }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText != "" {
+            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+                guard let category = invoice.category else { return false }
+                return receivedCategory == category
+            }.filter({ (invoice) -> Bool in
+                guard let detailDescription = invoice.detailedDescription else { return false }
+                return detailDescription.contains(searchText)
+            })
+        }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText == "" {
+            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+                guard let category = invoice.category else { return false }
+                return receivedCategory == category
+            }
+        }else {
+            invoiceResults = _cdInvoiceList
+        }
+        
+        invoiceResults.forEach { (invoice) in
+            _invoiceListToShow.append(invoice)
         }
     }
     
-    // MARK: - PUBLIC
+    func getInvoiceCount () -> Int {
+        return _invoiceListToShow.count
+    }
     
-    func addMonth(_ monthName: String) {
-        let newMonth = MonthCD(context: manager.context)
-        newMonth.name = monthName
+    func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> InvoiceCD? {
+        if index >= 0 && index < getInvoiceCount() {
+            return _invoiceListToShow[index]
+        } else {
+            return nil
+        }
+    }
+    
+    func modifyInvoice (atIndex index: Int, withMonth month: MonthCD, _ description: String, _ amount: Double, _ categoryObject: CategoryCD? = nil, _ identifier: String?, _ documentType: String?) {
+        let updatedInvoice = InvoiceCD(context: manager.context)
+        updatedInvoice.identifier = identifier
+        updatedInvoice.documentType = documentType
+        updatedInvoice.detailedDescription = description
+        updatedInvoice.category = categoryObject
+        updatedInvoice.amount = amount
+        
+        manager.saveCoreDataContext()
+        
+        updateTotalPrice()
+    }
+    
+    func removeInvoice (invoice: InvoiceCD) {
+        guard let invoiceIndex = _cdInvoiceList.firstIndex(of: invoice) else { return }
+        _invoiceListToShow.remove(at: invoiceIndex)
+        updateTotalDocuments()
+        updateTotalPrice()
+        manager.context.delete(invoice)
         manager.saveCoreDataContext()
     }
     
-    func getMonthCount() -> Int{
-        return _monthList.count
-    }
-    
-    func initMonthList() {
-        manager._monthArray.forEach { (monthName) in
-            addMonth(monthName)
+    func getTotalAmount () -> Double {
+        var totalAmount: Double = 0
+        _invoiceListToShow.forEach { (invoice) in
+            totalAmount += invoice.amount
         }
-    }
-    
-    func getMonth(atIndex index: Int) -> MonthCD? {
-        let month: MonthCD?
-        if index >= 0 && index < getMonthCount() {
-            month = _monthList[index]
-        }else {
-            month = nil
-        }
-        return month
-        
-    }
-    
-    func getMonthIndexFromTable(forMonthName monthName: String) -> Int {
-        return Manager.instance._monthArray.firstIndex(of: monthName)!
-    }
-    
-    func checkIfMonthExist(forMonthName monthName: String) -> MonthCD? {
-        guard let monthIndex = manager._monthArray.firstIndex(of: monthName),
-            let monthToReturn = getMonth(atIndex: monthIndex) else {
-                print("--> Error: This month name is unknown or does not exists in database")
-                return nil
-        }
-        return monthToReturn
+        return totalAmount
     }
 
     func getTotalGroupAmount() -> Double {
         var totalAmount: Double = 0
-        for month in _monthList {
-            totalAmount += month.totalAmount
+        _cdInvoiceList.forEach { (invoice) in
+            totalAmount += invoice.amount
         }
         return totalAmount
     }
     
-    func getTotalDocument() -> Int64 {
-        var totalDocument: Int64 = 0
-        _monthList.forEach { (month) in
-            totalDocument += month.totalDocument
-        }
-        return totalDocument
+    func getTotalDocuments() -> Int64 {
+        return Int64(_cdInvoiceList.count)
     }
     
-    func updateDecemberName() {
-        if let month = getMonth(atIndex: getMonthIndexFromTable(forMonthName: NSLocalizedString("December", comment: ""))) {
-            month.name = NSLocalizedString("December", comment: "")
-        }
+    
+    // MARK: - Private
+    private func updateTotalPrice() {
+        totalPrice = getTotalGroupAmount()
+    }
+    
+    private func updateTotalDocuments() {
+        totalDocuments = getTotalDocuments()
     }
 }

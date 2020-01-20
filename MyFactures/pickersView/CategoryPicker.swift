@@ -23,11 +23,12 @@ class CategoryPicker: UIPickerView {
     }
     
     func selectDefaultRow (forCategoryName categoryName: String, forPickerView pickerView: UIPickerView) {
-        guard let manager = _manager else { fatalError("Manager cannot be found")}
-        guard let category = _manager?.getCategory(forName: categoryName) else { fatalError("Cannot find any category with name :\(categoryName)") }
+//        guard let manager = _manager else { fatalError("Manager cannot be found")}
+//        guard let category = _manager?.getCategory(forName: categoryName) else { fatalError("Cannot find any category with name :\(categoryName)") }
+        guard let category = Manager.instance.getCategory(forName: categoryName) else { fatalError("Cannot find any category with name :\(categoryName)") }
         
         // There is one hidden category so the number of rows is minus 1
-        pickerView.selectRow(manager.getCategoryIndex(forCategory: category) - 1, inComponent: 0, animated: false)
+        pickerView.selectRow(Manager.instance.getCategoryIndex(forCategory: category) - 1, inComponent: 0, animated: false)
     }
 }
 

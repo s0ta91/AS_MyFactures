@@ -17,7 +17,7 @@ enum DocumentType {
 
 class SaveManager {
     
-    static func saveDocument (document: Any?, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
+    static func saveDocument (_ document: Any?, forGroup group: GroupCD, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
@@ -52,27 +52,18 @@ class SaveManager {
                 }
             }
         } else {
-            print("No document receive in parameter")
+            print("No document received in parameter")
         }
         
         if modify == false {
-            newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
+            group.addInvoice(with: newMonth, description, amount, categoryObject ,identifier, documentExtension)
         }else {
             if let invoiceToModify = invoice {
                 if invoiceToModify.identifier != nil && documentAdded == true {
                     identifier = invoiceToModify.identifier
                 }
-                if let previousMonth = currentMonth {
-                    previousMonth.removeInvoice(invoice: invoiceToModify)
-                    newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
-                }
-//                    let invoiceIndex = previousMonth.removeInvoice(invoice: invoiceToModify) {
-//                    if newMonth.month == previousMonth.month {
-//                        newMonth.modifyInvoice(atIndex: invoiceIndex, description, amount, categoryObject, identifier, documentExtension)
-//                    }else {
-//                        newMonth.addInvoice(description, amount, categoryObject ,identifier, documentExtension)
-//                    }
-//                }
+                group.removeInvoice(invoice: invoiceToModify)
+                group.addInvoice(with: newMonth, description, amount, categoryObject ,identifier, documentExtension)
             }
         }
     }

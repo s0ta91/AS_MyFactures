@@ -29,7 +29,7 @@ public class YearCD: NSManagedObject {
     private var _groupListToShow : [GroupCD] = []
     
     // MARK: - PUBLIC
-    func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) -> GroupCD? {
+    func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) {
         let newGroup = GroupCD(context: Manager.instance.context)
         newGroup.title = title
         if let totalPrice = totalPrice,
@@ -42,16 +42,14 @@ public class YearCD: NSManagedObject {
         print("groupList updated \(_cdGroupList.count)")
         Manager.instance.saveCoreDataContext()
         
-        newGroup.initMonthList()
         setGroupList()
-        return newGroup
     }
     
     func getGroup(atIndex index: Int, isListFiltered: Bool = false) -> GroupCD? {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
-            print("\(year): return group \(_cdGroupList[index].title)")
+            print("\(year): return group \(String(describing: _cdGroupList[index].title))")
             return _cdGroupList[index]
         }
     }
@@ -105,10 +103,6 @@ public class YearCD: NSManagedObject {
                 guard let title = group.title else { return false }
                 return title.contains(nameParts)
             }
-        }
-        
-        _cdGroupList.forEach { (group) in
-            group.updateDecemberName()
         }
     }
     

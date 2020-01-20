@@ -320,8 +320,10 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
+        
         ui_newGroupNameTextField.resignFirstResponder()
         guard let newGroupName = ui_newGroupNameTextField.text else {return print("textFiled is empty")}
+        
         if let selectedGroup = _groupToModify {
             _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
             _groupToModify = nil
@@ -334,11 +336,7 @@ class GroupViewController: UIViewController {
             }else {
                 let alertController = UIAlertController(title: createNewFolderWarningTitle, message: createNewFolderWarningMessage, preferredStyle: .alert)
                 let createAction = UIAlertAction(title: createAddActionTitle, style: .default, handler: { (_) in
-                    if let newGroup = self._currentYear.addGroup(withTitle: newGroupName, isListFiltered: self.isListFiltered) {
-                        for monthName in self.monthArray {
-                            newGroup.addMonth(monthName)
-                        }
-                    }
+                    self._currentYear.addGroup(withTitle: newGroupName, isListFiltered: self.isListFiltered)
                     self.animateOut()
                 })
                 let cancelCreationAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)

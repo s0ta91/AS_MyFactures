@@ -36,6 +36,17 @@ class Manager {
                         NSLocalizedString("November", comment: ""),
                         NSLocalizedString("December", comment: "")]
     
+    //private var _monthList: [Month] = []
+    private var _monthList: [MonthCD] {
+        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
+        do {
+            return try Manager.instance.context.fetch(monthRequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [MonthCD]()
+        }
+    }
+    
     
     // MARK: REALM
     var _realm: Realm?
@@ -52,7 +63,7 @@ class Manager {
 //    private var _cdGroupIdeaList: [GroupIdea]
     
     
-    // MARK: -  INIT
+    // MARK: - INIT
     init() {
         
 //        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
@@ -104,6 +115,9 @@ class Manager {
             _realmInvoices = realm.objects(Invoice.self)
             _realmCategoryList = realm.objects(Category.self)
             
+            // TODO: Create month list in database
+            initMonthList()
+            
             // TODO: Migrate data from Realm to CoreData
             migrateFromRealmToCoreData()
         }
@@ -149,15 +163,15 @@ class Manager {
         print("ApplicationDataCount: \(getApplicationDataCount())")
         if getApplicationDataCount() == 0 {
             let yearsStartAt = 1900
-            print("create years")
             for calculatedYears in yearsStartAt...currentYear {
+                print("add year \(calculatedYears)")
                 addYear(calculatedYears)
             }
-        _cdYearsList.first?.selected = true
-            print("set year \(String(describing: _cdYearsList.first?.year)) as selected \(String(describing: _cdYearsList.first?.selected))")
+            _cdYearsList.last?.selected = true
+            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
         } else {
-            if let yearsListLast = _cdYearsList.last,
-                yearsListLast.year != currentYear {
+            if let lastYear = _cdYearsList.last,
+                lastYear.year != currentYear {
                 addYear(currentYear)
             }
         }
@@ -165,15 +179,8 @@ class Manager {
         saveCoreDataContext()
     }
     
-    func initCategory () {
-        if getApplicationDataCount() == 0 {
-            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
-            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
-        }
-    }
     
-    
-    // MARK: - PRIVATE functions
+    // MARK: - PRIVATE
     private func getApplicationDataCount () -> Int {
         return _cdApplicationDataList.count
     }
@@ -182,6 +189,7 @@ class Manager {
         let ny = YearCD(context: context)
         ny.year = Int64(yearToAdd)
         ny.selected = false
+        _cdYearsList.append(ny)
     }
     
     
@@ -196,7 +204,7 @@ class Manager {
         }
     }
     
-    // TODO: Save in user Defaults
+    // MARK: Save in user Defaults
     func saveInUserDefault(forKey key: String, andValue value: String) {
         UserDefaults.standard.set(value, forKey: key)
     }
@@ -210,13 +218,13 @@ class Manager {
     }
     
     
-    // TODO: Generate a random 4 digit code
+    // MARK: Generate a random 4 digit code
     func generateRandomCode() -> String? {
         return String(1000+arc4random_uniform(8999))
     }
     
     
-    // TODO: Password management
+    // MARK: Password management
     func savePassword (_ password: String) {
         DbManager().saveMasterPassword(password)
     }
@@ -241,7 +249,7 @@ class Manager {
     }
     
     
-    // TODO: Email management
+    // MARK: Email management
     func sendEmail(toEmail email: String, withCode code: String? = nil, withPassword password: String? = nil) -> Bool {
         var didComplete: Bool!
         
@@ -295,7 +303,7 @@ class Manager {
     }
     
     
-    // TODO: User management
+    // MARK: User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
 //        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
@@ -311,7 +319,7 @@ class Manager {
     }
     
     
-    // TODO: APPLICATIONDATA functions
+    // MARK: APPLICATIONDATA functions
     func updateApplicationData () {
         let applicationData = ApplicationData(context: context)
         applicationData.currentDate = Date()
@@ -319,7 +327,7 @@ class Manager {
     }
     
     
-    // TODO: YEAR functions
+    // MARK: YEAR functions
     func getyearsCount () -> Int {
         return _cdYearsList.count
     }
@@ -355,7 +363,7 @@ class Manager {
     }
 
     
-    // TODO: GROUPIDEA functions
+    // MARK: GROUPIDEA functions
     func getGroupIdeaCount () -> Int {
 //        return _cdGroupIdeaList.count
         return 0
@@ -385,7 +393,18 @@ class Manager {
     }
     
     
-    // TODO: CATEGORY Functions
+    // MARK: CATEGORY Functions
+    func initCategory () {
+        if getApplicationDataCount() == 0 {
+            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
+            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
+        }
+        print("init categoryList?")
+        _cdCategoryList.forEach { (category) in
+            print(category)
+        }
+    }
+    
     func getCategoryCount () -> Int {
         return _cdCategoryList.count
     }
@@ -468,8 +487,50 @@ class Manager {
         layout?.sectionHeadersPinToVisibleBounds = true
     }
     
-    //FIXME: TO DELETE
-    // Has been moved to SaveManager.swift
+    
+    // MARK: MONTH Functions
+    func initMonthList() {
+        if getApplicationDataCount() == 0 {
+            _monthArray.forEach { (monthName) in
+                addMonth(monthName)
+            }
+        }
+    }
+    
+    func addMonth(_ monthName: String) {
+        let newMonth = MonthCD(context: context)
+        newMonth.name = monthName
+        saveCoreDataContext()
+    }
+    
+    func getMonthCount() -> Int{
+        return _monthList.count
+    }
+    
+    func getMonth(atIndex index: Int) -> MonthCD? {
+        let month: MonthCD?
+        if index >= 0 && index < getMonthCount() {
+            month = _monthList[index]
+        }else {
+            month = nil
+        }
+        return month
+        
+    }
+    
+    func getMonthIndexFromTable(forMonthName monthName: String) -> Int {
+        return _monthArray.firstIndex(of: monthName)!
+    }
+    
+    func checkIfMonthExist(forMonthName monthName: String) -> MonthCD? {
+        guard let monthIndex = _monthArray.firstIndex(of: monthName),
+            let monthToReturn = getMonth(atIndex: monthIndex) else {
+                print("--> Error: This month name is unknown or does not exists in database")
+                return nil
+        }
+        return monthToReturn
+    }
+    
     func getImageFromURL (url: URL) -> UIImage? {
         let image: UIImage?
         if let data = NSData(contentsOf: url) {
@@ -509,12 +570,5 @@ class Manager {
     
     static func isFirstLoad() -> Bool {
         return UserDefaults.standard.bool(forKey: "firstLoad")
-    }
-}
-
-extension Results {
-    func toArray<T>(ofType: T.Type) -> [T] {
-        let array = Array(self) as! [T]
-        return array
     }
 }

@@ -59,21 +59,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         
-        
+        let realmDb = DbManager().getRealmDb()
+        let realmApplicationDataCount = realmDb?.objects(Year.self).count ?? 0
         if !UserDefaults.standard.bool(forKey: UserDefaults.keys.migrationDone.rawValue),
-            let realmDb = DbManager().getRealmDb() {
+            realmApplicationDataCount > 0 {
             database._realm = realmDb
             
-            print("---> RealmDB found. Init CoreDatafrom realm data")
+            print("---> initialized RealmDB found. Init CoreDatafrom realm data")
             // TODO: Initialize all data from Realm
             database.initRealmData()
             database.updateApplicationData()
         } else {
 
-            print("---> Migration Already done or No RealmDB on device. Init CoreData manualy")
+            print("---> Migration Already done or no initialized RealmDB found on device. Init CoreData manualy")
             // TODO: Initialize all default data in coreData database
             database.initYear()
             database.initCategory()
+            database.initMonthList()
             database.updateApplicationData()
         }
         

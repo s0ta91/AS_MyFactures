@@ -25,7 +25,7 @@ class GroupCollectionViewCell: UICollectionViewCell {
     //MARK: - public functions
     func setValues (_ group: GroupCD, fontSize: CGFloat) {
         let totalAmount = String(describing: group.getTotalGroupAmount())
-        let totalDocument = String(group.getTotalDocument())
+        let totalDocument = String(group.totalDocuments)
         ui_titleLabel.text = group.title
         ui_totalPriceLabel.text = totalAmount
         ui_totalDocumentsLabel.text = totalDocument

@@ -83,7 +83,7 @@ class PDFViewController: UIViewController {
                 let scrollViewHeight = view.frame.size.height - ui_navBarView.frame.size.height
                 
                 //TODO: Create and configure the imageView
-                if let imageToShow = _manager.getImageFromURL(url: _documentURL) {
+                if let imageToShow = Manager.instance.getImageFromURL(url: _documentURL) {
                     ui_scrollView.isHidden = false
                     ui_scrollView.frame = CGRect(x: 0, y: 0, width: scrollViewWidth, height: scrollViewHeight)
                     ui_jpgImageView = UIImageView()
