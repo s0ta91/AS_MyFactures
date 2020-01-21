@@ -170,7 +170,7 @@ class Manager {
             _cdYearsList.last?.selected = true
             print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
         } else {
-            if let lastYear = _cdYearsList.last,
+            if let lastYear = _cdYearsList.first,
                 lastYear.year != currentYear {
                 addYear(currentYear)
             }
