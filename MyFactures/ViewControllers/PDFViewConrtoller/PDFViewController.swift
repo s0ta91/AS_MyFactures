@@ -17,7 +17,6 @@ class PDFViewController: UIViewController {
     @IBOutlet weak var ui_navBarImageView: UIImageView!
     
     //MARK: - Passsthrough variables
-    var _ptManager: Manager?
     var _ptDocumentURL: URL?
     var _ptDocumentType: String?
     var _ptFontSize: CGFloat?
@@ -25,7 +24,9 @@ class PDFViewController: UIViewController {
     //MARK: -  Variables
     var ui_jpgImageView: UIImageView!
     var _pdfView: PDFView!
-    var _manager: Manager!
+    var _manager: Manager {
+        return Manager.instance
+    }
     var _documentURL: URL!
     var _documentType: String!
     
@@ -48,10 +49,8 @@ class PDFViewController: UIViewController {
     }
     
     private func checkPassthroughData () {
-        if let receivedManager = _ptManager,
-            let receivedDocumentURL = _ptDocumentURL,
+        if let receivedDocumentURL = _ptDocumentURL,
             let receivedDocumentType = _ptDocumentType {
-                _manager = receivedManager
                 _documentURL = receivedDocumentURL
                 _documentType = receivedDocumentType
         }else {

@@ -30,11 +30,10 @@ class ManageCategoryTableViewController: UIViewController {
         return button
     }()
     
-    //TODO: Data reveived from previous VC
-    var _ptManager: Manager?
-    
     //TODO: Internal variables
-    private var _manager: Manager!
+    private var _manager: Manager {
+        return Manager.instance
+    }
     private var _selectedCategoryToModify: CategoryCD!
     private var _visualEffect: UIVisualEffect!
     let BUTTON_SIZE: CGFloat = 56
@@ -61,7 +60,6 @@ class ManageCategoryTableViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        checkRecievedData()
         ui_modifyCategoryView.layer.cornerRadius = 10
     }
     
@@ -74,12 +72,6 @@ class ManageCategoryTableViewController: UIViewController {
     }
 
     //MARK: - Private functions
-    private func checkRecievedData() {
-        if let recievedManager = _ptManager {
-            _manager = recievedManager
-        }
-    }
-    
     private func isDarkModeNeeded() -> Bool {
        if #available(iOS 13, *) {
            return traitCollection.userInterfaceStyle == .dark

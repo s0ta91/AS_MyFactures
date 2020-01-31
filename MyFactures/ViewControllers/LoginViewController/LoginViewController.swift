@@ -134,7 +134,6 @@ class LoginViewController: UIViewController {
     func displayAddNewInvoiceVC() {
         let addNewInvoiceStoryboard = UIStoryboard(name: "AddNewInvoiceViewController", bundle: .main)
         if let addNewInvoiceVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
-            addNewInvoiceVC._ptManager = DbManager().getDb()
             addNewInvoiceVC._ptYear = DbManager().getDb()?.getYear(atIndex: 0)
             addNewInvoiceVC._fromOtherApp = true
             addNewInvoiceVC._ptLoginVC = self

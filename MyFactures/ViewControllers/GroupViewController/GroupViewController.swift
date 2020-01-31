@@ -61,11 +61,7 @@ class GroupViewController: UIViewController {
     
     //MARK: - Properties
     private var _manager: Manager {
-        if let database =  DbManager().getDb() {
-            return database
-        }else {
-            fatalError("Database doesn't exists")
-        }
+        return Manager.instance
     }
     
     lazy var _settingsLauncher: SettingsLauncher = {
@@ -484,7 +480,6 @@ class GroupViewController: UIViewController {
             if let destinationVC = segue.destination as? InvoiceCollectionViewController,
                 let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
                 let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row, isListFiltered: isListFiltered) {
-                    destinationVC._ptManager = _manager
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
                     destinationVC._ptFontSize = collectionViewFontSize

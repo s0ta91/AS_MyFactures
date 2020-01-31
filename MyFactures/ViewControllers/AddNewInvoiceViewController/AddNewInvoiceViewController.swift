@@ -40,7 +40,6 @@ class AddNewInvoiceViewController: UIViewController {
     
     
     //MARK: - paththrough Managers/Objects
-    var _ptManager: Manager?
     var _ptYear: YearCD?
     var _ptGroup: GroupCD?
     var _ptMonth: MonthCD?
@@ -51,7 +50,9 @@ class AddNewInvoiceViewController: UIViewController {
     var _ptPickedDocument: Any?
     
     //MARK: - Global variable filled with passthrough Managers/objects
-    private var _manager: Manager!
+    private var _manager: Manager {
+        return Manager.instance
+    }
     private var _year: YearCD!
     private var _group: GroupCD!
     private var _month: MonthCD!
@@ -129,9 +130,7 @@ class AddNewInvoiceViewController: UIViewController {
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
     private func checkReceivedData () {
-        guard let receivedManager = _ptManager else { fatalError("Manager :\(String(describing: _ptManager)) unknown") }
         guard let receivedYear = _ptYear else { fatalError("Year :\(String(describing: _ptYear)) unknown") }
-        _manager = receivedManager
         _year = receivedYear
         
         if _fromOtherApp {
