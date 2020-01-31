@@ -12,8 +12,11 @@ class MonthsPicker: UIPickerView {
 
     var _monthTextField: UITextField!
     
+    var _group: GroupCD?
+    
     func selectDefaultRow (forMonthName monthName: String, forPickerView pickerView: UIPickerView) {
-        let monthIndex = Manager.instance.getMonthIndexFromTable(forMonthName: monthName)
+        guard let group = _group else { fatalError("Group cannot be found") }
+        let monthIndex = group.getMonthIndexFromTable(forMonthName: monthName)
         pickerView.selectRow(monthIndex, inComponent: 0, animated: false)
     }
 }
@@ -24,17 +27,23 @@ extension MonthsPicker: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Manager.instance.getMonthCount()
+        guard let group = _group else {
+            // FIXME: - Créer une modale d'erreur pour demander de relancer l'application
+            fatalError("Group cannot be found")
+        }
+        return group.getMonthCount()
     }
 }
 
 extension MonthsPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Manager.instance.getMonth(atIndex: row)?.name
+        guard let group = _group else { fatalError("Group cannot be found") }
+        return group.getMonth(atIndex: row)?.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard let monthName = Manager.instance.getMonth(atIndex: row)?.name else {
+        guard let group = _group else { fatalError("Group cannot be found") }
+        guard let monthName = group.getMonth(atIndex: row)?.name else {
             // FIXME: - Créer une modale d'erreur pour demander de relancer l'application
             fatalError("Cannot retreive monthName for index: \(row)")
         }

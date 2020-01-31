@@ -482,9 +482,9 @@ class AddNewInvoiceViewController: UIViewController {
             
                 let amountDouble = Double(truncating: convertedAmount as NSNumber)
                 
-            if let newMonth = Manager.instance.checkIfMonthExist(forMonthName: monthString) {
+            if let newMonth = group.checkIfMonthExist(forMonthName: monthString) {
                     if _modifyInvoice == false {
-                        SaveManager.saveDocument(_pickedDocument, forGroup: group, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
+                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
                     }else {
                         var _extension = _documentExtension
                         if let documentId = _invoice.identifier,
@@ -492,7 +492,7 @@ class AddNewInvoiceViewController: UIViewController {
                             _extension = invoiceDocumentExtension
                             deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
                         }
-                        SaveManager.saveDocument(_pickedDocument, forGroup: group, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
+                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
                         
                     }
                 }
@@ -557,6 +557,7 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             ui_monthSelectionTextField.inputView = _pickerView
             _pickerView.delegate = monthsPickerView
             monthsPickerView._monthTextField = ui_monthSelectionTextField
+            monthsPickerView._group = _group
             monthsPickerView.selectDefaultRow(forMonthName: monthName, forPickerView: _pickerView)
         }
         

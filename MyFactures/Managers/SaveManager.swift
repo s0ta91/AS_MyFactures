@@ -17,7 +17,7 @@ enum DocumentType {
 
 class SaveManager {
     
-    static func saveDocument (_ document: Any?, forGroup group: GroupCD, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
+    static func saveDocument (_ document: Any?, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
@@ -56,14 +56,16 @@ class SaveManager {
         }
         
         if modify == false {
-            group.addInvoice(with: newMonth, description, amount, categoryObject ,identifier, documentExtension)
-        }else {
+            newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension)
+        } else {
             if let invoiceToModify = invoice {
                 if invoiceToModify.identifier != nil && documentAdded == true {
                     identifier = invoiceToModify.identifier
                 }
-                group.removeInvoice(invoice: invoiceToModify)
-                group.addInvoice(with: newMonth, description, amount, categoryObject ,identifier, documentExtension)
+                if let previousMonth = currentMonth {
+                    previousMonth.removeInvoice(invoice: invoiceToModify)
+                    newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension)
+                }
             }
         }
     }
