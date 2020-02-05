@@ -16,6 +16,9 @@ public class GroupCD: NSManagedObject {
     
     private var _monthList: [MonthCD] {
         let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
+        let monthPredicate = NSPredicate(format: "group == %@", self)
+        monthRequest.predicate = monthPredicate
+        monthRequest.sortDescriptors = [NSSortDescriptor(key: "number", ascending: true)]
         do {
             return try Manager.instance.context.fetch(monthRequest)
         } catch (let error) {
@@ -26,10 +29,21 @@ public class GroupCD: NSManagedObject {
     
     
     // MARK: - Public
-    func addMonth(_ monthName: String) {
-        let newMonth = MonthCD(context: manager.context)
-        newMonth.name = monthName
-        manager.saveCoreDataContext()
+    func initMonthList() {
+        var index: Int64 = 0
+        manager._monthArray.forEach { (monthName) in
+            index += 1
+            addMonth(index, monthName)
+        }
+    }
+    
+    func getMonthInfos() {
+        _monthList.forEach { (month) in
+            print("monthNumber: \(month.number)")
+            print("monthName: \(month.name)")
+            print("monthTotalDoc: \(month.totalDocument)")
+            print("monthTotalAmount: \(month.totalAmount)")
+        }
     }
     
     func getMonthCount() -> Int{
@@ -37,14 +51,8 @@ public class GroupCD: NSManagedObject {
     }
     
     func getMonth(atIndex index: Int) -> MonthCD? {
-        let month: MonthCD?
-        if index >= 0 && index < getMonthCount() {
-            month = _monthList[index]
-        }else {
-            month = nil
-        }
-        return month
-        
+        guard index >= 0 && index < getMonthCount() else { return nil }
+        return _monthList[index]
     }
     
     func getMonthIndexFromTable(forMonthName monthName: String) -> Int {
@@ -60,19 +68,38 @@ public class GroupCD: NSManagedObject {
         return monthToReturn
     }
     
-    func getTotalGroupAmount() -> Double {
-        var totalAmount: Double = 0
+//    func update() {
+//        totalPrice = 0
+//        totalDocuments = 0
+//        _monthList.forEach { (month) in
+//            totalPrice += month.totalAmount
+//            totalDocuments += month.totalDocument
+//        }
+//    }
+    
+    func getTotalAmount() -> Double {
+//        var totalAmount: Double = 0
+        totalPrice = 0
         for month in _monthList {
-            totalAmount += month.totalAmount
+            totalPrice += month.totalAmount
         }
-        return totalAmount
+        return totalPrice
     }
     
-    func getTotalDocument() -> Int64 {
-        var totalDocument: Int64 = 0
+    func getTotalDocuments() -> Int64 {
+        totalDocuments = 0
         _monthList.forEach { (month) in
-            totalDocument += month.totalDocument
+            totalDocuments += month.totalDocument
         }
-        return totalDocument
+        return totalDocuments
+    }
+    
+    // MARK: - Private
+    private func addMonth(_ number: Int64, _ monthName: String) {
+        let newMonth = MonthCD(context: manager.context)
+        newMonth.number = number
+        newMonth.name = monthName
+        newMonth.group = self
+        manager.saveCoreDataContext()
     }
 }

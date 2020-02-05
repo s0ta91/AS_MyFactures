@@ -16,6 +16,7 @@ public class YearCD: NSManagedObject {
         get {
             let yearPredicate = NSPredicate(format: "year == %@", self)
             let groupRequest: NSFetchRequest<GroupCD> = GroupCD.fetchRequest()
+            groupRequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
             groupRequest.predicate = yearPredicate
             do {
                 return try Manager.instance.context.fetch(groupRequest)
@@ -37,6 +38,7 @@ public class YearCD: NSManagedObject {
             newGroup.totalPrice = totalPrice
             newGroup.totalDocuments = totalDocuments
             newGroup.year = self
+            newGroup.initMonthList()
         }
         _cdGroupList.append(newGroup)
         print("groupList updated \(_cdGroupList.count)")
@@ -50,6 +52,7 @@ public class YearCD: NSManagedObject {
             return _groupListToShow[index]
         }else {
             print("\(year): return group \(String(describing: _cdGroupList[index].title))")
+            print("groupMonths: \(_cdGroupList[index].getMonthInfos())")
             return _cdGroupList[index]
         }
     }

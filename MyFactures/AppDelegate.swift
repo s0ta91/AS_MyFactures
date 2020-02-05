@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // TODO: Initialize all default data in coreData database
             database.initYear()
             database.initCategory()
-            database.initMonthList()
+//            database.initMonthList()
             database.updateApplicationData()
         }
         

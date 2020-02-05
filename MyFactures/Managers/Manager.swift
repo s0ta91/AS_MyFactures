@@ -116,7 +116,7 @@ class Manager {
             _realmCategoryList = realm.objects(Category.self)
             
             // TODO: Create month list in database
-            initMonthList()
+//            initMonthList()
             
             // TODO: Migrate data from Realm to CoreData
             migrateFromRealmToCoreData()
@@ -485,50 +485,6 @@ class Manager {
     func setHeaderClippedToBound (_ collectionView: UICollectionView) {
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout?.sectionHeadersPinToVisibleBounds = true
-    }
-    
-    
-    // MARK: MONTH Functions
-    func initMonthList() {
-        if getApplicationDataCount() == 0 {
-            _monthArray.forEach { (monthName) in
-                addMonth(monthName)
-            }
-        }
-    }
-    
-    func addMonth(_ monthName: String) {
-        let newMonth = MonthCD(context: context)
-        newMonth.name = monthName
-        saveCoreDataContext()
-    }
-    
-    func getMonthCount() -> Int{
-        return _monthList.count
-    }
-    
-    func getMonth(atIndex index: Int) -> MonthCD? {
-        let month: MonthCD?
-        if index >= 0 && index < getMonthCount() {
-            month = _monthList[index]
-        }else {
-            month = nil
-        }
-        return month
-        
-    }
-    
-    func getMonthIndexFromTable(forMonthName monthName: String) -> Int {
-        return _monthArray.firstIndex(of: monthName)!
-    }
-    
-    func checkIfMonthExist(forMonthName monthName: String) -> MonthCD? {
-        guard let monthIndex = _monthArray.firstIndex(of: monthName),
-            let monthToReturn = getMonth(atIndex: monthIndex) else {
-                print("--> Error: This month name is unknown or does not exists in database")
-                return nil
-        }
-        return monthToReturn
     }
     
     func getImageFromURL (url: URL) -> UIImage? {

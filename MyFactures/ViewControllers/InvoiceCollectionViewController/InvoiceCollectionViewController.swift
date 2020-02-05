@@ -263,7 +263,7 @@ class InvoiceCollectionViewController: UIViewController {
                     let invoiceDocumentExtension = selectedInvoice.documentType,
                     let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
                     let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
-                    
+
                     if let popoverController = activityViewController.popoverPresentationController {
                         popoverController.sourceView = invoice.contentView
                         popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
@@ -292,16 +292,16 @@ class InvoiceCollectionViewController: UIViewController {
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
                 let monthIndex = _monthToShow[cell_indexPath.section]
-                if let month = getCurrentMonth(atIndex: monthIndex),
-                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) {
-                    destinationVC._modifyInvoice = true
-                    destinationVC._ptYear = _invoiceCollectionCurrentYear
-                    destinationVC._ptGroup = _invoiceCollectionCurrentGroup
-                    destinationVC._ptMonth = month
-                    destinationVC._ptInvoice = selectedInvoice
-                    destinationVC.presentationController?.delegate = destinationVC
-                    destinationVC.delegate = self
-                }
+                guard let month = getCurrentMonth(atIndex: monthIndex),
+                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) else { return }
+            
+                destinationVC._modifyInvoice = true
+                destinationVC._ptYear = _invoiceCollectionCurrentYear
+                destinationVC._ptGroup = _invoiceCollectionCurrentGroup
+                destinationVC._ptMonth = month
+                destinationVC._ptInvoice = selectedInvoice
+                destinationVC.presentationController?.delegate = destinationVC
+                destinationVC.delegate = self
                 destinationVC.modalTransitionStyle = .coverVertical
                 present(destinationVC, animated: true, completion: nil)
         }

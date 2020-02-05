@@ -30,6 +30,8 @@ public class MonthCD: NSManagedObject {
     var _invoiceListToShow = [InvoiceCD]()
     let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
     
+    
+    // MARK: - PUBLIC
     func addInvoice(description: String, amount: Double, categoryObject: CategoryCD? = nil ,identifier: String?, documentType: String?) {
         let newInvoice = InvoiceCD(context: manager.context)
         newInvoice.identifier = identifier
@@ -44,7 +46,6 @@ public class MonthCD: NSManagedObject {
         update()
     }
     
-    // MARK: - PUBLIC
     func update() {
         setTotalAmout()
         setTotalDocuments()
@@ -129,6 +130,7 @@ public class MonthCD: NSManagedObject {
     
     //MARK: - PRIVATE
     private func setTotalAmout() {
+        totalAmount = 0
         _cdInvoiceList.forEach { (invoice) in
             totalAmount += invoice.amount
         }

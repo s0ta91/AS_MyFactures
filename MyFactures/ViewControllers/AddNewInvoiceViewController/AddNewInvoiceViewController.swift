@@ -485,7 +485,7 @@ class AddNewInvoiceViewController: UIViewController {
             if let newMonth = group.checkIfMonthExist(forMonthName: monthString) {
                     if _modifyInvoice == false {
                         SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
-                    }else {
+                    } else {
                         var _extension = _documentExtension
                         if let documentId = _invoice.identifier,
                             let invoiceDocumentExtension = _invoice.documentType {
@@ -516,7 +516,7 @@ class AddNewInvoiceViewController: UIViewController {
                     }
                     dismiss(animated: true, completion: nil)
             }
-            
+
         } else {
             if ui_groupSelectionTextField.text == noFolderAvailable {
                 Alert.message(title: errorActionTitle, message: createFolderActionMessage, vc: self)

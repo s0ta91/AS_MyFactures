@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19A582a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ApplicationData" representedClassName=".ApplicationData" syncable="YES" codeGenerationType="category">
         <attribute name="currentDate" attributeType="Date" defaultDateTimeInterval="599740920" usesScalarValueType="NO"/>
     </entity>
@@ -25,6 +25,7 @@
     </entity>
     <entity name="Month" representedClassName=".MonthCD" syncable="YES" codeGenerationType="category">
         <attribute name="name" attributeType="String"/>
+        <attribute name="number" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="totalAmount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalDocument" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="month" inverseEntity="Group"/>
@@ -40,7 +41,7 @@
         <element name="Category" positionX="-194.66015625" positionY="-136.76953125" width="128" height="88"/>
         <element name="Group" positionX="-663.52734375" positionY="-294.75" width="128" height="118"/>
         <element name="Invoice" positionX="-408.30859375" positionY="-166.5234375" width="131.96875" height="133"/>
-        <element name="Month" positionX="-826.04296875" positionY="-142.39453125" width="128" height="118"/>
+        <element name="Month" positionX="-826.04296875" positionY="-142.39453125" width="128" height="133"/>
         <element name="Year" positionX="-214.4296875" positionY="-323.91015625" width="128" height="88"/>
     </elements>
 </model>
