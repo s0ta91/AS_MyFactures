@@ -48,15 +48,9 @@
 		1D95B63A2125D28F008BBA52 /* ResetPasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D95B6382125D28F008BBA52 /* ResetPasswordViewController.storyboard */; };
 		1D98E6F220AD685700580488 /* VerifyPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */; };
 		1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */; };
-		1DAEAC202029E093001C144E /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC1F2029E093001C144E /* Year.swift */; };
-		1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC212029E3DD001C144E /* ApplicationData.swift */; };
-		1DAEAC242029E756001C144E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC232029E756001C144E /* Group.swift */; };
 		1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */; };
 		1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */; };
 		1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */; };
-		1DB07FC82031FCAE00BDDDFB /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC72031FCAE00BDDDFB /* Invoice.swift */; };
-		1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FC9203200DA00BDDDFB /* Category.swift */; };
-		1DB07FCC2032094800BDDDFB /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FCB2032094800BDDDFB /* Month.swift */; };
 		1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB07FCD20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift */; };
 		1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */; };
 		1DD2402B202C5D4300917B08 /* GroupIdea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD2402A202C5D4300917B08 /* GroupIdea.swift */; };
@@ -76,7 +70,18 @@
 		BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */; };
 		BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */; };
 		BE29F6D021B7FB9500BCCDDD /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE29F6CF21B7FB9500BCCDDD /* UIView.swift */; };
+		BE4C72222369C04900061DF9 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */; };
 		BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */; };
+		BE5FB8C023BF4D2D0036A3B3 /* YearCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8BF23BF4D2D0036A3B3 /* YearCD.swift */; };
+		BE5FB8C423BF56030036A3B3 /* ApplicationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8C323BF56030036A3B3 /* ApplicationData.swift */; };
+		BE5FB8C623BF8B140036A3B3 /* GroupCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8C523BF8B140036A3B3 /* GroupCD.swift */; };
+		BE5FB8C823C34B710036A3B3 /* MonthCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5FB8C723C34B710036A3B3 /* MonthCD.swift */; };
+		BE7A57DD23C3577100D90462 /* InvoiceCD.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57DC23C3577100D90462 /* InvoiceCD.swift */; };
+		BE7A57E023C37EB300D90462 /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57DF23C37EB300D90462 /* Year.swift */; };
+		BE7A57E223C37EF400D90462 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E123C37EF400D90462 /* Group.swift */; };
+		BE7A57E423C37FE800D90462 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E323C37FE800D90462 /* Month.swift */; };
+		BE7A57E623C3804700D90462 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E523C3804700D90462 /* Invoice.swift */; };
+		BE7A57E823C3809100D90462 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E723C3809100D90462 /* Category.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
@@ -143,15 +148,9 @@
 		1D95B63B2125D294008BBA52 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ResetPasswordViewController.strings; sourceTree = "<group>"; };
 		1D98E6F120AD685700580488 /* VerifyPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyPasswordViewController.swift; sourceTree = "<group>"; };
 		1DAC564D20DBFAAC006140AB /* UILabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtension.swift; sourceTree = "<group>"; };
-		1DAEAC1F2029E093001C144E /* Year.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
-		1DAEAC212029E3DD001C144E /* ApplicationData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
-		1DAEAC232029E756001C144E /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		1DAEAC252029F1A6001C144E /* GroupCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DB07FBE2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewController.swift; sourceTree = "<group>"; };
 		1DB07FC02031D12F00BDDDFB /* InvoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCollectionViewCell.swift; sourceTree = "<group>"; };
-		1DB07FC72031FCAE00BDDDFB /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
-		1DB07FC9203200DA00BDDDFB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		1DB07FCB2032094800BDDDFB /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		1DB07FCD20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderInvoiceCollectionReusableView.swift; sourceTree = "<group>"; };
 		1DD24028202C508B00917B08 /* GroupIdeasCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdeasCollectionViewCell.swift; sourceTree = "<group>"; };
 		1DD2402A202C5D4300917B08 /* GroupIdea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupIdea.swift; sourceTree = "<group>"; };
@@ -176,7 +175,18 @@
 		BE29F6CB21B7FB3500BCCDDD /* SettingCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CD21B7FB7500BCCDDD /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE29F6CF21B7FB9500BCCDDD /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		BE4ECDD821BFF236005B6FF0 /* SideYearSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideYearSelector.swift; sourceTree = "<group>"; };
+		BE5FB8BF23BF4D2D0036A3B3 /* YearCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearCD.swift; sourceTree = "<group>"; };
+		BE5FB8C323BF56030036A3B3 /* ApplicationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationData.swift; sourceTree = "<group>"; };
+		BE5FB8C523BF8B140036A3B3 /* GroupCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCD.swift; sourceTree = "<group>"; };
+		BE5FB8C723C34B710036A3B3 /* MonthCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthCD.swift; sourceTree = "<group>"; };
+		BE7A57DC23C3577100D90462 /* InvoiceCD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCD.swift; sourceTree = "<group>"; };
+		BE7A57DF23C37EB300D90462 /* Year.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
+		BE7A57E123C37EF400D90462 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		BE7A57E323C37FE800D90462 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
+		BE7A57E523C3804700D90462 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		BE7A57E723C3809100D90462 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,13 +233,13 @@
 		1D4809CD20248B4800068094 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1DAEAC212029E3DD001C144E /* ApplicationData.swift */,
-				1DAEAC1F2029E093001C144E /* Year.swift */,
-				1DAEAC232029E756001C144E /* Group.swift */,
+				BE7A57DE23C37E9E00D90462 /* Realm */,
+				BE5FB8C323BF56030036A3B3 /* ApplicationData.swift */,
+				BE5FB8BF23BF4D2D0036A3B3 /* YearCD.swift */,
+				BE5FB8C523BF8B140036A3B3 /* GroupCD.swift */,
 				1DD2402A202C5D4300917B08 /* GroupIdea.swift */,
-				1DB07FCB2032094800BDDDFB /* Month.swift */,
-				1DB07FC9203200DA00BDDDFB /* Category.swift */,
-				1DB07FC72031FCAE00BDDDFB /* Invoice.swift */,
+				BE5FB8C723C34B710036A3B3 /* MonthCD.swift */,
+				BE7A57DC23C3577100D90462 /* InvoiceCD.swift */,
 				1D1052AA20ADE23E007C5CCF /* Settings.swift */,
 				BE29F6C921B7F7B600BCCDDD /* Setting.swift */,
 			);
@@ -288,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
+				BE4C721F2369C02C00061DF9 /* CoreData */,
 				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
 				1D4809D92024B08900068094 /* Extensions */,
 				1D4809CD20248B4800068094 /* Models */,
@@ -487,6 +498,26 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BE4C721F2369C02C00061DF9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		BE7A57DE23C37E9E00D90462 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				BE7A57DF23C37EB300D90462 /* Year.swift */,
+				BE7A57E123C37EF400D90462 /* Group.swift */,
+				BE7A57E323C37FE800D90462 /* Month.swift */,
+				BE7A57E523C3804700D90462 /* Invoice.swift */,
+				BE7A57E723C3809100D90462 /* Category.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		F969AC461B7DF10C2695440A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -652,14 +683,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
-				1DAEAC222029E3DD001C144E /* ApplicationData.swift in Sources */,
 				BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
+				BE7A57E223C37EF400D90462 /* Group.swift in Sources */,
+				BE5FB8C823C34B710036A3B3 /* MonthCD.swift in Sources */,
+				BE7A57E423C37FE800D90462 /* Month.swift in Sources */,
+				BE5FB8C023BF4D2D0036A3B3 /* YearCD.swift in Sources */,
 				1DFD204520B9B276009546C2 /* UIViewControllerExtension.swift in Sources */,
 				BE4ECDD921BFF236005B6FF0 /* SideYearSelector.swift in Sources */,
 				1DAC564E20DBFAAC006140AB /* UILabelExtension.swift in Sources */,
 				1DB07FC12031D12F00BDDDFB /* InvoiceCollectionViewCell.swift in Sources */,
 				1DFE14EA203B238E00176EF3 /* SaveManager.swift in Sources */,
+				BE5FB8C623BF8B140036A3B3 /* GroupCD.swift in Sources */,
 				1D42C4A5202DB5BA0033BEF1 /* SelectYearViewController.swift in Sources */,
 				1D370E1A206A87ED005583BB /* ResetPasswordViewController.swift in Sources */,
 				1DB07FCE20321D1A00BDDDFB /* HeaderInvoiceCollectionReusableView.swift in Sources */,
@@ -678,29 +713,30 @@
 				BE29F6CE21B7FB7500BCCDDD /* BaseCollectionViewCell.swift in Sources */,
 				1D4809D32024924900068094 /* Manager.swift in Sources */,
 				BE29F6CA21B7F7B600BCCDDD /* Setting.swift in Sources */,
+				BE7A57E023C37EB300D90462 /* Year.swift in Sources */,
 				1D1052A820ADD233007C5CCF /* AlertExtension.swift in Sources */,
 				1DD9235A2028C4C800387FF8 /* HeaderGroupView.swift in Sources */,
 				1D4FDFE22084743400208108 /* AboutViewController.swift in Sources */,
-				1DB07FC82031FCAE00BDDDFB /* Invoice.swift in Sources */,
+				BE5FB8C423BF56030036A3B3 /* ApplicationData.swift in Sources */,
 				1D5F069E202DF50100FE2105 /* SelectYearTableViewCell.swift in Sources */,
 				1D4809D12024900A00068094 /* DbManager.swift in Sources */,
 				1D4809CC2023AB0200068094 /* CreateAccountViewController.swift in Sources */,
 				BE29F6CC21B7FB3500BCCDDD /* SettingCollectionViewCell.swift in Sources */,
 				BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */,
 				1D4809DB2024B0A400068094 /* DataExtension.swift in Sources */,
-				1DB07FCA203200DA00BDDDFB /* Category.swift in Sources */,
 				1DFE14E8203B0E5D00176EF3 /* CategoryPicker.swift in Sources */,
+				BE7A57E623C3804700D90462 /* Invoice.swift in Sources */,
 				1D4B078F20233FF4002F745C /* LoginViewController.swift in Sources */,
+				BE4C72222369C04900061DF9 /* CoreDataModel.xcdatamodeld in Sources */,
 				1D08F5172128250E00563B27 /* UserInfosViewController.swift in Sources */,
-				1DAEAC202029E093001C144E /* Year.swift in Sources */,
 				1DB07FBF2031D0CB00BDDDFB /* InvoiceCollectionViewController.swift in Sources */,
 				1D370E18206A81E1005583BB /* SettingsViewController.swift in Sources */,
 				1DD24029202C508B00917B08 /* GroupIdeasCollectionViewCell.swift in Sources */,
-				1DB07FCC2032094800BDDDFB /* Month.swift in Sources */,
 				1D6D531E20360152004160C4 /* AddNewInvoiceViewController.swift in Sources */,
+				BE7A57DD23C3577100D90462 /* InvoiceCD.swift in Sources */,
 				1D4B078D20233FF4002F745C /* AppDelegate.swift in Sources */,
+				BE7A57E823C3809100D90462 /* Category.swift in Sources */,
 				1D3FC04720EE281F00E9B5C5 /* UIButton.swift in Sources */,
-				1DAEAC242029E756001C144E /* Group.swift in Sources */,
 				1DFD207920BDA3FF009546C2 /* YearsPicker.swift in Sources */,
 				1DFE14E6203B097F00176EF3 /* GroupPicker.swift in Sources */,
 			);
@@ -1041,6 +1077,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE4C72202369C04900061DF9 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = BE4C72212369C04900061DF9 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1D4B078120233FF4002F745C /* Project object */;
 }

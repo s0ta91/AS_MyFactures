@@ -1,5 +1,5 @@
 //
-//  Group.swift
+//  RealmGroup.swift
 //  MesFactures
 //
 //  Created by Sébastien on 04/01/2018.

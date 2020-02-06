@@ -26,7 +26,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Functions
     //TODO: Set values for the cell
-    func setValues (forInvoice invoice: Invoice, fontSize: CGFloat) {
+    func setValues (forInvoice invoice: InvoiceCD, fontSize: CGFloat) {
         if let invoiceIdentifier = invoice.identifier {
             let thumbnailUrl = SaveManager.getUrl(forIdentifier: invoiceIdentifier, documentType: .thumbnail)
             ui_invoiceDocumentThumbnail.loadImage(with: thumbnailUrl.absoluteString)
@@ -34,7 +34,7 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         ui_invoiceDocumentThumbnail.layer.cornerRadius = 4
         
         ui_amountLabel.text = String(describing: invoice.amount)
-        ui_categoryLabel.text = invoice.categoryObject?.title
+        ui_categoryLabel.text = invoice.category?.title
         ui_invoiceTitleLabel.text = invoice.detailedDescription
         ui_amountLabel.convertToCurrencyNumber()
         setFontSize(with: fontSize)

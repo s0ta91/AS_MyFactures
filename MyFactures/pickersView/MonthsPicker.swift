@@ -10,11 +10,10 @@ import UIKit
 
 class MonthsPicker: UIPickerView {
 
-    var _group: Group?
-//    let monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"]
-    
     var _monthTextField: UITextField!
-
+    
+    var _group: GroupCD?
+    
     func selectDefaultRow (forMonthName monthName: String, forPickerView pickerView: UIPickerView) {
         guard let group = _group else { fatalError("Group cannot be found") }
         let monthIndex = group.getMonthIndexFromTable(forMonthName: monthName)
@@ -28,7 +27,10 @@ extension MonthsPicker: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        guard let group = _group else { fatalError("Group cannot be found") }
+        guard let group = _group else {
+            // FIXME: - Créer une modale d'erreur pour demander de relancer l'application
+            fatalError("Group cannot be found")
+        }
         return group.getMonthCount()
     }
 }
@@ -36,14 +38,15 @@ extension MonthsPicker: UIPickerViewDataSource {
 extension MonthsPicker: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         guard let group = _group else { fatalError("Group cannot be found") }
-        return group.getMonth(atIndex: row)?.month
-//        return monthArray[row]
+        return group.getMonth(atIndex: row)?.name
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         guard let group = _group else { fatalError("Group cannot be found") }
-        guard let monthName = group.getMonth(atIndex: row)?.month else { fatalError("Cannot retreive monthName for index: \(row)")}
+        guard let monthName = group.getMonth(atIndex: row)?.name else {
+            // FIXME: - Créer une modale d'erreur pour demander de relancer l'application
+            fatalError("Cannot retreive monthName for index: \(row)")
+        }
         _monthTextField.text = monthName
-//        _monthTextField.text = monthArray[row]
     }
 }

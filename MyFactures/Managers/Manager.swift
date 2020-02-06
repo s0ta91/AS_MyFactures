@@ -7,24 +7,173 @@
 //
 
 import Foundation
-import RealmSwift
+import CoreData
 import KeychainAccess
+
+import RealmSwift
+
+
+enum action {
+    case add
+    case remove
+}
 
 class Manager {
     
-    private var _realm: Realm
-    private var _yearsList: Results<Year>
-    private var _applicationDataList: Results<ApplicationData>
-    private var _categoryList: Results<Category>
-    private var _groupIdeaList: Results<GroupIdea>
+    static let instance = Manager()
     
-    // MARK: -  INIT functions
-    init (withRealm realm: Realm) {
-        _realm = realm
-        _yearsList = _realm.objects(Year.self).sorted(byKeyPath: "_year", ascending: false)
-        _applicationDataList = _realm.objects(ApplicationData.self)
-        _categoryList = _realm.objects(Category.self)
-        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
+    let context = AppDelegate.persistentContainer.viewContext
+    let _monthArray =   [NSLocalizedString("January", comment: ""),
+                        NSLocalizedString("February", comment: ""),
+                        NSLocalizedString("March", comment: ""),
+                        NSLocalizedString("April", comment: ""),
+                        NSLocalizedString("May", comment: ""),
+                        NSLocalizedString("June", comment: ""),
+                        NSLocalizedString("July", comment: ""),
+                        NSLocalizedString("August", comment: ""),
+                        NSLocalizedString("September", comment: ""),
+                        NSLocalizedString("October", comment: ""),
+                        NSLocalizedString("November", comment: ""),
+                        NSLocalizedString("December", comment: "")]
+    
+    // MARK: REALM
+    var _realm: Realm?
+    private var _realmYears: Results<Year>?
+    private var _realmCategoryList: Results<Category>?
+    private var _realmGroups: Results<Group>?
+    private var _realmMonths: Results<Month>?
+    private var _realmInvoices: Results<Invoice>?
+    
+    // MARK: - COREDATA
+    private var _cdApplicationDataList: [ApplicationData]
+    private var _cdYearsList: [YearCD]
+    private var _monthList: [MonthCD] {
+        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
+        do {
+            return try Manager.instance.context.fetch(monthRequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [MonthCD]()
+        }
+    }
+    private var _cdTopCategories: [CategoryCD] {
+        let categoryrequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+        categoryrequest.predicate = NSPredicate(format: "toplist == %@", NSNumber(value: true))
+        categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        do {
+            return try Manager.instance.context.fetch(categoryrequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [CategoryCD]()
+        }
+    }
+    private var _cdCategoriesList: [CategoryCD] {
+        get {
+            let categoryrequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+            categoryrequest.predicate = NSPredicate(format: "toplist == %@", "false")
+            categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            do {
+                return try Manager.instance.context.fetch(categoryrequest)
+            } catch (let error) {
+                print("Error fetching groups from DB: \(error)")
+                return [CategoryCD]()
+            }
+        }
+        set {}
+    }
+//    private var _cdGroupIdeaList: [GroupIdea]
+    
+    
+    // MARK: - INIT
+    init() {
+        
+//        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
+        
+        
+        // Load CoreData ApplicationData
+        let applicationDataRequest: NSFetchRequest<ApplicationData> = ApplicationData.fetchRequest()
+        do {
+            _cdApplicationDataList = try context.fetch(applicationDataRequest)
+        } catch (let error) {
+            _cdApplicationDataList = [ApplicationData]()
+            print("Error fetching applicationData: \(error)")
+        }
+        
+        // Load CoreData years
+        let request: NSFetchRequest<YearCD> = YearCD.fetchRequest()
+        do {
+            _cdYearsList = try context.fetch(request).sorted(by: { $0.year > $1.year} )
+        } catch (let error) {
+            _cdYearsList = [YearCD]()
+            print("Error fetching Years: \(error)")
+        }
+        
+        // Load CoreData Categories
+//        let categoriesRequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+//        do {
+//            _cdCategoryList = try context.fetch(categoriesRequest)
+//        } catch (let error) {
+//            _cdCategoryList = [CategoryCD]()
+//            print("Error fetching categories: \(error)")
+//        }
+        
+        // Load CoreData Group ideas
+//       let groupIdeasRequest: NSFetchRequest<GroupIdea> = GroupIdea.fetchRequest()
+//       do {
+//           _cdGroupIdeaList = try context.fetch(groupIdeasRequest)
+//       } catch (let error) {
+//           print("Error fetching categories: \(error)")
+//       }
+    }
+    
+    func initRealmData() {
+        if let realm = _realm {
+            print("realm exist, load Results")
+            print("realmYears count \(realm.objects(Year.self).count)")
+            _realmYears = realm.objects(Year.self)
+            _realmGroups = realm.objects(Group.self)
+            _realmMonths = realm.objects(Month.self)
+            _realmInvoices = realm.objects(Invoice.self)
+            _realmCategoryList = realm.objects(Category.self)
+            
+            // TODO: Create month list in database
+//            initMonthList()
+            
+            // TODO: Migrate data from Realm to CoreData
+            migrateFromRealmToCoreData()
+        }
+    }
+    
+    func migrateFromRealmToCoreData() {
+//        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
+//            print("ERROR: Cannot convert from RealmYears to Years array")
+//            return }
+
+        _realmYears?.forEach({ (year) in
+            let newYear = YearCD(context: context)
+            newYear.year = Int64(year.year)
+            newYear.selected = year.selected
+//            newYear.group = year._groupListToShow
+            print("-> migrate year to newYear")
+            print("--> newYear: \(newYear.year)")
+//            print("---> newYear is selected: \(newYear.selected)")
+            print("---> nb of groups to migrate: \(year._groupList.count)")
+            year._groupList.forEach { (group) in
+                print("---> \(newYear.year) - Create new group: \(group.title)")
+                let _ = newYear.addGroup(withTitle: group.title, totalPrice: group.totalPrice, totalDocuments: Int64(group.totalDocuments), isListFiltered: false)
+            }
+        })
+        
+//        _realmGroups?.forEach({ (group) in
+//            let newGroup = GroupCD(context: context)
+//            newGroup.title = group.title
+//            newGroup.totalPrice = group.totalPrice
+//            newGroup.totalDocuments = Int64(group.totalDocuments)
+//        })
+        
+        print("---> Save context")
+        saveCoreDataContext()
+        UserDefaults.standard.set(true, forKey: UserDefaults.keys.migrationDone.rawValue)
     }
     
     func initYear () {
@@ -32,63 +181,71 @@ class Manager {
         let _currentDate = Date()
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: _currentDate)
+        print("ApplicationDataCount: \(getApplicationDataCount())")
         if getApplicationDataCount() == 0 {
             let yearsStartAt = 1900
-            print("create years")
             for calculatedYears in yearsStartAt...currentYear {
+                print("add year \(calculatedYears)")
                 addYear(calculatedYears)
             }
-        _yearsList.first?.selected = true
-        print("yearslistCount \(_yearsList.count)")
-        }else {
-            if let yearsListLast = _yearsList.first,
-                yearsListLast.year != currentYear {
+            _cdYearsList.last?.selected = true
+            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
+        } else {
+            if let lastYear = _cdYearsList.first,
+                lastYear.year != currentYear {
                 addYear(currentYear)
             }
         }
-    }
-    
-    func initCategory () {
-        if getApplicationDataCount() == 0 {
-            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
-            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
-        }
+        
+        saveCoreDataContext()
     }
     
     
-    // MARK: - PRIVATE functions
+    // MARK: - PRIVATE
     private func getApplicationDataCount () -> Int {
-        return _applicationDataList.count
+        return _cdApplicationDataList.count
     }
     
-    private func addYear (_ yearToAdd: Int) {
-        let newYear = Year()
-        newYear.year = yearToAdd
-        try? _realm.write {
-            _realm.add(newYear)
+    private func addYear(_ yearToAdd: Int) {
+        let ny = YearCD(context: context)
+        ny.year = Int64(yearToAdd)
+        ny.selected = false
+        _cdYearsList.append(ny)
+    }
+    
+    
+    // MARK: - PUBLIC
+    
+    func saveCoreDataContext() {
+        do {
+            try context.save()
+        } catch {
+            // A remplacer par une modale d'erreur à présenter à l'utilisateur
+            print("Error saving context: \(error)")
         }
     }
     
-    
-    // PUBLIC functions
-    
-    // MARK: - Save in user Defaults
+    // MARK: Save in user Defaults
     func saveInUserDefault(forKey key: String, andValue value: String) {
         UserDefaults.standard.set(value, forKey: key)
     }
+    
     func getFromUserDefault(forKey key: String) -> String? {
         return UserDefaults.standard.string(forKey: key)
     }
+    
     func reinitUserDefaultValue(forKey key: String) {
         UserDefaults.standard.set(nil, forKey: Settings().USER_EMAIL_KEY)
     }
     
-    // MARK: - Generate a random 4 digit code
+    
+    // MARK: Generate a random 4 digit code
     func generateRandomCode() -> String? {
         return String(1000+arc4random_uniform(8999))
     }
     
-    // MARK: - Password management
+    
+    // MARK: Password management
     func savePassword (_ password: String) {
         DbManager().saveMasterPassword(password)
     }
@@ -111,7 +268,9 @@ class Manager {
             print("Error retreiving user informations")
         }
     }
-    // MARK: - Email management
+    
+    
+    // MARK: Email management
     func sendEmail(toEmail email: String, withCode code: String? = nil, withPassword password: String? = nil) -> Bool {
         var didComplete: Bool!
         
@@ -164,7 +323,8 @@ class Manager {
         return didComplete
     }
     
-    // MARK: - User management
+    
+    // MARK: User management
     func createUser(with password: String, andEmail email: String) {
         savePassword(password)
 //        saveInUserDefault(forKey: Settings().USER_EMAIL_KEY, andValue: email)
@@ -180,63 +340,62 @@ class Manager {
     }
     
     
-    // MARK: - APPLICATIONDATA functions
+    // MARK: APPLICATIONDATA functions
     func updateApplicationData () {
-        let applicationData = ApplicationData()
-        _realm.beginWrite()
-        _realm.add(applicationData)
-        try? _realm.commitWrite()
+        let applicationData = ApplicationData(context: context)
+        applicationData.currentDate = Date()
+        saveCoreDataContext()
     }
     
-    // MARK: - YEAR functions
+    
+    // MARK: YEAR functions
     func getyearsCount () -> Int {
-        return _yearsList.count
+        return _cdYearsList.count
     }
     
-    func getYear (atIndex index: Int) -> Year? {
-        return _yearsList[index]
+    func getYear (atIndex index: Int) -> YearCD? {
+        return _cdYearsList[index]
     }
     
-    func getYear (forValue value: Int) -> Year? {
-        let yearPredicate = NSPredicate(format: "_year == %i", value)
-        guard let yearIndex = _yearsList.index(matching: yearPredicate) else { return nil }
+    func getYear (forValue value: Int) -> YearCD? {
+        guard let yearIndex = _cdYearsList.firstIndex(where: { (year) -> Bool in
+            year.year == value
+        }) else { return nil }
         return getYear(atIndex: yearIndex)
     }
     
     func getYearIndex (forValue value: Int) -> Int? {
         guard let year = getYear(forValue: value) else { return 0 }
-        return _yearsList.index(of: year)
+        return _cdYearsList.firstIndex(of: year)
     }
     
-    func setSelectedYear (forYear newSelectedYear: Year) {
+    func setSelectedYear (forYear newSelectedYear: YearCD) {
         let oldSelectedYear = getSelectedYear()
         oldSelectedYear?.selected = false
         newSelectedYear.selected = true
     }
     
-    func getSelectedYear () -> Year! {
-        let selectedYear: Year?
-        let findSelectedYear = NSPredicate(format: "_selected == true")
-        if let getSelectedYear = _yearsList.filter(findSelectedYear).first {
-            selectedYear = getSelectedYear
-        }else {
-            selectedYear = nil
-        }
+    func getSelectedYear () -> YearCD? {
+        guard let selectedYear = _cdYearsList.first(where: { (year) -> Bool in
+            year.selected == true
+        }) else { return nil }
+        
         return selectedYear
     }
 
     
-    // MARK: - GROUPIDEA functions
+    // MARK: GROUPIDEA functions
     func getGroupIdeaCount () -> Int {
-        return _groupIdeaList.count
+//        return _cdGroupIdeaList.count
+        return 0
     }
+    
     private func addGroupidea (_ groupIdeaName: String) {
         let newGroupIdea = GroupIdea()
         newGroupIdea.title = groupIdeaName
-        try? _realm.write {
-            _realm.add(newGroupIdea)
-        }
+        saveCoreDataContext()
     }
+    
     func setGroupIdeaList () {
         addGroupidea("Achats en ligne")
         addGroupidea("Energies")
@@ -245,123 +404,140 @@ class Manager {
         addGroupidea("Magasins")
         addGroupidea("Téléphones")
     }
+    
     func getGroupIdeaNameList () -> [String]{
-        var groupIdeaName:[String] = []
-        for groupIdeaIndex in 0...getGroupIdeaCount() {
-             groupIdeaName.append(_groupIdeaList[groupIdeaIndex].title)
-        }
+        let groupIdeaName:[String] = []
+//        for groupIdeaIndex in 0...getGroupIdeaCount() {
+//             groupIdeaName.append(_groupIdeaList[groupIdeaIndex].title)
+//        }
         return groupIdeaName
     }
     
-    // MARK: - CATEGORY Functions
+    
+    // MARK: CATEGORY Functions
+    func initCategory () {
+        if getApplicationDataCount() == 0 {
+            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true, topList: true)
+            _ = addCategory(NSLocalizedString("Unclassified", comment: ""), isSelected: false, topList: true)
+        }
+//        print("init categoryList?")
+//        _cdCategoryList.forEach { (category) in
+//            print(category)
+//        }
+    }
+    
     func getCategoryCount () -> Int {
-        return _categoryList.count
+        return _cdCategoriesList.count
     }
     
-    func getCategory (atIndex index: Int) -> Category? {
-        return _categoryList[index]
+    func getTopCategoryCount() -> Int {
+        return _cdTopCategories.count
     }
     
-    func getCategoryIndex (forCategory category: Category) -> Int!{
-        return _categoryList.index(of: category)
+    func getTopCategory(atIndex index: Int) -> CategoryCD {
+        return _cdTopCategories[index]
     }
     
-    func getCategory (forName categoryName: String) -> Category? {
-        var category: Category? = nil
-        let categoryPredicate = NSPredicate(format: "_title == %@", categoryName)
-        if let categoryIndex = _categoryList.index(matching: categoryPredicate) {
-            category = getCategory(atIndex: categoryIndex)
+    func getCategory (atIndex index: Int) -> CategoryCD {
+        return _cdCategoriesList[index]
+    }
+    
+    func getCategoryIndex (forCategory category: CategoryCD) -> Int? {
+        if category.toplist {
+            return _cdTopCategories.firstIndex(of: category)
+        } else {
+            return _cdCategoriesList.firstIndex(of: category)
         }
-        return category
     }
     
-    func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> Category {
-        let newCategory = Category()
+    func getCategory (forName categoryName: String) -> CategoryCD? {
+        if let category = _cdCategoriesList.first(where: { (category) -> Bool in
+            categoryName == category.title
+        }) {
+            return category
+        } else if let category = _cdTopCategories.first(where: { (category) -> Bool in
+            categoryName == category.title
+        }) {
+            return category
+        } else {
+            return nil
+        }
+    }
+    
+    func getPickerCategories() -> [String] {
+        var pickerCategories = [String]()
+        pickerCategories.append(_cdTopCategories[1].title!)
+        _cdCategoriesList.forEach { (category) in
+            pickerCategories.append(category.title!)
+        }
+        return pickerCategories
+    }
+    
+    func addCategory (_ categoryTitle: String, isSelected: Bool, topList: Bool) -> CategoryCD {
+        let newCategory = CategoryCD(context: context)
         newCategory.title = categoryTitle
-        newCategory.selected = isSelected!
-        try? _realm.write {
-            _realm.add(newCategory)
-        }
+        newCategory.selected = isSelected
+        newCategory.toplist = topList
+        saveCoreDataContext()
         return newCategory
     }
 
     func checkForDuplicateCategory (forCategoryName categoryName: String) -> Bool {
         var categoryNameExists: Bool = false
-        for categoryIndex in 0..<getCategoryCount() {
-            if let existingCategoryToCheck = getCategory(atIndex: categoryIndex) {
-                if categoryName == existingCategoryToCheck.title {
-                    categoryNameExists = true
-                }
+        
+        _cdCategoriesList.forEach({ (category) in
+            if categoryName == category.title {
+                categoryNameExists.toggle()
+            }
+        })
+        
+        _cdTopCategories.forEach { (category) in
+            if categoryName == category.title {
+                categoryNameExists.toggle()
             }
         }
+        
         return categoryNameExists
     }
     
-    func getSelectedCategory () -> Category {
-        let findSelectedCategory = NSPredicate(format: "_selected == true")
-        guard let getSelectedCategory = _categoryList.filter(findSelectedCategory).first else {fatalError("No category selected")}
-        return getSelectedCategory
-    }
-    func setSelectedCategory (forCategory newSelectedCategory: Category) {
-        let oldSelectedCategory = getSelectedCategory()
-        oldSelectedCategory.selected = false
-        newSelectedCategory.selected = true
-    }
-    
-    
-    func modifyCategoryTitle (forCategory category: Category, withNewTitle newTitle: String) {
-        category.title = newTitle
-    }
-    
-    func removeCategory (atIndex index: Int) {
-        if let categoryToDelete = getCategory(atIndex: index) {
-            try? _realm.write {
-                _realm.delete(categoryToDelete)
-            }
+    func getSelectedCategory () -> CategoryCD? {
+        if let selectedCategory = _cdCategoriesList.first(where: { (category) -> Bool in
+            category.selected == true
+            }){
+            return selectedCategory
+        } else if let selectedCategory = _cdTopCategories.first(where: { (category) -> Bool in
+            category.selected == true
+        }){
+            return selectedCategory
+        } else {
+            return nil
         }
     }
     
+    func setSelectedCategory (forCategory newSelectedCategory: CategoryCD) {
+        
+        _cdTopCategories.forEach { (category) in
+            category.selected = false
+        }
     
-    // MARK: - Other functions
-//    func convertToCurrencyNumber (forTextField textField: UITextField? = nil, forLabel label: UILabel? = nil) {
-//        let textFieldToConvert = textField
-//        let labelToConvert = label
-//
-//        let currencyFormatter = NumberFormatter()
-//        currencyFormatter.usesGroupingSeparator = true
-//        currencyFormatter.numberStyle = NumberFormatter.Style.currency
-//        currencyFormatter.locale = NSLocale.autoupdatingCurrent
-////        currencyFormatter.locale = Locale(identifier: "fr-FR")
-//        currencyFormatter.decimalSeparator = "."
-//
-//        if let amountString = textFieldToConvert?.text?.replacingOccurrences(of: ",", with: "."),
-//            let amountDouble = Double(amountString) {
-//            let amountNumber = NSNumber(value: amountDouble)
-//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-//                textFieldToConvert?.text = numberToCurrencyType
-//            }
-//        }else if let amountString = labelToConvert?.text,
-//            let amountDouble = Double(amountString) {
-//            let amountNumber = NSNumber(value: amountDouble)
-//            if let numberToCurrencyType = currencyFormatter.string(from: amountNumber) {
-//                labelToConvert?.text = numberToCurrencyType
-//            }
-//        }
-//    }
+        _cdCategoriesList.forEach { (category) in
+            category.selected = false
+        }
+        
+        newSelectedCategory.selected = true
+        saveCoreDataContext()
+    }
     
-//    func convertFromCurrencyNumber (forTextField textField: UITextField) -> Decimal? {
-//        let convertedResult: Decimal?
-//        let textFieldToConvert = textField
-//        let currencyFormatter = NumberFormatter()
-//        currencyFormatter.numberStyle = .currency
-//        if let amountString = textFieldToConvert.text,
-//            let currencyToNumber = currencyFormatter.number(from: amountString) {
-//            convertedResult = currencyToNumber.decimalValue
-//        }else {
-//            convertedResult = nil
-//        }
-//        return convertedResult
-//    }
+    func modifyCategoryTitle (forCategory category: CategoryCD, withNewTitle newTitle: String) {
+        category.title = newTitle
+        saveCoreDataContext()
+    }
+    
+    func removeCategory (atIndex index: Int) {
+        let categoryToDelete = getCategory(atIndex: index)
+        context.delete(categoryToDelete)
+        saveCoreDataContext()
+    }
     
     func setButtonLayer (_ button: UIButton) {
         button.layer.cornerRadius = 17
@@ -378,8 +554,6 @@ class Manager {
         layout?.sectionHeadersPinToVisibleBounds = true
     }
     
-    //FIXME: TO DELETE
-    // Has been moved to SaveManager.swift
     func getImageFromURL (url: URL) -> UIImage? {
         let image: UIImage?
         if let data = NSData(contentsOf: url) {
@@ -416,6 +590,7 @@ class Manager {
     static func setIsFirstLoad(_ value: Bool) {
         UserDefaults.standard.set(value, forKey: "firstLoad")
     }
+    
     static func isFirstLoad() -> Bool {
         return UserDefaults.standard.bool(forKey: "firstLoad")
     }

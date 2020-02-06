@@ -40,15 +40,13 @@ class InvoiceCollectionViewController: UIViewController {
     let PDFStoryboard = UIStoryboard(name: "PDFViewController", bundle: .main)
     
     //TODO: Data reveived from previous VC
-    var _ptManager: Manager?
-    var _ptCurrentGroup: Group?
-    var _ptYear: Year?
+    var _ptCurrentGroup: GroupCD?
+    var _ptYear: YearCD?
     var _ptFontSize: CGFloat?
     
     //TODO: Internal variables
-    private var _invoiceCollectionManager: Manager!
-    private var _invoiceCollectionCurrentGroup: Group!
-    private var _invoiceCollectionCurrentYear: Year!
+    private var _invoiceCollectionCurrentGroup: GroupCD!
+    private var _invoiceCollectionCurrentYear: YearCD!
     
     // To store the months that need to be shown if they contains at least an invoice
     private var _monthToShow: [Int] = []
@@ -90,7 +88,7 @@ class InvoiceCollectionViewController: UIViewController {
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
         checkReceivedData()
         setNavigationBarInfo()
-        _invoiceCollectionManager.setHeaderClippedToBound(invoiceCollectionView)
+        Manager.instance.setHeaderClippedToBound(invoiceCollectionView)
         
         invoiceCollectionView.reloadData()
     }
@@ -149,12 +147,6 @@ class InvoiceCollectionViewController: UIViewController {
     
     /** Check if the data recieved from previous controller are ok */
     private func checkReceivedData () {
-        if let _manager = _ptManager {
-            _invoiceCollectionManager = _manager
-        }else {
-            fatalError("_manager data are missing")
-        }
-        
         if let _group = _ptCurrentGroup {
             _invoiceCollectionCurrentGroup = _group
         }else {
@@ -177,7 +169,7 @@ class InvoiceCollectionViewController: UIViewController {
         self.title = _invoiceCollectionCurrentGroup.title
 //        let searchButton = UIBarButtonItem(image: searchButtonImage, style: .plain, target: self, action: #selector(search))
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(search))
-        let selectedCategoryName = _invoiceCollectionManager.getSelectedCategory().title
+        let selectedCategoryName = Manager.instance.getSelectedCategory()?.title
         let selectCategoryButon = UIBarButtonItem(title: selectedCategoryName, style: .plain, target: self, action: #selector(showCategorySelector))
         
         if #available(iOS 13, *) {
@@ -187,20 +179,21 @@ class InvoiceCollectionViewController: UIViewController {
        }
         navigationItem.rightBarButtonItems = [searchButton, selectCategoryButon]
     }
-
+    
     //TODO: Retrieve the month for the section index
-    private func getCurrentMonth (atIndex monthIndex: Int) -> Month? {
-        let selectedCategory = _invoiceCollectionManager.getSelectedCategory()
-        let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) ?? nil
-        if month != nil {
-            month?.setInvoiceList(for: selectedCategory, searchText: searchText)
+    private func getCurrentMonth (atIndex monthIndex: Int) -> MonthCD? {
+        guard let selectedCategory = Manager.instance.getSelectedCategory(),
+            let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) else {
+                return nil
         }
+        month.setInvoiceList(for: selectedCategory, searchText: searchText)
         return month
     }
     
     //TODO: Get the number of sections for the current group
     private func getNumberOfSections () -> Int {
         _monthToShow.removeAll()
+        
         var numberOfSection = 0
         for monthId in 0...11 {
             let numberOfInvoiceInSection = getNumberOfInvoice(atMonthIndex: monthId)
@@ -209,24 +202,22 @@ class InvoiceCollectionViewController: UIViewController {
                 numberOfSection = numberOfSection + 1
             }
         }
+        
         return numberOfSection
     }
     
     //TODO: Get the number of Invoice by section (by month)
     private func getNumberOfInvoice (atMonthIndex monthIndex: Int) -> Int {
-        var numberOfInvoice = 0
-        if let month = getCurrentMonth(atIndex: monthIndex) {
-            numberOfInvoice = month.getInvoiceCount()
-        }
-        return numberOfInvoice
+        guard let month = getCurrentMonth(atIndex: monthIndex) else { return 0 }
+        return month.getInvoiceCount()
     }
     
-    private func getSelectedInvoice (for month: Month, atInvoiceIndex invoiceIndex: Int) -> Invoice? {
-        var invoice: Invoice? = nil
-        invoice = month.getInvoice(atIndex: invoiceIndex, isListFiltered)
+    private func getSelectedInvoice (for month: MonthCD, atInvoiceIndex invoiceIndex: Int) -> InvoiceCD? {
+        guard let invoice = month.getInvoice(atIndex: invoiceIndex, isListFiltered) else { return nil }
         return invoice
     }
     
+    //TODO: Create the function to delete a cell
     //TODO: Create the function to delete a cell
     func delete(invoice: InvoiceCollectionViewCell) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
@@ -239,7 +230,6 @@ class InvoiceCollectionViewController: UIViewController {
                     
                     // Delete invoice object from DB
                     _ = month.removeInvoice(invoice: invoiceToDelete)
-                    month.removeFromInvoiceToShow (atIndex: indexPath.row)
                     
                     // If there isn't any invoice left we need to delete the section from the collectionView
                     if self.getNumberOfInvoice(atMonthIndex: monthIndex) == 0 {
@@ -263,38 +253,38 @@ class InvoiceCollectionViewController: UIViewController {
     }
     
     //TODO: Create the function to share the invoice
-    func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
-        if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
-            
-            let monthIndex = _monthToShow[indexPath.section]
-            if let month = getCurrentMonth(atIndex: monthIndex),
-                let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
-                let invoiceIdentifier = selectedInvoice.identifier,
-                let invoiceDocumentExtension = selectedInvoice.documentType,
-                let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
-                let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
+        func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
+            if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
                 
-                if let popoverController = activityViewController.popoverPresentationController {
-                    popoverController.sourceView = invoice.contentView
-                    popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
-                    popoverController.permittedArrowDirections = .up
+                let monthIndex = _monthToShow[indexPath.section]
+                if let month = getCurrentMonth(atIndex: monthIndex),
+                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
+                    let invoiceIdentifier = selectedInvoice.identifier,
+                    let invoiceDocumentExtension = selectedInvoice.documentType,
+                    let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
+                    let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
+
+                    if let popoverController = activityViewController.popoverPresentationController {
+                        popoverController.sourceView = invoice.contentView
+                        popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
+                        popoverController.permittedArrowDirections = .up
+                    }
+                    present(activityViewController, animated: true, completion: nil)
+                }else {
+                    /*** DEBUG ***/
+    //                let month = getCurrentMonth(atIndex: monthIndex)
+    //                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
+    //                print("invoice: \(selectedInvoice)")
+                    /*******************/
+                    let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
+                    let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
+    //                    self.dismiss(animated: true, completion: nil)
+                    })
+                    alertController.addAction(validAction)
+                    present(alertController, animated: true, completion: nil)
                 }
-                present(activityViewController, animated: true, completion: nil)
-            }else {
-                /*** DEBUG ***/
-//                let month = getCurrentMonth(atIndex: monthIndex)
-//                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
-//                print("invoice: \(selectedInvoice)")
-                /*******************/
-                let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
-                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
-//                    self.dismiss(animated: true, completion: nil)
-                })
-                alertController.addAction(validAction)
-                present(alertController, animated: true, completion: nil)
             }
         }
-    }
     
     //TODO: - Create the function to modify an invoice
     func modify(invoice: InvoiceCollectionViewCell) {
@@ -302,17 +292,16 @@ class InvoiceCollectionViewController: UIViewController {
             let cell_indexPath = invoiceCollectionView.indexPath(for: invoice) {
             
                 let monthIndex = _monthToShow[cell_indexPath.section]
-                if let month = getCurrentMonth(atIndex: monthIndex),
-                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) {
-                    destinationVC._modifyInvoice = true
-                    destinationVC._ptManager = _invoiceCollectionManager
-                    destinationVC._ptYear = _invoiceCollectionCurrentYear
-                    destinationVC._ptGroup = _invoiceCollectionCurrentGroup
-                    destinationVC._ptMonth = month
-                    destinationVC._ptInvoice = selectedInvoice
-                    destinationVC.presentationController?.delegate = destinationVC
-                    destinationVC.delegate = self
-                }
+                guard let month = getCurrentMonth(atIndex: monthIndex),
+                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: cell_indexPath.row) else { return }
+            
+                destinationVC._modifyInvoice = true
+                destinationVC._ptYear = _invoiceCollectionCurrentYear
+                destinationVC._ptGroup = _invoiceCollectionCurrentGroup
+                destinationVC._ptMonth = month
+                destinationVC._ptInvoice = selectedInvoice
+                destinationVC.presentationController?.delegate = destinationVC
+                destinationVC.delegate = self
                 destinationVC.modalTransitionStyle = .coverVertical
                 present(destinationVC, animated: true, completion: nil)
         }
@@ -330,7 +319,6 @@ class InvoiceCollectionViewController: UIViewController {
     @objc private func showCategorySelector() {
         let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
         if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
-            manageCategoryVC._ptManager = self._ptManager
             manageCategoryVC.presentationController?.delegate = self
             manageCategoryVC.modalTransitionStyle = .coverVertical
 //            manageCategoryVC.modalPresentationStyle = .fullScreen
@@ -340,7 +328,6 @@ class InvoiceCollectionViewController: UIViewController {
     
     @objc private func addNewInvoiceButtonPressed(_ sender: UIButton) {
         if let destinationVC = addNewInvoiceStoryboard.instantiateViewController(withIdentifier: "AddNewInvoiceViewController") as? AddNewInvoiceViewController {
-            destinationVC._ptManager = self._invoiceCollectionManager
             destinationVC._ptYear = self._invoiceCollectionCurrentYear
             destinationVC._ptGroup = self._invoiceCollectionCurrentGroup
             destinationVC.presentationController?.delegate = destinationVC
@@ -366,8 +353,9 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         case UICollectionView.elementKindSectionHeader:
             invoiceHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "cell_invoiceHeader", for: indexPath) as? HeaderInvoiceCollectionReusableView
             let monthIndex = _monthToShow[indexPath.section]
-            if let month = getCurrentMonth(atIndex: monthIndex) {
-                headerDate = "\(month.month) \(_invoiceCollectionCurrentYear.year)"
+            if let month = getCurrentMonth(atIndex: monthIndex),
+                let monthName = month.name {
+                headerDate = "\(monthName) \(_invoiceCollectionCurrentYear.year)"
                 monthAmount = String(describing: month.getTotalAmount())
             }
             invoiceHeaderView.setValuesForHeader(headerDate, monthAmount, fontSize: collectionViewFontSize)
@@ -385,25 +373,15 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell_invoice = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_invoice", for: indexPath) as! InvoiceCollectionViewCell
-        guard let month = getCurrentMonth(atIndex: _monthToShow[indexPath.section]) else {fatalError("no month found at index \(_monthToShow[indexPath.section])")}
+        guard let month = getCurrentMonth(atIndex: _monthToShow[indexPath.section]) else {
+            fatalError("no month found at index \(_monthToShow[indexPath.section])")
+        }
+        
         if let invoiceToShow = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row) {
             cell_invoice.setValues(forInvoice: invoiceToShow, fontSize: collectionViewFontSize)
         }
         
         cell_invoice.delegate = self
-//        cell_invoice.layer.borderWidth = 1.0
-//        cell_invoice.layer.borderColor = UIColor.clear.cgColor
-////        cell_invoice.layer.shadowColor = UIColor.lightGray.cgColor
-//        cell_invoice.layer.shadowColor = UIColor.gray.cgColor
-//        if #available(iOS 13, *) {
-//            cell_invoice.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
-//        }
-//        cell_invoice.layer.shadowOffset = CGSize(width:2,height: 2)
-//        cell_invoice.layer.shadowRadius = 4.0
-//        cell_invoice.layer.shadowOpacity = 1.0
-////        cell_invoice.layer.cornerRadius = 4
-//        cell_invoice.layer.masksToBounds = false;
-//        cell_invoice.layer.shadowPath = UIBezierPath(rect:cell_invoice.bounds).cgPath
         
         cell_invoice.layer.cornerRadius = 8
         cell_invoice.layer.shadowColor = UIColor.gray.cgColor
@@ -414,7 +392,6 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.shadowRadius = 5
         cell_invoice.layer.shadowOffset = .zero
         cell_invoice.layer.shadowPath = UIBezierPath(rect: cell_invoice.bounds).cgPath
-//        cell_group.layer.shouldRasterize = true
         cell_invoice.layer.masksToBounds = false
         
         return cell_invoice
@@ -472,7 +449,6 @@ extension InvoiceCollectionViewController: InvoiceCollectionViewCellDelegate {
             let invoiceIdentifier = selectedInvoice.identifier,
             let invoiceDocumentExtension = selectedInvoice.documentType,
             let documentURL = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
-                destinationVC._ptManager = _invoiceCollectionManager
                 destinationVC._ptDocumentURL = documentURL
                 destinationVC._ptDocumentType = invoiceDocumentExtension
             destinationVC.modalTransitionStyle = .coverVertical

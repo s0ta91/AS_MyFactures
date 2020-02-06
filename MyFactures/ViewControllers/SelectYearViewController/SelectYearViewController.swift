@@ -68,6 +68,7 @@ extension SelectYearViewController: UITableViewDataSource {
                 }
             }
             cell_yearSelection.setValues(yearString, numberOfGroup)
+            print("yearString: \(yearString) - yearSelected: \(year.selected)")
             if year.selected == true {
                 cell_yearSelection.accessoryType = .checkmark
             }else {

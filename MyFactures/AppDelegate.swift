@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import RealmSwift
 import IQKeyboardManagerSwift
 import Buglife
@@ -18,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let APP_VERSION = "MyAppVersion"
+    
+    static var persistentContainer: NSPersistentContainer {
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    }
 
     // MARK: - Launching treatment
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -54,18 +59,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // TODO: try to create the database
         guard let database = DbManager().getDb() else { fatalError("No database found") }
         
-        // TODO: Initialize all default data in database
-        database.initYear()
-        database.initCategory()
-        database.updateApplicationData()
+        let realmDb = DbManager().getRealmDb()
+        let realmApplicationDataCount = realmDb?.objects(Year.self).count ?? 0
+        if !UserDefaults.standard.bool(forKey: UserDefaults.keys.migrationDone.rawValue),
+            realmApplicationDataCount > 0 {
+            database._realm = realmDb
+            
+            print("---> initialized RealmDB found. Init CoreDatafrom realm data")
+            // TODO: Initialize all data from Realm
+            database.initRealmData()
+            database.updateApplicationData()
+        } else {
+
+            print("---> Migration Already done or no initialized RealmDB found on device. Init CoreData manualy")
+            // TODO: Initialize all default data in coreData database
+            database.initYear()
+            database.initCategory()
+//            database.initMonthList()
+            database.updateApplicationData()
+        }
+        
         
         // TODO: Check if password is already set ELSE show createAccount screen instead of login screen
         if database.hasMasterPassword() == false {
             displayCreateAccountVC(withPassword: false)
         } else if UserDefaults.standard.string(forKey: UserDefaults.keys.userEmail.rawValue) == nil {
-            // FIXME: Obsolete. To Delete
-            //            database.getFromUserDefault(forKey: "USER_EMAIL") == nil {
-            
             displayCreateAccountVC(withPassword: true)
         }
         
@@ -95,7 +113,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
 
-    //MARK: - Other functions
+    // MARK: - Other functions
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -121,6 +139,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // Saves changes in the application's managed object context before the application terminates.
+        self.saveContext()
+    }
+
+    
+    // MARK: - Core Data stack
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+        */
+        let container = NSPersistentContainer(name: "CoreDataModel")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                 
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+
+    // MARK: - Core Data Saving support
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -131,8 +195,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // MARK: - My private functions
-    //TODO: Display the create account VC
+    
+    
+    // MARK: - Private
+    // TODO: Display the create account VC
     private func displayCreateAccountVC (withPassword: Bool) {
         let storyboard = UIStoryboard(name: "CreateAccountViewController", bundle: nil)
         let createAccountVC = storyboard.instantiateViewController(withIdentifier: "CreateAccountVC") as! CreateAccountViewController

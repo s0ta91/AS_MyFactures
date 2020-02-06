@@ -55,11 +55,6 @@ class CreateAccountViewController: UIViewController {
         }
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     private func setPasswordAndDesableField() {
         ui_emailTextField.placeholder = emailPlaceholderText

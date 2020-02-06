@@ -61,11 +61,7 @@ class GroupViewController: UIViewController {
     
     //MARK: - Properties
     private var _manager: Manager {
-        if let database =  DbManager().getDb() {
-            return database
-        }else {
-            fatalError("Database doesn't exists")
-        }
+        return Manager.instance
     }
     
     lazy var _settingsLauncher: SettingsLauncher = {
@@ -74,8 +70,8 @@ class GroupViewController: UIViewController {
         return launcher
     }()
     
-    private var _currentYear: Year!
-    private var _groupToModify: Group?
+    private var _currentYear: YearCD!
+    private var _groupToModify: GroupCD?
     let monthArray = [NSLocalizedString("January", comment: ""),
                       NSLocalizedString("February", comment: ""),
                       NSLocalizedString("March", comment: ""),
@@ -320,25 +316,23 @@ class GroupViewController: UIViewController {
     }
     
     @IBAction func createNewGroupButtonPressed(_ sender: Any) {
+        
         ui_newGroupNameTextField.resignFirstResponder()
         guard let newGroupName = ui_newGroupNameTextField.text else {return print("textFiled is empty")}
+        
         if let selectedGroup = _groupToModify {
             _currentYear.modifyGroupTitle(forGroup: selectedGroup, withNewTitle: newGroupName)
             _groupToModify = nil
             animateOut()
         }else {
-            let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName, isListFiltered)
+            let groupExists = _currentYear.checkForDuplicate(forGroupName: newGroupName)
             if groupExists == false {
-                _ = _currentYear.addGroup(withTitle: newGroupName, isListFiltered)
+                _ = _currentYear.addGroup(withTitle: newGroupName, isListFiltered: isListFiltered)
                 animateOut()
             }else {
                 let alertController = UIAlertController(title: createNewFolderWarningTitle, message: createNewFolderWarningMessage, preferredStyle: .alert)
                 let createAction = UIAlertAction(title: createAddActionTitle, style: .default, handler: { (_) in
-                    if let newGroup = self._currentYear.addGroup(withTitle: newGroupName, self.isListFiltered) {
-                        for monthName in self.monthArray {
-                            newGroup.addMonth(monthName)
-                        }
-                    }
+                    self._currentYear.addGroup(withTitle: newGroupName, isListFiltered: self.isListFiltered)
                     self.animateOut()
                 })
                 let cancelCreationAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)
@@ -485,8 +479,7 @@ class GroupViewController: UIViewController {
         if segue.identifier == "show_invoiceCollectionVC" {
             if let destinationVC = segue.destination as? InvoiceCollectionViewController,
                 let selectedGroupIndex = groupCV.indexPathsForSelectedItems?.first,
-                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row, isListFiltered) {
-                    destinationVC._ptManager = _manager
+                let selectedGroup = _currentYear.getGroup(atIndex: selectedGroupIndex.row, isListFiltered: isListFiltered) {
                     destinationVC._ptCurrentGroup = selectedGroup
                     destinationVC._ptYear = _currentYear
                     destinationVC._ptFontSize = collectionViewFontSize
@@ -508,7 +501,7 @@ extension GroupViewController: UICollectionViewDataSource {
 
         let cell_group = collectionView.dequeueReusableCell(withReuseIdentifier: "cell_group", for: indexPath) as! GroupCollectionViewCell
 
-        if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered) {
+        if let group = _currentYear.getGroup(atIndex: indexPath.row, isListFiltered: isListFiltered) {
             cell_group.setValues(group, fontSize: collectionViewFontSize)
         }
 
@@ -542,9 +535,9 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let modify = UIAlertAction(title: editFolderActionTitle, style: .default) { (_) in
-            if let indexPath = self.groupCV.indexPath(for: groupCell),
-                let group = self._currentYear.getGroup(atIndex: indexPath.row, self.isListFiltered) {
-                    self.ui_newGroupNameTextField.text = group.title
+            if let groupName = groupCell.ui_titleLabel.text,
+                let group = self._currentYear.getGroup(forName: groupName, isListFiltered: self.isListFiltered) {
+                    self.ui_newGroupNameTextField.text = groupName
                     self.ui_newGroupNameTextField.becomeFirstResponder()
                     self._groupToModify = group
                     self.setupBlackView()
@@ -557,12 +550,13 @@ extension GroupViewController: GroupCollectionViewCellDelegate {
             let deleteAction = UIAlertAction(title: self.deleteActionTitle, style: .destructive, handler: { (_) in
                 if let indexPath = self.groupCV.indexPath(for: groupCell),
                     let groupNameToDelete = groupCell.ui_titleLabel.text,
-                    let group = self._currentYear.getGroup(forName: groupNameToDelete, self.isListFiltered),
-                    let groupIndex = self._currentYear.getGroupIndex(forGroup: group) {
-                        self._currentYear.removeGroup(atIndex: groupIndex)
-                        self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
+                    let groupToDelete = self._currentYear.getGroup(forName: groupNameToDelete, isListFiltered: self.isListFiltered) {
+//                    let groupIndex = self._currentYear.getGroupIndex(forGroup: group) {
+//                        self._currentYear.removeGroup(atIndex: groupIndex)
+                        self._currentYear.removeGroup(groupToDelete)
+//                        self._currentYear.removeGroupinListToShow(atIndex: indexPath.row)
                         self.groupCV.deleteItems(at: [indexPath])
-                        self.groupCV.reloadData()
+//                        self.groupCV.reloadData()
                 }
             })
             let cancelDeletion = UIAlertAction(title: self.cancelActionTitle, style: .cancel, handler: nil)

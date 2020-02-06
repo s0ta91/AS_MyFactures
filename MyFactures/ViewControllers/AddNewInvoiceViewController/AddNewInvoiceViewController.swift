@@ -40,22 +40,23 @@ class AddNewInvoiceViewController: UIViewController {
     
     
     //MARK: - paththrough Managers/Objects
-    var _ptManager: Manager?
-    var _ptYear: Year?
-    var _ptGroup: Group?
-    var _ptMonth: Month?
-    var _ptInvoice: Invoice?
+    var _ptYear: YearCD?
+    var _ptGroup: GroupCD?
+    var _ptMonth: MonthCD?
+    var _ptInvoice: InvoiceCD?
     var _modifyInvoice: Bool = false
     var _fromOtherApp: Bool = false
     var _ptLoginVC: UIViewController?
     var _ptPickedDocument: Any?
     
     //MARK: - Global variable filled with passthrough Managers/objects
-    private var _manager: Manager!
-    private var _year: Year!
-    private var _group: Group!
-    private var _month: Month!
-    private var _invoice: Invoice!
+    private var _manager: Manager {
+        return Manager.instance
+    }
+    private var _year: YearCD!
+    private var _group: GroupCD!
+    private var _month: MonthCD!
+    private var _invoice: InvoiceCD!
     private var _loginVC: UIViewController!
     
     
@@ -129,9 +130,7 @@ class AddNewInvoiceViewController: UIViewController {
     //MARK: - Private functions
     //TODO: Check if data received from previous controller are all set
     private func checkReceivedData () {
-        guard let receivedManager = _ptManager else { fatalError("Manager :\(String(describing: _ptManager)) unknown") }
         guard let receivedYear = _ptYear else { fatalError("Year :\(String(describing: _ptYear)) unknown") }
-        _manager = receivedManager
         _year = receivedYear
         
         if _fromOtherApp {
@@ -195,8 +194,8 @@ class AddNewInvoiceViewController: UIViewController {
                 ui_descriptionTextField.text = _invoice.detailedDescription
                 ui_yearSelectionTextField.text = String(_year.year)
                 ui_groupSelectionTextField.text = groupTitle
-                ui_monthSelectionTextField.text = _month.month
-                ui_categorySelectionTextField.text = _invoice.categoryObject?.title
+                ui_monthSelectionTextField.text = _month.name
+                ui_categorySelectionTextField.text = _invoice.category?.title
                 ui_amountTextField.text = String(describing: _invoice.amount)
                 
                 if _invoice.identifier != nil {
@@ -278,7 +277,7 @@ class AddNewInvoiceViewController: UIViewController {
         }
     }
 
-    private func isGroup(forYear year: Year) -> Bool {
+    private func isGroup(forYear year: YearCD) -> Bool {
         if year.getGlobalGroupCount() != 0 {
             return true
         } else {
@@ -431,7 +430,8 @@ class AddNewInvoiceViewController: UIViewController {
         if let textFieldValue = ui_addNewGroupOrCategoryTextField.text {
             if _isNewGroup {
                 if !_year.groupExist(forGroupName: textFieldValue) {
-                    ui_groupSelectionTextField.text = _year.addGroup(withTitle: textFieldValue, false)?.title
+                    _year.addGroup(withTitle: textFieldValue, isListFiltered: false)
+                    ui_groupSelectionTextField.text = _year.getGroup(forName: textFieldValue)?.title
                     ui_groupSelectionTextField.isEnabled = true
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
@@ -441,7 +441,7 @@ class AddNewInvoiceViewController: UIViewController {
             } else {
                 let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: textFieldValue)
                 if categoryExists == false {
-                    let createdCategory = _manager.addCategory(textFieldValue)
+                    let createdCategory = _manager.addCategory(textFieldValue, isSelected: false, topList: false)
                     ui_categorySelectionTextField.text = createdCategory.title
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
@@ -468,8 +468,7 @@ class AddNewInvoiceViewController: UIViewController {
     //TODO: Add invoice to collectionView + DB
     @IBAction func addNewInvoiceButtonPressed(_ sender: UIButton) {
         let categoryName = getCategoryName()
-        var categoryObject: Category? = nil
-        
+        var categoryObject: CategoryCD? = nil
         
         if let description = ui_descriptionTextField.text,
             let monthString = ui_monthSelectionTextField.text,
@@ -482,19 +481,20 @@ class AddNewInvoiceViewController: UIViewController {
                 }
             
                 let amountDouble = Double(truncating: convertedAmount as NSNumber)
-                let newMonth = group.checkIfMonthExist(forMonthName: monthString)
-            
-                if _modifyInvoice == false {
-                    SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
-                }else {
-                    var _extension = _documentExtension
-                    if let documentId = _invoice.identifier,
-                        let invoiceDocumentExtension = _invoice.documentType {
-                        _extension = invoiceDocumentExtension
-                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+                
+            if let newMonth = group.checkIfMonthExist(forMonthName: monthString) {
+                    if _modifyInvoice == false {
+                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
+                    } else {
+                        var _extension = _documentExtension
+                        if let documentId = _invoice.identifier,
+                            let invoiceDocumentExtension = _invoice.documentType {
+                            _extension = invoiceDocumentExtension
+                            deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+                        }
+                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
+                        
                     }
-                    SaveManager.saveDocument(document: _pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
-                    
                 }
             
                 if self._fromOtherApp {
@@ -516,7 +516,7 @@ class AddNewInvoiceViewController: UIViewController {
                     }
                     dismiss(animated: true, completion: nil)
             }
-            
+
         } else {
             if ui_groupSelectionTextField.text == noFolderAvailable {
                 Alert.message(title: errorActionTitle, message: createFolderActionMessage, vc: self)
@@ -574,7 +574,6 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             categoryPickerView = CategoryPicker()
             ui_categorySelectionTextField.inputView = _pickerView
             _pickerView.delegate = categoryPickerView
-            categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
             categoryPickerView.selectDefaultRow(forCategoryName: ui_categorySelectionTextField.text!, forPickerView: _pickerView)
         }

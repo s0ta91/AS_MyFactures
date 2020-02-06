@@ -1,5 +1,5 @@
 //
-//  yearsList.swift
+//  RealmYear.swift
 //  MesFactures
 //
 //  Created by Sébastien on 10/01/2018.
@@ -12,9 +12,10 @@ import RealmSwift
 class Year: Object {
     @objc private dynamic var _year: Int = 0
     @objc private dynamic var _selected: Bool = false
-    private var _groupList = List<Group>()
+    var _groupList = List<Group>()
+    
     private var _groupArray: [String] = []
-    private var _groupListToShow : [Group] = []
+    var _groupListToShow : [Group] = []
 
     
     var year: Int {
@@ -127,7 +128,7 @@ class Year: Object {
         return group
     }
     
-    func modifyGroupTitle (forGroup group: Group, withNewTitle newTitle: String) {
+    func modifyGroupTitle (forGroup group: GroupCD, withNewTitle newTitle: String) {
         group.title = newTitle
     }
     
@@ -153,3 +154,4 @@ class Year: Object {
         _groupListToShow.remove(at: index)
     }
 }
+
