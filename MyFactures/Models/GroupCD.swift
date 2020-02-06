@@ -12,7 +12,6 @@ import CoreData
 public class GroupCD: NSManagedObject {
     
     let manager = Manager.instance
-    let ALL_CATEGORY_TEXT = NSLocalizedString("All categories", comment: "")
     
     private var _monthList: [MonthCD] {
         let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()

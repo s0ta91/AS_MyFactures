@@ -441,7 +441,7 @@ class AddNewInvoiceViewController: UIViewController {
             } else {
                 let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: textFieldValue)
                 if categoryExists == false {
-                    let createdCategory = _manager.addCategory(textFieldValue)
+                    let createdCategory = _manager.addCategory(textFieldValue, isSelected: false, topList: false)
                     ui_categorySelectionTextField.text = createdCategory.title
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()
                     animateOut(forSubview: ui_createGroupOrCategoryView)
@@ -574,7 +574,6 @@ extension AddNewInvoiceViewController: UITextFieldDelegate {
             categoryPickerView = CategoryPicker()
             ui_categorySelectionTextField.inputView = _pickerView
             _pickerView.delegate = categoryPickerView
-            categoryPickerView._manager = _manager
             categoryPickerView._categoryTextField = ui_categorySelectionTextField
             categoryPickerView.selectDefaultRow(forCategoryName: ui_categorySelectionTextField.text!, forPickerView: _pickerView)
         }

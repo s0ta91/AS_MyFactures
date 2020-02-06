@@ -31,9 +31,6 @@ class ManageCategoryTableViewController: UIViewController {
     }()
     
     //TODO: Internal variables
-    private var _manager: Manager {
-        return Manager.instance
-    }
     private var _selectedCategoryToModify: CategoryCD!
     private var _visualEffect: UIVisualEffect!
     let BUTTON_SIZE: CGFloat = 56
@@ -153,13 +150,13 @@ class ManageCategoryTableViewController: UIViewController {
     
     @IBAction func modifyCategory(_ sender: Any) {
         guard let newCategoryName = ui_modifyCategoryTextField.text else {return print("textField is empty")}
-        let categoryExists = _manager.checkForDuplicateCategory(forCategoryName: newCategoryName)
+        let categoryExists = Manager.instance.checkForDuplicateCategory(forCategoryName: newCategoryName)
         if categoryExists == false {
             if ui_addNewCategoryButton.titleLabel?.text == addNewCategoryButtonAddText {
-                _ = _manager.addCategory(newCategoryName)
+                _ = Manager.instance.addCategory(newCategoryName, isSelected: false, topList: false)
             }
             else if ui_addNewCategoryButton.titleLabel?.text == addNewCategoryButtonConfirmText {
-                _manager.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
+                Manager.instance.modifyCategoryTitle(forCategory: _selectedCategoryToModify, withNewTitle: newCategoryName)
             }
             ui_manageCategoryTableView.reloadData()
             animateOut(forSubview: ui_modifyCategoryView)
@@ -175,26 +172,41 @@ class ManageCategoryTableViewController: UIViewController {
 // MARK: - Table view data source
 extension ManageCategoryTableViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return _manager.getCategoryCount()
+        if section == 0 {
+            return Manager.instance.getTopCategoryCount()
+        } else {
+            return Manager.instance.getCategoryCount()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell_category = tableView.dequeueReusableCell(withIdentifier: "cell_category", for: indexPath)
-        if let category = _manager.getCategory(atIndex: indexPath.row) {
+        
+        if indexPath.section == 0 {
+            let topCategory = Manager.instance.getTopCategory(atIndex: indexPath.row)
+            cell_category.textLabel?.text = topCategory.title
+            if topCategory.selected == true {
+                cell_category.accessoryType = .checkmark
+            }else {
+                cell_category.accessoryType = .none
+            }
+            return cell_category
+        } else {
+            let category = Manager.instance.getCategory(atIndex: indexPath.row)
             cell_category.textLabel?.text = category.title
             if category.selected == true {
                 cell_category.accessoryType = .checkmark
             }else {
                 cell_category.accessoryType = .none
             }
+            
+            return cell_category
         }
-        return cell_category
     }
 
 }
@@ -202,21 +214,22 @@ extension ManageCategoryTableViewController: UITableViewDataSource {
 //MARK: - Table view delegate
 extension ManageCategoryTableViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        guard indexPath.section != 0 else { return nil }
+        
         let editAction = UITableViewRowAction(style: .normal, title: editRowActionTitle) { (action: UITableViewRowAction, indexPath: IndexPath) in
-            if let category = self._manager.getCategory(atIndex: indexPath.row) {
-                self._selectedCategoryToModify = category
-                self.ui_modifyCategoryTextField.text = category.title
-                self.ui_modifyCategoryTextField.becomeFirstResponder()
-                self.ui_addNewCategoryButton.setTitle(self.addNewCategoryButtonConfirmText, for: .normal)
-                self.animateIn(forSubview: self.ui_modifyCategoryView)
-            }
+            let category = Manager.instance.getCategory(atIndex: indexPath.row)
+            self._selectedCategoryToModify = category
+            self.ui_modifyCategoryTextField.text = category.title
+            self.ui_modifyCategoryTextField.becomeFirstResponder()
+            self.ui_addNewCategoryButton.setTitle(self.addNewCategoryButtonConfirmText, for: .normal)
+            self.animateIn(forSubview: self.ui_modifyCategoryView)
         }
         editAction.backgroundColor = UIColor(named: "EditButtonGrey")
         
         let deleteAction = UITableViewRowAction(style: .destructive, title: deleteRowActionTitle) { (action: UITableViewRowAction, indexPath: IndexPath) in
             let alert = UIAlertController(title: self.deleteCategoryAlertTitle, message: self.deleteCategoryAlertMessage, preferredStyle: .alert)
             let deleteAction = UIAlertAction(title: self.deleteRowActionTitle, style: .destructive) { (_) in
-                self._manager.removeCategory(atIndex: indexPath.row)
+                Manager.instance.removeCategory(atIndex: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             
@@ -231,16 +244,21 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let selectedCategory = _manager.getCategory(atIndex: indexPath.row) {
-            _manager.setSelectedCategory(forCategory: selectedCategory)
-            tableView.reloadData()
-            if #available(iOS 13, *) {
-                if let presentationController = presentationController {
-                    presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-                }
-            }
-            dismiss(animated: true, completion: nil)
+        let selectedCategory: CategoryCD
+        if indexPath.section == 0 {
+            selectedCategory = Manager.instance.getTopCategory(atIndex: indexPath.row)
+        } else {
+            selectedCategory = Manager.instance.getCategory(atIndex: indexPath.row)
         }
+        
+        Manager.instance.setSelectedCategory(forCategory: selectedCategory)
+        tableView.reloadData()
+        if #available(iOS 13, *) {
+            if let presentationController = presentationController {
+                presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 
 }

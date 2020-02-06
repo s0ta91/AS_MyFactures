@@ -6,6 +6,7 @@
     <entity name="Category" representedClassName=".CategoryCD" syncable="YES" codeGenerationType="class">
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="toplist" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <relationship name="invoice" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="category" inverseEntity="Invoice"/>
     </entity>
     <entity name="Group" representedClassName=".GroupCD" syncable="YES" codeGenerationType="category">
@@ -38,7 +39,7 @@
     </entity>
     <elements>
         <element name="ApplicationData" positionX="-221.28125" positionY="-401.72265625" width="128" height="58"/>
-        <element name="Category" positionX="-194.66015625" positionY="-136.76953125" width="128" height="88"/>
+        <element name="Category" positionX="-194.66015625" positionY="-136.76953125" width="128" height="103"/>
         <element name="Group" positionX="-663.52734375" positionY="-294.75" width="128" height="118"/>
         <element name="Invoice" positionX="-408.30859375" positionY="-166.5234375" width="131.96875" height="133"/>
         <element name="Month" positionX="-826.04296875" positionY="-142.39453125" width="128" height="133"/>

@@ -36,18 +36,6 @@ class Manager {
                         NSLocalizedString("November", comment: ""),
                         NSLocalizedString("December", comment: "")]
     
-    //private var _monthList: [Month] = []
-    private var _monthList: [MonthCD] {
-        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
-        do {
-            return try Manager.instance.context.fetch(monthRequest)
-        } catch (let error) {
-            print("Error fetching groups from DB: \(error)")
-            return [MonthCD]()
-        }
-    }
-    
-    
     // MARK: REALM
     var _realm: Realm?
     private var _realmYears: Results<Year>?
@@ -59,7 +47,40 @@ class Manager {
     // MARK: - COREDATA
     private var _cdApplicationDataList: [ApplicationData]
     private var _cdYearsList: [YearCD]
-    private var _cdCategoryList: [CategoryCD]
+    private var _monthList: [MonthCD] {
+        let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
+        do {
+            return try Manager.instance.context.fetch(monthRequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [MonthCD]()
+        }
+    }
+    private var _cdTopCategories: [CategoryCD] {
+        let categoryrequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+        categoryrequest.predicate = NSPredicate(format: "toplist == %@", NSNumber(value: true))
+        categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        do {
+            return try Manager.instance.context.fetch(categoryrequest)
+        } catch (let error) {
+            print("Error fetching groups from DB: \(error)")
+            return [CategoryCD]()
+        }
+    }
+    private var _cdCategoriesList: [CategoryCD] {
+        get {
+            let categoryrequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+            categoryrequest.predicate = NSPredicate(format: "toplist == %@", "false")
+            categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+            do {
+                return try Manager.instance.context.fetch(categoryrequest)
+            } catch (let error) {
+                print("Error fetching groups from DB: \(error)")
+                return [CategoryCD]()
+            }
+        }
+        set {}
+    }
 //    private var _cdGroupIdeaList: [GroupIdea]
     
     
@@ -88,13 +109,13 @@ class Manager {
         }
         
         // Load CoreData Categories
-        let categoriesRequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
-        do {
-            _cdCategoryList = try context.fetch(categoriesRequest)
-        } catch (let error) {
-            _cdCategoryList = [CategoryCD]()
-            print("Error fetching categories: \(error)")
-        }
+//        let categoriesRequest: NSFetchRequest<CategoryCD> = CategoryCD.fetchRequest()
+//        do {
+//            _cdCategoryList = try context.fetch(categoriesRequest)
+//        } catch (let error) {
+//            _cdCategoryList = [CategoryCD]()
+//            print("Error fetching categories: \(error)")
+//        }
         
         // Load CoreData Group ideas
 //       let groupIdeasRequest: NSFetchRequest<GroupIdea> = GroupIdea.fetchRequest()
@@ -396,80 +417,126 @@ class Manager {
     // MARK: CATEGORY Functions
     func initCategory () {
         if getApplicationDataCount() == 0 {
-            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true)
-            _ = addCategory(NSLocalizedString("Unclassified", comment: ""))
+            _ = addCategory(NSLocalizedString("All categories", comment: ""), isSelected: true, topList: true)
+            _ = addCategory(NSLocalizedString("Unclassified", comment: ""), isSelected: false, topList: true)
         }
-        print("init categoryList?")
-        _cdCategoryList.forEach { (category) in
-            print(category)
-        }
+//        print("init categoryList?")
+//        _cdCategoryList.forEach { (category) in
+//            print(category)
+//        }
     }
     
     func getCategoryCount () -> Int {
-        return _cdCategoryList.count
+        return _cdCategoriesList.count
     }
     
-    func getCategory (atIndex index: Int) -> CategoryCD? {
-        return _cdCategoryList[index]
+    func getTopCategoryCount() -> Int {
+        return _cdTopCategories.count
     }
     
-    func getCategoryIndex (forCategory category: CategoryCD) -> Int!{
-        return _cdCategoryList.firstIndex(of: category)
+    func getTopCategory(atIndex index: Int) -> CategoryCD {
+        return _cdTopCategories[index]
+    }
+    
+    func getCategory (atIndex index: Int) -> CategoryCD {
+        return _cdCategoriesList[index]
+    }
+    
+    func getCategoryIndex (forCategory category: CategoryCD) -> Int? {
+        if category.toplist {
+            return _cdTopCategories.firstIndex(of: category)
+        } else {
+            return _cdCategoriesList.firstIndex(of: category)
+        }
     }
     
     func getCategory (forName categoryName: String) -> CategoryCD? {
-        guard let categoryIndex = _cdCategoryList.firstIndex(where: { (category) -> Bool in
-            category.title == categoryName
-        }) else { return nil }
-        
-        return getCategory(atIndex: categoryIndex)
+        if let category = _cdCategoriesList.first(where: { (category) -> Bool in
+            categoryName == category.title
+        }) {
+            return category
+        } else if let category = _cdTopCategories.first(where: { (category) -> Bool in
+            categoryName == category.title
+        }) {
+            return category
+        } else {
+            return nil
+        }
     }
     
-    func addCategory (_ categoryTitle: String, isSelected: Bool? = false) -> CategoryCD {
+    func getPickerCategories() -> [String] {
+        var pickerCategories = [String]()
+        pickerCategories.append(_cdTopCategories[1].title!)
+        _cdCategoriesList.forEach { (category) in
+            pickerCategories.append(category.title!)
+        }
+        return pickerCategories
+    }
+    
+    func addCategory (_ categoryTitle: String, isSelected: Bool, topList: Bool) -> CategoryCD {
         let newCategory = CategoryCD(context: context)
         newCategory.title = categoryTitle
-        newCategory.selected = isSelected!
+        newCategory.selected = isSelected
+        newCategory.toplist = topList
         saveCoreDataContext()
         return newCategory
     }
 
     func checkForDuplicateCategory (forCategoryName categoryName: String) -> Bool {
         var categoryNameExists: Bool = false
-        for categoryIndex in 0..<getCategoryCount() {
-            if let existingCategoryToCheck = getCategory(atIndex: categoryIndex) {
-                if categoryName == existingCategoryToCheck.title {
-                    categoryNameExists = true
-                }
+        
+        _cdCategoriesList.forEach({ (category) in
+            if categoryName == category.title {
+                categoryNameExists.toggle()
+            }
+        })
+        
+        _cdTopCategories.forEach { (category) in
+            if categoryName == category.title {
+                categoryNameExists.toggle()
             }
         }
+        
         return categoryNameExists
     }
     
     func getSelectedCategory () -> CategoryCD? {
-        guard let selectedCategory = _cdCategoryList.first(where: { (category) -> Bool in
+        if let selectedCategory = _cdCategoriesList.first(where: { (category) -> Bool in
             category.selected == true
-        }) else { return nil }
-        return selectedCategory
+            }){
+            return selectedCategory
+        } else if let selectedCategory = _cdTopCategories.first(where: { (category) -> Bool in
+            category.selected == true
+        }){
+            return selectedCategory
+        } else {
+            return nil
+        }
     }
     
     func setSelectedCategory (forCategory newSelectedCategory: CategoryCD) {
-        _cdCategoryList.forEach { (category) in
+        
+        _cdTopCategories.forEach { (category) in
             category.selected = false
         }
+    
+        _cdCategoriesList.forEach { (category) in
+            category.selected = false
+        }
+        
         newSelectedCategory.selected = true
         saveCoreDataContext()
     }
     
     func modifyCategoryTitle (forCategory category: CategoryCD, withNewTitle newTitle: String) {
         category.title = newTitle
+        saveCoreDataContext()
     }
     
     func removeCategory (atIndex index: Int) {
-        if let categoryToDelete = getCategory(atIndex: index) {
-            _cdCategoryList.remove(at: index)
-            context.delete(categoryToDelete)
-            saveCoreDataContext()
-        }
+        let categoryToDelete = getCategory(atIndex: index)
+        context.delete(categoryToDelete)
+        saveCoreDataContext()
     }
     
     func setButtonLayer (_ button: UIButton) {
