@@ -51,10 +51,6 @@ public class MonthCD: NSManagedObject {
         setTotalDocuments()
     }
     
-    func getInvoicesCount() -> Int {
-        return _cdInvoiceList.count
-    }
-    
     func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {
         _invoiceListToShow.removeAll(keepingCapacity: false)
         var invoiceResults: [InvoiceCD]
@@ -113,10 +109,12 @@ public class MonthCD: NSManagedObject {
     
     func removeInvoice (invoice: InvoiceCD) {
         guard let invoiceIndex = _cdInvoiceList.firstIndex(of: invoice) else { return }
-        _invoiceListToShow.remove(at: invoiceIndex)
-        update()
+        guard let invoiceToShowIndex = _invoiceListToShow.firstIndex(of: invoice) else { return }
+        _cdInvoiceList.remove(at: invoiceIndex)
+        _invoiceListToShow.remove(at: invoiceToShowIndex)
         manager.context.delete(invoice)
         manager.saveCoreDataContext()
+        update()
     }
     
     func getTotalAmount () -> Double {

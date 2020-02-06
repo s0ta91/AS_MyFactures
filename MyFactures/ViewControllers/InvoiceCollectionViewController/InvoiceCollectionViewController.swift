@@ -217,8 +217,7 @@ class InvoiceCollectionViewController: UIViewController {
         return invoice
     }
     
-    //TODO: Create the function to delete a cell
-    //TODO: Create the function to delete a cell
+    //TODO: delete a cell
     func delete(invoice: InvoiceCollectionViewCell) {
         if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
             let monthIndex = _monthToShow[indexPath.section]
@@ -253,38 +252,38 @@ class InvoiceCollectionViewController: UIViewController {
     }
     
     //TODO: Create the function to share the invoice
-        func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
-            if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
-                
-                let monthIndex = _monthToShow[indexPath.section]
-                if let month = getCurrentMonth(atIndex: monthIndex),
-                    let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
-                    let invoiceIdentifier = selectedInvoice.identifier,
-                    let invoiceDocumentExtension = selectedInvoice.documentType,
-                    let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
-                    let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
+    func share(invoice: InvoiceCollectionViewCell, buttonPressed: UIButton) {
+        if let indexPath = invoiceCollectionView.indexPath(for: invoice) {
+            
+            let monthIndex = _monthToShow[indexPath.section]
+            if let month = getCurrentMonth(atIndex: monthIndex),
+                let selectedInvoice = getSelectedInvoice(for: month, atInvoiceIndex: indexPath.row),
+                let invoiceIdentifier = selectedInvoice.identifier,
+                let invoiceDocumentExtension = selectedInvoice.documentType,
+                let documentToShareUrl = SaveManager.loadDocument(withIdentifier: invoiceIdentifier, andExtension: invoiceDocumentExtension) {
+                let activityViewController = UIActivityViewController(activityItems: [documentToShareUrl], applicationActivities: nil)
 
-                    if let popoverController = activityViewController.popoverPresentationController {
-                        popoverController.sourceView = invoice.contentView
-                        popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
-                        popoverController.permittedArrowDirections = .up
-                    }
-                    present(activityViewController, animated: true, completion: nil)
-                }else {
-                    /*** DEBUG ***/
-    //                let month = getCurrentMonth(atIndex: monthIndex)
-    //                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
-    //                print("invoice: \(selectedInvoice)")
-                    /*******************/
-                    let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
-                    let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
-    //                    self.dismiss(animated: true, completion: nil)
-                    })
-                    alertController.addAction(validAction)
-                    present(alertController, animated: true, completion: nil)
+                if let popoverController = activityViewController.popoverPresentationController {
+                    popoverController.sourceView = invoice.contentView
+                    popoverController.sourceRect = CGRect(x: buttonPressed.frame.midX, y: buttonPressed.frame.maxY, width: 0, height: 0)
+                    popoverController.permittedArrowDirections = .up
                 }
+                present(activityViewController, animated: true, completion: nil)
+            }else {
+                /*** DEBUG ***/
+//                let month = getCurrentMonth(atIndex: monthIndex)
+//                let selectedInvoice = getSelectedInvoice(for: month!, atInvoiceIndex: indexPath.row)
+//                print("invoice: \(selectedInvoice)")
+                /*******************/
+                let alertController = UIAlertController(title: noDocumentAssociatedTitle, message: nil, preferredStyle: .alert)
+                let validAction = UIAlertAction(title: "OK", style: .default, handler: { (_) in
+//                    self.dismiss(animated: true, completion: nil)
+                })
+                alertController.addAction(validAction)
+                present(alertController, animated: true, completion: nil)
             }
         }
+    }
     
     //TODO: - Create the function to modify an invoice
     func modify(invoice: InvoiceCollectionViewCell) {
