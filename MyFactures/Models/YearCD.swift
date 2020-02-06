@@ -89,7 +89,7 @@ public class YearCD: NSManagedObject {
 //    }
     
     func removeGroup(_ groupToDelete: GroupCD) {
-        if let groupIndex = _cdGroupList.firstIndex(of: groupToDelete) {
+        if let groupIndex = _groupListToShow.firstIndex(of: groupToDelete) {
             _groupListToShow.remove(at: groupIndex)
         }
         
