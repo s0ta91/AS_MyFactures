@@ -114,7 +114,7 @@ public class YearCD: NSManagedObject {
     }
     
     func getGroupCount() -> Int {
-        return _cdGroupList.count
+        return _groupListToShow.count
     }
     
     func checkForDuplicate(forGroupName groupName: String) -> Bool {
