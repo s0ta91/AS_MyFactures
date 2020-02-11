@@ -220,6 +220,12 @@ class AddNewInvoiceViewController: UIViewController {
             ui_documentAddedLabel.isHidden = true
             ui_deleteAddedDocumentButton.isHidden = true
             ui_addNewDocumentButton.isHidden = false
+            
+            if  let invoice = _invoice,
+                let documentId = invoice.identifier,
+                let invoiceDocumentExtension = invoice.documentType {
+                deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension, _modifyInvoice)
+            }
         }else {
             ui_documentAddedLabel.isHidden = false
             ui_deleteAddedDocumentButton.isHidden = false
@@ -490,13 +496,13 @@ class AddNewInvoiceViewController: UIViewController {
                         self.dismissViewController()
                     })
                 } else {
-                    var _extension = _documentExtension
-                    if let documentId = _invoice.identifier,
-                        let invoiceDocumentExtension = _invoice.documentType {
-                        _extension = invoiceDocumentExtension
-                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
-                    }
-                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension, completion: { invoice in
+//                    var _extension = _documentExtension
+//                    if let documentId = _invoice.identifier,
+//                        let invoiceDocumentExtension = _invoice.documentType {
+//                        _extension = invoiceDocumentExtension
+//                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+//                    }
+                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _invoice.documentType ?? _documentExtension, completion: { invoice in
                         self._ptInvoice = invoice
                         self.dismissViewController()
                     })

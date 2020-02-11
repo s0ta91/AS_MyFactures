@@ -16,6 +16,7 @@ public class MonthCD: NSManagedObject {
         get {
             let invoicesRequest: NSFetchRequest<InvoiceCD> = InvoiceCD.fetchRequest()
             let invoicesPredicate = NSPredicate(format: "month == %@", self)
+            invoicesRequest.sortDescriptors = [NSSortDescriptor(key: "detailedDescription", ascending: true)]
             invoicesRequest.predicate = invoicesPredicate
             
             do {
@@ -40,7 +41,6 @@ public class MonthCD: NSManagedObject {
         newInvoice.detailedDescription = description
         newInvoice.category = categoryObject
         newInvoice.amount = amount
-        
         _cdInvoiceList.append(newInvoice)
         manager.saveCoreDataContext()
         update()
@@ -54,15 +54,15 @@ public class MonthCD: NSManagedObject {
     
     func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {
         _invoiceListToShow.removeAll(keepingCapacity: false)
-        var invoiceResults: [InvoiceCD]
+//        var invoiceResults: [InvoiceCD]
         
         if receivedCategory.title == ALL_CATEGORY_TEXT && searchText != "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let detailDescription = invoice.detailedDescription else { return false }
                 return detailDescription.contains(searchText)
             }
         }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText != "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let category = invoice.category else { return false }
                 return receivedCategory == category
             }.filter({ (invoice) -> Bool in
@@ -70,17 +70,24 @@ public class MonthCD: NSManagedObject {
                 return detailDescription.contains(searchText)
             })
         }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText == "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let category = invoice.category else { return false }
                 return receivedCategory == category
             }
         }else {
-            invoiceResults = _cdInvoiceList
+            _invoiceListToShow = _cdInvoiceList
         }
         
-        invoiceResults.forEach { (invoice) in
-            _invoiceListToShow.append(invoice)
-        }
+//        invoiceResults.forEach { (invoice) in
+//            let index = _invoiceListToShow.insertionIndex(of: invoice) { (invoice1, invoice2) -> Bool in
+//                guard let title1 = invoice1.detailedDescription,
+//                    let title2 = invoice2.detailedDescription else { return false }
+//                return title1 < title2
+//            }
+//            _invoiceListToShow.insert(invoice, at: index)
+//        }
+        
+        
     }
     
     func getInvoiceCount () -> Int {

@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "6663BC8A-2BB4-432A-BF53-94CA5153E28A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyFactures/ViewControllers/InvoiceCollectionViewController/InvoiceCollectionViewController.swift"
@@ -40,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A77F9E06-A3B5-48E5-B8B1-C900D07B34F1"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyFactures/ViewControllers/InvoiceCollectionViewController/InvoiceCollectionViewController.swift"
@@ -113,6 +113,22 @@
             startingLineNumber = "374"
             endingLineNumber = "374"
             landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "623DF649-DA9C-45BA-9BC9-132FABCA74B7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyFactures/Models/MonthCD.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "addInvoice(description:amount:categoryObject:identifier:documentType:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

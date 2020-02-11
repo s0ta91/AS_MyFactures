@@ -177,19 +177,19 @@ class Manager {
     }
     
     func initYear () {
-        print("init years")
+//        print("init years")
         let _currentDate = Date()
         let calendar = Calendar.current
         let currentYear = calendar.component(.year, from: _currentDate)
-        print("ApplicationDataCount: \(getApplicationDataCount())")
+//        print("ApplicationDataCount: \(getApplicationDataCount())")
         if getApplicationDataCount() == 0 {
             let yearsStartAt = 1900
             for calculatedYears in yearsStartAt...currentYear {
-                print("add year \(calculatedYears)")
+//                print("add year \(calculatedYears)")
                 addYear(calculatedYears)
             }
             _cdYearsList.last?.selected = true
-            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
+//            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
         } else {
             if let lastYear = _cdYearsList.first,
                 lastYear.year != currentYear {

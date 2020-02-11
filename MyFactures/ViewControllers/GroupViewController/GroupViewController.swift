@@ -279,7 +279,7 @@ class GroupViewController: UIViewController {
     }
     
     private func setFontSize (){
-        print("gcv size [\(groupCV.frame.size.width)]")
+//        print("gcv size [\(groupCV.frame.size.width)]")
         let collectionViewWidth = groupCV.frame.size.width
         if collectionViewWidth == 288 {
             collectionViewFontSize = 15

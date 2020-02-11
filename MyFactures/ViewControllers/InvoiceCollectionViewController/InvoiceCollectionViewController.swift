@@ -82,7 +82,7 @@ class InvoiceCollectionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("invoiceVC viewWillAppear")
+//        print("invoiceVC viewWillAppear")
         invoiceCollectionView.clipsToBounds = false
         
         // Check if data are reveived from previous VC otherwise app fatal crash because it can't run without these data
@@ -95,13 +95,13 @@ class InvoiceCollectionViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("invoiceVC viewDidAppear")
+//        print("invoiceVC viewDidAppear")
         NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("invoiceVC viewDidDisappear")
+//        print("invoiceVC viewDidDisappear")
         NotificationCenter.default.post(name: NSNotification.Name("enteringLeavingGroupVC"), object: nil)
     }
     
@@ -385,7 +385,7 @@ extension InvoiceCollectionViewController: UICollectionViewDataSource  {
         cell_invoice.layer.cornerRadius = 8
         cell_invoice.layer.shadowColor = UIColor.gray.cgColor
         if #available(iOS 13, *) {
-        cell_invoice.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
+            cell_invoice.layer.shadowColor = isDarkModeNeeded() ?  UIColor.white.cgColor : UIColor.gray.cgColor
         }
         cell_invoice.layer.shadowOpacity = 0.5
         cell_invoice.layer.shadowRadius = 5

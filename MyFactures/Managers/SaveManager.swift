@@ -44,7 +44,7 @@ class SaveManager {
                 save(documentAtUrl: documentUrl, to: documentDestinationURL) {
                     saveThumbnail(withFilename: thumbnailFilename, fromUrl: documentUrl, to: thumbnailDestinationURL, withDocumentExtention: documentExtension)
                 }
-            }else {
+            } else {
                 if let image = document as? UIImage {
                     save(image: image, atPath: documentDestinationURL.path) {
                         saveThumbnail(withFilename: thumbnailFilename, withImage: image, to: thumbnailDestinationURL, withDocumentExtention: documentExtension)

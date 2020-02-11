@@ -51,8 +51,8 @@ public class YearCD: NSManagedObject {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
-            print("\(year): return group \(String(describing: _cdGroupList[index].title))")
-            print("groupMonths: \(_cdGroupList[index].getMonthInfos())")
+//            print("\(year): return group \(String(describing: _cdGroupList[index].title))")
+//            print("groupMonths: \(_cdGroupList[index].getMonthInfos())")
             return _cdGroupList[index]
         }
     }

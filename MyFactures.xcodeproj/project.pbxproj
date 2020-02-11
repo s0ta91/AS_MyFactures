@@ -82,6 +82,7 @@
 		BE7A57E423C37FE800D90462 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E323C37FE800D90462 /* Month.swift */; };
 		BE7A57E623C3804700D90462 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E523C3804700D90462 /* Invoice.swift */; };
 		BE7A57E823C3809100D90462 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E723C3809100D90462 /* Category.swift */; };
+		BEBC93D023F32A410015CB73 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
@@ -187,6 +188,7 @@
 		BE7A57E323C37FE800D90462 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		BE7A57E523C3804700D90462 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		BE7A57E723C3809100D90462 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +274,7 @@
 				1D5B510821020AEA003BC535 /* UserDefaultsExtension.swift */,
 				BE29F6CF21B7FB9500BCCDDD /* UIView.swift */,
 				BEC77B0A23267CC700199319 /* UIImageExtension.swift */,
+				BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -685,6 +688,7 @@
 				1DAEAC262029F1A6001C144E /* GroupCollectionViewCell.swift in Sources */,
 				BE29F6C621B7F54D00BCCDDD /* SettingsLauncher.swift in Sources */,
 				1DFE14E4203ADF1500176EF3 /* MonthsPicker.swift in Sources */,
+				BEBC93D023F32A410015CB73 /* CollectionExtension.swift in Sources */,
 				BE7A57E223C37EF400D90462 /* Group.swift in Sources */,
 				BE5FB8C823C34B710036A3B3 /* MonthCD.swift in Sources */,
 				BE7A57E423C37FE800D90462 /* Month.swift in Sources */,
