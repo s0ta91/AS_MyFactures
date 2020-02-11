@@ -500,9 +500,13 @@ class AddNewInvoiceViewController: UIViewController {
 //                    if let documentId = _invoice.identifier,
 //                        let invoiceDocumentExtension = _invoice.documentType {
 //                        _extension = invoiceDocumentExtension
-//                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
+////                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
 //                    }
-                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _invoice.documentType ?? _documentExtension, completion: { invoice in
+                    if let documentExtension = _invoice.documentType,
+                        !documentExtension.isEmpty {
+                        _documentExtension = documentExtension
+                    }
+                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _documentExtension, completion: { invoice in
                         self._ptInvoice = invoice
                         self.dismissViewController()
                     })

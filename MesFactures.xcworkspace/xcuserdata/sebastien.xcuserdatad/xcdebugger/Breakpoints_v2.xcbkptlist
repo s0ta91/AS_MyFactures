@@ -132,5 +132,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3036005B-9652-4D42-81A8-315B8D1058D9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyFactures/ViewControllers/AddNewInvoiceViewController/AddNewInvoiceViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
+            landmarkName = "addNewInvoiceButtonPressed(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3036005B-9652-4D42-81A8-315B8D1058D9 - 36088207f5a2edde"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyFactures.AddNewInvoiceViewController.addNewInvoiceButtonPressed(__C.UIButton) -&gt; ()"
+                  moduleName = "MyFactures"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sebastien/Documents/apps/MyFactures/MyFactures/ViewControllers/AddNewInvoiceViewController/AddNewInvoiceViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "509"
+                  endingLineNumber = "509"
+                  offsetFromSymbolStart = "4846">
+               </Location>
+               <Location
+                  uuid = "3036005B-9652-4D42-81A8-315B8D1058D9 - 6f30353d3873e283"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (MyFactures.InvoiceCD) -&gt; () in MyFactures.AddNewInvoiceViewController.addNewInvoiceButtonPressed(__C.UIButton) -&gt; ()"
+                  moduleName = "MyFactures"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sebastien/Documents/apps/MyFactures/MyFactures/ViewControllers/AddNewInvoiceViewController/AddNewInvoiceViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "510"
+                  endingLineNumber = "510"
+                  offsetFromSymbolStart = "34">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C9D43A6-6BFA-486D-90EF-EE5D6913995E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyFactures/Managers/SaveManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "saveDocument(_:description:categoryObject:amount:currentMonth:newMonth:invoice:modify:documentAdded:documentType:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
