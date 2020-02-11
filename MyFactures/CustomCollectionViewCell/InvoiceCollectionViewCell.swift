@@ -30,6 +30,9 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
         if let invoiceIdentifier = invoice.identifier {
             let thumbnailUrl = SaveManager.getUrl(forIdentifier: invoiceIdentifier, documentType: .thumbnail)
             ui_invoiceDocumentThumbnail.loadImage(with: thumbnailUrl.absoluteString)
+        } else {
+            print("load \(invoice.detailedDescription) with missing document")
+            ui_invoiceDocumentThumbnail.loadImage(with: "missing_document")
         }
         ui_invoiceDocumentThumbnail.layer.cornerRadius = 4
         

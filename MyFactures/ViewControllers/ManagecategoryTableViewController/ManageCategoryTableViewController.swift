@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ManageCategoryTableViewController: UIViewController {
     
     //MARK: - Declarations
@@ -270,4 +272,8 @@ extension ManageCategoryTableViewController: UITextFieldDelegate {
     }
 }
 
-
+extension ManageCategoryTableViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        print("ManagedCategory controller has been dismissed")
+    }
+}

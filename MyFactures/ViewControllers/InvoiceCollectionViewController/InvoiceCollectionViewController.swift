@@ -76,7 +76,7 @@ class InvoiceCollectionViewController: UIViewController {
         setupReviewController()
         invoiceCollectionView.dataSource = self
         invoiceCollectionView.delegate = self
-        invoiceCollectionView.emptyDataSetSource = self
+//        invoiceCollectionView.emptyDataSetSource = self
         setupFloatingButton()
     }
     
@@ -90,7 +90,7 @@ class InvoiceCollectionViewController: UIViewController {
         setNavigationBarInfo()
         Manager.instance.setHeaderClippedToBound(invoiceCollectionView)
         
-        invoiceCollectionView.reloadData()
+//        invoiceCollectionView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -318,7 +318,7 @@ class InvoiceCollectionViewController: UIViewController {
     @objc private func showCategorySelector() {
         let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
         if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
-            manageCategoryVC.presentationController?.delegate = self
+            manageCategoryVC.presentationController?.delegate = manageCategoryVC
             manageCategoryVC.modalTransitionStyle = .coverVertical
 //            manageCategoryVC.modalPresentationStyle = .fullScreen
             present(manageCategoryVC, animated: true, completion: nil)
@@ -511,14 +511,29 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
 }
 
 extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
-    func refreshData() {
-        viewWillAppear(true)
+    func refresh(invoice: InvoiceCD) {
+        guard let monthIndex = invoice.month?.number,
+            let invoiceIndex = invoice.month?.getIndex(forInvoice: invoice) else { return }
+        
+        if !_monthToShow.contains(Int(monthIndex)-1) {
+           _monthToShow.append(Int(monthIndex)-1)
+            _monthToShow.sort()
+        }
+        guard let section = _monthToShow.firstIndex(of: Int(monthIndex)-1) else { return }
+        
+        if getNumberOfInvoice(atMonthIndex: Int(monthIndex)-1) > 1 {
+            let indexPath = IndexPath(row: invoiceIndex, section: section)
+            invoiceCollectionView.insertItems(at: [indexPath])
+        } else {
+            invoiceCollectionView.insertSections(IndexSet(arrayLiteral: section))
+//            invoiceCollectionView.insertItems(at: [indexPath])
+        }
     }
 }
 
-extension InvoiceCollectionViewController: UIAdaptivePresentationControllerDelegate {
-    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("controller has been dismissed")
-        viewWillAppear(true)
-    }
-}
+//extension InvoiceCollectionViewController: UIAdaptivePresentationControllerDelegate {
+//    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+//        print("controller has been dismissed")
+//        viewWillAppear(true)
+//    }
+//}

@@ -17,7 +17,7 @@ enum DocumentType {
 
 class SaveManager {
     
-    static func saveDocument (_ document: Any?, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?) {
+    static func saveDocument (_ document: Any?, description: String, categoryObject: CategoryCD?, amount: Double, currentMonth: MonthCD? = nil, newMonth: MonthCD, invoice: InvoiceCD? = nil, modify: Bool? = false, documentAdded: Bool? = nil, documentType: String?, completion: ((InvoiceCD)->Void)? = nil) {
         var identifier: String? = nil
         guard let documentExtension = documentType else {return print("Unknown document extension)")}
         
@@ -56,7 +56,7 @@ class SaveManager {
         }
         
         if modify == false {
-            newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension)
+            newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension, completion: completion)
         } else {
             if let invoiceToModify = invoice {
                 if invoiceToModify.identifier != nil && documentAdded == true {
@@ -64,7 +64,7 @@ class SaveManager {
                 }
                 if let previousMonth = currentMonth {
                     previousMonth.removeInvoice(invoice: invoiceToModify)
-                    newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension)
+                    newMonth.addInvoice(description: description, amount: amount, categoryObject: categoryObject ,identifier: identifier, documentType: documentExtension, completion: completion)
                 }
             }
         }

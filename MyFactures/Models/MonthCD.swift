@@ -32,7 +32,7 @@ public class MonthCD: NSManagedObject {
     
     
     // MARK: - PUBLIC
-    func addInvoice(description: String, amount: Double, categoryObject: CategoryCD? = nil ,identifier: String?, documentType: String?) {
+    func addInvoice(description: String, amount: Double, categoryObject: CategoryCD? = nil ,identifier: String?, documentType: String?, completion: ((InvoiceCD)->Void)? = nil) {
         let newInvoice = InvoiceCD(context: manager.context)
         newInvoice.identifier = identifier
         newInvoice.month = self
@@ -44,6 +44,7 @@ public class MonthCD: NSManagedObject {
         _cdInvoiceList.append(newInvoice)
         manager.saveCoreDataContext()
         update()
+        completion?(newInvoice)
     }
     
     func update() {
@@ -91,6 +92,12 @@ public class MonthCD: NSManagedObject {
             return _invoiceListToShow[index]
         } else {
             return nil
+        }
+    }
+    
+    func getIndex(forInvoice theInvoice: InvoiceCD) -> Int? {
+        return _cdInvoiceList.firstIndex { (invoice) -> Bool in
+            invoice == theInvoice
         }
     }
     
