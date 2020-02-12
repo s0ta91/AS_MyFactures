@@ -318,7 +318,7 @@ class InvoiceCollectionViewController: UIViewController {
     @objc private func showCategorySelector() {
         let manageCategoryStoryboard = UIStoryboard(name: "ManageCategoryTableViewController", bundle: .main)
         if let manageCategoryVC = manageCategoryStoryboard.instantiateViewController(withIdentifier: "ManageCategoryTableViewController") as? ManageCategoryTableViewController {
-            manageCategoryVC.presentationController?.delegate = manageCategoryVC
+            manageCategoryVC.presentationController?.delegate = self
             manageCategoryVC.modalTransitionStyle = .coverVertical
 //            manageCategoryVC.modalPresentationStyle = .fullScreen
             present(manageCategoryVC, animated: true, completion: nil)
@@ -526,14 +526,13 @@ extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
             invoiceCollectionView.insertItems(at: [indexPath])
         } else {
             invoiceCollectionView.insertSections(IndexSet(arrayLiteral: section))
-//            invoiceCollectionView.insertItems(at: [indexPath])
         }
     }
 }
 
-//extension InvoiceCollectionViewController: UIAdaptivePresentationControllerDelegate {
-//    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-//        print("controller has been dismissed")
-//        viewWillAppear(true)
-//    }
-//}
+extension InvoiceCollectionViewController: UIAdaptivePresentationControllerDelegate {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        setNavigationBarInfo()
+        invoiceCollectionView.reloadData()
+    }
+}
