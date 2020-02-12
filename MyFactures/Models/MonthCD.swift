@@ -16,6 +16,7 @@ public class MonthCD: NSManagedObject {
         get {
             let invoicesRequest: NSFetchRequest<InvoiceCD> = InvoiceCD.fetchRequest()
             let invoicesPredicate = NSPredicate(format: "month == %@", self)
+            invoicesRequest.sortDescriptors = [NSSortDescriptor(key: "detailedDescription", ascending: true)]
             invoicesRequest.predicate = invoicesPredicate
             
             do {
@@ -32,7 +33,7 @@ public class MonthCD: NSManagedObject {
     
     
     // MARK: - PUBLIC
-    func addInvoice(description: String, amount: Double, categoryObject: CategoryCD? = nil ,identifier: String?, documentType: String?) {
+    func addInvoice(description: String, amount: Double, categoryObject: CategoryCD? = nil ,identifier: String?, documentType: String?, completion: ((InvoiceCD)->Void)? = nil) {
         let newInvoice = InvoiceCD(context: manager.context)
         newInvoice.identifier = identifier
         newInvoice.month = self
@@ -40,10 +41,10 @@ public class MonthCD: NSManagedObject {
         newInvoice.detailedDescription = description
         newInvoice.category = categoryObject
         newInvoice.amount = amount
-        
         _cdInvoiceList.append(newInvoice)
         manager.saveCoreDataContext()
         update()
+        completion?(newInvoice)
     }
     
     func update() {
@@ -51,21 +52,17 @@ public class MonthCD: NSManagedObject {
         setTotalDocuments()
     }
     
-    func getInvoicesCount() -> Int {
-        return _cdInvoiceList.count
-    }
-    
     func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {
         _invoiceListToShow.removeAll(keepingCapacity: false)
-        var invoiceResults: [InvoiceCD]
+//        var invoiceResults: [InvoiceCD]
         
         if receivedCategory.title == ALL_CATEGORY_TEXT && searchText != "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let detailDescription = invoice.detailedDescription else { return false }
                 return detailDescription.contains(searchText)
             }
         }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText != "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let category = invoice.category else { return false }
                 return receivedCategory == category
             }.filter({ (invoice) -> Bool in
@@ -73,17 +70,24 @@ public class MonthCD: NSManagedObject {
                 return detailDescription.contains(searchText)
             })
         }else if receivedCategory.title != ALL_CATEGORY_TEXT && searchText == "" {
-            invoiceResults = _cdInvoiceList.filter { (invoice) -> Bool in
+            _invoiceListToShow = _cdInvoiceList.filter { (invoice) -> Bool in
                 guard let category = invoice.category else { return false }
                 return receivedCategory == category
             }
         }else {
-            invoiceResults = _cdInvoiceList
+            _invoiceListToShow = _cdInvoiceList
         }
         
-        invoiceResults.forEach { (invoice) in
-            _invoiceListToShow.append(invoice)
-        }
+//        invoiceResults.forEach { (invoice) in
+//            let index = _invoiceListToShow.insertionIndex(of: invoice) { (invoice1, invoice2) -> Bool in
+//                guard let title1 = invoice1.detailedDescription,
+//                    let title2 = invoice2.detailedDescription else { return false }
+//                return title1 < title2
+//            }
+//            _invoiceListToShow.insert(invoice, at: index)
+//        }
+        
+        
     }
     
     func getInvoiceCount () -> Int {
@@ -95,6 +99,12 @@ public class MonthCD: NSManagedObject {
             return _invoiceListToShow[index]
         } else {
             return nil
+        }
+    }
+    
+    func getIndex(forInvoice theInvoice: InvoiceCD) -> Int? {
+        return _cdInvoiceList.firstIndex { (invoice) -> Bool in
+            invoice == theInvoice
         }
     }
     
@@ -113,10 +123,12 @@ public class MonthCD: NSManagedObject {
     
     func removeInvoice (invoice: InvoiceCD) {
         guard let invoiceIndex = _cdInvoiceList.firstIndex(of: invoice) else { return }
-        _invoiceListToShow.remove(at: invoiceIndex)
-        update()
+        guard let invoiceToShowIndex = _invoiceListToShow.firstIndex(of: invoice) else { return }
+        _cdInvoiceList.remove(at: invoiceIndex)
+        _invoiceListToShow.remove(at: invoiceToShowIndex)
         manager.context.delete(invoice)
         manager.saveCoreDataContext()
+        update()
     }
     
     func getTotalAmount () -> Double {

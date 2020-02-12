@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 class ManageCategoryTableViewController: UIViewController {
     
     //MARK: - Declarations
@@ -253,6 +255,7 @@ extension ManageCategoryTableViewController: UITableViewDelegate {
         
         Manager.instance.setSelectedCategory(forCategory: selectedCategory)
         tableView.reloadData()
+        
         if #available(iOS 13, *) {
             if let presentationController = presentationController {
                 presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
@@ -270,4 +273,8 @@ extension ManageCategoryTableViewController: UITextFieldDelegate {
     }
 }
 
-
+//extension ManageCategoryTableViewController: UIAdaptivePresentationControllerDelegate {
+//    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+//        print("ManagedCategory controller has been dismissed")
+//    }
+//}

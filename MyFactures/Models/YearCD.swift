@@ -51,8 +51,8 @@ public class YearCD: NSManagedObject {
         if isListFiltered == true {
             return _groupListToShow[index]
         }else {
-            print("\(year): return group \(String(describing: _cdGroupList[index].title))")
-            print("groupMonths: \(_cdGroupList[index].getMonthInfos())")
+//            print("\(year): return group \(String(describing: _cdGroupList[index].title))")
+//            print("groupMonths: \(_cdGroupList[index].getMonthInfos())")
             return _cdGroupList[index]
         }
     }
@@ -89,7 +89,7 @@ public class YearCD: NSManagedObject {
 //    }
     
     func removeGroup(_ groupToDelete: GroupCD) {
-        if let groupIndex = _cdGroupList.firstIndex(of: groupToDelete) {
+        if let groupIndex = _groupListToShow.firstIndex(of: groupToDelete) {
             _groupListToShow.remove(at: groupIndex)
         }
         
@@ -114,7 +114,7 @@ public class YearCD: NSManagedObject {
     }
     
     func getGroupCount() -> Int {
-        return _cdGroupList.count
+        return _groupListToShow.count
     }
     
     func checkForDuplicate(forGroupName groupName: String) -> Bool {

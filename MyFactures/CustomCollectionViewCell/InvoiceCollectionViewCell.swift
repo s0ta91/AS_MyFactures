@@ -24,6 +24,11 @@ class InvoiceCollectionViewCell: UICollectionViewCell {
     //MARK: - Global variables
     weak var delegate: InvoiceCollectionViewCellDelegate?
     
+    override func prepareForReuse() {
+//        ui_invoiceDocumentThumbnail.imageView?.image = UIImage(named: "missing_document")
+        ui_invoiceDocumentThumbnail.setImage(UIImage(named: "missing_document"), for: .normal)
+    }
+    
     //MARK: - Functions
     //TODO: Set values for the cell
     func setValues (forInvoice invoice: InvoiceCD, fontSize: CGFloat) {

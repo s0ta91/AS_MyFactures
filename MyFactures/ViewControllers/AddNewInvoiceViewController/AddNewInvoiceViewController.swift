@@ -11,7 +11,8 @@ import MobileCoreServices
 import IQKeyboardManagerSwift
 
 protocol AddNewInvoiceDelegate {
-    func refreshData()
+    func insert(_ invoice: InvoiceCD)
+    func refresh(_ invoice: InvoiceCD)
 }
 
 class AddNewInvoiceViewController: UIViewController {
@@ -220,6 +221,12 @@ class AddNewInvoiceViewController: UIViewController {
             ui_documentAddedLabel.isHidden = true
             ui_deleteAddedDocumentButton.isHidden = true
             ui_addNewDocumentButton.isHidden = false
+            
+            if  let invoice = _invoice,
+                let documentId = invoice.identifier,
+                let invoiceDocumentExtension = invoice.documentType {
+                deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension, _modifyInvoice)
+            }
         }else {
             ui_documentAddedLabel.isHidden = false
             ui_deleteAddedDocumentButton.isHidden = false
@@ -483,39 +490,30 @@ class AddNewInvoiceViewController: UIViewController {
                 let amountDouble = Double(truncating: convertedAmount as NSNumber)
                 
             if let newMonth = group.checkIfMonthExist(forMonthName: monthString) {
-                    if _modifyInvoice == false {
-                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension)
-                    } else {
-                        var _extension = _documentExtension
-                        if let documentId = _invoice.identifier,
-                            let invoiceDocumentExtension = _invoice.documentType {
-                            _extension = invoiceDocumentExtension
-                            deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
-                        }
-                        SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _extension)
-                        
-                    }
-                }
             
-                if self._fromOtherApp {
-                    self.modalTransitionStyle = .coverVertical
-                    if #available(iOS 13, *) {
-                        if let presentationController = presentationController {
-                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-                        }
-                    }
-                    self.dismiss(animated: true) {
-                        self._loginVC.modalTransitionStyle = .crossDissolve
-                        self._loginVC.dismiss(animated: true, completion: nil)
-                    }
+                if _modifyInvoice == false {
+                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject ,amount: amountDouble, newMonth: newMonth, documentType: _documentExtension, completion: { invoice in
+                        self._ptInvoice = invoice
+                        self.dismissViewController()
+                    })
                 } else {
-                    if #available(iOS 13, *) {
-                        if let presentationController = presentationController {
-                            presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
-                        }
+                    if let documentExtension = _invoice.documentType,
+                        !documentExtension.isEmpty {
+                        _documentExtension = documentExtension
                     }
-                    dismiss(animated: true, completion: nil)
+                    SaveManager.saveDocument(_pickedDocument, description: description, categoryObject: categoryObject, amount: amountDouble, currentMonth: _month, newMonth: newMonth, invoice: _invoice, modify: true, documentAdded: _documentHasBeenAdded, documentType: _documentExtension, completion: { invoice in
+                        self._ptInvoice = invoice
+                        self.dismissViewController()
+                    })
+                    
+                }
+            } else {
+                Alert.message(title: errorActionTitle, message: someFieldError, vc: self, completion: {
+                    self.dismiss(animated: true, completion: nil)
+                })
             }
+            
+//            dismissViewController()
 
         } else {
             if ui_groupSelectionTextField.text == noFolderAvailable {
@@ -524,6 +522,28 @@ class AddNewInvoiceViewController: UIViewController {
                 Alert.message(title: errorActionTitle, message: someFieldError, vc: self)
                 print("Something went wrong with one of the fields")
             }
+        }
+    }
+    
+    func dismissViewController() {
+        if self._fromOtherApp {
+            self.modalTransitionStyle = .coverVertical
+            if #available(iOS 13, *) {
+                if let presentationController = presentationController {
+                    presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                }
+            }
+            self.dismiss(animated: true) {
+                self._loginVC.modalTransitionStyle = .crossDissolve
+                self._loginVC.dismiss(animated: true, completion: nil)
+            }
+        } else {
+            if #available(iOS 13, *) {
+                if let presentationController = presentationController {
+                    presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
+                }
+            }
+            dismiss(animated: true, completion: nil)
         }
     }
 
@@ -634,8 +654,12 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
 
 extension AddNewInvoiceViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("controller has been dismissed")
-        delegate?.refreshData()
+        guard let invoice = _ptInvoice else {return}
+        if _modifyInvoice {
+            delegate?.refresh(invoice)
+        } else {
+            delegate?.insert(invoice)
+        }
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {

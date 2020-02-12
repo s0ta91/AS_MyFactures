@@ -5,19 +5,14 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.RuntimeIssueBreakpoint">
          <BreakpointContent
-            uuid = "6B064ACB-F3B6-4092-BE40-94B3445C324C"
-            shouldBeEnabled = "No"
+            uuid = "421E70A9-BA50-47EB-B377-9DDD31ECA3ED"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyFactures/ViewControllers/UserInfosViewController/UserInfosViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "textFieldDidChangeSelection(_:)"
-            landmarkType = "7">
+            breakpointStackSelectionBehavior = "1"
+            type = "4">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
