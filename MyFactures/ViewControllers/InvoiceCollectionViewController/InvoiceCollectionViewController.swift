@@ -512,8 +512,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
 
 extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
     func insert(_ invoice: InvoiceCD) {
-        guard let monthIndex = invoice.month?.number,
-            let invoiceIndex = invoice.month?.getIndex(forInvoice: invoice) else { return }
+        guard let monthIndex = invoice.month?.number else { return }
         
         if !_monthToShow.contains(Int(monthIndex)-1) {
            _monthToShow.append(Int(monthIndex)-1)
@@ -522,8 +521,7 @@ extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
         guard let section = _monthToShow.firstIndex(of: Int(monthIndex)-1) else { return }
         
         if getNumberOfInvoice(atMonthIndex: Int(monthIndex)-1) > 1 {
-            let indexPath = IndexPath(row: invoiceIndex, section: section)
-            invoiceCollectionView.insertItems(at: [indexPath])
+            invoiceCollectionView.reloadSections([section])
         } else {
             invoiceCollectionView.insertSections(IndexSet(arrayLiteral: section))
         }
@@ -531,10 +529,8 @@ extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
     
     func refresh(_ invoice: InvoiceCD) {
         guard let monthIndex = invoice.month?.number,
-            let invoiceIndex = invoice.month?.getIndex(forInvoice: invoice),
         let section = _monthToShow.firstIndex(of: Int(monthIndex)-1) else { return }
-        let indexPath = IndexPath(row: invoiceIndex, section: section)
-        invoiceCollectionView.reloadItems(at: [indexPath])
+        invoiceCollectionView.reloadSections([section])
     }
 }
 
