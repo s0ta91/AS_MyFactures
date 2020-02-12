@@ -511,7 +511,7 @@ extension InvoiceCollectionViewController: DZNEmptyDataSetSource {
 }
 
 extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
-    func refresh(invoice: InvoiceCD) {
+    func insert(_ invoice: InvoiceCD) {
         guard let monthIndex = invoice.month?.number,
             let invoiceIndex = invoice.month?.getIndex(forInvoice: invoice) else { return }
         
@@ -527,6 +527,14 @@ extension InvoiceCollectionViewController: AddNewInvoiceDelegate {
         } else {
             invoiceCollectionView.insertSections(IndexSet(arrayLiteral: section))
         }
+    }
+    
+    func refresh(_ invoice: InvoiceCD) {
+        guard let monthIndex = invoice.month?.number,
+            let invoiceIndex = invoice.month?.getIndex(forInvoice: invoice),
+        let section = _monthToShow.firstIndex(of: Int(monthIndex)-1) else { return }
+        let indexPath = IndexPath(row: invoiceIndex, section: section)
+        invoiceCollectionView.reloadItems(at: [indexPath])
     }
 }
 

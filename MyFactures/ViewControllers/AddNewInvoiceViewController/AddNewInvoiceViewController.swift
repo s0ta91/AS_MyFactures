@@ -11,7 +11,8 @@ import MobileCoreServices
 import IQKeyboardManagerSwift
 
 protocol AddNewInvoiceDelegate {
-    func refresh(invoice: InvoiceCD)
+    func insert(_ invoice: InvoiceCD)
+    func refresh(_ invoice: InvoiceCD)
 }
 
 class AddNewInvoiceViewController: UIViewController {
@@ -496,12 +497,6 @@ class AddNewInvoiceViewController: UIViewController {
                         self.dismissViewController()
                     })
                 } else {
-//                    var _extension = _documentExtension
-//                    if let documentId = _invoice.identifier,
-//                        let invoiceDocumentExtension = _invoice.documentType {
-//                        _extension = invoiceDocumentExtension
-////                        deletePreviousDocumentIfRequested(withIdentifier: documentId, andExtension: invoiceDocumentExtension ,_deletePreviousDocument)
-//                    }
                     if let documentExtension = _invoice.documentType,
                         !documentExtension.isEmpty {
                         _documentExtension = documentExtension
@@ -659,9 +654,12 @@ extension AddNewInvoiceViewController : UIImagePickerControllerDelegate {
 
 extension AddNewInvoiceViewController: UIAdaptivePresentationControllerDelegate {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
-        print("controller has been dismissed")
         guard let invoice = _ptInvoice else {return}
-        delegate?.refresh(invoice: invoice)
+        if _modifyInvoice {
+            delegate?.refresh(invoice)
+        } else {
+            delegate?.insert(invoice)
+        }
     }
     
     func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
