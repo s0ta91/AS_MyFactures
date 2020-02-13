@@ -204,6 +204,8 @@ class Manager {
             cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoice.documentType ?? "JPG", completion: nil)
             print("---> \(String(describing: cdMonth.name)) - Create new invoice: \(rInvoice.detailedDescription)")
         }
+        
+        print("END INVOICE")
     }
     
     func initYear () {
