@@ -196,13 +196,12 @@ class Manager {
         for invoiceIndex in 0..<rMonth.getInvoiceCount() {
             guard let rInvoice = rMonth.getInvoice(atIndex: invoiceIndex),
                 let rInvoiceIdentifier = rInvoice.identifier,
-                let rInvoiceCategory = rInvoice.categoryObject,
-                let rInvoiceDocumentType = rInvoice.documentType else {
+                let rInvoiceCategory = rInvoice.categoryObject else {
                 //SET ERROR
                 return
             }
             let cdCategory = Manager.instance.addCategory(rInvoiceCategory.title, isSelected: rInvoiceCategory.selected, topList: false)
-            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoiceDocumentType, completion: nil)
+            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoice.documentType ?? "JPG", completion: nil)
             print("---> \(String(describing: cdMonth.name)) - Create new invoice: \(rInvoice.detailedDescription)")
         }
     }
