@@ -437,7 +437,7 @@ class AddNewInvoiceViewController: UIViewController {
         if let textFieldValue = ui_addNewGroupOrCategoryTextField.text {
             if _isNewGroup {
                 if !_year.groupExist(forGroupName: textFieldValue) {
-                    _year.addGroup(withTitle: textFieldValue, isListFiltered: false)
+                    _ = _year.addGroup(withTitle: textFieldValue, isListFiltered: false)
                     ui_groupSelectionTextField.text = _year.getGroup(forName: textFieldValue)?.title
                     ui_groupSelectionTextField.isEnabled = true
                     ui_addNewGroupOrCategoryTextField.resignFirstResponder()

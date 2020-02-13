@@ -30,7 +30,7 @@ public class YearCD: NSManagedObject {
     private var _groupListToShow : [GroupCD] = []
     
     // MARK: - PUBLIC
-    func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) {
+    func addGroup(withTitle title: String, totalPrice: Double? = 0, totalDocuments: Int64? = 0, isListFiltered: Bool) -> GroupCD {
         let newGroup = GroupCD(context: Manager.instance.context)
         newGroup.title = title
         if let totalPrice = totalPrice,
@@ -45,6 +45,7 @@ public class YearCD: NSManagedObject {
         Manager.instance.saveCoreDataContext()
         
         setGroupList()
+        return newGroup
     }
     
     func getGroup(atIndex index: Int, isListFiltered: Bool = false) -> GroupCD? {

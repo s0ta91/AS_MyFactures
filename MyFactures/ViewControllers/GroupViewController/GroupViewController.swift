@@ -332,7 +332,7 @@ class GroupViewController: UIViewController {
             }else {
                 let alertController = UIAlertController(title: createNewFolderWarningTitle, message: createNewFolderWarningMessage, preferredStyle: .alert)
                 let createAction = UIAlertAction(title: createAddActionTitle, style: .default, handler: { (_) in
-                    self._currentYear.addGroup(withTitle: newGroupName, isListFiltered: self.isListFiltered)
+                    _ = self._currentYear.addGroup(withTitle: newGroupName, isListFiltered: self.isListFiltered)
                     self.animateOut()
                 })
                 let cancelCreationAction = UIAlertAction(title: cancelActionTitle, style: .cancel, handler: nil)

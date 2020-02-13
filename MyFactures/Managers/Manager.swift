@@ -149,31 +149,62 @@ class Manager {
 //            print("ERROR: Cannot convert from RealmYears to Years array")
 //            return }
 
-        _realmYears?.forEach({ (year) in
-            let newYear = YearCD(context: context)
-            newYear.year = Int64(year.year)
-            newYear.selected = year.selected
-//            newYear.group = year._groupListToShow
+        _realmYears?.forEach({ (rYear) in
+            let cdYear = YearCD(context: context)
+            cdYear.year = Int64(rYear.year)
+            cdYear.selected = rYear.selected
+
             print("-> migrate year to newYear")
-            print("--> newYear: \(newYear.year)")
-//            print("---> newYear is selected: \(newYear.selected)")
-            print("---> nb of groups to migrate: \(year._groupList.count)")
-            year._groupList.forEach { (group) in
-                print("---> \(newYear.year) - Create new group: \(group.title)")
-                let _ = newYear.addGroup(withTitle: group.title, totalPrice: group.totalPrice, totalDocuments: Int64(group.totalDocuments), isListFiltered: false)
-            }
+            print("--> newYear: \(cdYear.year)")
+            print("---> nb of groups to migrate: \(rYear._groupList.count)")
+            
+            migrateGroups(fromRealmYear: rYear, toCoreDataYear: cdYear)
         })
-        
-//        _realmGroups?.forEach({ (group) in
-//            let newGroup = GroupCD(context: context)
-//            newGroup.title = group.title
-//            newGroup.totalPrice = group.totalPrice
-//            newGroup.totalDocuments = Int64(group.totalDocuments)
-//        })
         
         print("---> Save context")
         saveCoreDataContext()
         UserDefaults.standard.set(true, forKey: UserDefaults.keys.migrationDone.rawValue)
+    }
+    
+    private func migrateGroups(fromRealmYear rYear: Year, toCoreDataYear cdYear: YearCD) {
+        rYear._groupList.forEach { (rGroup) in
+            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.totalPrice, totalDocuments: Int64(rGroup.totalDocuments), isListFiltered: false)
+            print("---> \(cdYear.year) - Create new group: \(String(describing: cdGroup.title))")
+            migrateMonths(fromRealmGroup: rGroup, toCoreDataGroup: cdGroup)
+        }
+    }
+    
+    private func migrateMonths(fromRealmGroup rGroup: Group, toCoreDataGroup cdGroup: GroupCD) {
+        for monthIndex in 0...11 {
+            guard let rMonth = rGroup.getMonth(atIndex: monthIndex) else {
+                // SET ERROR
+                return
+            }
+            
+            cdGroup.addMonth(Int64(monthIndex+1), rMonth.month)
+            
+            guard let cdMonth = cdGroup.getMonth(atIndex: monthIndex) else {
+                // SET ERROR
+                return
+            }
+            print("---> \(String(describing: cdGroup.title)) - Create new month: \(String(describing: cdMonth.name))")
+            migrateInvoices(forRealmMonth: rMonth, toCoreDataMonth: cdMonth)
+        }
+    }
+    
+    private func migrateInvoices(forRealmMonth rMonth: Month, toCoreDataMonth cdMonth: MonthCD) {
+        for invoiceIndex in 0..<rMonth.getInvoiceCount() {
+            guard let rInvoice = rMonth.getInvoice(atIndex: invoiceIndex),
+                let rInvoiceIdentifier = rInvoice.identifier,
+                let rInvoiceCategory = rInvoice.categoryObject,
+                let rInvoiceDocumentType = rInvoice.documentType else {
+                //SET ERROR
+                return
+            }
+            let cdCategory = Manager.instance.addCategory(rInvoiceCategory.title, isSelected: rInvoiceCategory.selected, topList: false)
+            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoiceDocumentType, completion: nil)
+            print("---> \(String(describing: cdMonth.name)) - Create new invoice: \(rInvoice.detailedDescription)")
+        }
     }
     
     func initYear () {

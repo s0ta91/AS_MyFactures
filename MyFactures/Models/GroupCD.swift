@@ -94,7 +94,7 @@ public class GroupCD: NSManagedObject {
     }
     
     // MARK: - Private
-    private func addMonth(_ number: Int64, _ monthName: String) {
+    func addMonth(_ number: Int64, _ monthName: String) {
         let newMonth = MonthCD(context: manager.context)
         newMonth.number = number
         newMonth.name = monthName
