@@ -193,7 +193,7 @@ class Manager {
     }
     
     private func migrateInvoices(forRealmMonth rMonth: Month, toCoreDataMonth cdMonth: MonthCD) {
-        for invoiceIndex in 0..<rMonth.getInvoiceCount() {
+        for invoiceIndex in 0..<rMonth.getInvoiceListCount() {
             guard let rInvoice = rMonth.getInvoice(atIndex: invoiceIndex),
                 let rInvoiceIdentifier = rInvoice.identifier,
                 let rInvoiceCategory = rInvoice.categoryObject else {
