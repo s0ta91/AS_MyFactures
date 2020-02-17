@@ -158,9 +158,10 @@ class Manager {
             let cdYear = YearCD(context: context)
             cdYear.year = Int64(rYear.year)
             cdYear.selected = rYear.selected
-
+            _cdYearsList.append(cdYear)
+            
             print("-> migrate year to newYear")
-            print("--> newYear: \(cdYear.year)")
+            print("--> newYear: \(cdYear.year) isSelected \(cdYear.selected)")
             print("---> nb of groups to migrate: \(rYear._groupList.count)")
             
             migrateGroups(fromRealmYear: rYear, toCoreDataYear: cdYear)
