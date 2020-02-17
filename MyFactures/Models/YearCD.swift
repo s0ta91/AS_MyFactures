@@ -38,7 +38,9 @@ public class YearCD: NSManagedObject {
             newGroup.totalPrice = totalPrice
             newGroup.totalDocuments = totalDocuments
             newGroup.year = self
+            print("Init group list")
             newGroup.initMonthList()
+            print("new month count \(newGroup.getMonthCount())")
         }
         _cdGroupList.append(newGroup)
         print("---> groupList updated: Contains \(_cdGroupList.count) group(s)")

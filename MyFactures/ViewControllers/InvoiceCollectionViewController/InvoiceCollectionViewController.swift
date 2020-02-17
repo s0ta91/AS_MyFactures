@@ -186,7 +186,9 @@ class InvoiceCollectionViewController: UIViewController {
             let month = _invoiceCollectionCurrentGroup.getMonth(atIndex: monthIndex) else {
                 return nil
         }
+        print("setInvoiceList for category \(String(describing: selectedCategory.title))")
         month.setInvoiceList(for: selectedCategory, searchText: searchText)
+        print("month \(String(describing: month.name)) invoices \(month.getInvoiceCount())")
         return month
     }
     

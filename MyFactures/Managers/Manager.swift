@@ -149,6 +149,11 @@ class Manager {
 //            print("ERROR: Cannot convert from RealmYears to Years array")
 //            return }
 
+        _realmCategoryList?.forEach({ (rCategory) in
+            let topList = (rCategory.title == NSLocalizedString("All categories", comment: "") || rCategory.title == NSLocalizedString("Unclassified", comment: "")) ? true : false
+            let _ = addCategory(rCategory.title, isSelected: rCategory.selected, topList: topList)
+        })
+        
         _realmYears?.forEach({ (rYear) in
             let cdYear = YearCD(context: context)
             cdYear.year = Int64(rYear.year)
@@ -168,26 +173,23 @@ class Manager {
     
     private func migrateGroups(fromRealmYear rYear: Year, toCoreDataYear cdYear: YearCD) {
         rYear._groupList.forEach { (rGroup) in
-            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.getTotalGroupAmount(), totalDocuments: Int64(rGroup.getTotalDocument()), isListFiltered: false)
+            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.totalPrice, totalDocuments: Int64(rGroup.totalDocuments), isListFiltered: false)
             print("---> \(cdYear.year) - Create new group with name: \(String(describing: cdGroup.title)), price: \(cdGroup.totalPrice), nbDocs: \(cdGroup.totalDocuments)")
             migrateMonths(fromRealmGroup: rGroup, toCoreDataGroup: cdGroup)
         }
     }
     
     private func migrateMonths(fromRealmGroup rGroup: Group, toCoreDataGroup cdGroup: GroupCD) {
-        for monthIndex in 0...11 {
-            guard let rMonth = rGroup.getMonth(atIndex: monthIndex) else {
-                // SET ERROR
-                return
-            }
-            print("----> Start migrating month \(rMonth.month) containing \(rMonth.getInvoiceListCount()) invoice(s)")
-            cdGroup.addMonth(Int64(monthIndex+1), rMonth.month)
+        rGroup.getMonthList().forEach { (rMonth) in
             
-            guard let cdMonth = cdGroup.getMonth(atIndex: monthIndex) else {
+            print("----> Start migrating month \(rMonth.month) containing \(rMonth.getInvoiceListCount()) invoice(s)")
+            guard let monthIndex = rGroup.getMonthIndex(forMonth: rMonth),
+                let cdMonth = cdGroup.getMonth(atIndex: monthIndex) else {
                 // SET ERROR
                 return
             }
-            print("---> \(String(describing: cdGroup.title)) - Create new month: \(String(describing: cdMonth.name))")
+            print("---> \(String(describing: cdGroup.title)) - for month: \(String(describing: cdMonth.name))")
+            
             migrateInvoices(forRealmMonth: rMonth, toCoreDataMonth: cdMonth)
         }
     }
@@ -195,16 +197,18 @@ class Manager {
     private func migrateInvoices(forRealmMonth rMonth: Month, toCoreDataMonth cdMonth: MonthCD) {
         for invoiceIndex in 0..<rMonth.getInvoiceListCount() {
             guard let rInvoice = rMonth.getInvoiceFromList(atIndex: invoiceIndex),
-                let rInvoiceIdentifier = rInvoice.identifier,
                 let rInvoiceCategory = rInvoice.categoryObject else {
                 //SET ERROR
                 return
             }
+            print("---> \(String(describing: cdMonth.name)) - Migrate invoice: \(String(describing: rInvoice.detailedDescription)), for category: \(String(describing: rInvoice.categoryObject?.title))")
+            let cdCategory = Manager.instance.getCategory(forName: rInvoiceCategory.title)
             
-            let cdCategory = Manager.instance.addCategory(rInvoiceCategory.title, isSelected: rInvoiceCategory.selected, topList: false)
+            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoice.identifier, documentType: rInvoice.documentType ?? "JPG", completion: { cdInvoice in
+                    
+                print("--> Invoice added \(String(describing: cdInvoice.detailedDescription)) with category \(String(describing: cdInvoice.category?.title)) and amount \(cdInvoice.amount)")
+            })
             
-            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoice.documentType ?? "JPG", completion: nil)
-            print("---> \(String(describing: cdMonth.name)) - Create new invoice: \(rInvoice.detailedDescription)")
         }
     }
     

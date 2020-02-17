@@ -42,7 +42,6 @@ public class MonthCD: NSManagedObject {
         newInvoice.category = categoryObject
         newInvoice.amount = amount
         _cdInvoiceList.append(newInvoice)
-        manager.saveCoreDataContext()
         update()
         completion?(newInvoice)
     }
@@ -50,6 +49,7 @@ public class MonthCD: NSManagedObject {
     func update() {
         setTotalAmout()
         setTotalDocuments()
+        manager.saveCoreDataContext()
     }
     
     func setInvoiceList (for receivedCategory: CategoryCD, searchText: String = "") {

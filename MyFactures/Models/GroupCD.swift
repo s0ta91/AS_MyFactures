@@ -29,11 +29,19 @@ public class GroupCD: NSManagedObject {
     
     // MARK: - Public
     func initMonthList() {
-        var index: Int64 = 0
+        var monthNumber: Int64 = 0
         manager._monthArray.forEach { (monthName) in
-            index += 1
-            addMonth(index, monthName)
+            monthNumber += 1
+            addMonth(monthNumber, monthName)
         }
+    }
+    
+    func addMonth(_ number: Int64, _ monthName: String) {
+        let newMonth = MonthCD(context: manager.context)
+        newMonth.number = number
+        newMonth.name = monthName
+        newMonth.group = self
+        manager.saveCoreDataContext()
     }
     
     func getMonthInfos() {
@@ -91,14 +99,5 @@ public class GroupCD: NSManagedObject {
             totalDocuments += month.totalDocument
         }
         return totalDocuments
-    }
-    
-    // MARK: - Private
-    func addMonth(_ number: Int64, _ monthName: String) {
-        let newMonth = MonthCD(context: manager.context)
-        newMonth.number = number
-        newMonth.name = monthName
-        newMonth.group = self
-        manager.saveCoreDataContext()
     }
 }
