@@ -41,7 +41,7 @@ public class YearCD: NSManagedObject {
             newGroup.initMonthList()
         }
         _cdGroupList.append(newGroup)
-        print("groupList updated \(_cdGroupList.count)")
+        print("---> groupList updated: Contains \(_cdGroupList.count) group(s)")
         Manager.instance.saveCoreDataContext()
         
         setGroupList()
