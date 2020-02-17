@@ -93,6 +93,13 @@ class Month: Object {
         return invoice
     }
     
+    func getInvoiceFromList(atIndex index: Int) -> Invoice? {
+        guard index >= 0 && index < getInvoiceListCount() else {
+            return nil
+        }
+        return _invoiceList[index]
+    }
+    
     func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {
         return _invoiceList.index(of: invoice)
     }

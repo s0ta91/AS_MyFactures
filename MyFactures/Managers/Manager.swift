@@ -168,8 +168,8 @@ class Manager {
     
     private func migrateGroups(fromRealmYear rYear: Year, toCoreDataYear cdYear: YearCD) {
         rYear._groupList.forEach { (rGroup) in
-            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.totalPrice, totalDocuments: Int64(rGroup.totalDocuments), isListFiltered: false)
-            print("---> \(cdYear.year) - Create new group: \(String(describing: cdGroup.title))")
+            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.getTotalGroupAmount(), totalDocuments: Int64(rGroup.getTotalDocument()), isListFiltered: false)
+            print("---> \(cdYear.year) - Create new group with name: \(String(describing: cdGroup.title)), price: \(cdGroup.totalPrice), nbDocs: \(cdGroup.totalDocuments)")
             migrateMonths(fromRealmGroup: rGroup, toCoreDataGroup: cdGroup)
         }
     }
@@ -180,7 +180,7 @@ class Manager {
                 // SET ERROR
                 return
             }
-            
+            print("----> Start migrating month \(rMonth.month) containing \(rMonth.getInvoiceListCount()) invoice(s)")
             cdGroup.addMonth(Int64(monthIndex+1), rMonth.month)
             
             guard let cdMonth = cdGroup.getMonth(atIndex: monthIndex) else {
@@ -194,18 +194,18 @@ class Manager {
     
     private func migrateInvoices(forRealmMonth rMonth: Month, toCoreDataMonth cdMonth: MonthCD) {
         for invoiceIndex in 0..<rMonth.getInvoiceListCount() {
-            guard let rInvoice = rMonth.getInvoice(atIndex: invoiceIndex),
+            guard let rInvoice = rMonth.getInvoiceFromList(atIndex: invoiceIndex),
                 let rInvoiceIdentifier = rInvoice.identifier,
                 let rInvoiceCategory = rInvoice.categoryObject else {
                 //SET ERROR
                 return
             }
+            
             let cdCategory = Manager.instance.addCategory(rInvoiceCategory.title, isSelected: rInvoiceCategory.selected, topList: false)
+            
             cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoiceIdentifier, documentType: rInvoice.documentType ?? "JPG", completion: nil)
             print("---> \(String(describing: cdMonth.name)) - Create new invoice: \(rInvoice.detailedDescription)")
         }
-        
-        print("END INVOICE")
     }
     
     func initYear () {
