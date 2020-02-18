@@ -136,18 +136,12 @@ class Manager {
             _realmInvoices = realm.objects(Invoice.self)
             _realmCategoryList = realm.objects(Category.self)
             
-            // TODO: Create month list in database
-//            initMonthList()
-            
             // TODO: Migrate data from Realm to CoreData
             migrateFromRealmToCoreData()
         }
     }
     
     func migrateFromRealmToCoreData() {
-//        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
-//            print("ERROR: Cannot convert from RealmYears to Years array")
-//            return }
 
         _realmCategoryList?.forEach({ (rCategory) in
             let topList = (rCategory.title == NSLocalizedString("All categories", comment: "") || rCategory.title == NSLocalizedString("Unclassified", comment: "")) ? true : false
@@ -170,6 +164,43 @@ class Manager {
         print("---> Save context")
         saveCoreDataContext()
         UserDefaults.standard.set(true, forKey: UserDefaults.keys.migrationDone.rawValue)
+    }
+    
+    func initYear () {
+//        print("init years")
+        let _currentDate = Date()
+        let calendar = Calendar.current
+        let currentYear = calendar.component(.year, from: _currentDate)
+//        print("ApplicationDataCount: \(getApplicationDataCount())")
+        if getApplicationDataCount() == 0 {
+            let yearsStartAt = 1900
+            for calculatedYears in yearsStartAt...currentYear {
+//                print("add year \(calculatedYears)")
+                addYear(calculatedYears)
+            }
+            _cdYearsList.last?.selected = true
+//            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
+        } else {
+            if let lastYear = _cdYearsList.first,
+                lastYear.year != currentYear {
+                addYear(currentYear)
+            }
+        }
+        
+        saveCoreDataContext()
+    }
+    
+    
+    // MARK: - PRIVATE
+    private func getApplicationDataCount () -> Int {
+        return _cdApplicationDataList.count
+    }
+    
+    private func addYear(_ yearToAdd: Int) {
+        let ny = YearCD(context: context)
+        ny.year = Int64(yearToAdd)
+        ny.selected = false
+        _cdYearsList.append(ny)
     }
     
     private func migrateGroups(fromRealmYear rYear: Year, toCoreDataYear cdYear: YearCD) {
@@ -213,46 +244,8 @@ class Manager {
         }
     }
     
-    func initYear () {
-//        print("init years")
-        let _currentDate = Date()
-        let calendar = Calendar.current
-        let currentYear = calendar.component(.year, from: _currentDate)
-//        print("ApplicationDataCount: \(getApplicationDataCount())")
-        if getApplicationDataCount() == 0 {
-            let yearsStartAt = 1900
-            for calculatedYears in yearsStartAt...currentYear {
-//                print("add year \(calculatedYears)")
-                addYear(calculatedYears)
-            }
-            _cdYearsList.last?.selected = true
-//            print("set year \(String(describing: _cdYearsList.last?.year)) as selected \(String(describing: _cdYearsList.last?.selected))")
-        } else {
-            if let lastYear = _cdYearsList.first,
-                lastYear.year != currentYear {
-                addYear(currentYear)
-            }
-        }
-        
-        saveCoreDataContext()
-    }
-    
-    
-    // MARK: - PRIVATE
-    private func getApplicationDataCount () -> Int {
-        return _cdApplicationDataList.count
-    }
-    
-    private func addYear(_ yearToAdd: Int) {
-        let ny = YearCD(context: context)
-        ny.year = Int64(yearToAdd)
-        ny.selected = false
-        _cdYearsList.append(ny)
-    }
-    
     
     // MARK: - PUBLIC
-    
     func saveCoreDataContext() {
         do {
             try context.save()
