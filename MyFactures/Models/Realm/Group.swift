@@ -64,6 +64,9 @@ class Group: Object {
         return _monthList.count
     }
     
+    func getMonthList() -> List<Month> {
+        return _monthList
+    }
     func initMonthList() {
         for month in _monthArray {
             self.addMonth(month)

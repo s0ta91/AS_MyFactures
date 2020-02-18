@@ -79,6 +79,10 @@ class Month: Object {
         return _invoiceListToShow.count
     }
     
+    func getInvoiceListCount() -> Int {
+        return _invoiceList.count
+    }
+    
     func getInvoice (atIndex index: Int, _ isListFiltered: Bool = false) -> Invoice? {
         let invoice: Invoice?
         if index >= 0 && index < getInvoiceCount() {
@@ -87,6 +91,13 @@ class Month: Object {
             invoice = nil
         }
         return invoice
+    }
+    
+    func getInvoiceFromList(atIndex index: Int) -> Invoice? {
+        guard index >= 0 && index < getInvoiceListCount() else {
+            return nil
+        }
+        return _invoiceList[index]
     }
     
     func getInvoiceIndex (forInvoice invoice: Invoice) -> Int? {

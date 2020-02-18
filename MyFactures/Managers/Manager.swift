@@ -136,40 +136,30 @@ class Manager {
             _realmInvoices = realm.objects(Invoice.self)
             _realmCategoryList = realm.objects(Category.self)
             
-            // TODO: Create month list in database
-//            initMonthList()
-            
             // TODO: Migrate data from Realm to CoreData
             migrateFromRealmToCoreData()
         }
     }
     
     func migrateFromRealmToCoreData() {
-//        guard let years = _realmYears?.toArray(ofType: YearCD.self) else {
-//            print("ERROR: Cannot convert from RealmYears to Years array")
-//            return }
 
-        _realmYears?.forEach({ (year) in
-            let newYear = YearCD(context: context)
-            newYear.year = Int64(year.year)
-            newYear.selected = year.selected
-//            newYear.group = year._groupListToShow
-            print("-> migrate year to newYear")
-            print("--> newYear: \(newYear.year)")
-//            print("---> newYear is selected: \(newYear.selected)")
-            print("---> nb of groups to migrate: \(year._groupList.count)")
-            year._groupList.forEach { (group) in
-                print("---> \(newYear.year) - Create new group: \(group.title)")
-                let _ = newYear.addGroup(withTitle: group.title, totalPrice: group.totalPrice, totalDocuments: Int64(group.totalDocuments), isListFiltered: false)
-            }
+        _realmCategoryList?.forEach({ (rCategory) in
+            let topList = (rCategory.title == NSLocalizedString("All categories", comment: "") || rCategory.title == NSLocalizedString("Unclassified", comment: "")) ? true : false
+            let _ = addCategory(rCategory.title, isSelected: rCategory.selected, topList: topList)
         })
         
-//        _realmGroups?.forEach({ (group) in
-//            let newGroup = GroupCD(context: context)
-//            newGroup.title = group.title
-//            newGroup.totalPrice = group.totalPrice
-//            newGroup.totalDocuments = Int64(group.totalDocuments)
-//        })
+        _realmYears?.forEach({ (rYear) in
+            let cdYear = YearCD(context: context)
+            cdYear.year = Int64(rYear.year)
+            cdYear.selected = rYear.selected
+            _cdYearsList.append(cdYear)
+            
+            print("-> migrate year to newYear")
+            print("--> newYear: \(cdYear.year) isSelected \(cdYear.selected)")
+            print("---> nb of groups to migrate: \(rYear._groupList.count)")
+            
+            migrateGroups(fromRealmYear: rYear, toCoreDataYear: cdYear)
+        })
         
         print("---> Save context")
         saveCoreDataContext()
@@ -213,9 +203,49 @@ class Manager {
         _cdYearsList.append(ny)
     }
     
+    private func migrateGroups(fromRealmYear rYear: Year, toCoreDataYear cdYear: YearCD) {
+        rYear._groupList.forEach { (rGroup) in
+            let cdGroup = cdYear.addGroup(withTitle: rGroup.title, totalPrice: rGroup.totalPrice, totalDocuments: Int64(rGroup.totalDocuments), isListFiltered: false)
+            print("---> \(cdYear.year) - Create new group with name: \(String(describing: cdGroup.title)), price: \(cdGroup.totalPrice), nbDocs: \(cdGroup.totalDocuments)")
+            migrateMonths(fromRealmGroup: rGroup, toCoreDataGroup: cdGroup)
+        }
+    }
+    
+    private func migrateMonths(fromRealmGroup rGroup: Group, toCoreDataGroup cdGroup: GroupCD) {
+        rGroup.getMonthList().forEach { (rMonth) in
+            
+            print("----> Start migrating month \(rMonth.month) containing \(rMonth.getInvoiceListCount()) invoice(s)")
+            guard let monthIndex = rGroup.getMonthIndex(forMonth: rMonth),
+                let cdMonth = cdGroup.getMonth(atIndex: monthIndex) else {
+                // SET ERROR
+                return
+            }
+            print("---> \(String(describing: cdGroup.title)) - for month: \(String(describing: cdMonth.name))")
+            
+            migrateInvoices(forRealmMonth: rMonth, toCoreDataMonth: cdMonth)
+        }
+    }
+    
+    private func migrateInvoices(forRealmMonth rMonth: Month, toCoreDataMonth cdMonth: MonthCD) {
+        for invoiceIndex in 0..<rMonth.getInvoiceListCount() {
+            guard let rInvoice = rMonth.getInvoiceFromList(atIndex: invoiceIndex),
+                let rInvoiceCategory = rInvoice.categoryObject else {
+                //SET ERROR
+                return
+            }
+            print("---> \(String(describing: cdMonth.name)) - Migrate invoice: \(String(describing: rInvoice.detailedDescription)), for category: \(String(describing: rInvoice.categoryObject?.title))")
+            let cdCategory = Manager.instance.getCategory(forName: rInvoiceCategory.title)
+            
+            cdMonth.addInvoice(description: rInvoice.detailedDescription, amount: rInvoice.amount, categoryObject: cdCategory, identifier: rInvoice.identifier, documentType: rInvoice.documentType ?? "JPG", completion: { cdInvoice in
+                    
+                print("--> Invoice added \(String(describing: cdInvoice.detailedDescription)) with category \(String(describing: cdInvoice.category?.title)) and amount \(cdInvoice.amount)")
+            })
+            
+        }
+    }
+    
     
     // MARK: - PUBLIC
-    
     func saveCoreDataContext() {
         do {
             try context.save()
