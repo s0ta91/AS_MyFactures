@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import Buglife
 import Fabric
 import Crashlytics
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //TODO: - Add crashLytics
         Fabric.with([Crashlytics.self])
-        
+        FirebaseApp.configure()
         // realm migration configuration
 //        let config = Realm.Configuration(schemaVersion: 1, migrationBlock: { (migration: Migration, oldSchemaVersion: UInt64) in
 //            if oldSchemaVersion < 2 {

@@ -14,6 +14,7 @@ target 'MyFactures' do
   pod 'Buglife', '2.8.0'
   pod 'Fabric', '1.10.2'
   pod 'Crashlytics', '3.13.4'
+  pod 'Firebase/Core'
   pod 'mailcore2-ios', '0.6.4'
   pod 'IQKeyboardManagerSwift', '6.4.0'
 
