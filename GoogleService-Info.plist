@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>423218874087-9fufjqfctjdjvflvto56c0mg15bg7qfe.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.423218874087-9fufjqfctjdjvflvto56c0mg15bg7qfe</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDuMlNUj4qJpL3SPjkp5XpglW6nxEgKJGM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>423218874087</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sebconstant.MyFactures</string>
+	<key>PROJECT_ID</key>
+	<string>myfactures-5e03d</string>
+	<key>STORAGE_BUCKET</key>
+	<string>myfactures-5e03d.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:423218874087:ios:4c4e7c972504b7b60b4442</string>
+	<key>DATABASE_URL</key>
+	<string>https://myfactures-5e03d.firebaseio.com</string>
+</dict>
+</plist>

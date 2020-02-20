@@ -82,6 +82,7 @@
 		BE7A57E423C37FE800D90462 /* Month.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E323C37FE800D90462 /* Month.swift */; };
 		BE7A57E623C3804700D90462 /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E523C3804700D90462 /* Invoice.swift */; };
 		BE7A57E823C3809100D90462 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7A57E723C3809100D90462 /* Category.swift */; };
+		BE96438323FC662000AE771A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE96438223FC662000AE771A /* GoogleService-Info.plist */; };
 		BEBC93D023F32A410015CB73 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
@@ -188,6 +189,7 @@
 		BE7A57E323C37FE800D90462 /* Month.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Month.swift; sourceTree = "<group>"; };
 		BE7A57E523C3804700D90462 /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		BE7A57E723C3809100D90462 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		BE96438223FC662000AE771A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +284,7 @@
 		1D4B078020233FF4002F745C = {
 			isa = PBXGroup;
 			children = (
+				BE96438223FC662000AE771A /* GoogleService-Info.plist */,
 				1D4B078B20233FF4002F745C /* MyFactures */,
 				1D4B078A20233FF4002F745C /* Products */,
 				F969AC461B7DF10C2695440A /* Pods */,
@@ -611,6 +614,7 @@
 				1D95B62A2125CC50008BBA52 /* InvoiceCollectionViewController.storyboard in Resources */,
 				1D95B6322125D24B008BBA52 /* AboutViewController.storyboard in Resources */,
 				1D4B079220233FF4002F745C /* Main.storyboard in Resources */,
+				BE96438323FC662000AE771A /* GoogleService-Info.plist in Resources */,
 				1D95B6362125D26A008BBA52 /* SettingsViewController.storyboard in Resources */,
 				1D95B6222125B4D9008BBA52 /* ManageCategoryTableViewController.storyboard in Resources */,
 			);
@@ -630,7 +634,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" cd36415c6aedb89925857123a7d30d17be8d13e0 4512f55a185be3d3052cc35f62a0f20ab31d18babf2271b0e3dab2700d9f70e8";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" cd36415c6aedb89925857123a7d30d17be8d13e0 4512f55a185be3d3052cc35f62a0f20ab31d18babf2271b0e3dab2700d9f70e8\n\"${PODS_ROOT}/Fabric/upload-symbols\" -a cd36415c6aedb89925857123a7d30d17be8d13e0 -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		BAEBD57DA9AB2F06D2A968BD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -659,19 +663,25 @@
 				"${PODS_ROOT}/Target Support Files/Pods-MyFactures/Pods-MyFactures-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Buglife/Buglife.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Buglife.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

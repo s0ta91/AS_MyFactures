@@ -90,7 +90,7 @@ class InvoiceCollectionViewController: UIViewController {
         setNavigationBarInfo()
         Manager.instance.setHeaderClippedToBound(invoiceCollectionView)
         
-//        invoiceCollectionView.reloadData()
+        fatalError()
     }
 
     override func viewDidAppear(_ animated: Bool) {
