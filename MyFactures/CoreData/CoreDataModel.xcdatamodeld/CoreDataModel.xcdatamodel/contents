@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ApplicationData" representedClassName=".ApplicationData" syncable="YES" codeGenerationType="category">
         <attribute name="currentDate" attributeType="Date" defaultDateTimeInterval="599740920" usesScalarValueType="NO"/>
     </entity>
@@ -10,7 +10,7 @@
         <relationship name="invoice" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Invoice" inverseName="category" inverseEntity="Invoice"/>
     </entity>
     <entity name="Group" representedClassName=".GroupCD" syncable="YES" codeGenerationType="category">
-        <attribute name="title" attributeType="String"/>
+        <attribute name="title" attributeType="String" defaultValueString=" "/>
         <attribute name="totalDocuments" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalPrice" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="month" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Month" inverseName="group" inverseEntity="Month"/>
@@ -25,8 +25,8 @@
         <relationship name="month" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Month" inverseName="invoice" inverseEntity="Month"/>
     </entity>
     <entity name="Month" representedClassName=".MonthCD" syncable="YES" codeGenerationType="category">
-        <attribute name="name" attributeType="String"/>
-        <attribute name="number" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String" defaultValueString="Janvier"/>
+        <attribute name="number" attributeType="Integer 64" defaultValueString="1" usesScalarValueType="YES"/>
         <attribute name="totalAmount" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="totalDocument" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="month" inverseEntity="Group"/>
@@ -34,7 +34,7 @@
     </entity>
     <entity name="Year" representedClassName=".YearCD" syncable="YES" codeGenerationType="category">
         <attribute name="selected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="year" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="year" attributeType="Integer 64" defaultValueString="2020" usesScalarValueType="YES"/>
         <relationship name="group" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="year" inverseEntity="Group"/>
     </entity>
     <elements>

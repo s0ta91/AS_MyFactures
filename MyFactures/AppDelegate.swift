@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let APP_VERSION = "MyAppVersion"
     
-    static var persistentContainer: NSPersistentContainer {
-        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    static var viewContext: NSManagedObjectContext {
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }
 
     // MARK: - Launching treatment
@@ -58,8 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         // TODO: try to create the database
-        guard let database = DbManager().getDb() else { fatalError("No database found") }
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
         
+        guard let database = DbManager().getDb() else { fatalError("No database found") }
         let realmDb = DbManager().getRealmDb()
         let realmApplicationDataCount = realmDb?.objects(Year.self).count ?? 0
         if !UserDefaults.standard.bool(forKey: UserDefaults.keys.migrationDone.rawValue),
@@ -146,14 +148,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     // MARK: - Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
         /*
          The persistent container for the application. This implementation
          creates and returns a container, having loaded the store for the
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "CoreDataModel")
+        let container = NSPersistentCloudKitContainer(name: "CoreDataModel")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.

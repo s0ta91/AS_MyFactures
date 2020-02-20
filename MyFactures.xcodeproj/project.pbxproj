@@ -85,6 +85,7 @@
 		BE96438323FC662000AE771A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE96438223FC662000AE771A /* GoogleService-Info.plist */; };
 		BEBC93D023F32A410015CB73 /* CollectionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */; };
 		BEC77B0B23267CC700199319 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC77B0A23267CC700199319 /* UIImageExtension.swift */; };
+		BED705FA23FEEF1E00880A67 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED705F923FEEF1E00880A67 /* CloudKit.framework */; };
 		FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,8 @@
 		BE96438223FC662000AE771A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEBC93CF23F32A400015CB73 /* CollectionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionExtension.swift; sourceTree = "<group>"; };
 		BEC77B0A23267CC700199319 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		BED705F823FEEF1800880A67 /* MyFactures.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyFactures.entitlements; sourceTree = "<group>"; };
+		BED705F923FEEF1E00880A67 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFDF43D1656995A2790C6A24 /* Pods_MyFactures.framework in Frameworks */,
+				BED705FA23FEEF1E00880A67 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +307,7 @@
 		1D4B078B20233FF4002F745C /* MyFactures */ = {
 			isa = PBXGroup;
 			children = (
+				BED705F823FEEF1800880A67 /* MyFactures.entitlements */,
 				1D4B078C20233FF4002F745C /* AppDelegate.swift */,
 				BE4C721F2369C02C00061DF9 /* CoreData */,
 				1D16E9FE20AD860300A8A248 /* MailCore2_Extensions */,
@@ -494,6 +499,7 @@
 		4038E0185330D3C1844EB1A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BED705F923FEEF1E00880A67 /* CloudKit.framework */,
 				8C0522B5D728EB59F48D195D /* Pods_MyFactures.framework */,
 				89936F80E410EF0264FED47B /* Pods_MyFacturesTests.framework */,
 				1A97801A3F720D8C4798144A /* Pods_MyFacturesUITests.framework */,
@@ -1022,6 +1028,7 @@
 			baseConfigurationReference = 0F22AF52DDDB1BFD3A028C93 /* Pods-MyFactures.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyFactures/MyFactures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T496A6N9T8;
@@ -1032,7 +1039,7 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
 				INFOPLIST_FILE = MyFactures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;
@@ -1048,6 +1055,7 @@
 			baseConfigurationReference = 9B5D620116AA9C161F6D3C7C /* Pods-MyFactures.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyFactures/MyFactures.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T496A6N9T8;
@@ -1058,7 +1066,7 @@
 					"\"${PODS_ROOT}/Headers/Public/mailcore2-ios/MailCore\"",
 				);
 				INFOPLIST_FILE = MyFactures/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sebconstant.MyFactures;

@@ -89,8 +89,6 @@ class InvoiceCollectionViewController: UIViewController {
         checkReceivedData()
         setNavigationBarInfo()
         Manager.instance.setHeaderClippedToBound(invoiceCollectionView)
-        
-        fatalError()
     }
 
     override func viewDidAppear(_ animated: Bool) {

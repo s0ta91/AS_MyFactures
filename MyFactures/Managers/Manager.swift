@@ -22,7 +22,8 @@ class Manager {
     
     static let instance = Manager()
     
-    let context = AppDelegate.persistentContainer.viewContext
+    let context: NSManagedObjectContext = AppDelegate.viewContext
+    
     let _monthArray =   [NSLocalizedString("January", comment: ""),
                         NSLocalizedString("February", comment: ""),
                         NSLocalizedString("March", comment: ""),
@@ -50,7 +51,7 @@ class Manager {
     private var _monthList: [MonthCD] {
         let monthRequest: NSFetchRequest<MonthCD> = MonthCD.fetchRequest()
         do {
-            return try Manager.instance.context.fetch(monthRequest)
+            return try context.fetch(monthRequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
             return [MonthCD]()
@@ -61,7 +62,7 @@ class Manager {
         categoryrequest.predicate = NSPredicate(format: "toplist == %@", NSNumber(value: true))
         categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
         do {
-            return try Manager.instance.context.fetch(categoryrequest)
+            return try context.fetch(categoryrequest)
         } catch (let error) {
             print("Error fetching groups from DB: \(error)")
             return [CategoryCD]()
@@ -73,7 +74,7 @@ class Manager {
             categoryrequest.predicate = NSPredicate(format: "toplist == %@", "false")
             categoryrequest.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
             do {
-                return try Manager.instance.context.fetch(categoryrequest)
+                return try context.fetch(categoryrequest)
             } catch (let error) {
                 print("Error fetching groups from DB: \(error)")
                 return [CategoryCD]()
@@ -86,7 +87,7 @@ class Manager {
     
     // MARK: - INIT
     init() {
-        
+        context.automaticallyMergesChangesFromParent = true
 //        _groupIdeaList = _realm.objects(GroupIdea.self).sorted(byKeyPath: "_title")
         
         
